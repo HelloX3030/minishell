@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/24 16:05:15 by lseeger          ###   ########.fr       */
+/*   Created: 2024/11/27 14:42:25 by lseeger           #+#    #+#             */
+/*   Updated: 2024/11/27 14:57:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_max(int a, int b)
 {
-	(void)argc;
-	(void)argv;
-	return (0);
+	if (a >= b)
+		return (a);
+	else
+		return (b);
+}
+
+int	ft_abs_max(int a, int b)
+{
+	if (ft_abs(a) >= ft_abs(b))
+		return (a);
+	else
+		return (b);
 }

@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/24 16:05:15 by lseeger          ###   ########.fr       */
+/*   Created: 2024/10/11 12:06:48 by hello_x           #+#    #+#             */
+/*   Updated: 2024/10/14 16:54:04 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	(void)argc;
-	(void)argv;
-	return (0);
+	t_list	*back;
+
+	if (lst)
+	{
+		if (*lst)
+		{
+			back = ft_lstlast(*lst);
+			back->next = new;
+		}
+		else
+			*lst = new;
+	}
 }

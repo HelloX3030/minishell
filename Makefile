@@ -13,7 +13,7 @@ SRC_FILES := main.c
 
 # .o files
 OBJ_DIR := obj
-OBJ_FILES := $(addprefix $(OBJ_DIR)/, $(BASE_SRC_FILES:.c=.o))
+OBJ_FILES := $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 # libft
 LIBFT_DIR := libft

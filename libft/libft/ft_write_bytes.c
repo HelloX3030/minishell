@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_write_bytes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/24 16:05:15 by lseeger          ###   ########.fr       */
+/*   Created: 2025/01/16 16:22:39 by lseeger           #+#    #+#             */
+/*   Updated: 2025/01/16 16:45:43 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_write_byte(char byte)
 {
-	(void)argc;
-	(void)argv;
-	return (0);
+	int		i;
+	char	num;
+
+	i = 0;
+	while (i < 8)
+	{
+		num = ((byte >> (7 - i)) & 1) + '0';
+		write(1, &num, 1);
+		i++;
+	}
+}
+
+void	ft_write_bytes(char *bytes, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		ft_write_byte(bytes[i]);
+		write(1, " ", 1);
+		i++;
+	}
 }

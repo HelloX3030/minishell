@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_s.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/24 16:05:15 by lseeger          ###   ########.fr       */
+/*   Created: 2024/10/17 09:48:06 by lseeger           #+#    #+#             */
+/*   Updated: 2024/11/12 11:53:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
+#include "../include/ft_printf.h"
 
-int	main(int argc, char **argv)
+int	ft_print_s(va_list args)
 {
-	(void)argc;
-	(void)argv;
-	return (0);
+	const char	*str = va_arg(args, char *);
+	size_t		len;
+	ssize_t		result;
+
+	if (str == NULL)
+		return (write(1, "(null)", 6));
+	else
+	{
+		len = ft_strlen(str);
+		result = write(1, str, len);
+		return ((int)result);
+	}
 }

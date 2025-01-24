@@ -3,7 +3,7 @@
 *.pdf
 *.a
 obj/
-./minishell
+minishell
 *.ini
 .vscode/
 # *.md
