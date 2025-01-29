@@ -6,34 +6,35 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/29 14:06:35 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:47:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+#include <readline/history.h>
+#include <readline/readline.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	char	buffer[2048];
-	char	*clear_screen;
+	char	*input;
 
-	(void)argc;
-	(void)argv;
-	// Load terminal capabilities
-	if (tgetent(buffer, getenv("TERM")) != 1)
+	input = readline(PROMPT);
+	while (input)
 	{
-		fprintf(stderr, "Could not retrieve terminal capabilities.\n");
-		return (1);
+		if (*input)
+			add_history(input);
+		if (strcmp(input, "exit") == 0)
+		{
+			free(input);
+			break ;
+		}
+		printf("You typed: %s\n", input);
+		free(input);
+		input = readline(PROMPT);
 	}
-	// Get the clear screen capability
-	clear_screen = tgetstr("cl", NULL);
-	if (clear_screen)
-	{
-		tputs(clear_screen, 1, ft_putchar); // Clear screen
-	}
-	else
-	{
-		fprintf(stderr, "Terminal does not support clearing the screen.\n");
-	}
+	rl_clear_history();
 	return (0);
 }
