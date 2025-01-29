@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:25:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/16 16:28:41 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:05:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void				ft_remove_c(char *str, char *set);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_write_byte(char c);
 void				ft_write_bytes(char *bytes, int size);
+int					ft_putchar(int c);
 
 #endif

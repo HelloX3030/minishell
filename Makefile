@@ -22,7 +22,7 @@ LIBFT := $(LIBFT_DIR)/libft.a
 # includes
 INCLUDES := -I include -I libft
 LIBS := $(LIBFT)
-LDFLAGS := -L$(LIBFT_DIR)
+LDFLAGS := -L$(LIBFT_DIR) -lncurses
 LDLIBS := -lft
 
 # all
