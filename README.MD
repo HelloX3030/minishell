@@ -30,3 +30,5 @@
 	- From the Repositry with the Code
   	- git remote add intra(name) "url"
   	- git push intra
+	
+https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
