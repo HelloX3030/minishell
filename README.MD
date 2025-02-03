@@ -195,6 +195,10 @@ int main(int argc, char **argv, char **envp)
 }
 
 ```
+- Bonus:
+	- First split up into && parts
+	- than split up into || 
+	- => than the normal data structurs with | pipes
 
 # Nachrichten xD
 - Add Remote Repository:
