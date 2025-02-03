@@ -31,4 +31,4 @@
   	- git remote add intra(name) "url"
   	- git push intra
 - branch test :o
-
+https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
