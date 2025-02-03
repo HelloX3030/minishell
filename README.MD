@@ -4,7 +4,7 @@
 	- Erstes Feature Umsetzten: executables starten. 
 	- Erstes Parsing... 
 		- Recursive/Teilbereiche welche wiederum interpretiert werden müssen
-/ test
+
 # Problems
 - Memory Managment:
 	- Keine Globalen Variablen (welche man bei SIGINT cleanen könnte), dennoch aber muss man den derzeitigen Prozess beenden, und darf nicht nur auf das Flag Pollen...
