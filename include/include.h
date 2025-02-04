@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 14:50:54 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:01:21 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <termcap.h>
 
 # define PROMPT "myshell> "
+
+typedef enum s_token_type
+{
+	TOKEN_TYPE_WORD,
+	TOKEN_
+}						t_token_type;
 
 typedef struct s_token
 {
