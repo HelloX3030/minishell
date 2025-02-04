@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 12:59:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:42:58 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void	leaks_end(void)
-{
-	system("leaks minishell");
-}
+// static void	leaks_end(void)
+// {
+// 	system("leaks minishell");
+// }
 
 int	main(void)
 {
 	char			*input;
 	t_expression	*expressions;
 
-	input = "cmd1 && (cmd2 || cmd3)";
+	input = "cmd1 \"ABC && XYZ\" && (cmd2 || cmd3)";
 	expressions = parse_expression(input);
 	free_expression(expressions);
-	atexit(leaks_end);
+	// atexit(leaks_end);
 	return (0);
 }
 
 /*
 readline code:
-char		*input;
+char	*input;
 
 	input = readline(PROMPT);
 	while (input)
