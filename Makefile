@@ -9,7 +9,7 @@ H_FILES := include/include.h
 # .c files
 SRC_DIR := src/base
 vpath %.c $(SRC_DIR)
-SRC_FILES := main.c
+SRC_FILES := create_command.c create_expression.c free_command.c free_expression.c main.c parse_command.c parse_expression.c
 
 # .o files
 OBJ_DIR := obj

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/03 18:26:17 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:52:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef enum e_expression_type
 
 	next: the next subexpressions in the list, which
 		will get evaluated before
-	e. g. a && b || c => one expression with type EXPR_OR
+
+	e. g.
+		cmd1 && cmd2 || cmd3 => one expression with type EXPR_OR
 		and two childs: one with type EXPR_AND and one with type EXPR_NONE
 */
 typedef struct s_expression
@@ -54,12 +56,24 @@ typedef struct s_expression
 */
 typedef struct s_command
 {
-	char				*cmd;
 	char				**args;
 	char				*infile;
 	char				*outfile;
 	bool				append;
 	struct s_command	*pipe;
 }						t_command;
+
+// expressions
+t_expression			*create_expression(void);
+t_expression			*parse_expression(char *str);
+t_expression			*print_expression(t_expression *expr, int insertion);
+void					print_expression_type(t_expression_type type);
+void					free_expression(t_expression *expr);
+
+// commands
+t_command				*create_command(void);
+t_command				*parse_command(char *str);
+void					print_command(t_command *cmd, int insertion);
+void					free_command(t_command *cmd);
 
 #endif
