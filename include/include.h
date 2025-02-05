@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/05 13:43:12 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/05 14:53:00 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef struct s_command
 }						t_command;
 
 // builtins
+static int	to_path(int fl, t_command *args);
+static int	path_history(t_command *args);
+mini_cd(char **args, t_command *env);
 static int	count_args(char **args);
 int			mini_echo(char **args);
 void		mini_pwd(void);

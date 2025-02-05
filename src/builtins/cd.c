@@ -6,11 +6,16 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/05 14:49:49 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/05 14:51:58 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/include.h"
+
+static int	to_path(int fl, t_command *args)
+{
+	
+}
 
 static int	path_history(t_command *args)
 {
