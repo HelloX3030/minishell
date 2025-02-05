@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 15:56:53 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:40:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum s_token_type
 {
 	TOKEN_NONE,
 	TOKEN_WORD,
+	TOKEN_QUOTE,
 	TOKEN_OPEN_GROUP,
 	TOKEN_CLOSE_GROUP,
 	TOKEN_OPERATOR,
