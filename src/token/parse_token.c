@@ -6,13 +6,13 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 15:53:45 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:58:47 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_token	*parse_token(char *str_start, char *str_end)
+t_token	*parse_token(char *str)
 {
 	t_token	*token;
 
@@ -20,7 +20,6 @@ t_token	*parse_token(char *str_start, char *str_end)
 	if (!token)
 		return (NULL);
 	// parsing logic
-	token->str = ft_strdup(str_start);
-	(void)str_end;
+	token->str = ft_strdup(str);
 	return (token);
 }

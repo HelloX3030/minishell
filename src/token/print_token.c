@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:22:53 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 15:54:13 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:00:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	print_token(t_token *token)
 	printf("Tokens:\n");
 	while (token)
 	{
-		printf("%sType:", insertion_str);
+		printf("%s", insertion_str);
 		print_token_type(token->type);
-		printf("\n");
+		printf(": ");
 		if (token->str)
-			printf("%sstr: %s\n", insertion_str, token->str);
+			printf("%s\n", token->str);
 		else
-			printf("%sstr: NULL\n", insertion_str);
+			printf("NULL\n");
 		token = token->next;
 	}
 	free(insertion_str);

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 15:53:20 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:56:53 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_command
 
 // tokens
 t_token					*create_token(void);
-t_token					*parse_token(char *str_start, char *str_end);
+t_token					*parse_token(char *str);
 void					print_token(t_token *token);
 void					print_token_type(t_token_type type);
 void					free_token(t_token *token);

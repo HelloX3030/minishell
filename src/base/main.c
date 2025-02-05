@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 14:42:58 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:00:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 
 int	main(void)
 {
-	char			*input;
-	t_expression	*expressions;
+	char	*input;
+	t_token	*token;
 
 	input = "cmd1 \"ABC && XYZ\" && (cmd2 || cmd3)";
-	expressions = parse_expression(input);
-	free_expression(expressions);
+	token = parse_token(input);
+	print_token(token);
+	free_token(token);
 	// atexit(leaks_end);
 	return (0);
 }
