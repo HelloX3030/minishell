@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:32:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/05 12:34:55 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:39:55 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	mini_pwd(void)
 	if (getcwd, PATH_MAX != NULL)
 	{
 		ft_putendl_fd(cwd, 1);
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	}
 	else
-		return (ERROR);
+		return (EXIT_FAILURE);
 }

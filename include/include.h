@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/05 13:00:51 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:43:12 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,15 @@ typedef struct s_command
 	bool				background;
 	struct s_command	*next;
 }						t_command;
+
+// builtins
+static int	count_args(char **args);
+int			mini_echo(char **args);
+void		mini_pwd(void);
+
+// exec
+int	is_builtin(char *cmd);
+int	dispatch_builtin(char **args, t_command cmd);
+void	execute(t_command *cmd, t_token *token);
 
 #endif
