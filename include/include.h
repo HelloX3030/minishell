@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/05 17:08:36 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/06 14:42:35 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,31 @@ typedef struct s_token
 typedef enum e_expression_type
 {
 	EXPR_NONE,
+	EXPR_CMD,
 	EXPR_AND,
 	EXPR_OR,
-	EXPR_BRACKET,
+	EXPR_GROUP,
 }						t_expression_type;
 
 /*
-	childs: all expressions of the same type are
-		grouped together in a NULL-terminated Array
+	childs: will only be set when type == EXPR_GROUP
+		contains the subexpressions of the group
 
-	next: the next subexpressions in the list, which
-		will get evaluated before
+	next: the next expression in the list
 
 	e. g.
-		cmd1 && cmd2 || cmd3 => one expression with type EXPR_OR
-		and two childs: one with type EXPR_AND and one with type EXPR_NONE
+		cmd1 && (cmd2 || cmd3)
+		=> cmd1 type AND
+		=> GROUP
+			=> cmd2 type OR
+			=> cmd3 type CMD
+
+	expressionss will be evaluated from left to right,
+		beginning from the most nested
 */
 typedef struct s_expression
 {
-	char				*str;
+	char				*cmd;
 	t_expression_type	type;
 	struct s_expression	*childs;
 	struct s_expression	*next;
@@ -87,7 +93,7 @@ void					free_token(t_token *token);
 
 // expressions
 t_expression			*create_expression(void);
-t_expression			*parse_expression(char *str);
+t_expression			*parse_expression(t_token *token);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);

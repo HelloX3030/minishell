@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 15:53:29 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/06 14:39:33 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	print_expression(t_expression *expr, int insertion)
 	if (expr)
 	{
 		printf("%sExpression:\n", insertion_str);
-		if (expr->str)
-			printf("%sstr: %s\n", insertion_str, expr->str);
+		if (expr->cmd)
+			printf("%scmd: %s\n", insertion_str, expr->cmd);
 		printf("%stype: ", insertion_str);
 		print_expression_type(expr->type);
 		printf("\n");

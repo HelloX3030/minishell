@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:05:35 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 13:45:37 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/06 14:40:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	print_expression_type(t_expression_type type)
 {
 	if (type == EXPR_NONE)
-		printf("NONE");
+		printf("EXPR_NONE");
 	else if (type == EXPR_AND)
-		printf("&&");
+		printf("EXPR_AND");
 	else if (type == EXPR_OR)
-		printf("||");
-	else if (type == EXPR_BRACKET)
-		printf("()");
+		printf("EXPR_OR");
+	else if (type == EXPR_GROUP)
+		printf("EXPR_GROUP");
 	else
-		printf("UNKNOWN\n");
+		printf("EXPR_UNKNOWN");
 }
