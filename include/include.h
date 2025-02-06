@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 13:52:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/06 13:47:39 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define INCLUDE_H
 
 # include "libft/libft.h"
+# include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <termcap.h>
+# include <unistd.h>
 
 # define PROMPT "myshell> "
 
