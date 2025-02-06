@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leokubler <leokubler@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/05 14:53:00 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/06 12:57:35 by leokubler        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <termcap.h>
 # include <limits.h>
 # include <unistd.h>
+# include <dirent.h>
 
 # define PROMPT "myshell> "
 
@@ -42,6 +43,12 @@ typedef struct s_command
 	bool				background;
 	struct s_command	*next;
 }						t_command;
+
+typedef struct	s_env
+{
+	char			*str;
+	struct s_env	*next;
+}					t_env;
 
 // builtins
 static int	to_path(int fl, t_command *args);
