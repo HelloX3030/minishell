@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 13:50:07 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:53:29 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	print_childs(t_expression *expr, int insertion)
 {
-	const char	*insertion_str = ft_get_insertion(insertion);
-	int			i;
+	char	*insertion_str;
+	int		i;
 
+	insertion_str = ft_get_insertion(insertion);
 	i = 0;
 	if (expr->childs)
 		printf("%sChilds:\n", insertion_str);
@@ -30,8 +31,9 @@ static void	print_childs(t_expression *expr, int insertion)
 
 void	print_expression(t_expression *expr, int insertion)
 {
-	const char	*insertion_str = ft_get_insertion(insertion);
+	char	*insertion_str;
 
+	insertion_str = ft_get_insertion(insertion);
 	if (expr)
 	{
 		printf("%sExpression:\n", insertion_str);
