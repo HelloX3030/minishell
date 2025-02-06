@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/05 17:21:31 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/06 13:45:29 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 	char	*input;
 	t_token	*token;
 
-	input = "cmd1\"(abc\"ccc cmd3&&cmd5 (cmd2||cmd3)";
+	input = "(cmd_a && cmd_b) || abc\"cmd_c && cmd_d\"abc && cmd_e";
 	token = parse_token(input);
 	print_token(token);
 	free_token(token);
