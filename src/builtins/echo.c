@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:49:21 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/04 15:08:34 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/07 12:06:21 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ int	mini_echo(char **args)
 	}
 	if (!n_flag)
 		write(1, "\n", 1);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

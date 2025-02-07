@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/04 14:35:09 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/05 14:58:51 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,20 @@ void	fd_close(int fd)
 		close (fd);
 }
 
-void	close_fds(t_command cmd)
+void	close_fds(t_command *cmd)
 {
-	fd_close(cmd->fdin);
-	fd_close(cmd->fdout);
+	fd_close(cmd->infile);
+	fd_close(cmd->outfile);
 	fd_close(cmd->inpipe);
 	fd_close(cmd->outpipe);
+}
+
+char	*path_join(const char *s1, const char *s2)
+{
+	char	*tmp;
+	char	*path;
+
+	tmp = ft_strjoin(s1, "/");
+	path = ft_strjoin(tmp, s2);
+	return (path);
 }

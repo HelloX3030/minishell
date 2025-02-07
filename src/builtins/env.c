@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 12:32:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/05 13:39:55 by lkubler          ###   ########.fr       */
+/*   Created: 2025/02/06 12:54:20 by leokubler         #+#    #+#             */
+/*   Updated: 2025/02/07 13:21:26 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/include.h"
 
-void	mini_pwd(void)
+void print_env(t_env *env_list)
 {
-	char	cwd[PATH_MAX];
+	t_env *current;
 
-	if (getcwd, PATH_MAX != NULL)
+	current = env_list;
+	while (current)
 	{
-		ft_putendl_fd(cwd, 1);
-		return (EXIT_SUCCESS);
+		ft_printf("%s=%s\n", current->key, current->value);
+		current = current->next;
 	}
-	else
-		return (EXIT_FAILURE);
 }
