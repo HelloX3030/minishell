@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/07 13:14:56 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/07 13:20:21 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	path_history(char *prev_path)
 	old_path[PATH_MAX - 1] = '\0';
 }
 
-int	mini_cd(t_command *command)
+int	mini_cd(t_command *command, t_env *env)
 {
 	int	cd;
 

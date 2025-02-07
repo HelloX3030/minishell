@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/07 12:09:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/07 13:20:53 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	dispatch_builtin(t_command *command)
 	if (ft_strcmp(command->cmd, "echo") == 0)
 		result = mini_echo(command->args);
 	if (ft_strcmp(command->cmd, "cd") == 0)
-		result = mini_cd();		//woher bekomme ich env?
+		result = mini_cd(command);
 	if (ft_strcmp(command->cmd, "pwd") == 0)
 		mini_pwd();
 	if (ft_strcmp(command->cmd, "env") == 0)
