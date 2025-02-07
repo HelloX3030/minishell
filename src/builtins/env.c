@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leokubler <leokubler@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:54:20 by leokubler         #+#    #+#             */
-/*   Updated: 2025/02/06 12:57:32 by leokubler        ###   ########.fr       */
+/*   Updated: 2025/02/07 13:04:39 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/include.h"
 
-int mini_env(t_env *env)
+void print_env(t_env *env_list)
 {
-    while (env && env->next != NULL)
-    {
-		ft_putendl_fd(env->str, 1);
-		env = env->next;
-    }
-	if (env)
-		ft_putendl_fd(env->str, 1);
-	return (EXIT_SUCCESS);
+	t_env *current;
+
+	current = env_list;
+	while (current)
+	{
+		ft_printf("%s=%s\n", current->key, current->value);
+		current = current->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/07 12:10:12 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/07 12:14:48 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct s_command
 
 typedef struct	s_env
 {
-	char			*str;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }					t_env;
 
