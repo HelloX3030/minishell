@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leokubler <leokubler@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/06 12:43:28 by leokubler        ###   ########.fr       */
+/*   Updated: 2025/02/07 12:07:49 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ static int	path_history(char *prev_path)
 	ft_strlcpy(old_path, current_path, PATH_MAX - 1);
 	old_path[PATH_MAX - 1] = '\0';
 }
-mini_cd(char **args, t_command *env)
+int	mini_cd(t_command *command)
 {
 	int	cd;
 
-	if (!args[1])
+	if (!command->args)
 		to_path(0, env);
-	if (ft_strcmp(args[1], "-") == 0)
+	if (ft_strcmp(command->args[0], "-") == 0)
 		cd = to_path(1, env);
 	else
 	{
-		path_history(args[1]);
-		cd = chdir(args[1]);
+		path_history(command->args[1]);
+		cd = chdir(command->args[1]);
 		if (cd < 0)
 			cd *= -1;
 		if (cd != 0)

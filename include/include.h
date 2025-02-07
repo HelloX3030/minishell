@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leokubler <leokubler@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/06 12:57:35 by leokubler        ###   ########.fr       */
+/*   Updated: 2025/02/07 12:10:12 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ typedef struct	s_env
 // builtins
 static int	to_path(int fl, t_command *args);
 static int	path_history(t_command *args);
-mini_cd(char **args, t_command *env);
+int			mini_cd(t_command *command);
 static int	count_args(char **args);
 int			mini_echo(char **args);
 void		mini_pwd(void);
 
 // exec
-int	is_builtin(char *cmd);
-int	dispatch_builtin(char **args, t_command cmd);
-void	execute(t_command *cmd, t_token *token);
+int		is_builtin(char *cmd);
+int		dispatch_builtin(t_command *command);
+void	execute(t_command *command);
 
 #endif
