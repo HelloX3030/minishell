@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/11 13:33:19 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/11 13:45:01 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct	s_env
 
 // builtins
 static int	to_path(int fl, t_command *args);
-static int	path_history(t_command *args);
-int			mini_cd(t_command *command);
+static int	path_history(char *prev_path);
+int			mini_cd(t_command *command, t_env *env);
 static int	count_args(char **args);
 int			mini_echo(char **args);
 void		mini_pwd(void);
