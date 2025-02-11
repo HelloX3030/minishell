@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/06 14:42:35 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/11 15:17:40 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 typedef enum s_token_type
 {
-	TOKEN_NONE,
 	TOKEN_WORD,
 	TOKEN_GROUP,
 	TOKEN_OPERATOR,
@@ -38,7 +37,6 @@ typedef struct s_token
 
 typedef enum e_expression_type
 {
-	EXPR_NONE,
 	EXPR_CMD,
 	EXPR_AND,
 	EXPR_OR,
@@ -63,7 +61,7 @@ typedef enum e_expression_type
 */
 typedef struct s_expression
 {
-	char				*cmd;
+	char				*str;
 	t_expression_type	type;
 	struct s_expression	*childs;
 	struct s_expression	*next;
@@ -92,7 +90,7 @@ void					print_token_type(t_token_type type);
 void					free_token(t_token *token);
 
 // expressions
-t_expression			*create_expression(void);
+t_expression			*create_expression(t_expression_type type);
 t_expression			*parse_expression(t_token *token);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
