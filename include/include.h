@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/07 12:14:48 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/11 13:33:19 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,14 @@ void		mini_pwd(void);
 int		is_builtin(char *cmd);
 int		dispatch_builtin(t_command *command);
 void	execute(t_command *command);
+
+// envs
+t_env	*create_env_node(char *key, char *value);
+void	add_env_node(t_env **head, t_env *new_node);
+t_env	*init_env(char **envp);
+char	*get_env_value(t_env *env, const char *key);
+void	set_env_val(t_env **env, const char *key, const char *value);
+void	unset_env_val(t_env **env, const char *key);
+char	**env_to_array(t_env *env);
 
 #endif
