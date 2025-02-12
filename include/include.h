@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/11 13:45:01 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:26:15 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ static int	path_history(char *prev_path);
 int			mini_cd(t_command *command, t_env *env);
 static int	count_args(char **args);
 int			mini_echo(char **args);
+int			mini_export(char **args, t_env **env);
 void		mini_pwd(void);
+int			is_valid_id(const char *str);
+int			mini_unset(char **args, t_env **env);
+
 
 // exec
 int		is_builtin(char *cmd);
