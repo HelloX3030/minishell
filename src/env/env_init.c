@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:29:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/07 13:15:04 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:00:42 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_env	*init_env(char **envp)
 	char	*equals;
 	int		i;
 	int		key_len;
+	t_env *new_node;
 
 	env_list = NULL;
 	i = 0;
@@ -60,7 +61,7 @@ t_env	*init_env(char **envp)
 			key = (char *)malloc(key_len + 1);
 			ft_strlcpy(key, envp[i], key_len);
 			value = ft_strdup(equals + 1);
-			t_env *new_node = create_env_node(key, value);
+			new_node = create_env_node(key, value);
 			if (new_node)
 				add_env_node(&env_list, new_node);
 			free(key);

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/07 13:38:56 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:38:43 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,35 +89,28 @@ typedef struct	s_env
 
 // builtins
 static int	to_path(int fl, t_command *args);
-static int	path_history(t_command *args);
+static int	path_history(char *prev_path);
 int			mini_cd(t_command *command, t_env *env);
 static int	count_args(char **args);
 int			mini_echo(char **args);
+int			mini_export(char **args, t_env **env);
 void		mini_pwd(void);
+int			is_valid_id(const char *str);
+int			mini_unset(char **args, t_env **env);
+
 
 // exec
 int		is_builtin(char *cmd);
 int		dispatch_builtin(t_command *command);
 void	execute(t_command *command);
 
-// tokens
-t_token					*create_token(t_token_type type, char *str);
-t_token					*parse_token(char *str);
-void					print_token(t_token *token);
-void					print_token_type(t_token_type type);
-void					free_token(t_token *token);
-
-// expressions
-t_expression			*create_expression(void);
-t_expression			*parse_expression(char *str);
-void					print_expression(t_expression *expr, int insertion);
-void					print_expression_type(t_expression_type type);
-void					free_expression(t_expression *expr);
-
-// commands
-t_command				*create_command(void);
-t_command				*parse_command(char *str);
-void					print_command(t_command *cmd, int insertion);
-void					free_command(t_command *cmd);
+// envs
+t_env	*create_env_node(char *key, char *value);
+void	add_env_node(t_env **head, t_env *new_node);
+t_env	*init_env(char **envp);
+char	*get_env_value(t_env *env, const char *key);
+void	set_env_val(t_env **env, const char *key, const char *value);
+void	unset_env_val(t_env **env, const char *key);
+char	**env_to_array(t_env *env);
 
 #endif
