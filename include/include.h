@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 12:26:15 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/12 13:37:31 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,6 @@ void		mini_pwd(void);
 int			is_valid_id(const char *str);
 int			mini_unset(char **args, t_env **env);
 
-
-// exec
-int		is_builtin(char *cmd);
-int		dispatch_builtin(t_command *command);
-void	execute(t_command *command);
-
 // envs
 t_env	*create_env_node(char *key, char *value);
 void	add_env_node(t_env **head, t_env *new_node);
@@ -76,5 +70,15 @@ char	*get_env_value(t_env *env, const char *key);
 void	set_env_val(t_env **env, const char *key, const char *value);
 void	unset_env_val(t_env **env, const char *key);
 char	**env_to_array(t_env *env);
+
+// exec
+int		is_builtin(char *cmd);
+int		dispatch_builtin(t_command *command);
+void	execute(t_command *command);
+
+// externals
+static char	*find_cmd_path(const char *cmd, t_env *env);
+static void	free_array(char **array);
+int	execute_ext(t_command *cmd, t_env *env);
 
 #endif
