@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 14:32:30 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/12 16:01:50 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ int	main(void)
 	char			*input;
 	t_token			*token;
 	t_expression	*expr;
+	t_token			*closing;
 
 	// input = "cmd_first && ((cmd_a || cmd_b) && cmd_c) || cmd_d && cmd_e";
-	input = "cmd_first cmd abck && cmd_a || cmd_b && cmd_c";
+	input = "cmd && (cmd2 || cmd3) last";
 	printf("Input: %s\n", input);
 	token = parse_token(input);
+	closing = get_closing_group(token->next->next);
 	print_token(token);
+	printf("Closing:\n");
+	print_token(closing);
 	expr = parse_expression(token);
 	print_expression(expr, 0);
 	free_token(token);

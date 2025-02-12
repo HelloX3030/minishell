@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/11 15:17:40 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:17:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ typedef enum e_expression_type
 }						t_expression_type;
 
 /*
-	childs: will only be set when type == EXPR_GROUP
-		contains the subexpressions of the group
+	child: will only be set when type == EXPR_GROUP
+		contains the subexpressions of the group via a linked list
 
 	next: the next expression in the list
 
 	e. g.
 		cmd1 && (cmd2 || cmd3)
 		=> cmd1 type AND
-		=> GROUP
+		=> type GROUP:
 			=> cmd2 type OR
 			=> cmd3 type CMD
 
@@ -63,7 +63,7 @@ typedef struct s_expression
 {
 	char				*str;
 	t_expression_type	type;
-	struct s_expression	*childs;
+	struct s_expression	*child;
 	struct s_expression	*next;
 }						t_expression;
 
@@ -88,6 +88,7 @@ t_token					*parse_token(char *str);
 void					print_token(t_token *token);
 void					print_token_type(t_token_type type);
 void					free_token(t_token *token);
+t_token					*get_closing_group(t_token *token);
 
 // expressions
 t_expression			*create_expression(t_expression_type type);

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 14:26:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:53:46 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@ static t_expression	*parse_group(t_token *token)
 	expr = create_expression(EXPR_GROUP);
 	expr->str = ft_strdup(token->str);
 	return (expr);
+}
+
+static t_expression	*get_next_expression(t_expression *expr,
+		t_token *next_token)
+{
+	t_expression	*next_expr;
+
+	if (next_token->type == TOKEN_OPERATOR)
+	{
+		if (ft_strcmp(next_token->str, "&&") == 0)
+			expr->type = EXPR_AND;
+		else if (ft_strcmp(next_token->str, "||") == 0)
+			expr->type = EXPR_OR;
+		else
+			return (NULL);
+		next_expr = parse_expression(next_token->next);
+	}
+	else
+		next_expr = parse_expression(next_token);
+	return (next_expr);
 }
 
 /*
@@ -37,18 +57,7 @@ static t_expression	*parse_cmd(t_token *token)
 	expr->str = ft_strdup(token->str);
 	if (token->next)
 	{
-		if (token->next->type == TOKEN_OPERATOR)
-		{
-			if (ft_strcmp(token->next->str, "&&") == 0)
-				expr->type = EXPR_AND;
-			else if (ft_strcmp(token->next->str, "||") == 0)
-				expr->type = EXPR_OR;
-			else
-				return (free_expression(expr), NULL);
-			next_expr = parse_expression(token->next->next);
-		}
-		else
-			next_expr = parse_expression(token->next);
+		next_expr = get_next_expression(expr, token->next);
 		if (!next_expr)
 			return (free_expression(expr), NULL);
 		expr->next = next_expr;

@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_expression.c                                :+:      :+:    :+:   */
+/*   get_closing_group.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 15:13:56 by lseeger          ###   ########.fr       */
+/*   Created: 2025/02/12 15:17:24 by lseeger           #+#    #+#             */
+/*   Updated: 2025/02/12 15:25:38 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_expression	*create_expression(t_expression_type type)
+t_token	*get_closing_group(t_token *token)
 {
-	t_expression	*expr;
+	int	open_groups;
 
-	expr = malloc(sizeof(t_expression));
-	if (!expr)
+	if (!token || token->type != TOKEN_GROUP)
 		return (NULL);
-	expr->str = NULL;
-	expr->type = type;
-	expr->child = NULL;
-	expr->next = NULL;
-	return (expr);
+	open_groups = 1;
+	token = token->next;
+	while (token)
+	{
+		if (token->type == TOKEN_GROUP)
+		{
+			if (ft_strcmp(token->str, "(") == 0)
+				open_groups++;
+			else if (ft_strcmp(token->str, ")") == 0)
+				open_groups--;
+			else
+				return (NULL);
+		}
+		if (open_groups == 0)
+			return (token);
+		token = token->next;
+	}
+	return (NULL);
 }
