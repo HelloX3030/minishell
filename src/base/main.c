@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/11 15:21:51 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/12 14:32:30 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(void)
 	t_expression	*expr;
 
 	// input = "cmd_first && ((cmd_a || cmd_b) && cmd_c) || cmd_d && cmd_e";
-	input = "";
+	input = "cmd_first cmd abck && cmd_a || cmd_b && cmd_c";
 	printf("Input: %s\n", input);
 	token = parse_token(input);
 	print_token(token);

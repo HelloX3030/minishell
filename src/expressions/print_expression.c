@@ -6,11 +6,13 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/11 15:18:16 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/12 14:31:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+static void	print_helper(t_expression *expr, int insertion);
 
 static void	print_childs(t_expression *expr, int insertion)
 {
@@ -23,13 +25,13 @@ static void	print_childs(t_expression *expr, int insertion)
 		printf("%sChilds:\n", insertion_str);
 	while (expr->childs + i)
 	{
-		print_expression(expr->childs + i, insertion + 1);
+		print_helper(expr->childs + i, insertion + 1);
 		i++;
 	}
 	free(insertion_str);
 }
 
-void	print_expression(t_expression *expr, int insertion)
+static void	print_helper(t_expression *expr, int insertion)
 {
 	char	*insertion_str;
 	char	*more_insertion;
@@ -47,9 +49,19 @@ void	print_expression(t_expression *expr, int insertion)
 		print_childs(expr, insertion + 1);
 		if (expr->next)
 		{
-			print_expression(expr->next, insertion);
+			print_helper(expr->next, insertion);
 		}
 	}
 	free(insertion_str);
 	free(more_insertion);
+}
+
+void	print_expression(t_expression *expr, int insertion)
+{
+	char	*insertion_str;
+
+	insertion_str = ft_get_insertion(insertion);
+	printf("%sExpressions:\n", insertion_str);
+	print_helper(expr, insertion);
+	free(insertion_str);
 }
