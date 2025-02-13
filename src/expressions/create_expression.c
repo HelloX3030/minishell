@@ -6,13 +6,13 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 12:46:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:13:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_expression	*create_expression(void)
+t_expression	*create_expression(t_expression_type type)
 {
 	t_expression	*expr;
 
@@ -20,8 +20,8 @@ t_expression	*create_expression(void)
 	if (!expr)
 		return (NULL);
 	expr->str = NULL;
-	expr->type = EXPR_NONE;
-	expr->childs = NULL;
+	expr->type = type;
+	expr->child = NULL;
 	expr->next = NULL;
 	return (expr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/07 13:37:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:46:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,23 @@
 
 int	main(void)
 {
-	char	*input;
-	t_token	*token;
+	char			*input;
+	t_token			*token;
+	t_expression	*expr;
+	t_token			*closing;
 
-	input = "(cmd_a && cmd_b) || abc\"cmd_c && cmd_d\"abc && cmd_e";
+	// input = "cmd_first && ((cmd_a || cmd_b) && cmd_c) || cmd_d && cmd_e";
+	input = "cmd &&) (cmd2 || cmd3) (last))";
+	printf("Input: %s\n", input);
 	token = parse_token(input);
+	closing = get_closing_group(token->next->next);
 	print_token(token);
+	printf("Closing:\n");
+	print_token(closing);
+	expr = parse_expression(token, NULL);
+	print_expression(expr, 0);
 	free_token(token);
+	free_expression(expr);
 	// atexit(leaks_end);
 	return (0);
 }

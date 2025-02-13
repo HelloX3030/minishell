@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 12:39:25 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:46:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 typedef enum s_token_type
 {
-	TOKEN_NONE,
 	TOKEN_WORD,
 	TOKEN_GROUP,
 	TOKEN_OPERATOR,
@@ -40,28 +39,33 @@ typedef struct s_token
 
 typedef enum e_expression_type
 {
-	EXPR_NONE,
+	EXPR_CMD,
 	EXPR_AND,
 	EXPR_OR,
-	EXPR_BRACKET,
+	EXPR_GROUP,
 }						t_expression_type;
 
 /*
-	childs: all expressions of the same type are
-		grouped together in a NULL-terminated Array
+	child: will only be set when type == EXPR_GROUP
+		contains the subexpressions of the group via a linked list
 
-	next: the next subexpressions in the list, which
-		will get evaluated before
+	next: the next expression in the list
 
 	e. g.
-		cmd1 && cmd2 || cmd3 => one expression with type EXPR_OR
-		and two childs: one with type EXPR_AND and one with type EXPR_NONE
+		cmd1 && (cmd2 || cmd3)
+		=> cmd1 type AND
+		=> type GROUP:
+			=> cmd2 type OR
+			=> cmd3 type CMD
+
+	expressionss will be evaluated from left to right,
+		beginning from the most nested
 */
 typedef struct s_expression
 {
 	char				*str;
 	t_expression_type	type;
-	struct s_expression	*childs;
+	struct s_expression	*child;
 	struct s_expression	*next;
 }						t_expression;
 
@@ -80,37 +84,29 @@ typedef struct s_command
 	struct s_command	*pipe;
 }						t_command;
 
-typedef struct	s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}					t_env;
+// tokens
+t_token					*create_token(t_token_type type, char *str);
+t_token					*parse_token(char *str);
+void					print_token(t_token *token);
+void					print_token_type(t_token_type type);
+void					free_token(t_token *token);
+t_token					*get_closing_group(t_token *token);
 
-// builtins
-static int	to_path(int fl, t_command *args);
-static int	path_history(char *prev_path);
-int			mini_cd(t_command *command, t_env *env);
-static int	count_args(char **args);
-int			mini_echo(char **args);
-int			mini_export(char **args, t_env **env);
-void		mini_pwd(void);
-int			is_valid_id(const char *str);
-int			mini_unset(char **args, t_env **env);
-
-
-// exec
-int		is_builtin(char *cmd);
-int		dispatch_builtin(t_command *command);
-void	execute(t_command *command);
+// expressions
+t_expression			*create_expression(t_expression_type type);
+t_expression			*parse_expression(t_token *token, t_token *end);
+void					print_expression(t_expression *expr, int insertion);
+void					print_expression_type(t_expression_type type);
+void					free_expression(t_expression *expr);
 
 // envs
-t_env	*create_env_node(char *key, char *value);
-void	add_env_node(t_env **head, t_env *new_node);
-t_env	*init_env(char **envp);
-char	*get_env_value(t_env *env, const char *key);
-void	set_env_val(t_env **env, const char *key, const char *value);
-void	unset_env_val(t_env **env, const char *key);
-char	**env_to_array(t_env *env);
+t_env					*create_env_node(char *key, char *value);
+void					add_env_node(t_env **head, t_env *new_node);
+t_env					*init_env(char **envp);
+char					*get_env_value(t_env *env, const char *key);
+void					set_env_val(t_env **env, const char *key,
+							const char *value);
+void					unset_env_val(t_env **env, const char *key);
+char					**env_to_array(t_env *env);
 
 #endif

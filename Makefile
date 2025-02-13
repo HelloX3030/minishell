@@ -14,7 +14,7 @@ vpath %.c src/token
 SRC_FILES := main.c \
 	create_command.c free_command.c parse_command.c print_command.c \
 	create_expression.c free_expression.c parse_expression.c print_expression.c print_expression_type.c \
-	create_token.c free_token.c parse_token.c print_token.c print_token_type.c
+	create_token.c free_token.c get_closing_group.c parse_token.c print_token.c print_token_type.c
 
 # .o files
 OBJ_DIR := obj
