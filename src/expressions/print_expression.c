@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 15:50:01 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:33:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void	print_helper(t_expression *expr, int insertion)
 		print_expression_type(expr->type);
 		printf("\n");
 		if (expr->child)
-			print_helper(expr->child, insertion + 1);
+		{
+			printf("%sChild:\n", more_insertion);
+			print_helper(expr->child, insertion + 2);
+		}
 		if (expr->next)
 			print_helper(expr->next, insertion);
 	}

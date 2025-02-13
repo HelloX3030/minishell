@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 15:17:10 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/13 13:40:37 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_token					*get_closing_group(t_token *token);
 
 // expressions
 t_expression			*create_expression(t_expression_type type);
-t_expression			*parse_expression(t_token *token);
+t_expression			*parse_expression(t_token *token, t_token *end);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);

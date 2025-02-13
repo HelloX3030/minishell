@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:17:24 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/12 15:25:38 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:39:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*get_closing_group(t_token *token)
 {
 	int	open_groups;
 
-	if (!token || token->type != TOKEN_GROUP)
+	if (!token || token->type != TOKEN_GROUP || ft_strcmp(token->str, "(") != 0)
 		return (NULL);
 	open_groups = 1;
 	token = token->next;
