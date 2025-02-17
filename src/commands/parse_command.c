@@ -6,25 +6,17 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:49:19 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 12:50:59 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:42:45 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_command	*parse_command(char *str)
+t_command	*parse_command(t_expression *expr)
 {
 	t_command	*cmd;
 
-	cmd = malloc(sizeof(t_command));
-	if (!cmd)
-		return (NULL);
-	cmd->args = ft_split(str, ' ');
-	if (!cmd->args)
-	{
-		free(cmd);
-		return (NULL);
-	}
+	cmd = create_command(expr->str);
 	// parsing logic
 	return (cmd);
 }
