@@ -6,19 +6,20 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:48:13 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 13:00:42 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:41:42 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_command	*create_command(void)
+t_command	*create_command(char *cmd_str)
 {
 	t_command	*cmd;
 
 	cmd = malloc(sizeof(t_command));
 	if (!cmd)
 		return (NULL);
+	cmd->cmd = cmd_str;
 	cmd->args = NULL;
 	cmd->infile = NULL;
 	cmd->outfile = NULL;

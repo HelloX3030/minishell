@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/13 14:46:52 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:29:50 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_expression
 */
 typedef struct s_command
 {
+	char				*cmd;
 	char				**args;
 	char				*infile;
 	char				*outfile;
@@ -99,14 +100,12 @@ void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
 
-// envs
-t_env					*create_env_node(char *key, char *value);
-void					add_env_node(t_env **head, t_env *new_node);
-t_env					*init_env(char **envp);
-char					*get_env_value(t_env *env, const char *key);
-void					set_env_val(t_env **env, const char *key,
-							const char *value);
-void					unset_env_val(t_env **env, const char *key);
-char					**env_to_array(t_env *env);
+// commands
+t_command				*create_command(char *cmd_str);
+t_command				*parse_command(t_expression *expr, t_expression *end);
+t_expression			*get_expression_end(t_expression *expr);
+void					print_command(t_command *cmd, int insertion);
+void					free_command(t_command *cmd);
+void					test_execute(t_expression *expr);
 
 #endif
