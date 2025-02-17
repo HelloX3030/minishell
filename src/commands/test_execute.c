@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_command.c                                    :+:      :+:    :+:   */
+/*   test_execute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:49:19 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/17 16:23:19 by lseeger          ###   ########.fr       */
+/*   Created: 2025/02/17 15:48:41 by lseeger           #+#    #+#             */
+/*   Updated: 2025/02/17 15:53:53 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_command	*parse_command(t_expression *expr, t_expression *end)
+void	test_execute(t_expression *expr)
 {
-	t_command	*cmd;
+	t_command		*cmd;
+	t_expression	*end;
 
-	cmd = create_command(expr->str);
-	(void)expr;
-	(void)end;
-	// parsing logic
-	return (cmd);
+	end = get_expression_end(expr);
+	if (!end)
+		return ;
+	cmd = parse_command(expr, end);
 }

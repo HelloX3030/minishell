@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/17 15:41:51 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:50:24 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,10 @@ void					free_expression(t_expression *expr);
 
 // commands
 t_command				*create_command(char *cmd_str);
-t_command				*parse_command(t_expression *expr);
+t_command				*parse_command(t_expression *expr, t_expression *end);
 t_expression			*get_expression_end(t_expression *expr);
 void					print_command(t_command *cmd, int insertion);
 void					free_command(t_command *cmd);
+void					test_execute(t_expression *expr);
 
 #endif
