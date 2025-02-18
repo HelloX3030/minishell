@@ -6,11 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/05 14:58:51 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:59:15 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
 void	fd_close(int fd)
 {

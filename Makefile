@@ -10,6 +10,7 @@ H_FILES := include/include.h
 vpath %.c src/base
 vpath %.c src/builtins
 vpath %.c src/env
+vpath %.c src/exec
 vpath %.c src/externals
 vpath %.c src/utils
 SRC_FILES := main.c \

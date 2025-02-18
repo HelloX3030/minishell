@@ -6,13 +6,13 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/18 14:15:00 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:59:13 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
-static char	*find_cmd_path(const char *cmd, t_env *env)
+char	*find_cmd_path(const char *cmd, t_env *env)
 {
 	char	*path_env;
 	char	**paths;
@@ -51,7 +51,7 @@ static char	*find_cmd_path(const char *cmd, t_env *env)
 	return (NULL);
 }
 
-static void	free_array(char **array)
+void	free_array(char **array)
 {
 	int	i;
 

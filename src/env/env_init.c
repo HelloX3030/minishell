@@ -6,11 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:29:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/12 12:00:42 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:59:03 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
 t_env	*create_env_node(char *key, char *value)
 {

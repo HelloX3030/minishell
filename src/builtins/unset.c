@@ -6,11 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:18:43 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/12 12:24:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:58:59 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
 int	is_valid_id(const char *str)
 {

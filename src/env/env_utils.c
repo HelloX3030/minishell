@@ -6,11 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/12 12:01:18 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 15:06:10 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
 char	*get_env_value(t_env *env, const char *key)
 {
@@ -23,7 +23,7 @@ char	*get_env_value(t_env *env, const char *key)
 	return (NULL);
 }
 
-void	set_env_val(t_env **env, const char *key, const char *value)
+void	set_env_val(t_env **env, char *key, char *value)
 {
 	t_env	*cur;
 	t_env	*new_node;

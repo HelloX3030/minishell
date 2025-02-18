@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 14:47:33 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:55:23 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,36 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+t_command *create_test_command(char **args)
+{
+    t_command *command;
+
+    // Allocate memory for command structure
+    command = (t_command *)malloc(sizeof(t_command));
+    if (!command)
+        return (NULL);
+
+    // Initialize all fields to default values
+    command->cmd = "pwd";
+    command->args = args;
+    command->infile = NULL;
+    command->outfile = NULL;
+    command->append = false;
+    command->pipe = false;
+    command->background = false;
+    command->next = NULL;
+
+    return (command);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	(void) argc;
-	(void) argv;
-	t_env *env = init_env(envp);
 	t_command *command;
+	command = create_test_command(argv);
+	t_env *env = init_env(envp);
 	input = readline(PROMPT);
 	execute(command, env);
 	while (input)
