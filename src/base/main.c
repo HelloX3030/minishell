@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 14:29:35 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:00:21 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(void)
 	print_token(token);
 	expr = parse_expression(token, NULL);
 	print_expression(expr, 0);
-	test_execute(expr);
+	execute_expression(expr);
 	free_token(token);
 	free_expression(expr);
 	// atexit(leaks_end);

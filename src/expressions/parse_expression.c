@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/13 14:39:32 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/18 15:56:18 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_expression	*parse_group(t_token *token, t_token *end)
 	t_expression	*expr;
 
 	expr = create_expression(EXPR_GROUP);
-	expr->str = ft_strdup(token->str);
+	// expr->str = ft_strdup(token->str);
 	end = get_closing_group(token);
 	if (end)
 	{
@@ -63,7 +63,7 @@ static t_expression	*parse_cmd(t_token *token, t_token *end)
 	t_expression	*next_expr;
 
 	expr = create_expression(EXPR_CMD);
-	expr->str = ft_strdup(token->str);
+	// expr->str = ft_strdup(token->str);
 	if (token->next)
 	{
 		if (end && token->next == end)

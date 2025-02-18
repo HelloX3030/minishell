@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 14:39:27 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/18 15:30:16 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,6 @@ typedef enum e_expression_type
 }						t_expression_type;
 
 /*
-	infile:		"<"
-	outfile:	">"
-	append:		">>"
-*/
-typedef struct s_command
-{
-	char				*cmd;
-	char				**args;
-	char				**infile;
-	char				**outfile;
-	char				**append;
-}						t_command;
-
-/*
 	child: will only be set when type == EXPR_GROUP
 		contains the subexpressions of the group via a linked list
 
@@ -76,9 +62,16 @@ typedef struct s_command
 */
 typedef struct s_expression
 {
-	char				*str;
-	t_command			cmd;
 	t_expression_type	type;
+
+	// cmd values
+	char				*cmd;
+	char				**args;
+	char				**infile;
+	char				**outfile;
+	char				**append;
+
+	// controll structures
 	struct s_expression	*child;
 	struct s_expression	*next;
 }						t_expression;
@@ -98,11 +91,5 @@ void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
 void					execute_expression(t_expression *expr);
-
-// commands
-void					init_command(t_command *cmd, char *cmd_str);
-t_command				*parse_command(t_expression *expr);
-void					print_command(t_command *cmd, int insertion);
-void					clear_command(t_command *cmd);
 
 #endif
