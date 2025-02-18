@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/07 13:20:53 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 13:44:55 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	dispatch_builtin(t_command *command)
+int	dispatch_builtin(t_command *command, t_env *env)
 {
 	int	result;
 
 	result = 0;
 	if (ft_strcmp(command->cmd, "echo") == 0)
-		result = mini_echo(command->args);
+		result = mini_echo(command->cmd);
 	if (ft_strcmp(command->cmd, "cd") == 0)
-		result = mini_cd(command);
+		result = mini_cd(command->args, env);
 	if (ft_strcmp(command->cmd, "pwd") == 0)
 		mini_pwd();
 	if (ft_strcmp(command->cmd, "env") == 0)
-		mini_env();
+		mini_env(env);
 	if (ft_strcmp(command->cmd, "export") == 0)
-		mini_export();
+		mini_export(command->args, env);
 	if (ft_strcmp(command->cmd, "unset") == 0)
-		mini_unset();
+		mini_unset(command->args, env);
 }
