@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/17 15:50:24 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:39:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,22 @@ typedef enum e_expression_type
 	EXPR_AND,
 	EXPR_OR,
 	EXPR_GROUP,
+	EXPR_PIPE,
 }						t_expression_type;
+
+/*
+	infile:		"<"
+	outfile:	">"
+	append:		">>"
+*/
+typedef struct s_command
+{
+	char				*cmd;
+	char				**args;
+	char				**infile;
+	char				**outfile;
+	char				**append;
+}						t_command;
 
 /*
 	child: will only be set when type == EXPR_GROUP
@@ -62,26 +77,11 @@ typedef enum e_expression_type
 typedef struct s_expression
 {
 	char				*str;
+	t_command			cmd;
 	t_expression_type	type;
 	struct s_expression	*child;
 	struct s_expression	*next;
 }						t_expression;
-
-/*
-	infile:		"<"
-	outfile:	">"
-	append:		">>"
-	pipe: 		"|"
-*/
-typedef struct s_command
-{
-	char				*cmd;
-	char				**args;
-	char				*infile;
-	char				*outfile;
-	bool				append;
-	struct s_command	*pipe;
-}						t_command;
 
 // tokens
 t_token					*create_token(t_token_type type, char *str);
@@ -97,13 +97,12 @@ t_expression			*parse_expression(t_token *token, t_token *end);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
+void					execute_expression(t_expression *expr);
 
 // commands
-t_command				*create_command(char *cmd_str);
-t_command				*parse_command(t_expression *expr, t_expression *end);
-t_expression			*get_expression_end(t_expression *expr);
+void					init_command(t_command *cmd, char *cmd_str);
+t_command				*parse_command(t_expression *expr);
 void					print_command(t_command *cmd, int insertion);
-void					free_command(t_command *cmd);
-void					test_execute(t_expression *expr);
+void					clear_command(t_command *cmd);
 
 #endif
