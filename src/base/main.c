@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 16:00:21 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:38:11 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
 	t_token			*token;
 	t_expression	*expr;
 
-	input = "echo";
+	input = "cmd1 && cmd2 || (cmd3 && cmd4 || cmd5)";
 	printf("Input: %s\n", input);
 	token = parse_token(input);
 	print_token(token);
