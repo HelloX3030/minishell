@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/12 13:19:02 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:15:00 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	execute_ext(t_command *cmd, t_env *env)
 		free(cmd_path);
 		return (1);
 	}
-	/*	forke ich hier, oder seperat?
 	pid = fork();
 	if (pid == -1)
 	{
@@ -93,7 +92,6 @@ int	execute_ext(t_command *cmd, t_env *env)
 		free_array(envp);
 		return (1);
 	}
-	*/
 	if (pid == 0)
 	{
 		execve(cmd_path, cmd->args, envp);
