@@ -7,9 +7,17 @@ NAME := minishell
 H_FILES := include/include.h
 
 # .c files
-SRC_DIR := src/base
-vpath %.c $(SRC_DIR)
-SRC_FILES := main.c
+vpath %.c src/base
+vpath %.c src/builtins
+vpath %.c src/env
+vpath %.c src/externals
+vpath %.c src/utils
+SRC_FILES := main.c \
+	cd.c echo.c env.c export.c pwd.c unset.c \
+	env_init.c env_utils.c \
+	builtin.c execute.c \
+	externals.c \
+	fd.c \
 
 # .o files
 OBJ_DIR := obj
