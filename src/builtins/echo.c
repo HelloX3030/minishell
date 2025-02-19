@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:49:21 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 11:13:47 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 11:31:37 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	mini_echo(char **args)
 	int	i;
 	int	n_flag;
 
-	i = 1;
+	i = 0;
 	n_flag = 0;
 	if (count_args(args) >= 1)
 	{
