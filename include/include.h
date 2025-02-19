@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 15:39:49 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:00:41 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_expression
 }						t_expression;
 
 // tokens
-bool					is_operator(char *str);
+int						is_operator(char *str);
 int						is_redirection_operator(char *str);
 
 t_token					*create_token(t_token_type type, char *str);

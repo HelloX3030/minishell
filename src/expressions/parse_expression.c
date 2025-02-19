@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 14:02:25 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:03:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static t_expression	*get_next_expression(t_expression *expr,
 			expr->type = EXPR_AND;
 		else if (ft_strcmp(next_token->str, "||") == 0)
 			expr->type = EXPR_OR;
+		else if (ft_strcmp(next_token->str, "|") == 0)
+			expr->type = EXPR_PIPE;
 		else
 			return (NULL);
 		next_expr = parse_expression(next_token->next, end);

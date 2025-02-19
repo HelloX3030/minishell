@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 15:45:39 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:02:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ static t_token	*get_redirection_operator(char **str_pos, char *str)
 
 static t_token	*get_direct_token(char **str_pos, char *str)
 {
+	int		len;
 	t_token	*token;
 
-	if (is_operator(str))
+	len = is_operator(str);
+	if (len)
 	{
-		token = create_token(TOKEN_OPERATOR, ft_strdupn(str, str + 2));
+		token = create_token(TOKEN_OPERATOR, ft_strdupn(str, str + len));
 		if (!token)
 			return (NULL);
-		*str_pos = str + 2;
+		*str_pos = str + len;
 		return (token);
 	}
 	token = get_redirection_operator(str_pos, str);
