@@ -1,9 +1,13 @@
 # ToDo
-- Prototype
-	- Readline simpler Prototyp der schlicht auf Input lauscht
-	- Erstes Feature Umsetzten: executables starten. 
-	- Erstes Parsing... 
-		- Recursive/Teilbereiche welche wiederum interpretiert werden müssen
+- Finish Parsing
+	- All Values need to be inside of t_expression
+	- Remove t_command
+- Add Readline things
+- Put it all together: 
+	- Parser => exectutioner
+- Giant Merge on master 
+	- Create new subbranches 
+- => Testing
 
 # Problems
 - Memory Managment:
