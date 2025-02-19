@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 14:55:23 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 10:46:06 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_command *create_test_command(char **args)
         return (NULL);
 
     // Initialize all fields to default values
-    command->cmd = "pwd";
+    command->cmd = "env";
     command->args = args;
     command->infile = NULL;
     command->outfile = NULL;
@@ -49,19 +49,19 @@ int	main(int argc, char **argv, char **envp)
 	t_env *env = init_env(envp);
 	input = readline(PROMPT);
 	execute(command, env);
-	while (input)
-	{
-		if (*input)
-			add_history(input);
-		if (strcmp(input, "exit") == 0)
-		{
-			free(input);
-			break ;
-		}
-		printf("You typed: %s\n", input);
-		free(input);
-		input = readline(PROMPT);
-	}
-	rl_clear_history();
+	//while (input)
+	//{
+	//	if (*input)
+	//		add_history(input);
+	//	if (strcmp(input, "exit") == 0)
+	//	{
+	//		free(input);
+	//		break ;
+	//	}
+	//	printf("You typed: %s\n", input);
+	//	free(input);
+	//	input = readline(PROMPT);
+	//}
+	//rl_clear_history();
 	return (0);
 }

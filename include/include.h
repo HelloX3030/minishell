@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 15:06:36 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 10:38:20 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ typedef struct	s_env
 }					t_env;
 
 // builtins
-int	to_path(int fl, t_command *args);
-int	path_history(char *prev_path);
+int	to_path(int fl, t_env *env);
 int			mini_cd(t_command *command, t_env *env);
 int	count_args(char **args);
 int			mini_echo(char **args);
@@ -74,7 +73,7 @@ char	**env_to_array(t_env *env);
 
 // exec
 int		is_builtin(char *cmd);
-int		dispatch_builtin(t_command *command, t_env *env);
+int	dispatch_builtin(t_command *command, t_env **env);
 void	execute(t_command *command, t_env *env);
 
 // externals
