@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 10:46:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 11:26:41 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,25 @@
 #include <string.h>
 
 
-t_command *create_test_command(char **args)
+t_command *create_test_command()
 {
     t_command *command;
 
-    // Allocate memory for command structure
     command = (t_command *)malloc(sizeof(t_command));
     if (!command)
         return (NULL);
 
-    // Initialize all fields to default values
-    command->cmd = "env";
-    command->args = args;
+    // Allocate memory for args array
+    command->args = (char **)malloc(sizeof(char *) * 2);  // Space for command and NULL
+    if (!command->args)
+    {
+        free(command);
+        return (NULL);
+    }
+
+    command->cmd = "cd";
+    command->args[0] = "..";
+    command->args[1] = NULL;
     command->infile = NULL;
     command->outfile = NULL;
     command->append = false;
@@ -40,28 +47,29 @@ t_command *create_test_command(char **args)
     return (command);
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	char	*input;
-	(void) argc;
-	t_command *command;
-	command = create_test_command(argv);
-	t_env *env = init_env(envp);
-	input = readline(PROMPT);
-	execute(command, env);
-	//while (input)
-	//{
-	//	if (*input)
-	//		add_history(input);
-	//	if (strcmp(input, "exit") == 0)
-	//	{
-	//		free(input);
-	//		break ;
-	//	}
-	//	printf("You typed: %s\n", input);
-	//	free(input);
-	//	input = readline(PROMPT);
-	//}
-	//rl_clear_history();
-	return (0);
+    t_command *command;
+    t_env *env;
+
+    (void)argc;
+    (void)argv;
+
+    env = init_env(envp);
+    if (!env)
+        return (1);
+	command = create_test_command();
+    execute(command, env);
+    rl_clear_history();
+    // Free environment
+    while (env)
+    {
+        t_env *tmp = env;
+        env = env->next;
+        free(tmp->key);
+        free(tmp->value);
+        free(tmp);
+    }
+
+    return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:49:21 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/18 15:03:51 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 11:13:47 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	mini_echo(char **args)
 	int	i;
 	int	n_flag;
 
-	i = 0;
+	i = 1;
 	n_flag = 0;
-	if (count_args(args) > 1)
+	if (count_args(args) >= 1)
 	{
 		while(args[i] && ft_strcmp(args[i], "-n") == 0)
 		{
