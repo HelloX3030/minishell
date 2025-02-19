@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 13:54:27 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:09:59 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	main(int argc, char **argv, char **envp)
 	char			*input;
 	t_token			*token;
 	t_expression	*expr;
+	t_env			*env;
 
+	env = init_env(envp);
 	input = readline(PROMPT);
 	while (input)
 	{
