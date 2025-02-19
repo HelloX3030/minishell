@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/13 14:39:32 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:03:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,22 @@
 static t_expression	*parse_group(t_token *token, t_token *end)
 {
 	t_expression	*expr;
+	char			*str;
 
-	expr = create_expression(EXPR_GROUP);
-	expr->str = ft_strdup(token->str);
 	end = get_closing_group(token);
-	if (end)
-	{
+	if (!end)
+		return (NULL);
+	expr = create_expression(EXPR_GROUP);
+	str = ft_strdup(token->str);
+	expr->args = ft_lstnew(str);
+	if (token->next != end)
 		expr->child = parse_expression(token->next, end);
-		if (end->next)
-			expr->next = parse_expression(end->next, NULL);
+	if (end->next)
+	{
+		expr->next = parse_expression(end->next, NULL);
+		if (!expr->next)
+			return (free_expression(expr), NULL);
 	}
-	else
-		expr->next = parse_expression(token->next, NULL);
 	return (expr);
 }
 
@@ -41,6 +45,8 @@ static t_expression	*get_next_expression(t_expression *expr,
 			expr->type = EXPR_AND;
 		else if (ft_strcmp(next_token->str, "||") == 0)
 			expr->type = EXPR_OR;
+		else if (ft_strcmp(next_token->str, "|") == 0)
+			expr->type = EXPR_PIPE;
 		else
 			return (NULL);
 		next_expr = parse_expression(next_token->next, end);
@@ -51,8 +57,6 @@ static t_expression	*get_next_expression(t_expression *expr,
 }
 
 /*
-	- when there is a next token, it must be an operator
-		=> if it is not, return NULL to indicate an error
 	- when there is an operator,
 		after the operator there must be a word or a group
 		=> if there is not, return NULL to indicate an error
@@ -60,18 +64,23 @@ static t_expression	*get_next_expression(t_expression *expr,
 static t_expression	*parse_cmd(t_token *token, t_token *end)
 {
 	t_expression	*expr;
-	t_expression	*next_expr;
+	char			*str;
 
 	expr = create_expression(EXPR_CMD);
-	expr->str = ft_strdup(token->str);
+	str = ft_strdup(token->str);
+	expr->args = ft_lstnew(str);
 	if (token->next)
 	{
 		if (end && token->next == end)
 			return (expr);
-		next_expr = get_next_expression(expr, token->next, end);
-		if (!next_expr)
+		token = parse_cmd_values(expr, token, end);
+		if (!token)
 			return (free_expression(expr), NULL);
-		expr->next = next_expr;
+		if (!token->next)
+			return (expr);
+		expr->next = get_next_expression(expr, token->next, end);
+		if (!expr->next)
+			return (free_expression(expr), NULL);
 	}
 	return (expr);
 }
@@ -87,7 +96,12 @@ t_expression	*parse_expression(t_token *token, t_token *end)
 	if (!token)
 		return (NULL);
 	else if (token->type == TOKEN_WORD)
-		return (parse_cmd(token, end));
+	{
+		if (!is_cmd_placeholder(token->str))
+			return (NULL);
+		else
+			return (parse_cmd(token, end));
+	}
 	else if (token->type == TOKEN_GROUP)
 		return (parse_group(token, end));
 	else

@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_execute.c                                     :+:      :+:    :+:   */
+/*   execute_expression.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 15:48:41 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/17 15:53:53 by lseeger          ###   ########.fr       */
+/*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
+/*   Updated: 2025/02/18 15:31:48 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	test_execute(t_expression *expr)
+void	execute_expression(t_expression *expr)
 {
-	t_command		*cmd;
-	t_expression	*end;
-
-	end = get_expression_end(expr);
-	if (!end)
-		return ;
-	cmd = parse_command(expr, end);
+	(void)expr;
+	// placeholder
 }

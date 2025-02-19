@@ -11,10 +11,9 @@ vpath %.c src/base
 vpath %.c src/commands
 vpath %.c src/expressions
 vpath %.c src/token
-SRC_FILES := main.c \
-	create_command.c free_command.c get_expression_end.c parse_command.c print_command.c test_execute.c \
-	create_expression.c free_expression.c parse_expression.c print_expression.c print_expression_type.c \
-	create_token.c free_token.c get_closing_group.c parse_token.c print_token.c print_token_type.c
+SRC_FILES := is_cmd_placeholder.c main.c \
+	create_expression.c execute_expression.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
+	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c
 
 # .o files
 OBJ_DIR := obj

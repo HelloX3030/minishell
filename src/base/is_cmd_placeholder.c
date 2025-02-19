@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_expression_end.c                               :+:      :+:    :+:   */
+/*   is_cmd_placeholder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 15:43:18 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/17 15:43:49 by lseeger          ###   ########.fr       */
+/*   Created: 2025/02/18 16:05:46 by lseeger           #+#    #+#             */
+/*   Updated: 2025/02/18 16:06:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_expression	*get_expression_end(t_expression *expr)
+bool	is_cmd_placeholder(char *str)
 {
-	return (expr);
+	if (ft_strncmp(str, "cmd", 2) == 0 || ft_strncmp(str, "CMD", 2) == 0)
+		return (true);
+	return (false);
 }
