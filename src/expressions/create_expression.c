@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 15:33:34 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:54:44 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ t_expression	*create_expression(t_expression_type type)
 	if (!expr)
 		return (NULL);
 	expr->type = type;
-	expr->cmd = NULL;
 	expr->args = NULL;
-	expr->infile = NULL;
-	expr->outfile = NULL;
+	expr->infiles = NULL;
+	expr->outfiles = NULL;
 	expr->append = NULL;
 	expr->child = NULL;
 	expr->next = NULL;

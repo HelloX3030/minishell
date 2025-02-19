@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 13:35:59 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:39:49 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ typedef struct s_expression
 	t_expression_type	type;
 
 	// cmd values
-	char				**args;
-	char				**infile;
-	char				**outfile;
-	char				**append;
+	t_list				*args;
+	t_list				*infiles;
+	t_list				*outfiles;
+	t_list				*append;
 
 	// controll structures
 	struct s_expression	*child;
@@ -76,6 +76,9 @@ typedef struct s_expression
 }						t_expression;
 
 // tokens
+bool					is_operator(char *str);
+int						is_redirection_operator(char *str);
+
 t_token					*create_token(t_token_type type, char *str);
 t_token					*parse_token(char *str);
 void					print_token(t_token *token);

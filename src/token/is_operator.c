@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_expression.c                                  :+:      :+:    :+:   */
+/*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:53:00 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 13:58:27 by lseeger          ###   ########.fr       */
+/*   Created: 2025/02/19 15:12:01 by lseeger           #+#    #+#             */
+/*   Updated: 2025/02/19 15:41:03 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	free_expression(t_expression *expr)
+bool	is_operator(char *str)
 {
-	if (!expr)
-		return ;
-	ft_lstclear(&expr->args, free);
-	ft_lstclear(&expr->infiles, free);
-	ft_lstclear(&expr->outfiles, free);
-	ft_lstclear(&expr->append, free);
-	free_expression(expr->child);
-	free_expression(expr->next);
-	free(expr);
+	return (ft_strncmp(str, "&&", 2) == 0 || ft_strncmp(str, "||", 2) == 0
+		|| ft_strncmp(str, "|", 1) == 0);
+}
+
+int	is_redirection_operator(char *str)
+{
+	if (ft_strncmp(str, ">", 1) == 0 || ft_strncmp(str, "<", 1) == 0)
+		return (1);
+	else if (ft_strncmp(str, ">>", 2) == 0)
+		return (2);
+	else
+		return (0);
 }

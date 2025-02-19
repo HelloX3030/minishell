@@ -6,32 +6,40 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:51:33 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 17:23:11 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:29:50 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static t_token	*get_end(t_token *token, t_token *end)
+static inline bool	next_is_valid(t_token *token, t_token *end)
 {
-	while ((token->next && (!end || token->next != end)
-			&& (token->next->type == TOKEN_WORD
-				&& !is_cmd_placeholder(token->next))))
-		token = token->next;
-	return (token);
+	return (token->next && (!end || token->next != end)
+		&& (token->next->type == TOKEN_WORD
+			&& !is_cmd_placeholder(token->next->str)));
 }
 
-static int	count_values(t_token *token, t_token *end, char *key)
+static t_token	*add_lst(t_list **lst, t_token *token, t_token *end,
+		char *compare)
 {
-	int	count;
+	t_list	*new_element;
+	char	*str;
 
-	count = 0;
-	while (token && token != end)
+	if (!compare || ft_strcmp(token->str, compare) == 0)
 	{
-		if (ft_strcmp(token->str, key) == 0)
-			count++;
 		token = token->next;
+		if (token && (!end || token != end) && token->type == TOKEN_WORD
+			&& !is_redirection_operator(token->str))
+		{
+			str = ft_strdup(token->str);
+			new_element = ft_lstnew(str);
+			ft_lstadd_back(lst, new_element);
+			return (token);
+		}
+		else
+			return (NULL);
 	}
+	return (token);
 }
 
 /*
@@ -42,6 +50,18 @@ static int	count_values(t_token *token, t_token *end, char *key)
 */
 t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end)
 {
-	end = get_end(token, end);
-	return (end);
+	while (next_is_valid(token, end))
+	{
+		token = token->next;
+		token = add_lst(&expr->infiles, token, end, "<");
+		if (!token)
+			return (NULL);
+		token = add_lst(&expr->outfiles, token, end, ">");
+		if (!token)
+			return (NULL);
+		token = add_lst(&expr->append, token, end, ">>");
+		if (!token)
+			return (NULL);
+	}
+	return (token);
 }

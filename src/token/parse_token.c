@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/05 17:18:22 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:45:39 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,35 @@ static char	*get_token_end(char *end)
 			if (end_quote)
 				return (end_quote + 1);
 		}
-		if (!ft_strncmp(end, "&&", 2) || !ft_strncmp(end, "||", 2))
+		if (is_operator(end))
 			return (end);
 		end++;
 	}
 	return (end);
 }
 
+static t_token	*get_redirection_operator(char **str_pos, char *str)
+{
+	int		len;
+	t_token	*token;
+
+	len = is_redirection_operator(str);
+	if (len)
+	{
+		token = create_token(TOKEN_WORD, ft_strdupn(str, str + len));
+		if (!token)
+			return (NULL);
+		*str_pos = str + len;
+		return (token);
+	}
+	return (NULL);
+}
+
 static t_token	*get_direct_token(char **str_pos, char *str)
 {
 	t_token	*token;
 
-	if (!ft_strncmp(str, "&&", 2) || !ft_strncmp(str, "||", 2))
+	if (is_operator(str))
 	{
 		token = create_token(TOKEN_OPERATOR, ft_strdupn(str, str + 2));
 		if (!token)
@@ -51,6 +68,9 @@ static t_token	*get_direct_token(char **str_pos, char *str)
 		*str_pos = str + 2;
 		return (token);
 	}
+	token = get_redirection_operator(str_pos, str);
+	if (token)
+		return (token);
 	if (*str == '(' || *str == ')')
 	{
 		token = create_token(TOKEN_GROUP, ft_strdupn(str, str + 1));
