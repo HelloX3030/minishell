@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 12:16:05 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 12:21:32 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ char	*find_cmd_path(const char *cmd, t_env *env)
 	path_env = get_env_value(env, "PATH");
 	if (!path_env)
 		return (NULL);
-	printf("%s", cmd);
-	printf("\n");
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return (NULL);
@@ -73,7 +71,6 @@ int	execute_ext(t_command *cmd, t_env *env)
 	int		status;
 
 	cmd_path = find_cmd_path(cmd->cmd, env);
-	printf("%s", cmd_path);
 	if (!cmd_path)
 	{
 		ft_putstr_fd("minishell: ", 2);
