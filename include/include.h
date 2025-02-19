@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 16:10:47 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:35:59 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_expression
 	t_expression_type	type;
 
 	// cmd values
-	char				*cmd;
 	char				**args;
 	char				**infile;
 	char				**outfile;
@@ -87,6 +86,8 @@ t_token					*get_closing_group(t_token *token);
 // expressions
 t_expression			*create_expression(t_expression_type type);
 t_expression			*parse_expression(t_token *token, t_token *end);
+t_token					*parse_cmd_values(t_expression *expr, t_token *token,
+							t_token *end);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 16:49:09 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:51:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ static t_expression	*get_next_expression(t_expression *expr,
 	else
 		next_expr = parse_expression(next_token, end);
 	return (next_expr);
-}
-
-static t_token	*parse_cmd_values(t_expression *expr, t_token *token,
-		t_token *end)
-{
-	(void)end;
-	(void)expr;
-	return (token);
 }
 
 /*
