@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 11:29:04 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 12:17:21 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_command *create_test_command()
         return (NULL);
     }
 
-    command->cmd = "echo";
-    command->args[0] = "test";
+    command->cmd = "env";
+    command->args[0] = "";
     command->args[1] = NULL;
     command->infile = NULL;
     command->outfile = NULL;
