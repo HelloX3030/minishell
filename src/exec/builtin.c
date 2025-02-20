@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 11:32:24 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:38:38 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	dispatch_builtin(t_command *command, t_env **env)
+int	dispatch_builtin(char **args, t_env **env)
 {
 	int	result;
 
 	result = 0;
-	if (ft_strcmp(command->cmd, "echo") == 0)
-		result = mini_echo(command->args);
-	if (ft_strcmp(command->cmd, "cd") == 0)
-		result = mini_cd(command, *env);
-	if (ft_strcmp(command->cmd, "pwd") == 0)
+	if (ft_strcmp(args[0], "echo") == 0)
+		result = mini_echo(args);
+	if (ft_strcmp(args[0], "cd") == 0)
+		result = mini_cd(args, *env);
+	if (ft_strcmp(args[0], "pwd") == 0)
 		mini_pwd();
-	if (ft_strcmp(command->cmd, "env") == 0)
+	if (ft_strcmp(args[0], "env") == 0)
 		mini_env(*env);
-	if (ft_strcmp(command->cmd, "export") == 0)
-		mini_export(command->args, env);
-	if (ft_strcmp(command->cmd, "unset") == 0)
-		mini_unset(command->args, env);
+	if (ft_strcmp(args[0], "export") == 0)
+		mini_export(args, env);
+	if (ft_strcmp(args[0], "unset") == 0)
+		mini_unset(args, env);
 	return (1);
 }

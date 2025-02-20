@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 13:16:46 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:40:02 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ void	free_array(char **array)
 	free(array);
 }
 
-int	execute_ext(t_command *cmd, t_env *env)
+int	execute_ext(char **args, t_env *env)
 {
 	char	*cmd_path;
 	char	 **envp;
 	pid_t	pid;
 	int		status;
 
-	cmd_path = find_cmd_path(cmd->cmd, env);
+	cmd_path = find_cmd_path(args[0], env);
 	if (!cmd_path)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->args[0], 2);
+		ft_putstr_fd(args[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		return (127);
 	}
@@ -94,9 +94,9 @@ int	execute_ext(t_command *cmd, t_env *env)
 	}
 	if (pid == 0)
 	{
-		execve(cmd_path, cmd->args, envp);
+		execve(cmd_path, args, envp);
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->args[0], 2);
+		ft_putstr_fd(args[0], 2);
 		perror(": ");
 		free(cmd_path);
 		free_array(envp);

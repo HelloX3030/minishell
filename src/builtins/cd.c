@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 12:11:37 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:41:10 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,19 @@ static int	path_history(char *prev_path)
 	return (EXIT_SUCCESS);
 }
 
-int	mini_cd(t_command *command, t_env *env)
+int	mini_cd(char **args, t_env *env)
 {
 	int	cd;
 
 	cd = 0;
-	if (!command->args)
+	if (!args)
 		to_path(0, env);
-	if (ft_strcmp(command->args[0], "-") == 0)
+	if (ft_strcmp(args[0], "-") == 0)
 		cd = to_path(1, env);
 	else
 	{
-		path_history(command->args[1]);
-		cd = chdir(command->args[1]);
+		path_history(args[1]);
+		cd = chdir(args[1]);
 		if (cd < 0)
 			cd *= -1;
 		if (cd != 0)
