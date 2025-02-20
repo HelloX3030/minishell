@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:19:24 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:44:00 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 				free_token(token);
 				return (0);
 			}
-			//print_token(token);
+			print_token(token);
 			expr = parse_expression(token, NULL, env);
 			if (expr == NULL)
 			{
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 				free_expression(expr);
 				return (0);
 			}
-			print_expression(expr ,0);
+			//print_expression(expr ,0);
 			args = list_to_arr(expr->args);
 			ft_print_strs(args, 1);
 			execute(args, env);
