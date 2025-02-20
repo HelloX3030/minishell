@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_command.c                                   :+:      :+:    :+:   */
+/*   is_cmd_placeholder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:48:13 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 13:00:42 by lseeger          ###   ########.fr       */
+/*   Created: 2025/02/18 16:05:46 by lseeger           #+#    #+#             */
+/*   Updated: 2025/02/18 16:06:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_command	*create_command(void)
+bool	is_cmd_placeholder(char *str)
 {
-	t_command	*cmd;
-
-	cmd = malloc(sizeof(t_command));
-	if (!cmd)
-		return (NULL);
-	cmd->args = NULL;
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-	cmd->append = false;
-	cmd->pipe = false;
-	return (cmd);
+	if (ft_strncmp(str, "cmd", 2) == 0 || ft_strncmp(str, "CMD", 2) == 0)
+		return (true);
+	return (false);
 }

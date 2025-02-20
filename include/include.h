@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 11:02:44 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:08:36 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 typedef enum s_token_type
 {
-	TOKEN_NONE,
 	TOKEN_WORD,
 	TOKEN_GROUP,
 	TOKEN_OPERATOR,
@@ -40,28 +39,41 @@ typedef struct s_token
 
 typedef enum e_expression_type
 {
-	EXPR_NONE,
+	EXPR_CMD,
 	EXPR_AND,
 	EXPR_OR,
-	EXPR_BRACKET,
+	EXPR_GROUP,
+	EXPR_PIPE,
 }						t_expression_type;
 
 /*
-	childs: all expressions of the same type are
-		grouped together in a NULL-terminated Array
+	child: will only be set when type == EXPR_GROUP
+		contains the subexpressions of the group via a linked list
 
-	next: the next subexpressions in the list, which
-		will get evaluated before
+	next: the next expression in the list
 
 	e. g.
-		cmd1 && cmd2 || cmd3 => one expression with type EXPR_OR
-		and two childs: one with type EXPR_AND and one with type EXPR_NONE
+		cmd1 && (cmd2 || cmd3)
+		=> cmd1 type AND
+		=> type GROUP:
+			=> cmd2 type OR
+			=> cmd3 type CMD
+
+	expressionss will be evaluated from left to right,
+		beginning from the most nested
 */
 typedef struct s_expression
 {
-	char				*str;
 	t_expression_type	type;
-	struct s_expression	*childs;
+
+	// cmd values
+	t_list				*args;
+	t_list				*infiles;
+	t_list				*outfiles;
+	t_list				*append;
+
+	// controll structures
+	struct s_expression	*child;
 	struct s_expression	*next;
 }						t_expression;
 

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:53:00 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 13:01:03 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:58:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 void	free_expression(t_expression *expr)
 {
-	int	i;
-
-	if (expr->str)
-		free(expr->str);
-	i = 0;
-	while (expr->childs + i)
-	{
-		free_expression(expr->childs + i);
-		i++;
-	}
-	if (expr->next)
-		free_expression(expr->next);
+	if (!expr)
+		return ;
+	ft_lstclear(&expr->args, free);
+	ft_lstclear(&expr->infiles, free);
+	ft_lstclear(&expr->outfiles, free);
+	ft_lstclear(&expr->append, free);
+	free_expression(expr->child);
+	free_expression(expr->next);
 	free(expr);
 }

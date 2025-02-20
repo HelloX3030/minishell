@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 11:01:57 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:09:47 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+// static void	leaks_end(void)
+// {
+// 	system("leaks minishell");
+// }
+
+int	main(void)
+{
+	char			*input;
+	t_token			*token;
+	t_expression	*expr;
+
+	input = "cmd1 | cmd2";
+	printf("Input: %s\n", input);
+	token = parse_token(input);
+	print_token(token);
+	expr = parse_expression(token, NULL);
+	print_expression(expr, 0);
+	execute_expression(expr);
+	free_token(token);
+	free_expression(expr);
+	// atexit(leaks_end);
+	return (0);
+}
+
+/*
+readline code:
+char	*input;
 
 
 //t_command *create_test_command()
