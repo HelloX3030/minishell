@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 13:46:04 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:05:29 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,26 @@ typedef struct	s_env
 	struct s_env	*next;
 }					t_env;
 
+// tokens
+int						is_operator(char *str);
+int						is_redirection_operator(char *str);
+
+t_token					*create_token(t_token_type type, char *str);
+t_token					*parse_token(char *str);
+void					print_token(t_token *token);
+void					print_token_type(t_token_type type);
+void					free_token(t_token *token);
+t_token					*get_closing_group(t_token *token);
+
+// expressions
+t_expression			*create_expression(t_expression_type type);
+t_expression			*parse_expression(t_token *token, t_token *end, t_env *env);
+t_token					*parse_cmd_values(t_expression *expr, t_token *token, t_token *end, t_env *env);
+void					print_expression(t_expression *expr, int insertion);
+void					print_expression_type(t_expression_type type);
+void					free_expression(t_expression *expr);
+void					execute_expression(t_expression *expr);
+
 // builtins
 int		to_path(int fl, t_env *env);
 int		mini_cd(char **args, t_env *env);
@@ -120,9 +140,10 @@ void	unset_env_val(t_env **env, const char *key);
 char	**env_to_array(t_env *env);
 
 // exec
-int		is_builtin(char *cmd);
+int	is_builtin(char *cmd);
 int	dispatch_builtin(char **args, t_env **env);
 void	execute(char **args, t_env *env);
+bool	is_cmd(char *args, t_env *env);
 
 // externals
 char	*find_cmd_path(const char *cmd, t_env *env);

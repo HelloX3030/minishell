@@ -8,12 +8,21 @@ H_FILES := include/include.h
 
 # .c files
 vpath %.c src/base
-vpath %.c src/commands
 vpath %.c src/expressions
 vpath %.c src/token
-SRC_FILES := is_cmd_placeholder.c main.c \
+vpath %.c src/builtins
+vpath %.c src/env
+vpath %.c src/exec
+vpath %.c src/externals
+vpath %.c src/utils
+SRC_FILES := is_cmd.c main.c \
 	create_expression.c execute_expression.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
-	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c
+	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c \
+	cd.c echo.c env.c export.c pwd.c unset.c \
+	env_init.c env_utils.c \
+	builtin.c execute.c \
+	externals.c \
+	fd.c \
 
 # .o files
 OBJ_DIR := obj
