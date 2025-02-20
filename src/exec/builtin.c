@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 13:56:57 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:04:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	dispatch_builtin(char **args, t_env **env)
 	int	result;
 
 	result = 0;
+	(void)result;
 	if (ft_strcmp(args[0], "echo") == 0)
 		result = mini_echo(args);
 	if (ft_strcmp(args[0], "cd") == 0)

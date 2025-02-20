@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:52:26 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 13:46:13 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:05:12 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute(char **args, t_env *env)
 	int		i;
 
 	i = 0;
+	(void)i;
 	if (args && ft_strcmp(args[0], "exit") == 0)
 		return ;
 		//mini_exit();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 09:22:12 by lseeger           #+#    #+#             */
-/*   Updated: 2025/01/07 15:25:48 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:04:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*get_buffer(int fd)
 {
-	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1];
+	static char	buffer[1024][BUFFER_SIZE + 1];
 
 	return (buffer[fd]);
 }

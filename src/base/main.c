@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:59:20 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:12:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-// static void	leaks_end(void)
-// {
-// 	system("leaks minishell");
-// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -44,9 +39,9 @@ int	main(int argc, char **argv, char **envp)
 				free_token(token);
 				return (0);
 			}
-			// print_token(token);
+			print_token(token);
 			expr = parse_expression(token, NULL, env);
-			// print_expression(expr, 0);
+			print_expression(expr, 0);
 			if (expr == NULL)
 			{
 				free_token(token);
@@ -64,6 +59,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_token(token);
 	free_expression(expr);
-	// atexit(leaks_end);
 	return (0);
 }

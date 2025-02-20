@@ -2,7 +2,8 @@
 - Signals handling
 
 # Problems
-
+- Fix environment Variables Leaks
+- includes in main.c?
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?

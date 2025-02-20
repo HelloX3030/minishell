@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:05:29 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:01:42 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <termcap.h>
 # include <unistd.h>
 
+// xyz
+# include <sys/types.h>
+# include <sys/wait.h>
+
 # define PROMPT "myshell> "
 
 typedef enum s_token_type
@@ -28,6 +32,7 @@ typedef enum s_token_type
 	TOKEN_WORD,
 	TOKEN_GROUP,
 	TOKEN_OPERATOR,
+	TOKEN_END,
 }						t_token_type;
 
 typedef struct s_token
@@ -77,33 +82,19 @@ typedef struct s_expression
 	struct s_expression	*next;
 }						t_expression;
 
-/*
-	infile:		"<"
-	outfile:	">"
-	append:		">>"
-	pipe: 		"|"
-*/
-typedef struct s_command
+typedef struct s_env
 {
-	char				**args;
-	char				*infile;
-	char				*outfile;
-	bool				append;
-	struct s_command	*pipe;
-}						t_command;
-
-typedef struct	s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}					t_env;
+	char				*key;
+	char				*value;
+	struct s_env		*next;
+}						t_env;
 
 // tokens
 int						is_operator(char *str);
 int						is_redirection_operator(char *str);
 
-t_token					*create_token(t_token_type type, char *str);
+t_token					*create_token(t_token_type type, char *str,
+							char *str_end);
 t_token					*parse_token(char *str);
 void					print_token(t_token *token);
 void					print_token_type(t_token_type type);
@@ -112,47 +103,48 @@ t_token					*get_closing_group(t_token *token);
 
 // expressions
 t_expression			*create_expression(t_expression_type type);
-t_expression			*parse_expression(t_token *token, t_token *end, t_env *env);
-t_token					*parse_cmd_values(t_expression *expr, t_token *token, t_token *end, t_env *env);
+t_expression			*parse_expression(t_token *token, t_token *end,
+							t_env *env);
+t_token					*parse_cmd_values(t_expression *expr, t_token *token,
+							t_token *end, t_env *env);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
 void					execute_expression(t_expression *expr);
 
 // builtins
-int		to_path(int fl, t_env *env);
-int		mini_cd(char **args, t_env *env);
-int		count_args(char **args);
-int		mini_echo(char **args);
-void	mini_env(t_env *env);
-int		mini_export(char **args, t_env **env);
-void	mini_pwd(void);
-int		is_valid_id(const char *str);
-int		mini_unset(char **args, t_env **env);
+int						to_path(int fl, t_env *env);
+int						mini_cd(char **args, t_env *env);
+int						count_args(char **args);
+int						mini_echo(char **args);
+void					mini_env(t_env *env);
+int						mini_export(char **args, t_env **env);
+void					mini_pwd(void);
+int						is_valid_id(const char *str);
+int						mini_unset(char **args, t_env **env);
 
 // envs
-t_env	*create_env_node(char *key, char *value);
-void	add_env_node(t_env **head, t_env *new_node);
-t_env	*init_env(char **envp);
-char	*get_env_value(t_env *env, const char *key);
-void	set_env_val(t_env **env, char *key, char *value);
-void	unset_env_val(t_env **env, const char *key);
-char	**env_to_array(t_env *env);
+t_env					*create_env_node(char *key, char *value);
+void					add_env_node(t_env **head, t_env *new_node);
+t_env					*init_env(char **envp);
+char					*get_env_value(t_env *env, const char *key);
+void					set_env_val(t_env **env, char *key, char *value);
+void					unset_env_val(t_env **env, const char *key);
+char					**env_to_array(t_env *env);
 
 // exec
-int	is_builtin(char *cmd);
-int	dispatch_builtin(char **args, t_env **env);
-void	execute(char **args, t_env *env);
-bool	is_cmd(char *args, t_env *env);
+int						is_builtin(char *cmd);
+int						dispatch_builtin(char **args, t_env **env);
+void					execute(char **args, t_env *env);
+bool					is_cmd(char *args, t_env *env);
 
 // externals
-char	*find_cmd_path(const char *cmd, t_env *env);
-void	free_array(char **array);
-int	execute_ext(char **args, t_env *env);
-
+char					*find_cmd_path(const char *cmd, t_env *env);
+void					free_array(char **array);
+int						execute_ext(char **args, t_env *env);
 
 // utils
-char	*path_join(const char *s1, const char *s2);
-char	**list_to_arr(t_list *args);
+char					*path_join(const char *s1, const char *s2);
+char					**list_to_arr(t_list *args);
 
 #endif
