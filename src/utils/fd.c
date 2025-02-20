@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 12:33:14 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:46:31 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ char	*path_join(const char *s1, const char *s2)
 
 char	**list_to_arr(t_list *args)
 {
-		char    **arr;
-	t_list  *current;
-	int     size;
-	int     i;
+	char	**arr;
+	t_list	*current;
+	int		size;
+	int		i;
 	size = ft_lstsize(args);
 	if (size == 0)
 		return (NULL);
