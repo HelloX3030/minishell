@@ -6,13 +6,13 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:49:21 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/07 12:06:21 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 11:31:37 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
-static int	count_args(char **args)
+int	count_args(char **args)
 {
 	int	size;
 
@@ -29,7 +29,7 @@ int	mini_echo(char **args)
 
 	i = 0;
 	n_flag = 0;
-	if (count_args > 1)
+	if (count_args(args) >= 1)
 	{
 		while(args[i] && ft_strcmp(args[i], "-n") == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/07 13:37:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:01:57 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,70 @@
 #include <stdlib.h>
 #include <string.h>
 
-// static void	leaks_end(void)
-// {
-// 	system("leaks minishell");
-// }
 
-int	main(void)
+//t_command *create_test_command()
+//{
+//    t_command *command;
+
+//    command = (t_command *)malloc(sizeof(t_command));
+//    if (!command)
+//        return (NULL);
+
+//    // Allocate memory for args array
+//    command->args = (char **)malloc(sizeof(char *) * 3);  // Space for command and NULL
+//    if (!command->args)
+//    {
+//        free(command);
+//        return (NULL);
+//    }
+
+//    command->cmd = "cd";
+//    command->args[0] = "...";
+//    command->args[1] = NULL;
+//    command->infile = NULL;
+//    command->outfile = NULL;
+//    command->append = false;
+//    command->pipe = false;
+//    command->background = false;
+//    command->next = NULL;
+
+//    return (command);
+//}
+
+int	main(int argc, char **argv, char **envp)
 {
-	char	*input;
-	t_token	*token;
+	char			*input;
+	t_token			*token;
+	t_expression	*expr;
+	t_env			*env;
 
-	input = "(cmd_a && cmd_b) || abc\"cmd_c && cmd_d\"abc && cmd_e";
-	token = parse_token(input);
-	print_token(token);
-	free_token(token);
-	// atexit(leaks_end);
-	return (0);
-}
-
-/*
-readline code:
-char	*input;
-
+	env = init_env(envp);
 	input = readline(PROMPT);
 	while (input)
 	{
 		if (*input)
-			add_history(input);
-		if (strcmp(input, "exit") == 0)
 		{
-			free(input);
-			break ;
+			token = parse_token(input);
+			if (token == NULL)
+			{
+				free_token(token);
+				return (0);
+			}
+			expr = parse_expression(token, NULL);
+			if (expr == NULL)
+			{
+				free_token(token);
+				free_expression(expr);
+				return (0);
+			}
+			execute(expr, env);
+			add_history(input);
 		}
-		printf("You typed: %s\n", input);
 		free(input);
 		input = readline(PROMPT);
 	}
-	rl_clear_history();
+	free_token(token);
+	free_expression(expr);
+	// atexit(leaks_end);
 	return (0);
 */

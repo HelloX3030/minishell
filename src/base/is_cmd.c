@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   is_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 12:32:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/18 15:05:27 by lkubler          ###   ########.fr       */
+/*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
+/*   Updated: 2025/02/19 14:04:25 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	mini_pwd(void)
-{
-	char	cwd[PATH_MAX];
 
-	if (getcwd(cwd, PATH_MAX) != NULL)
-	{
-		ft_putendl_fd(cwd, 1);
-		return ;
-	}
-	else
-		return ;
+bool	is_cmd_ext(t_command *cmd, t_env *env)
+{
+	char *is_ext;
+	char *is_built;
+
+	is_ext = find_cmd_path(cmd->cmd, env);
+	is_built = is_builtin(cmd->cmd);
+	if (!is_ext || !is_built)
+		return (0);
+	return (1);
 }

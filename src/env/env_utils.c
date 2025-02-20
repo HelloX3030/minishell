@@ -6,11 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/12 12:01:18 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 12:13:18 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
 char	*get_env_value(t_env *env, const char *key)
 {
@@ -23,24 +23,25 @@ char	*get_env_value(t_env *env, const char *key)
 	return (NULL);
 }
 
-void	set_env_val(t_env **env, const char *key, const char *value)
+void set_env_val(t_env **env, char *key, char *value)
 {
-	t_env	*cur;
-	t_env	*new_node;
+		t_env *cur;
+		t_env *new_node;
 
-	cur = *env;
-	while(cur)
-	{
-		if (ft_strcmp(cur->key, key) == 0)
+		cur = *env;
+		while(cur)
 		{
-			free(cur->value);
-			cur->value = ft_strdup(value);
-			return ;
+			if (ft_strcmp(cur->key, key) == 0)
+			{
+				free(cur->value);
+				cur->value = ft_strdup(value);
+				return;
+			}
+			cur = cur->next;
 		}
-	}
-	new_node = create_env_node(key, value);
-	new_node->next = *env;
-	*env = new_node;
+		new_node = create_env_node(key, value);
+		new_node->next = *env;
+		*env = new_node;
 }
 
 void	unset_env_val(t_env **env, const char *key)

@@ -6,20 +6,20 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/12 13:19:02 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:16:46 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/include.h"
+#include "include.h"
 
-static char	*find_cmd_path(const char *cmd, t_env *env)
+char	*find_cmd_path(const char *cmd, t_env *env)
 {
 	char	*path_env;
 	char	**paths;
 	char	*full_path;
 	char	*tmp;
 	int		i;
-
+	
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	path_env = get_env_value(env, "PATH");
@@ -51,7 +51,7 @@ static char	*find_cmd_path(const char *cmd, t_env *env)
 	return (NULL);
 }
 
-static void	free_array(char **array)
+void	free_array(char **array)
 {
 	int	i;
 
@@ -70,7 +70,7 @@ int	execute_ext(t_command *cmd, t_env *env)
 	pid_t	pid;
 	int		status;
 
-	cmd_path = find_cmd_path(cmd->args[0], env);
+	cmd_path = find_cmd_path(cmd->cmd, env);
 	if (!cmd_path)
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -84,7 +84,6 @@ int	execute_ext(t_command *cmd, t_env *env)
 		free(cmd_path);
 		return (1);
 	}
-	/*	forke ich hier, oder seperat?
 	pid = fork();
 	if (pid == -1)
 	{
@@ -93,7 +92,6 @@ int	execute_ext(t_command *cmd, t_env *env)
 		free_array(envp);
 		return (1);
 	}
-	*/
 	if (pid == 0)
 	{
 		execve(cmd_path, cmd->args, envp);
