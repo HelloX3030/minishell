@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 14:09:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:36:12 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token			*token;
 	t_expression	*expr;
 	t_env			*env;
+	char			**args;
 
 	env = init_env(envp);
 	input = readline(PROMPT);
@@ -73,7 +74,8 @@ int	main(int argc, char **argv, char **envp)
 				free_expression(expr);
 				return (0);
 			}
-			execute(expr, env);
+			args = list_to_arr(expr->args);
+			execute(args, env);
 			add_history(input);
 		}
 		free(input);
