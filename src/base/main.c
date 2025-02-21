@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:44:00 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/21 11:46:04 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(int argc, char **argv, char **envp)
 	t_expression	*expr;
 	t_env			*env;
 	char			**args;
-	(void)			argv;
-	(void)			argc;
 
+	(void)argv;
+	(void)argc;
 	env = init_env(envp);
 	input = readline(PROMPT);
 	while (1)
@@ -44,15 +44,16 @@ int	main(int argc, char **argv, char **envp)
 				free_token(token);
 				return (0);
 			}
-			print_token(token);
+			// print_token(token);
 			expr = parse_expression(token, NULL, env);
+			// print_expression(expr, 0);
 			if (expr == NULL)
 			{
 				free_token(token);
 				free_expression(expr);
 				return (0);
 			}
-			//print_expression(expr ,0);
+			print_expression(expr, 0);
 			args = list_to_arr(expr->args);
 			ft_print_strs(args, 1);
 			execute(args, env);
@@ -66,4 +67,3 @@ int	main(int argc, char **argv, char **envp)
 	// atexit(leaks_end);
 	return (0);
 }
-

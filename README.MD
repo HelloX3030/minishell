@@ -1,5 +1,7 @@
 # ToDo
 - Signals handling
+- cd machtn noch nix
+- aus irgendeinem grund nimmt er bei cat die args nicht mit (bei ls auch, also ls -l wird nur ls geparst)
 
 # Problems
 
