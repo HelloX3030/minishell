@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:46:39 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/21 13:09:41 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ void					free_expression(t_expression *expr);
 void					execute_expression(t_expression *expr);
 
 // builtins
-int		to_path(int fl, t_env *env);
-int		mini_cd(char **args, t_env *env);
+int to_path(int fl, t_env **env);  // Changed to t_env ** to modify environment
+int mini_cd(char **args, t_env **env);  // Changed to t_env **
 int		count_args(char **args);
 int		mini_echo(char **args);
 void	mini_env(t_env *env);

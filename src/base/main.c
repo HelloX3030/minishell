@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/21 11:46:04 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/21 13:11:31 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 				free_expression(expr);
 				return (0);
 			}
-			print_expression(expr, 0);
+			//print_expression(expr, 0);
 			args = list_to_arr(expr->args);
 			ft_print_strs(args, 1);
 			execute(args, env);
