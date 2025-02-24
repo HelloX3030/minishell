@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 18:29:14 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:32:43 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ static t_token	*get_token(char **str)
 	char	*str_end;
 	int		len;
 
-	len = is_operator(str);
+	len = is_operator(*str);
 	if (len)
-		return (create_token(TOKEN_OPERATOR, *str, *str + len));
+		return (create_token(TOKEN_OPERATOR, str, *str + len));
 	len = is_redirection_operator(*str);
 	if (len)
-		return (create_token(TOKEN_WORD, *str, *str + len));
-	if (*str == '(' || *str == ')')
-		return (create_token(TOKEN_GROUP, *str, *str + 1));
+		return (create_token(TOKEN_WORD, str, *str + len));
+	if (**str == '(' || **str == ')')
+		return (create_token(TOKEN_GROUP, str, *str + 1));
 	str_end = get_token_end(*str);
-	if (str != str_end)
-		return (create_token(TOKEN_WORD, *str, str_end));
-	return (create_token(TOKEN_END, str, str));
+	if (*str != str_end)
+		return (create_token(TOKEN_WORD, str, str_end));
+	return (create_token(TOKEN_END, str, *str));
 }
 
 t_token	*parse_token(char *str)
@@ -71,7 +71,7 @@ t_token	*parse_token(char *str)
 	while (token->type != TOKEN_END)
 	{
 		str = ft_skip_charset(str, " \t");
-		token->next = get_token(str);
+		token->next = get_token(&str);
 		if (!token->next)
 		{
 			free_token(token_start);

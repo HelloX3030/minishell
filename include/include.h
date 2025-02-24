@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 18:01:42 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:31:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_env
 int						is_operator(char *str);
 int						is_redirection_operator(char *str);
 
-t_token					*create_token(t_token_type type, char *str,
+t_token					*create_token(t_token_type type, char **str,
 							char *str_end);
 t_token					*parse_token(char *str);
 void					print_token(t_token *token);
