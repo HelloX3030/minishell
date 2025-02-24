@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_expression.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:04:32 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:23:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,20 @@ static t_expression	*parse_group(t_token *token, t_token *end, t_env *env)
 	if (!end)
 		return (NULL);
 	expr = create_expression(EXPR_GROUP);
+	if (!expr)
+		return (NULL);
 	str = ft_strdup(token->str);
+	if (!str)
+		return (free_expression(expr), NULL);
 	expr->args = ft_lstnew(str);
+	if (!expr->args)
+		return (free_expression(expr), NULL);
 	if (token->next != end)
+	{
 		expr->child = parse_expression(token->next, end, env);
+		if (!expr->child)
+			return (free_expression(expr), NULL);
+	}
 	if (end->next)
 	{
 		expr->next = parse_expression(end->next, NULL, env);
@@ -37,8 +47,6 @@ static t_expression	*parse_group(t_token *token, t_token *end, t_env *env)
 static t_expression	*get_next_expression(t_expression *expr,
 		t_token *next_token, t_token *end, t_env *env)
 {
-	t_expression	*next_expr;
-
 	if (next_token->type == TOKEN_OPERATOR)
 	{
 		if (ft_strcmp(next_token->str, "&&") == 0)
@@ -49,11 +57,10 @@ static t_expression	*get_next_expression(t_expression *expr,
 			expr->type = EXPR_PIPE;
 		else
 			return (NULL);
-		next_expr = parse_expression(next_token->next, end, env);
+		return (parse_expression(next_token->next, end, env));
 	}
 	else
-		next_expr = parse_expression(next_token, end, env);
-	return (next_expr);
+		return (parse_expression(next_token, end, env));
 }
 
 /*
@@ -67,21 +74,20 @@ static t_expression	*parse_cmd(t_token *token, t_token *end, t_env *env)
 	char			*str;
 
 	expr = create_expression(EXPR_CMD);
+	if (!expr)
+		return (NULL);
 	str = ft_strdup(token->str);
+	if (!str)
+		return (free_expression(expr), NULL);
 	expr->args = ft_lstnew(str);
-	if (token->next)
-	{
-		if (end && token->next == end)
-			return (expr);
-		token = parse_cmd_values(expr, token, end, env);
-		if (!token)
-			return (free_expression(expr), NULL);
-		if (!token->next)
-			return (expr);
-		expr->next = get_next_expression(expr, token->next, end, env);
-		if (!expr->next)
-			return (free_expression(expr), NULL);
-	}
+	if (!expr->args || !token->next)
+		return (free_expression(expr), NULL);
+	token = parse_cmd_values(expr, token, end, env);
+	if (!token)
+		return (free_expression(expr), NULL);
+	expr->next = get_next_expression(expr, token->next, end, env);
+	if (!expr->next)
+		return (free_expression(expr), NULL);
 	return (expr);
 }
 
@@ -98,12 +104,14 @@ t_expression	*parse_expression(t_token *token, t_token *end, t_env *env)
 	else if (token->type == TOKEN_WORD)
 	{
 		if (!is_cmd(token->str, env))
-			return (NULL);
+			return (create_expression(EXPR_SYNTAX_ERROR));
 		else
 			return (parse_cmd(token, end, env));
 	}
 	else if (token->type == TOKEN_GROUP)
 		return (parse_group(token, end, env));
+	else if (token->type == TOKEN_END)
+		return (create_expression(EXPR_END));
 	else
-		return (NULL);
+		return (create_expression(EXPR_SYNTAX_ERROR));
 }

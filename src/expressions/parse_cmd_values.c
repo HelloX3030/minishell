@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:51:33 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 14:01:09 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:12:07 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 static inline bool	next_is_valid(t_token *token, t_token *end, t_env *env)
 {
 	return (token->next && (!end || token->next != end)
-		&& (token->next->type == TOKEN_WORD
-			&& !is_cmd(token->next->str, env)));
+		&& (token->next->type == TOKEN_WORD && !is_cmd(token->next->str, env)));
 }
 
 static t_token	*add_lst(t_list **lst, t_token *token, t_token *end,
@@ -48,7 +47,8 @@ static t_token	*add_lst(t_list **lst, t_token *token, t_token *end,
 		returns the token that was passed as an argument
 	- when an error occurs, returns NULL
 */
-t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end, t_env *env)
+t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end,
+		t_env *env)
 {
 	while (next_is_valid(token, end, env))
 	{

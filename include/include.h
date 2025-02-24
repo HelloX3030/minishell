@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 15:31:13 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:56:00 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum s_token_type
 	TOKEN_GROUP,
 	TOKEN_OPERATOR,
 	TOKEN_END,
+	TOKEN_SYNTAX_ERROR,
 }						t_token_type;
 
 typedef struct s_token
@@ -49,6 +50,8 @@ typedef enum e_expression_type
 	EXPR_OR,
 	EXPR_GROUP,
 	EXPR_PIPE,
+	EXPR_END,
+	EXPR_SYNTAX_ERROR,
 }						t_expression_type;
 
 /*
@@ -100,6 +103,7 @@ void					print_token(t_token *token);
 void					print_token_type(t_token_type type);
 void					free_token(t_token *token);
 t_token					*get_closing_group(t_token *token);
+bool					token_has_syntax_error(t_token *token);
 
 // expressions
 t_expression			*create_expression(t_expression_type type);
@@ -111,6 +115,7 @@ void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
 void					execute_expression(t_expression *expr);
+bool					expression_has_syntax_error(t_expression *expr);
 
 // builtins
 int						to_path(int fl, t_env *env);

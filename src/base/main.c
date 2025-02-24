@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 15:37:55 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:58:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,39 @@ int	main(int argc, char **argv, char **envp)
 		if (*input)
 		{
 			token = parse_token(input);
-			if (token == NULL)
-				return (0);
+			if (!token)
+				return (free(input), 0);
 			print_token(token);
-			// expr = parse_expression(token, NULL, env);
-			// print_expression(expr, 0);
-			// if (expr == NULL)
-			// {
-			// 	free_token(token);
-			// 	free_expression(expr);
-			// 	return (0);
-			// }
-			// print_expression(expr, 0);
-			// args = list_to_arr(expr->args);
-			// ft_print_strs(args, 1);
+			if (token_has_syntax_error(token))
+			{
+				printf("Token Syntax error\n");
+				free_token(token);
+				add_history(input);
+				free(input);
+				input = readline(PROMPT);
+				continue ;
+			}
+			expr = parse_expression(token, NULL, env);
+			if (!expr)
+				return (free_token(token), free(input), 0);
+			print_expression(expr, 0);
+			if (expression_has_syntax_error(expr))
+			{
+				printf("Expression Syntax error\n");
+				free_token(token);
+				free_expression(expr);
+				add_history(input);
+				free(input);
+				input = readline(PROMPT);
+				continue ;
+			}
+			args = list_to_arr(expr->args);
+			printf("args:\n");
+			ft_print_strs(args, 1);
 			// execute(args, env);
-			// add_history(input);
+			add_history(input);
 			free_token(token);
-			// free_expression(expr);
+			free_expression(expr);
 		}
 		free(input);
 		input = readline(PROMPT);

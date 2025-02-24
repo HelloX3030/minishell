@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 15:32:43 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:02:44 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ static char	*get_token_end(char *end)
 			end_quote = ft_strchr(end + 1, '"');
 			if (end_quote)
 				return (end_quote + 1);
+			return (NULL);
 		}
 		if (*end == '\'')
 		{
 			end_quote = ft_strchr(end + 1, '\'');
 			if (end_quote)
 				return (end_quote + 1);
+			return (NULL);
 		}
 		if (is_operator(end))
 			return (end);
@@ -53,6 +55,8 @@ static t_token	*get_token(char **str)
 	if (**str == '(' || **str == ')')
 		return (create_token(TOKEN_GROUP, str, *str + 1));
 	str_end = get_token_end(*str);
+	if (!str_end)
+		return (create_token(TOKEN_SYNTAX_ERROR, str, ft_strchr(*str, 0)));
 	if (*str != str_end)
 		return (create_token(TOKEN_WORD, str, str_end));
 	return (create_token(TOKEN_END, str, *str));
@@ -68,15 +72,12 @@ t_token	*parse_token(char *str)
 	if (!token_start)
 		return (NULL);
 	token = token_start;
-	while (token->type != TOKEN_END)
+	while (token->type != TOKEN_END && token->type != TOKEN_SYNTAX_ERROR)
 	{
 		str = ft_skip_charset(str, " \t");
 		token->next = get_token(&str);
 		if (!token->next)
-		{
-			free_token(token_start);
-			return (NULL);
-		}
+			return (free_token(token_start), NULL);
 		token = token->next;
 	}
 	return (token_start);

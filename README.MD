@@ -6,6 +6,10 @@
 # Problems
 - Fix environment Variables Leaks
 - includes in main.c?
+- redirections + Operator after Subshells 
+	e. g. 
+		=> (cat input.txt && echo "Read complete") || echo "Read failed"
+		=> (ls -l && echo "Done") > log.txt
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
