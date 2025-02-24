@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/21 13:09:56 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 10:04:06 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 int	is_builtin(char *cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 0)
-		return (1);
+		return (SUCCESS);
 	if (ft_strcmp(cmd, "cd") == 0)
-		return (1);
+		return (SUCCESS);
 	if (ft_strcmp(cmd, "pwd") == 0)
-		return (1);
+		return (SUCCESS);
 	if (ft_strcmp(cmd, "env") == 0)
-		return (1);
+		return (SUCCESS);
 	if (ft_strcmp(cmd, "export") == 0)
-		return (1);
+		return (SUCCESS);
 	if (ft_strcmp(cmd, "unset") == 0)
-		return (1);
-	return (0);
+		return (SUCCESS);
+	return (FAILURE);
 }
 
 int	dispatch_builtin(char **args, t_env **env)

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:18:43 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/18 14:58:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 10:02:39 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int	is_valid_id(const char *str)
 	int	i;
 	
 	if (!str || !*str)
-		return (0);
+		return (FAILURE);
 	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (0);
+		return (FAILURE);
 	i = 1;
 	while (str[i])
 	{
 		if (!ft_isalpha(str[0]) && str[0] != '_')
-			return (0);
+			return (FAILURE);
 		i ++;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 int	mini_unset(char **args, t_env **env)
@@ -35,7 +35,7 @@ int	mini_unset(char **args, t_env **env)
 	int	i;
 	
 	if (!args[1])
-		return (1);
+		return (EXIT_FAILURE);
 	i = 1;
 	while (args[i])
 	{
@@ -46,9 +46,9 @@ int	mini_unset(char **args, t_env **env)
 			ft_putstr_fd("minishell: unset: `", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (1);
+			return (EXIT_FAILURE);
 		}
 		i ++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/18 14:58:55 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 10:01:46 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	mini_export(char **args, t_env **env)
 			ft_printf("declare -x %s=\"%s\"\n", cur->key, cur->value);
 			cur = cur->next;
 		}
-		return (0);
+		return (EXIT_SUCCESS);
 	}
 	i = 1;
 	while(args[i])
@@ -40,7 +40,7 @@ int	mini_export(char **args, t_env **env)
 			len = ft_strlen(equals) - ft_strlen(args[i]);
 			key = (char*)malloc(len + 1);
 			if (!key)
-				return (1);
+				return (EXIT_FAILURE);
 			ft_strlcpy(key, args[i], (len + 1));
 			value = equals + 1;
 			set_env_val(env, key, value);
@@ -54,5 +54,5 @@ int	mini_export(char **args, t_env **env)
 		}
 	i ++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

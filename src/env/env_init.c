@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:29:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 12:19:53 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 10:03:26 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,33 @@ void	add_env_node(t_env **head, t_env *new_node)
 
 t_env *init_env(char **envp)
 {
-    t_env   *env_list;
-    char    *key;
-    char    *value;
-    char    *equals;
-    int     i;
-    int     key_len;
-    t_env   *new_node;
+	t_env   *env_list;
+	char    *key;
+	char    *value;
+	char    *equals;
+	int     i;
+	int     key_len;
+	t_env   *new_node;
 
-    env_list = NULL;
-    i = 0;
-    while(envp[i])
-    {
-        equals = ft_strchr(envp[i], '=');
-        if (equals)
-        {
-            key_len = equals - envp[i];
-            key = (char *)malloc(key_len + 1);
-            ft_strlcpy(key, envp[i], key_len + 1);
-            key[key_len] = '\0';
-            value = ft_strdup(equals + 1);
-            new_node = create_env_node(key, value);
-            if (new_node)
-                add_env_node(&env_list, new_node);
-            free(key);
-            free(value);
-        }
-        i++;
-    }
-    return (env_list);
+	env_list = NULL;
+	i = 0;
+	while(envp[i])
+	{
+		equals = ft_strchr(envp[i], '=');
+		if (equals)
+		{
+			key_len = equals - envp[i];
+			key = (char *)malloc(key_len + 1);
+			ft_strlcpy(key, envp[i], key_len + 1);
+			key[key_len] = '\0';
+			value = ft_strdup(equals + 1);
+			new_node = create_env_node(key, value);
+			if (new_node)
+				add_env_node(&env_list, new_node);
+			free(key);
+			free(value);
+		}
+		i++;
+	}
+	return (env_list);
 }
