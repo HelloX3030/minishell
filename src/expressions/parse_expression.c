@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 16:23:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:28:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_expression	*parse_group(t_token *token, t_token *end, t_env *env)
 
 	end = get_closing_group(token);
 	if (!end)
-		return (NULL);
+		return (create_expression(EXPR_SYNTAX_ERROR));
 	expr = create_expression(EXPR_GROUP);
 	if (!expr)
 		return (NULL);
@@ -29,18 +29,14 @@ static t_expression	*parse_group(t_token *token, t_token *end, t_env *env)
 	expr->args = ft_lstnew(str);
 	if (!expr->args)
 		return (free_expression(expr), NULL);
-	if (token->next != end)
-	{
-		expr->child = parse_expression(token->next, end, env);
-		if (!expr->child)
-			return (free_expression(expr), NULL);
-	}
-	if (end->next)
-	{
-		expr->next = parse_expression(end->next, NULL, env);
-		if (!expr->next)
-			return (free_expression(expr), NULL);
-	}
+	expr->child = parse_expression(token->next, end, env);
+	if (!expr->child)
+		return (free_expression(expr), NULL);
+	if (expression_has_syntax_error(expr->child))
+		return (expr);
+	expr->next = parse_expression(end->next, NULL, env);
+	if (!expr->next)
+		return (free_expression(expr), NULL);
 	return (expr);
 }
 
@@ -101,6 +97,8 @@ t_expression	*parse_expression(t_token *token, t_token *end, t_env *env)
 {
 	if (!token)
 		return (NULL);
+	if (end && token == end)
+		return (create_expression(EXPR_END));
 	else if (token->type == TOKEN_WORD)
 	{
 		if (!is_cmd(token->str, env))

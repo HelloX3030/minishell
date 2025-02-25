@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 08:34:09 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:16:00 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,17 @@ void					execute_expression(t_expression *expr);
 bool					expression_has_syntax_error(t_expression *expr);
 
 // builtins
-int to_path(int fl, t_env **env);  // Changed to t_env ** to modify environment
-int mini_cd(char **args, t_env **env);  // Changed to t_env **
-int		count_args(char **args);
-int		mini_echo(char **args);
-void	mini_env(t_env *env);
-int		mini_export(char **args, t_env **env);
-void	mini_pwd(void);
-int		is_valid_id(const char *str);
-int		mini_unset(char **args, t_env **env);
+// Changed to t_env ** to modify environment
+int						to_path(int fl, t_env **env);
+// Changed to t_env **
+int						mini_cd(char **args, t_env **env);
+int						count_args(char **args);
+int						mini_echo(char **args);
+void					mini_env(t_env *env);
+int						mini_export(char **args, t_env **env);
+void					mini_pwd(void);
+int						is_valid_id(const char *str);
+int						mini_unset(char **args, t_env **env);
 
 // envs
 t_env					*create_env_node(char *key, char *value);

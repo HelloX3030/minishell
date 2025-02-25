@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 09:09:23 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 12:47:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-//static void    print_expression_args(t_expression *expr)
+// static void    print_expression_args(t_expression *expr)
 //{
 //	t_list  *current;
-	
+
 //	if (!expr || !expr->args)
 //	{
 //		ft_putstr_fd("No arguments to display\n", 1);
-//		return;
+//		return ;
 //	}
-	
+
 //	ft_putstr_fd("Arguments:\n", 1);
 //	current = expr->args;
 //	while (current)
@@ -60,7 +59,7 @@ int	main(int argc, char **argv, char **envp)
 			token = parse_token(input);
 			if (!token)
 				return (free(input), 0);
-			//print_token(token);
+			print_token(token);
 			if (token_has_syntax_error(token))
 			{
 				printf("Token Syntax error\n");
@@ -74,7 +73,6 @@ int	main(int argc, char **argv, char **envp)
 			if (!expr)
 				return (free_token(token), free(input), 0);
 			print_expression(expr, 0);
-			print_expression_args(expr);
 			if (expression_has_syntax_error(expr))
 			{
 				printf("Expression Syntax error\n");
@@ -86,9 +84,9 @@ int	main(int argc, char **argv, char **envp)
 				continue ;
 			}
 			args = list_to_arr(expr->args);
-			//printf("args:\n");
-			//ft_print_strs(args, 0);
-			//execute(args, env);
+			// printf("args:\n");
+			// ft_print_strs(args, 0);
+			// execute(args, env);
 			add_history(input);
 			free_token(token);
 			free_expression(expr);
