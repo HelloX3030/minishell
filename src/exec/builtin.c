@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/24 10:04:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 08:33:07 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	dispatch_builtin(char **args, t_env **env)
 	int	result;
 
 	result = 0;
+	(void)result;
 	if (ft_strcmp(args[0], "echo") == 0)
 		result = mini_echo(args);
 	if (ft_strcmp(args[0], "cd") == 0)

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:30:52 by lseeger           #+#    #+#             */
-/*   Updated: 2024/10/14 17:45:26 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:02:40 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == needle)
 		return ((char *)(&s[i]));
 	return (NULL);
+}
+
+char	*ft_skip_charset(char *str, char *charset)
+{
+	while (*str && ft_strchr(charset, *str))
+		str++;
+	return (str);
 }

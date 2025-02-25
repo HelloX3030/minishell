@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:22:53 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/04 16:00:17 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:41:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ void	print_token(t_token *token)
 	{
 		printf("%s", insertion_str);
 		print_token_type(token->type);
-		printf(": ");
-		if (token->str)
-			printf("%s\n", token->str);
+		if (token->type == TOKEN_END)
+			printf("\n");
 		else
-			printf("NULL\n");
+		{
+			printf(": ");
+			if (token->str)
+				printf("%s\n", token->str);
+			else
+				printf("NULL\n");
+		}
 		token = token->next;
 	}
 	free(insertion_str);

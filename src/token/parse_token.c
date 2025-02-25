@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 16:02:54 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:02:44 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ static char	*get_token_end(char *end)
 			end_quote = ft_strchr(end + 1, '"');
 			if (end_quote)
 				return (end_quote + 1);
+			return (NULL);
 		}
 		if (*end == '\'')
 		{
 			end_quote = ft_strchr(end + 1, '\'');
 			if (end_quote)
 				return (end_quote + 1);
+			return (NULL);
 		}
 		if (is_operator(end))
 			return (end);
@@ -39,71 +41,25 @@ static char	*get_token_end(char *end)
 	return (end);
 }
 
-static t_token	*get_redirection_operator(char **str_pos, char *str)
+static t_token	*get_token(char **str)
 {
+	char	*str_end;
 	int		len;
-	t_token	*token;
 
-	len = is_redirection_operator(str);
+	len = is_operator(*str);
 	if (len)
-	{
-		token = create_token(TOKEN_WORD, ft_strdupn(str, str + len));
-		if (!token)
-			return (NULL);
-		*str_pos = str + len;
-		return (token);
-	}
-	return (NULL);
-}
-
-static t_token	*get_direct_token(char **str_pos, char *str)
-{
-	int		len;
-	t_token	*token;
-
-	len = is_operator(str);
+		return (create_token(TOKEN_OPERATOR, str, *str + len));
+	len = is_redirection_operator(*str);
 	if (len)
-	{
-		token = create_token(TOKEN_OPERATOR, ft_strdupn(str, str + len));
-		if (!token)
-			return (NULL);
-		*str_pos = str + len;
-		return (token);
-	}
-	token = get_redirection_operator(str_pos, str);
-	if (token)
-		return (token);
-	if (*str == '(' || *str == ')')
-	{
-		token = create_token(TOKEN_GROUP, ft_strdupn(str, str + 1));
-		if (!token)
-			return (NULL);
-		*str_pos = str + 1;
-		return (token);
-	}
-	return (NULL);
-}
-
-static t_token	*get_token(char **str_pos)
-{
-	char	*str;
-	char	*end;
-	t_token	*token;
-
-	str = *str_pos;
-	while (*str == ' ' || *str == '\t')
-		str++;
-	if (!*str)
-		return (NULL);
-	token = get_direct_token(str_pos, str);
-	if (token)
-		return (token);
-	end = get_token_end(str);
-	token = create_token(TOKEN_WORD, ft_strdupn(str, end));
-	if (!token)
-		return (NULL);
-	*str_pos = end;
-	return (token);
+		return (create_token(TOKEN_WORD, str, *str + len));
+	if (**str == '(' || **str == ')')
+		return (create_token(TOKEN_GROUP, str, *str + 1));
+	str_end = get_token_end(*str);
+	if (!str_end)
+		return (create_token(TOKEN_SYNTAX_ERROR, str, ft_strchr(*str, 0)));
+	if (*str != str_end)
+		return (create_token(TOKEN_WORD, str, str_end));
+	return (create_token(TOKEN_END, str, *str));
 }
 
 t_token	*parse_token(char *str)
@@ -111,13 +67,17 @@ t_token	*parse_token(char *str)
 	t_token	*token_start;
 	t_token	*token;
 
+	str = ft_skip_charset(str, " \t");
 	token_start = get_token(&str);
 	if (!token_start)
 		return (NULL);
 	token = token_start;
-	while (token)
+	while (token->type != TOKEN_END && token->type != TOKEN_SYNTAX_ERROR)
 	{
+		str = ft_skip_charset(str, " \t");
 		token->next = get_token(&str);
+		if (!token->next)
+			return (free_token(token_start), NULL);
 		token = token->next;
 	}
 	return (token_start);

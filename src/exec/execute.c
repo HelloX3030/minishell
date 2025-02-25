@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:52:26 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 14:57:30 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 08:33:18 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute(char **args, t_env *env)
 	int		i;
 
 	i = 0;
+	(void)i;
 	if (args && ft_strcmp(args[0], "exit") == 0)
 		return ;
 		//mini_exit();

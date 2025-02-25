@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:05:35 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/18 15:48:28 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:16:04 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	print_expression_type(t_expression_type type)
 		printf("EXPR_GROUP");
 	else if (type == EXPR_PIPE)
 		printf("EXPR_PIPE");
+	else if (type == EXPR_END)
+		printf("EXPR_END");
+	else if (type == EXPR_SYNTAX_ERROR)
+		printf("EXPR_SYNTAX_ERROR");
 	else
 		printf("EXPR_UNKNOWN");
 }
