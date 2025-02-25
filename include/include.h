@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 08:33:11 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 08:34:09 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <sys/wait.h>
 
 # define PROMPT "myshell> "
-# define SUCCESS 1`
+# define SUCCESS 1
 # define FAILURE 0
 
 typedef enum s_token_type
