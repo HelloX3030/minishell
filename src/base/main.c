@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 14:49:59 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:06:48 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 			expr = parse_expression(token, NULL, env);
 			if (!expr)
 				return (free_token(token), free(input), 0);
-			// print_expression(expr, 0);
+			print_expression(expr, 0);
 			if (expression_has_syntax_error(expr))
 			{
 				printf("Expression Syntax error\n");

@@ -10,6 +10,7 @@
 	e. g. 
 		=> (cat input.txt && echo "Read complete") || echo "Read failed"
 		=> (ls -l && echo "Done") > log.txt
+		=> Change: remove expression type Group => instead save only in child, than just use get_next_expression as type 
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?

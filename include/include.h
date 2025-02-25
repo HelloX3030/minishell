@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 13:16:00 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:05:26 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum e_expression_type
 	EXPR_CMD,
 	EXPR_AND,
 	EXPR_OR,
-	EXPR_GROUP,
 	EXPR_PIPE,
 	EXPR_END,
 	EXPR_SYNTAX_ERROR,
