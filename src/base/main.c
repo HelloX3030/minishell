@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 09:01:45 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 09:09:23 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@
 #include <string.h>
 
 
-static void    print_expression_args(t_expression *expr)
-{
-	t_list  *current;
+//static void    print_expression_args(t_expression *expr)
+//{
+//	t_list  *current;
 	
-	if (!expr || !expr->args)
-	{
-		ft_putstr_fd("No arguments to display\n", 1);
-		return;
-	}
+//	if (!expr || !expr->args)
+//	{
+//		ft_putstr_fd("No arguments to display\n", 1);
+//		return;
+//	}
 	
-	ft_putstr_fd("Arguments:\n", 1);
-	current = expr->args;
-	while (current)
-	{
-		if (current->content)
-			ft_putendl_fd((char *)current->content, 1);
-		else
-			ft_putendl_fd("(null)", 1);
-		current = current->next;
-	}
-}
+//	ft_putstr_fd("Arguments:\n", 1);
+//	current = expr->args;
+//	while (current)
+//	{
+//		if (current->content)
+//			ft_putendl_fd((char *)current->content, 1);
+//		else
+//			ft_putendl_fd("(null)", 1);
+//		current = current->next;
+//	}
+//}
 
 int	main(int argc, char **argv, char **envp)
 {
