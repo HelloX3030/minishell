@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:49:21 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 14:41:51 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:53:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	count_args(char **args)
 	int	size;
 
 	size = 0;
-	while(args[size])
-		size ++;
+	while (args[size])
+		size++;
 	return (size);
 }
 
@@ -31,18 +31,17 @@ int	mini_echo(char **args)
 	n_flag = 0;
 	if (count_args(args) >= 1)
 	{
-		ft_print_strs(args, 1);
-		while(args[i] && ft_strcmp(args[i], "-n") == 0)
+		while (args[i] && ft_strcmp(args[i], "-n") == 0)
 		{
-			i ++;
+			i++;
 			n_flag = 1;
 		}
-		while(args[i])
+		while (args[i])
 		{
 			ft_putstr_fd(args[i], 1);
 			if (args[i][0] != '\0' && args[i + 1])
 				write(1, " ", 1);
-			i ++;
+			i++;
 		}
 	}
 	if (!n_flag)
