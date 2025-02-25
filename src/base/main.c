@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 08:32:25 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 08:43:24 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	(void)argc;
-	(void)args;
 	(void)expr;
 	env = init_env(envp);
 	input = readline(PROMPT);
@@ -38,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 			token = parse_token(input);
 			if (!token)
 				return (free(input), 0);
-			print_token(token);
+			//print_token(token);
 			if (token_has_syntax_error(token))
 			{
 				printf("Token Syntax error\n");
@@ -51,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 			expr = parse_expression(token, NULL, env);
 			if (!expr)
 				return (free_token(token), free(input), 0);
-			print_expression(expr, 0);
+			//print_expression(expr, 0);
 			if (expression_has_syntax_error(expr))
 			{
 				printf("Expression Syntax error\n");
@@ -62,9 +61,9 @@ int	main(int argc, char **argv, char **envp)
 				input = readline(PROMPT);
 				continue ;
 			}
-			//print_expression(expr, 0);
+			print_expression(expr, 0);
 			args = list_to_arr(expr->args);
-			printf("args:\n");
+			//printf("args:\n");
 			ft_print_strs(args, 1);
 			// execute(args, env);
 			add_history(input);
