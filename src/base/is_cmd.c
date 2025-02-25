@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 15:01:19 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/24 10:00:11 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ bool	is_cmd(char *args, t_env *env)
 	if (is_ext)
 		free(is_ext);
 	if (is_built || is_ext)
-		return (1);
-	return (0);
+		return (SUCCESS);
+	return (FAILURE);
 }
