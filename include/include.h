@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 12:02:49 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/25 09:09:55 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 # define PROMPT "myshell> "
-# define SUCCESS 1`
+# define SUCCESS 1
 # define FAILURE 0
 
 typedef enum s_token_type
