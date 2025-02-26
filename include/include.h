@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 13:52:52 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:58:58 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int						is_valid_id(const char *str);
 int						mini_unset(char **args, t_env **env);
 
 // envs
+void					free_env(t_env *env);
 t_env					*create_env_node(char *key, char *value);
 void					add_env_node(t_env **head, t_env *new_node);
 t_env					*init_env(char **envp);

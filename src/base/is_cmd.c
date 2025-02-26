@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/24 10:00:11 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:40:50 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ bool	is_cmd(char *args, t_env *env)
 
 	is_ext = find_cmd_path(args, env);
 	is_built = is_builtin(args);
+	printf("%s\n", is_ext);
+	printf("%i\n", is_built);
 	if (is_ext)
 		free(is_ext);
 	if (is_built || is_ext)

@@ -1,9 +1,9 @@
 # ToDo
 - Signals handling
-	- exit 
-- expand variables $VAR_NAME
-- Wildcards
-- Handle Expressions
+- free envs.
+- cd machtn noch nix -- UPDATE: cd funktioniert jetzt fast, manche directories werdene als external befehle erkannt.
+- "test" wird als external erkannt-> kein arg sondern neuer cmd in expressions. // vlt neue is_cmd oder isexternal
+- export muss ich noch fixen.
 
 # Problems
 - Fix environment Variables Leaks
