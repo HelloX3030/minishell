@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/24 10:01:46 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:33:06 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	mini_export(char **args, t_env **env)
 {
 	int		i;
-	int		len;
+	int		key_len;
 	char	*equals;
 	char	*key;
 	char	*value;
@@ -37,14 +37,15 @@ int	mini_export(char **args, t_env **env)
 		equals = ft_strchr(args[i], '=');
 		if (equals)
 		{
-			len = ft_strlen(equals) - ft_strlen(args[i]);
-			key = (char*)malloc(len + 1);
+			key_len = equals - args[i];
+			key = (char*)malloc(key_len + 1);
 			if (!key)
 				return (EXIT_FAILURE);
-			ft_strlcpy(key, args[i], (len + 1));
-			value = equals + 1;
+			ft_strlcpy(key, args[i], key_len + 1);
+			value = ft_strdup(equals + 1);
 			set_env_val(env, key, value);
-			free (key);
+			free(key);
+			free(value);
 		}
 		else
 		{
@@ -52,7 +53,7 @@ int	mini_export(char **args, t_env **env)
 			if (!value)
 				set_env_val(env, args[i], "");
 		}
-	i ++;
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/26 13:53:34 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:37:53 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,26 @@ char	*get_env_value(t_env *env, const char *key)
 
 void set_env_val(t_env **env, char *key, char *value)
 {
-		t_env *cur;
-		t_env *new_node;
+	t_env *cur;
+	t_env *new_node;
 
-		cur = *env;
-		while(cur)
+	if (!env || !key)
+		return;
+	cur = *env;
+	while(cur)
+	{
+		if (ft_strcmp(cur->key, key) == 0)
 		{
-			if (ft_strcmp(cur->key, key) == 0)
-			{
-				free(cur->value);
-				cur->value = ft_strdup(value);
-				return;
-			}
-			cur = cur->next;
+			free(cur->value);
+			cur->value = ft_strdup(value);
+			return;
 		}
-		new_node = create_env_node(key, value);
-		new_node->next = *env;
-		*env = new_node;
+		cur = cur->next;
+	}
+	new_node = create_env_node(key, value);
+	if (!new_node)
+		return;
+	add_env_node(env, new_node);
 }
 
 void	unset_env_val(t_env **env, const char *key)
