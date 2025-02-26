@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/26 14:49:18 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:53:10 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static char *is_external(const char *cmd, t_env *env)
 {
-	char    *path_env;
-	char    **paths;
-	char    *full_path;
-	char    *tmp;
-	int     i;
-	DIR     *dir_check;
+	char	*path_env;
+	char	**paths;
+	char	*full_path;
+	char	*tmp;
+	int		i;
+	DIR		*dir_check;
 	
 	// Handle empty command
 	if (!cmd || !cmd[0])
