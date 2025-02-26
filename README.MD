@@ -1,14 +1,18 @@
 # ToDo
 - Signals handling
-- free envs.
-- cd machtn noch nix -- UPDATE: cd funktioniert jetzt fast, manche directories werdene als external befehle erkannt.
-- "test" wird als external erkannt-> kein arg sondern neuer cmd in expressions. // vlt neue is_cmd oder isexternal
-- export muss ich noch fixen.
+- Signals handling
+- exit
+- expand variables $VAR_NAME 
+- Wildcards 
+- Handle Expressions
+- Fix main.c
 
 # Problems
 - Fix environment Variables Leaks
-- includes in main.c?
-- wired includes in libft (xyz)
+- free envs
+- cd machtn noch nix -- UPDATE: cd funktioniert jetzt fast, manche directories werdene als external befehle erkannt.
+- "test" wird als external erkannt-> kein arg sondern neuer cmd in expressions. // vlt neue is_cmd oder isexternal
+- export muss ich noch fixen.
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
