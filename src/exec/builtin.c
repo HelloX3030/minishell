@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/25 08:33:07 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:20:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(char *cmd)
 {
+	if (ft_strcmp(cmd, "exit") == 0)
+		return (SUCCESS);
 	if (ft_strcmp(cmd, "echo") == 0)
 		return (SUCCESS);
 	if (ft_strcmp(cmd, "cd") == 0)

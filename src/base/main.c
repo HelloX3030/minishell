@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 16:58:21 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:17:14 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	handle_input(t_minishell *ms)
 		handle_expression_syntax_error(ms);
 		return ;
 	}
-	execute_expression(ms);
+	execute_minishell(ms);
 	free_token(ms->token);
 	free_expression(ms->expr);
 	ms->token = NULL;

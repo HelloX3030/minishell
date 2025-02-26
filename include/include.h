@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 16:48:27 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:15:07 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_minishell
 	char				*input;
 	t_token				*token;
 	t_expression		*expr;
+	bool				stop_execution;
 }						t_minishell;
 
 // tokens
@@ -124,11 +125,12 @@ t_token					*parse_cmd_values(t_expression *expr, t_token *token,
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
-void					execute_expression(t_minishell *ms);
 bool					expression_has_syntax_error(t_expression *expr);
 
 // minishell
+void					init_minishell(t_minishell *ms);
 void					free_minishell(t_minishell *ms);
+void					execute_minishell(t_minishell *ms);
 
 // builtins
 int						to_path(int fl, t_env **env);
