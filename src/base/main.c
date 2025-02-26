@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 13:36:20 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:18:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// static void    print_expression_args(t_expression *expr)
-//{
-//	t_list  *current;
-
-//	if (!expr || !expr->args)
-//	{
-//		ft_putstr_fd("No arguments to display\n", 1);
-//		return ;
-//	}
-
-//	ft_putstr_fd("Arguments:\n", 1);
-//	current = expr->args;
-//	while (current)
-//	{
-//		if (current->content)
-//			ft_putendl_fd((char *)current->content, 1);
-//		else
-//			ft_putendl_fd("(null)", 1);
-//		current = current->next;
-//	}	
-//}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -73,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 			if (!expr)
 				return (free_token(token), free(input), 0);
 			print_expression(expr, 0);
-			//print_expression_args(expr);
+			// print_expression_args(expr);
 			if (expression_has_syntax_error(expr))
 			{
 				printf("Expression Syntax error\n");

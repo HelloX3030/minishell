@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 13:58:58 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:18:43 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 # include "libft/libft.h"
 # include <limits.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <termcap.h>
-# include <unistd.h>
-
-// Linux specific headers
+# include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <termcap.h>
+# include <unistd.h>
 
 # define PROMPT "myshell> "
 # define SUCCESS 1
