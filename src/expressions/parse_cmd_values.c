@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:51:33 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 14:47:00 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:29:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ static t_token	*add_args(t_expression *expr, t_token *token)
 	- when an an syntax error occurs,
 		edits the current expression to represent the error
 */
-t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end,
-		t_env *env)
+t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end)
 {
 	while (token->next && (!end || token->next != end)
-		&& (token->next->type == TOKEN_WORD && !is_cmd(token->next->str, env)))
+		&& (token->next->type == TOKEN_WORD))
 	{
 		token = token->next;
 		if (ft_strcmp(token->str, "<") == 0)

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 16:10:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:29:39 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static t_expression	*parse_cmd(t_token *token, t_token *end, t_env *env)
 	expr->args = ft_lstnew(str);
 	if (!expr->args || !token->next)
 		return (free_expression(expr), NULL);
-	token = parse_cmd_values(expr, token, end, env);
+	token = parse_cmd_values(expr, token, end);
 	if (!token)
 		return (free_expression(expr), NULL);
 	if (expr->type == EXPR_SYNTAX_ERROR)

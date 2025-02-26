@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:18:43 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:29:29 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_expression			*create_expression(t_expression_type type);
 t_expression			*parse_expression(t_token *token, t_token *end,
 							t_env *env);
 t_token					*parse_cmd_values(t_expression *expr, t_token *token,
-							t_token *end, t_env *env);
+							t_token *end);
 void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);

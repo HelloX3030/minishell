@@ -11,7 +11,6 @@
 - cd machtn noch nix -- UPDATE: cd funktioniert jetzt fast, manche directories werdene als external befehle erkannt.
 - "test" wird als external erkannt-> kein arg sondern neuer cmd in expressions. // vlt neue is_cmd oder isexternal
 - export muss ich noch fixen.
-- Fix args: don't interpret commands
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
