@@ -1,15 +1,13 @@
 # ToDo
 - Signals handling
-- Signals handling
-- exit
-- expand variables $VAR_NAME 
+- exit (Leo)
+- expand variables $VAR_NAME (Leo)
+- Handle Expressions (Lukas)
+- Fix main.c (Lukas)
 - Wildcards 
-- Handle Expressions
-- Fix main.c
 
 # Problems
 - Fix environment Variables Leaks
-- free envs
 - cd machtn noch nix -- UPDATE: cd funktioniert jetzt fast, manche directories werdene als external befehle erkannt.
 - "test" wird als external erkannt-> kein arg sondern neuer cmd in expressions. // vlt neue is_cmd oder isexternal
 - export muss ich noch fixen.
