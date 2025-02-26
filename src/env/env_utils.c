@@ -6,11 +6,30 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/19 12:13:18 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:53:34 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+
+void free_env(t_env *env)
+{
+	t_env *current;
+	t_env *next;
+
+	current = env;
+	while (current)
+	{
+		next = current->next;
+		if (current->key)
+			free(current->key);
+		if (current->value)
+			free(current->value);
+		free(current);
+		current = next;
+	}
+}
 
 char	*get_env_value(t_env *env, const char *key)
 {
