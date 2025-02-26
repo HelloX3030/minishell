@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:31:38 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:48:24 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <termcap.h>
 # include <unistd.h>
+# include <dirent.h>
 
 # define PROMPT "myshell> "
 # define SUCCESS 1
