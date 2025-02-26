@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 09:13:31 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:20:22 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 //		else
 //			ft_putendl_fd("(null)", 1);
 //		current = current->next;
-//	}
+//	}	
 //}
 
 int	main(int argc, char **argv, char **envp)
