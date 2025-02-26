@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/25 16:05:26 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:52:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <termcap.h>
 # include <unistd.h>
 
-// xyz
+// Linux specific headers
 # include <sys/types.h>
 # include <sys/wait.h>
 
@@ -119,9 +119,7 @@ void					execute_expression(t_expression *expr);
 bool					expression_has_syntax_error(t_expression *expr);
 
 // builtins
-// Changed to t_env ** to modify environment
 int						to_path(int fl, t_env **env);
-// Changed to t_env **
 int						mini_cd(char **args, t_env **env);
 int						count_args(char **args);
 int						mini_echo(char **args);

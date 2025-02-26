@@ -1,16 +1,14 @@
 # ToDo
 - Signals handling
-- cd machtn noch nix -- UPDATE: cd funktioniert jetzt
-- aus irgendeinem grund nimmt er bei cat die args nicht mit (bei ls auch, also ls -l wird nur ls geparst)
+	- exit 
+- expand variables $VAR_NAME
+- Wildcards
+- Handle Expressions
 
 # Problems
 - Fix environment Variables Leaks
 - includes in main.c?
-- redirections + Operator after Subshells 
-	e. g. 
-		=> (cat input.txt && echo "Read complete") || echo "Read failed"
-		=> (ls -l && echo "Done") > log.txt
-		=> Change: remove expression type Group => instead save only in child, than just use get_next_expression as type 
+- wired includes in libft (xyz)
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
