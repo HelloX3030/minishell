@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:29:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/24 10:03:26 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:58:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ void	add_env_node(t_env **head, t_env *new_node)
 	cur->next = new_node;
 }
 
-t_env *init_env(char **envp)
+t_env	*init_env(char **envp)
 {
-	t_env   *env_list;
-	char    *key;
-	char    *value;
-	char    *equals;
-	int     i;
-	int     key_len;
-	t_env   *new_node;
+	t_env	*env_list;
+	char	*key;
+	char	*value;
+	char	*equals;
+	int		i;
+	int		key_len;
+	t_env	*new_node;
 
 	env_list = NULL;
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		equals = ft_strchr(envp[i], '=');
 		if (equals)

@@ -1,16 +1,14 @@
 # ToDo
 - Signals handling
-- exit (Leo)
 - expand variables $VAR_NAME (Leo)
 - Handle Expressions (Lukas)
 - Fix main.c (Lukas)
-- Wildcards 
+	- exit (Lukas)
+- Wildcards
+- Shell Level (Leo)
 
 # Problems
-- Fix environment Variables Leaks
-- cd machtn noch nix -- UPDATE: cd funktioniert jetzt fast, manche directories werdene als external befehle erkannt.
-- "test" wird als external erkannt-> kein arg sondern neuer cmd in expressions. // vlt neue is_cmd oder isexternal
-- export muss ich noch fixen.
+- Malloc Protections für 
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?

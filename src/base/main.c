@@ -6,67 +6,79 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:18:13 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:58:21 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
+inline static void	handle_token_syntax_error(t_minishell *ms)
+{
+	printf("Token Syntax error\n");
+	free_token(ms->token);
+	ms->token = NULL;
+}
+
+inline static void	handle_expression_syntax_error(t_minishell *ms)
+{
+	printf("Expression Syntax error\n");
+	free_token(ms->token);
+	ms->token = NULL;
+	free_expression(ms->expr);
+	ms->expr = NULL;
+}
+
+/*
+	- manages ms.token and ms.expr
+		=> needs to also free them
+*/
+static void	handle_input(t_minishell *ms)
+{
+	ms->token = parse_token(ms->input);
+	if (!ms->token)
+		return (free_minishell(ms), exit(EXIT_FAILURE));
+	if (token_has_syntax_error(ms->token))
+	{
+		handle_token_syntax_error(ms);
+		return ;
+	}
+	ms->expr = parse_expression(ms->token, NULL, ms->env);
+	if (!ms->expr)
+		return (free_minishell(ms), exit(EXIT_FAILURE));
+	if (expression_has_syntax_error(ms->expr))
+	{
+		handle_expression_syntax_error(ms);
+		return ;
+	}
+	execute_expression(ms);
+	free_token(ms->token);
+	free_expression(ms->expr);
+	ms->token = NULL;
+	ms->expr = NULL;
+}
+
+/*
+	- manages ms.input and ms.env
+		=> needs to also free it
+*/
 int	main(int argc, char **argv, char **envp)
 {
-	char			*input;
-	t_token			*token;
-	t_expression	*expr;
-	t_env			*env;
-	char			**args;
+	t_minishell	ms;
 
-	(void)argv;
 	(void)argc;
-	(void)expr;
-	env = init_env(envp);
-	input = readline(PROMPT);
+	(void)argv;
+	ms.env = init_env(envp);
+	if (!ms.env)
+		return (EXIT_FAILURE);
 	while (1)
 	{
-		if (*input)
-		{
-			token = parse_token(input);
-			if (!token)
-				return (free(input), 0);
-			// print_token(token);
-			if (token_has_syntax_error(token))
-			{
-				printf("Token Syntax error\n");
-				free_token(token);
-				add_history(input);
-				free(input);
-				input = readline(PROMPT);
-				continue ;
-			}
-			expr = parse_expression(token, NULL, env);
-			if (!expr)
-				return (free_token(token), free(input), 0);
-			print_expression(expr, 0);
-			// print_expression_args(expr);
-			if (expression_has_syntax_error(expr))
-			{
-				printf("Expression Syntax error\n");
-				free_token(token);
-				free_expression(expr);
-				add_history(input);
-				free(input);
-				input = readline(PROMPT);
-				continue ;
-			}
-			args = list_to_arr(expr->args);
-			// printf("args:\n");
-			// ft_print_strs(args, 0);
-			execute(args, env);
-			add_history(input);
-			free_token(token);
-			free_expression(expr);
-		}
-		free(input);
-		input = readline(PROMPT);
+		ms.input = readline(PROMPT);
+		if (!ms.input)
+			continue ;
+		handle_input(&ms);
+		add_history(ms.input);
+		free(ms.input);
+		ms.input = NULL;
 	}
-	return (0);
+	return (free_minishell(&ms), EXIT_SUCCESS);
 }

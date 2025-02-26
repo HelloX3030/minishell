@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/26 13:53:34 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:38:38 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-
-void free_env(t_env *env)
+void	free_env(t_env *env)
 {
-	t_env *current;
-	t_env *next;
+	t_env	*current;
+	t_env	*next;
 
 	current = env;
 	while (current)
@@ -33,7 +32,7 @@ void free_env(t_env *env)
 
 char	*get_env_value(t_env *env, const char *key)
 {
-	while(env)
+	while (env)
 	{
 		if (ft_strcmp(env->key, key) == 0)
 			return (env->value);
@@ -42,25 +41,25 @@ char	*get_env_value(t_env *env, const char *key)
 	return (NULL);
 }
 
-void set_env_val(t_env **env, char *key, char *value)
+void	set_env_val(t_env **env, char *key, char *value)
 {
-		t_env *cur;
-		t_env *new_node;
+	t_env	*cur;
+	t_env	*new_node;
 
-		cur = *env;
-		while(cur)
+	cur = *env;
+	while (cur)
+	{
+		if (ft_strcmp(cur->key, key) == 0)
 		{
-			if (ft_strcmp(cur->key, key) == 0)
-			{
-				free(cur->value);
-				cur->value = ft_strdup(value);
-				return;
-			}
-			cur = cur->next;
+			free(cur->value);
+			cur->value = ft_strdup(value);
+			return ;
 		}
-		new_node = create_env_node(key, value);
-		new_node->next = *env;
-		*env = new_node;
+		cur = cur->next;
+	}
+	new_node = create_env_node(key, value);
+	new_node->next = *env;
+	*env = new_node;
 }
 
 void	unset_env_val(t_env **env, const char *key)
@@ -70,7 +69,6 @@ void	unset_env_val(t_env **env, const char *key)
 
 	cur = *env;
 	prev = NULL;
-
 	while (cur)
 	{
 		if (ft_strcmp(cur->key, key) == 0)
@@ -98,22 +96,22 @@ char	**env_to_array(t_env *env)
 
 	tmp = env;
 	size = 0;
-	while(tmp)
+	while (tmp)
 	{
-		size ++;
+		size++;
 		tmp = tmp->next;
 	}
-	envp = malloc((size + 1) * sizeof(char*));
+	envp = malloc((size + 1) * sizeof(char *));
 	if (!envp)
 		return (NULL);
 	i = 0;
 	while (env)
 	{
 		size = ft_strlen(env->key) + ft_strlen(env->value) + 2;
-		envp[i] = malloc (size);
+		envp[i] = malloc(size);
 		if (!envp[i])
 		{
-			while(i > 0)
+			while (i > 0)
 				free(envp[--i]);
 			free(envp);
 			return (NULL);
@@ -122,7 +120,7 @@ char	**env_to_array(t_env *env)
 		ft_strlcat(envp[i], "=", size);
 		ft_strlcat(envp[i], env->value, size);
 		env = env->next;
-		i ++;
+		i++;
 	}
 	envp[i] = NULL;
 	return (envp);
