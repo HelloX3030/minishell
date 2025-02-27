@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/27 14:01:46 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:14:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INCLUDE_H
 
 # include "libft/libft.h"
+# include <dirent.h>
 # include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -139,6 +140,7 @@ int						count_args(char **args);
 int						mini_echo(char **args);
 void					mini_env(t_env *env);
 int						mini_export(char **args, t_env **env);
+// int						is_valid_identifier(const char *str);
 void					mini_pwd(void);
 int						is_valid_id(const char *str);
 int						mini_unset(char **args, t_env **env);

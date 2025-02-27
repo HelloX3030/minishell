@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/26 16:38:38 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:16:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	set_env_val(t_env **env, char *key, char *value)
 	t_env	*cur;
 	t_env	*new_node;
 
+	if (!env || !key)
+		return ;
 	cur = *env;
 	while (cur)
 	{
@@ -58,8 +60,9 @@ void	set_env_val(t_env **env, char *key, char *value)
 		cur = cur->next;
 	}
 	new_node = create_env_node(key, value);
-	new_node->next = *env;
-	*env = new_node;
+	if (!new_node)
+		return ;
+	add_env_node(env, new_node);
 }
 
 void	unset_env_val(t_env **env, const char *key)
