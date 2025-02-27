@@ -9,6 +9,7 @@ minishell
 .vscode/
 # *.md
 .devcontainer
+supp.supp
 
 # Prerequisites
 *.d

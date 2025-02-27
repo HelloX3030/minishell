@@ -8,7 +8,22 @@
 - Shell Level (Leo)
 
 # Problems
-- Malloc Protections für 
+- Refactor External Codes => Norm, Malloc Protection
+- Leak in find_cmd_path: Valgrind Log:
+==4005== 133 bytes in 4 blocks are definitely lost in loss record 24 of 68
+==4005==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4005==    by 0x10C9BF: custom_copy (in /workspaces/minishell/minishell)
+==4005==    by 0x10CB24: ft_split (in /workspaces/minishell/minishell)
+==4005==    by 0x10BFA0: find_cmd_path (in /workspaces/minishell/minishell)
+==4005==    by 0x10C1B6: execute_ext (in /workspaces/minishell/minishell)
+==4005==    by 0x10BF26: execute (in /workspaces/minishell/minishell)
+==4005==    by 0x10AB08: execute_expression (in /workspaces/minishell/minishell)
+==4005==    by 0x10AB40: execute_minishell (in /workspaces/minishell/minishell)
+==4005==    by 0x109575: handle_input (in /workspaces/minishell/minishell)
+==4005==    by 0x109639: main (in /workspaces/minishell/minishell)
+- Start Application without environment variables
+	=> env -i ./minishell
+	=> some environments need default values?
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
@@ -20,6 +35,10 @@
 	- From the Repositry with the Code
   	- git remote add intra(name) "url"
   	- git push intra
+- Check for Leaks
+	- di: init docker container
+	- Reopen in Container 
+	- valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=supp.supp  ./minishell
 
 # Ressources
 - https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf

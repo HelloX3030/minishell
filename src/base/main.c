@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 17:17:14 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:43:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,15 @@ static void	handle_input(t_minishell *ms)
 	}
 	execute_minishell(ms);
 	free_token(ms->token);
-	free_expression(ms->expr);
 	ms->token = NULL;
+	free_expression(ms->expr);
 	ms->expr = NULL;
 }
+
+// static void	check_leaks(void)
+// {
+// 	system("leaks minishell");
+// }
 
 /*
 	- manages ms.input and ms.env
@@ -67,9 +72,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	ms.env = init_env(envp);
-	if (!ms.env)
-		return (EXIT_FAILURE);
+	// atexit(check_leaks);
+	init_minishell(&ms, envp);
 	while (1)
 	{
 		ms.input = readline(PROMPT);

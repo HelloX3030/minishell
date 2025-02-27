@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 17:15:07 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:01:46 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void					free_expression(t_expression *expr);
 bool					expression_has_syntax_error(t_expression *expr);
 
 // minishell
-void					init_minishell(t_minishell *ms);
+void					init_minishell(t_minishell *ms, char **envp);
 void					free_minishell(t_minishell *ms);
 void					execute_minishell(t_minishell *ms);
 
