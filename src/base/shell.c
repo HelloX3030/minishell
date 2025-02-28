@@ -6,23 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:35:36 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:47:50 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-int	init_shell(t_env **env, char **envp)
-{
-	*env = init_env(envp);
-	if (!*env)
-	{
-		free_env(*env);
-		return (FAILURE);
-	}
-	handle_lvl(env);
-	return (SUCCESS);
-}
 
 void	handle_lvl(t_env **env)
 {
