@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:30:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:38:21 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_builtin(char *cmd)
 	if (ft_strcmp(cmd, "export") == 0)
 		return (SUCCESS);
 	if (ft_strcmp(cmd, "unset") == 0)
+		return (SUCCESS);
+	if (ft_strcmp(cmd, "minishell") == 0)
 		return (SUCCESS);
 	return (FAILURE);
 }
@@ -47,5 +49,7 @@ int	dispatch_builtin(char **args, t_env **env)
 		mini_export(args, env);
 	if (ft_strcmp(args[0], "unset") == 0)
 		mini_unset(args, env);
+	if (ft_strcmp(args[0], "minishell") == 0)
+		exec_shell(args, *env);
 	return (1);
 }
