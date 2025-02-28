@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:18:13 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:18:39 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 			expr = parse_expression(token, NULL, env);
 			if (!expr)
 				return (free_token(token), free(input), 0);
-			print_expression(expr, 0);
+			//print_expression(expr, 0);
 			// print_expression_args(expr);
 			if (expression_has_syntax_error(expr))
 			{

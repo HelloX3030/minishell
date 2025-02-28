@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:48:24 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:18:47 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,9 @@ int						execute_ext(char **args, t_env *env);
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
+
+//shell
+int	init_shell(t_env **env, char **envp);
+void	handle_lvl(t_env **env);
 
 #endif
