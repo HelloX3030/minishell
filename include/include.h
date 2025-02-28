@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/28 12:18:47 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:26:20 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,6 @@ char					**list_to_arr(t_list *args);
 //shell
 int	init_shell(t_env **env, char **envp);
 void	handle_lvl(t_env **env);
+int	exec_shell(char **args, t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/27 14:18:39 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:36:13 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)argc;
 	(void)expr;
-	env = init_env(envp);
+	if (!init_shell(&env, envp))
+		return (1);
 	input = readline(PROMPT);
 	while (1)
 	{

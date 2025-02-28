@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/26 14:53:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:26:38 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ static char *is_external(const char *cmd, t_env *env)
 
 bool is_cmd(char *args, t_env *env)
 {
-	char    *cmd_path;
-	int     is_built;
+	char	*cmd_path;
+	int		is_built;
 
 	if (!args || !args[0])
 		return (FAILURE);

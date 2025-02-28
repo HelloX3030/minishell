@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:25:54 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:35:36 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_shell(t_env **env, char **envp)
 	*env = init_env(envp);
 	if (!*env)
 	{
-		free_env(env);
+		free_env(*env);
 		return (FAILURE);
 	}
 	handle_lvl(env);
@@ -35,7 +35,7 @@ void	handle_lvl(t_env **env)
 		lvl = 1;
 	else
 	{
-		lvl + ft_atoi(lvl_str);
+		lvl = ft_atoi(lvl_str);
 		if (lvl < 0)
 			lvl = 0;
 		else if (lvl >= 999)
