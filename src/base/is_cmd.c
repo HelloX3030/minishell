@@ -6,13 +6,25 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:41:45 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:55:09 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static char	*is_external(const char *cmd, t_env *env)
+
+static void free_paths(char **paths)
+{
+	int	i;
+
+	if (!paths)
+		return;
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
+}
+static char *is_external(const char *cmd, t_env *env)
 {
 	char	*path_env;
 	char	**paths;
@@ -20,72 +32,84 @@ static char	*is_external(const char *cmd, t_env *env)
 	char	*tmp;
 	int		i;
 	DIR		*dir_check;
-	int		j;
 
-	// Handle empty command
 	if (!cmd || !cmd[0])
 		return (NULL);
-	// Handle commands with path (relative or absolute paths)
+
+	// Handle commands with path
 	if (ft_strchr(cmd, '/'))
 	{
-		// Check if path exists and is accessible
 		if (access(cmd, F_OK) == 0)
 		{
-			// Check if it's not a directory
 			dir_check = opendir(cmd);
 			if (dir_check)
 			{
-				// It's a directory, not a command
 				closedir(dir_check);
 				return (NULL);
 			}
-			// Check if it's executable
 			if (access(cmd, X_OK) == 0)
 				return (ft_strdup(cmd));
 		}
 		return (NULL);
 	}
+
 	// Look for command in PATH
 	path_env = get_env_value(env, "PATH");
 	if (!path_env)
 		return (NULL);
+
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return (NULL);
+
 	i = 0;
 	while (paths[i])
 	{
+		// Create full path
 		tmp = ft_strjoin(paths[i], "/");
+		if (!tmp)
+		{
+			free_paths(paths);
+			return (NULL);
+		}
+
 		full_path = ft_strjoin(tmp, cmd);
-		free(tmp);
-		// Check if file exists
+		free(tmp);  // Free tmp immediately after use
+		if (!full_path)
+		{
+			// Free paths array if full_path allocation fails
+			while (paths[i])
+				free(paths[i++]);
+			free(paths);
+			return (NULL);
+		}
+
+		// Check if file exists and is executable
 		if (access(full_path, F_OK) == 0)
 		{
-			// Check if it's not a directory
 			dir_check = opendir(full_path);
 			if (dir_check)
 			{
-				// It's a directory, not a command
 				closedir(dir_check);
 				free(full_path);
-				i++;
-				continue ;
 			}
-			// Check if it's executable
-			if (access(full_path, X_OK) == 0)
+			else if (access(full_path, X_OK) == 0)
 			{
-				// Clean up the paths array before returning
-				j = 0;
-				while (paths[j])
-					free(paths[j++]);
+				// Success: clean up paths and return full_path
+				while (paths[i])
+					free(paths[i++]);
 				free(paths);
 				return (full_path);
 			}
+			else
+				free(full_path);
 		}
-		free(full_path);
+		else
+			free(full_path);
 		i++;
 	}
-	// Clean up
+
+	// Clean up if no executable found
 	i = 0;
 	while (paths[i])
 		free(paths[i++]);

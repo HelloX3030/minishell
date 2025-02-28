@@ -5,7 +5,7 @@
 - Fix main.c (Lukas)
 	- exit (Lukas)
 - Wildcards
-- Shell Level (Leo)
+- Shell Level (Leo)		-- complete!
 
 # Problems
 - Refactor External Codes => Norm, Malloc Protection
