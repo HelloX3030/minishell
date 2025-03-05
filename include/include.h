@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/28 12:47:58 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/05 13:56:15 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ typedef struct s_minishell
 	char				*input;
 	t_token				*token;
 	t_expression		*expr;
-	bool				stop_execution;
 }						t_minishell;
 
 // tokens
@@ -170,8 +169,8 @@ int						execute_ext(char **args, t_env *env);
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
 
-//shell
-void	handle_lvl(t_env **env);
-int	exec_shell(char **args, t_env *env);
+// shell
+void					handle_lvl(t_env **env);
+int						exec_shell(char **args, t_env *env);
 
 #endif

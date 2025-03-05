@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:11:47 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/28 12:47:30 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/05 13:56:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,4 @@ void	init_minishell(t_minishell *ms, char **envp)
 	ms->input = NULL;
 	ms->token = NULL;
 	ms->expr = NULL;
-	ms->stop_execution = false;
 }

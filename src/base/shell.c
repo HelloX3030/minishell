@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:47:50 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/05 13:44:34 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_lvl(t_env **env)
 			lvl = 1;
 		}
 		else
-			lvl ++;
+			lvl++;
 		new_lvl = ft_itoa(lvl);
 		set_env_val(env, "SHLVL", new_lvl);
 	}
@@ -50,13 +50,13 @@ int	exec_shell(char **args, t_env *env)
 	if (!envp)
 	{
 		free_array(envp);
-		return(FAILURE);
+		return (FAILURE);
 	}
 	pid = fork();
 	if (pid == -1)
 	{
 		free_array(envp);
-		return(FAILURE);
+		return (FAILURE);
 	}
 	if (pid == 0)
 	{
