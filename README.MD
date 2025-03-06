@@ -1,14 +1,15 @@
 # ToDo
-- Signals handling
-- expand variables $VAR_NAME (Leo)
+- Redirections (Lukas, es muss abgesprochen werden wie ich das mit den Expressions machen soll + exit codes usw.)
 - Handle Expressions (Lukas)
-- Fix main.c (Lukas)
-	- exit (Lukas)
+- expand variables $VAR_NAME (Leo)
+- Signals handling
 - Wildcards
-- Shell Level (Leo)		-- complete!
+- Hanlde $? => Exit Codes
+- Succes/Failure for execute Function => to handle the expressions
 
 # Problems
 - Refactor External Codes => Norm, Malloc Protection
+- No more Mixed Exit Codes => the default Macros, not some selfe defined...
 - Leak in find_cmd_path: Valgrind Log:
 ==4005== 133 bytes in 4 blocks are definitely lost in loss record 24 of 68
 ==4005==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
@@ -24,6 +25,21 @@
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
+- replace all exit calls with exit_minishell calls
+- remove free_array function and replace it with free_strs
+	=> or move it to libft
+- Parsing: "Hello("World")" => all will be conected to one str
+- Environment variables:
+	- bash prevents modification: ppid, uid, euid, lineno, bashpid
+	bash resets/overrides them: shlvl, seconds, random, pwd, oldpwd
+	- system may reset on login: path, term, logname
+
+# Test Cases
+- export test=abc
+- export test
+=> test darf nicht geleert werden
+
+- pipe ins nichts
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?

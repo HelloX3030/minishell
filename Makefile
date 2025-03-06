@@ -16,11 +16,13 @@ vpath %.c src/exec
 vpath %.c src/externals
 vpath %.c src/utils
 vpath %.c src/minishell
+vpath %.c src/redirections
 
 SRC_FILES := is_cmd.c main.c shell.c \
 	create_expression.c expression_has_syntax_error.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
 	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c token_has_syntax_error.c \
-	execute_minishell.c free_minishell.c init_minishell.c \
+	execute_minishell.c exit_minishell.c free_minishell.c init_minishell.c \
+	redirect.c reset_redirect.c \
 	cd.c echo.c env.c export.c pwd.c unset.c \
 	env_init.c env_utils.c \
 	builtin.c execute.c \

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/05 13:56:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:29:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <dirent.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -86,6 +87,17 @@ typedef struct s_expression
 	// controll structures
 	struct s_expression	*child;
 	struct s_expression	*next;
+
+	// redirections
+	// out
+	int					saved_stdout;
+	int					out_redir_count;
+	int					*out_redir_fds;
+
+	// in
+	int					saved_stdin;
+
+	// append
 }						t_expression;
 
 typedef struct s_env
@@ -131,6 +143,7 @@ bool					expression_has_syntax_error(t_expression *expr);
 void					init_minishell(t_minishell *ms, char **envp);
 void					free_minishell(t_minishell *ms);
 void					execute_minishell(t_minishell *ms);
+void					exit_minishell(t_minishell *ms, int status);
 
 // builtins
 int						to_path(int fl, t_env **env);
@@ -157,7 +170,7 @@ char					**env_to_array(t_env *env);
 // exec
 int						is_builtin(char *cmd);
 int						dispatch_builtin(char **args, t_env **env);
-void					execute(char **args, t_env *env);
+int						execute(char **args, t_env *env);
 bool					is_cmd(char *args, t_env *env);
 
 // externals
@@ -172,5 +185,9 @@ char					**list_to_arr(t_list *args);
 // shell
 void					handle_lvl(t_env **env);
 int						exec_shell(char **args, t_env *env);
+
+// redirections
+int						redirect(t_expression *expr);
+int						reset_redirect(t_expression *expr);
 
 #endif
