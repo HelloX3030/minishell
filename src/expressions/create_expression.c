@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/06 14:54:59 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:28:24 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	init_redirections(t_expression *expr)
 	expr->out_redir_count = 0;
 	expr->out_redir_fds = NULL;
 	expr->saved_stdin = -1;
+	expr->in_redir_count = 0;
+	expr->in_redir_fds = NULL;
 }
 
 t_expression	*create_expression(t_expression_type type)

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/07 16:22:58 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:33:49 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,27 @@
 
 static int	set_input_redirect(t_expression *expr)
 {
-	(void)expr;
+	expr->in_redir_count = ft_lstsize(expr->infiles);
+	if (expr->in_redir_count == 0)
+		return (EXIT_SUCCESS);
+	expr->in_redir_fds = malloc(sizeof(int) * expr->in_redir_count);
+	if (!expr->in_redir_fds)
+		return (expr->in_redir_count = 0, EXIT_FAILURE);
+	expr->saved_stdin = dup(STDIN_FILENO);
+	if (expr->saved_stdin == -1)
+		return (free(expr->in_redir_fds), expr->in_redir_count = 0,
+			EXIT_FAILURE);
+	if (redirect_fd(expr->infiles, expr->in_redir_fds, O_RDONLY,
+			STDIN_FILENO) == EXIT_FAILURE)
+	{
+		dup2(expr->saved_stdin, STDIN_FILENO);
+		close(expr->saved_stdin);
+		expr->saved_stdin = -1;
+		free(expr->in_redir_fds);
+		expr->in_redir_fds = NULL;
+		expr->in_redir_count = 0;
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 

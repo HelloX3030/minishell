@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/07 16:11:42 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:28:08 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_expression
 
 	// in
 	int					saved_stdin;
+	int					in_redir_count;
+	int					*in_redir_fds;
 
 	// append
 }						t_expression;
