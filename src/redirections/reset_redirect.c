@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:53 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/07 15:21:06 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:26:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	reset_input_redirect(t_expression *expr)
 
 static int	reset_output_redirect(t_expression *expr)
 {
-	int	i;
 	int	return_value;
 
 	return_value = EXIT_SUCCESS;
@@ -32,12 +31,8 @@ static int	reset_output_redirect(t_expression *expr)
 			return_value = EXIT_FAILURE;
 		expr->saved_stdout = -1;
 	}
-	i = -1;
-	while (++i < expr->out_redir_count)
-	{
-		if (close(expr->out_redir_fds[i]) == -1)
-			return_value = EXIT_FAILURE;
-	}
+	if (close_fds(expr->out_redir_fds, expr->out_redir_count) == EXIT_FAILURE)
+		return_value = EXIT_FAILURE;
 	expr->out_redir_count = 0;
 	free(expr->out_redir_fds);
 	expr->out_redir_fds = NULL;
