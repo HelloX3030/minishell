@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/06 15:29:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:11:42 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@
 # define PROMPT "myshell> "
 # define SUCCESS 1
 # define FAILURE 0
+
+/*
+	DEFAULT_FILE_PERMISSIONS defines the default permissions for files
+	that are created using the O_CREAT flag in the open() system call.
+	It sets the file to be readable and writable by the owner, and
+	readable by the group and others (rw-r--r--).
+ */
+# define DEFAULT_FILE_PERMISSIONS 0644
 
 typedef enum s_token_type
 {
@@ -181,6 +189,7 @@ int						execute_ext(char **args, t_env *env);
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
+int						close_fds(int *fds, int count);
 
 // shell
 void					handle_lvl(t_env **env);
@@ -189,5 +198,7 @@ int						exec_shell(char **args, t_env *env);
 // redirections
 int						redirect(t_expression *expr);
 int						reset_redirect(t_expression *expr);
+int						redirect_fd(t_list *files, int *fds, int flags,
+							int target_fd);
 
 #endif

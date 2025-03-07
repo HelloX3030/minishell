@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/06 15:36:53 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:22:58 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static int	set_input_redirect(t_expression *expr)
 
 static int	set_output_redirect(t_expression *expr)
 {
-	t_list	*node;
-	int		i;
-
 	expr->out_redir_count = ft_lstsize(expr->outfiles);
 	if (expr->out_redir_count == 0)
 		return (EXIT_SUCCESS);
@@ -33,20 +30,16 @@ static int	set_output_redirect(t_expression *expr)
 	if (expr->saved_stdout == -1)
 		return (free(expr->out_redir_fds), expr->out_redir_count = 0,
 			EXIT_FAILURE);
-	node = expr->outfiles;
-	i = 0;
-	while (node)
+	if (redirect_fd(expr->outfiles, expr->out_redir_fds,
+			O_WRONLY | O_CREAT | O_TRUNC, STDOUT_FILENO) == EXIT_FAILURE)
 	{
-		expr->out_redir_fds[i] = open(node->content,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (expr->out_redir_fds[i] == -1)
-			// incomplete
-			return (EXIT_FAILURE);
-		if (dup2(expr->out_redir_fds[i], STDOUT_FILENO) == -1)
-			// incomplete
-			return (EXIT_FAILURE);
-		i++;
-		node = node->next;
+		dup2(expr->saved_stdout, STDOUT_FILENO);
+		close(expr->saved_stdout);
+		expr->saved_stdout = -1;
+		free(expr->out_redir_fds);
+		expr->out_redir_fds = NULL;
+		expr->out_redir_count = 0;
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
