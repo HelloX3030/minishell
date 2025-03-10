@@ -8,6 +8,7 @@
 - Succes/Failure for execute Function => to handle the expressions
 
 # Problems
+- bash erkennt "cmd" als valid => "pwd" gibt pwd aus etc. bei uns ist das ein Syntax Error	(Leo: 10.03)
 - Refactor External Codes => Norm, Malloc Protection
 - No more Mixed Exit Codes => the default Macros, not some selfe defined...
 - Leak in find_cmd_path: Valgrind Log:
