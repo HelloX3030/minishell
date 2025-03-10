@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 11:08:38 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:15:59 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@ static char *try_path(const char *dir, const char *cmd)
 	
 	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
+	{
+		free(tmp);
 		return (NULL);
+	}
 	full_path = ft_strjoin(tmp, cmd);
 	free(tmp);
 	if (!full_path)
+	{
+		free(full_path);
 		return (NULL);
+	}
 	if (access(full_path, F_OK) != 0 || is_directory(full_path) || 
 		access(full_path, X_OK) != 0)
 	{
@@ -87,15 +93,15 @@ static char *is_external(const char *cmd, t_env *env)
 	result = check_direct_path(cmd);
 	if (result || !cmd || !cmd[0])
 		return (result);
-	
 	path_env = get_env_value(env, "PATH");
 	if (!path_env)
 		return (NULL);
-		
 	paths = ft_split(path_env, ':');
 	if (!paths)
+	{
+		free(paths);
 		return (NULL);
-		
+	}
 	return (search_in_path(cmd, paths));
 }
 

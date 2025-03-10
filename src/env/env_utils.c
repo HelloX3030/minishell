@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 10:29:25 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:24:07 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	set_env_val(t_env **env, char *key, char *value)
 		{
 			free(cur->value);
 			cur->value = ft_strdup(value);
+			free(value);
 			return ;
 		}
 		cur = cur->next;
