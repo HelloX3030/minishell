@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/25 08:54:58 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 10:12:41 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,16 @@ char	**list_to_arr(t_list *args)
 	}
 	arr[size] = NULL;
 	return (arr);
+}
+
+void free_paths(char **paths)		// needed in is_cmd
+{
+	int	i;
+
+	if (!paths)
+		return;
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
 }
