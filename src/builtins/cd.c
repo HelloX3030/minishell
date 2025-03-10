@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 14:59:17 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:25:44 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	handle_home_path(t_env **env, char *current_path)
 static int	handle_old_path(t_env **env, char *current_path, char *old_path)
 {
 	char *path;
-	
+
 	if (!old_path[0])
 	{
 		path = get_env_value(*env, "OLDPWD");
@@ -76,7 +76,7 @@ int	to_path(int fl, t_env **env)
 	char		*cur_path;
 	int			result;
 	char		temp_path[PATH_MAX];
-	
+
 	if (!getcwd(current_path, PATH_MAX))
 	{
 		ft_putstr_fd("minishell: cd: error retrieving current directory\n", 2);
