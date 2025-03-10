@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:47:50 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 10:06:34 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,43 @@ void	handle_lvl(t_env **env)
 	}
 }
 
+static void	child_process(char **args, char **envp)
+{
+	execve("./minishell", args, envp);
+	perror("minishell");
+	free_array(envp);
+	exit(1);
+}
+
+static int	handle_parent(pid_t pid, char **envp)
+{
+	int	status;
+
+	waitpid(pid, &status, 0);
+	free_array(envp);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (SUCCESS);
+}
+
 int	exec_shell(char **args, t_env *env)
 {
 	pid_t	pid;
-	int		status;
 	char	**envp;
 
 	envp = env_to_array(env);
 	if (!envp)
 	{
 		free_array(envp);
-		return(FAILURE);
+		return (FAILURE);
 	}
 	pid = fork();
 	if (pid == -1)
 	{
 		free_array(envp);
-		return(FAILURE);
+		return (FAILURE);
 	}
 	if (pid == 0)
-	{
-		execve("./minishell", args, envp);
-		perror("minishell");
-		free_array(envp);
-		exit(1);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		free_array(envp);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		return (SUCCESS);
-	}
+		child_process(args, envp);
+	return (handle_parent(pid, envp));
 }
