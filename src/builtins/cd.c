@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 13:01:08 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:52:19 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,17 @@ int to_path(int fl, t_env **env)
 	else
 	{
 		o_path = ft_strdup(old_path);
-		result = handle_old_path(env, current_path, o_path);
+		cur_path = ft_strdup(current_path);
+		result = handle_old_path(env, cur_path, o_path);
 	}
-	if (result == EXIT_SUCCESS)
+	if (result == 0)
 		ft_strlcpy(old_path, temp_path, PATH_MAX);
 	return (result);
 }
 
 int mini_cd(char **args, t_env **env)
 {
-	char	current_path[PATH_MAX];			// kann nicht gefreed werden, muss ich irgendwie fixen
+	char	current_path[PATH_MAX];
 	int		cd;
 	char	new_path[PATH_MAX];
 	char	*cur_path;
