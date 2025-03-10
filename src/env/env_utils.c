@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 14:51:41 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:07:11 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	unset_env_val(t_env **env, const char *key)
 	}
 }
 
-static int count_env_vars(t_env *env)
+static int	count_env_vars(t_env *env)
 {
-	int count;
-	t_env *tmp;
+	int		count;
+	t_env	*tmp;
 
 	count = 0;
 	tmp = env;
@@ -106,9 +106,9 @@ static int count_env_vars(t_env *env)
 	return (count);
 }
 
-static void free_env_array(char **envp, int count)
+static void	free_env_array(char **envp, int count)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < count)
@@ -116,35 +116,32 @@ static void free_env_array(char **envp, int count)
 	free(envp);
 }
 
-static char *create_env_string(char *key, char *value)
+static char	*create_env_string(char *key, char *value)
 {
-	int size;
-	char *env_str;
+	int		size;
+	char	*env_str;
 
 	size = ft_strlen(key) + ft_strlen(value) + 2;
 	env_str = malloc(size);
 	if (!env_str)
 		return (NULL);
-	
 	ft_strlcpy(env_str, key, size);
 	ft_strlcat(env_str, "=", size);
 	ft_strlcat(env_str, value, size);
-	
 	return (env_str);
 }
 
-char **env_to_array(t_env *env)
+char	**env_to_array(t_env *env)
 {
-	int size;
-	char **envp;
-	int i;
-	char *env_str;
+	int		size;
+	char	**envp;
+	int		i;
+	char	*env_str;
 
 	size = count_env_vars(env);
 	envp = malloc((size + 1) * sizeof(char *));
 	if (!envp)
 		return (NULL);
-	
 	i = 0;
 	while (env)
 	{
@@ -156,8 +153,7 @@ char **env_to_array(t_env *env)
 		}
 		envp[i++] = env_str;
 		env = env->next;
-	}
-	
+	}	
 	envp[i] = NULL;
 	return (envp);
 }

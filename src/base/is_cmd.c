@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 12:15:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:08:19 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static char *check_direct_path(const char *cmd)
 	return (ft_strdup(cmd));
 }
 
-static char *try_path(const char *dir, const char *cmd)
+static char	*try_path(const char *dir, const char *cmd)
 {
-	char *tmp;
-	char *full_path;
-	
+	char	*tmp;
+	char	*full_path;
+
 	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
 	{
@@ -55,8 +55,8 @@ static char *try_path(const char *dir, const char *cmd)
 		free(full_path);
 		return (NULL);
 	}
-	if (access(full_path, F_OK) != 0 || is_directory(full_path) || 
-		access(full_path, X_OK) != 0)
+	if (access(full_path, F_OK) != 0 || is_directory(full_path)
+		|| access(full_path, X_OK) != 0)
 	{
 		free(full_path);
 		return (NULL);
@@ -64,11 +64,11 @@ static char *try_path(const char *dir, const char *cmd)
 	return (full_path);
 }
 
-static char *search_in_path(const char *cmd, char **paths)
+static char	*search_in_path(const char *cmd, char **paths)
 {
-	int i;
-	char *result;
-	
+	int		i;
+	char	*result;
+
 	i = 0;
 	while (paths[i])
 	{
@@ -84,12 +84,12 @@ static char *search_in_path(const char *cmd, char **paths)
 	return (NULL);
 }
 
-static char *is_external(const char *cmd, t_env *env)
+static char	*is_external(const char *cmd, t_env *env)
 {
-	char *path_env;
-	char **paths;
-	char *result;
-	
+	char	*path_env;
+	char	**paths;
+	char	*result;
+
 	result = check_direct_path(cmd);
 	if (result || !cmd || !cmd[0])
 		return (result);

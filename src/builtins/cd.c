@@ -6,13 +6,13 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 14:52:19 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:59:17 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int change_directory(char *path, char *current_path, t_env **env)
+static int	change_directory(char *path, char *current_path, t_env **env)
 {
 	int		ret;
 	char	new_path[PATH_MAX];
@@ -36,7 +36,7 @@ static int change_directory(char *path, char *current_path, t_env **env)
 	return (EXIT_SUCCESS);
 }
 
-static int handle_home_path(t_env **env, char *current_path)
+static int	handle_home_path(t_env **env, char *current_path)
 {
 	char *path;
 	
@@ -49,7 +49,7 @@ static int handle_home_path(t_env **env, char *current_path)
 	return (change_directory(path, current_path, env));
 }
 
-static int handle_old_path(t_env **env, char *current_path, char *old_path)
+static int	handle_old_path(t_env **env, char *current_path, char *old_path)
 {
 	char *path;
 	
@@ -68,7 +68,7 @@ static int handle_old_path(t_env **env, char *current_path, char *old_path)
 	return (change_directory(path, current_path, env));
 }
 
-int to_path(int fl, t_env **env)
+int	to_path(int fl, t_env **env)
 {
 	char		current_path[PATH_MAX];
 	static char	old_path[PATH_MAX] = {0};
@@ -99,7 +99,7 @@ int to_path(int fl, t_env **env)
 	return (result);
 }
 
-int mini_cd(char **args, t_env **env)
+int	mini_cd(char **args, t_env **env)
 {
 	char	current_path[PATH_MAX];
 	int		cd;

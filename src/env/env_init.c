@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:29:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 10:25:54 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:06:04 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,17 @@ void	add_env_node(t_env **head, t_env *new_node)
 	cur->next = new_node;
 }
 
-static t_env *process_env_var(char *env_var, t_env *env_list)
+static t_env	*process_env_var(char *env_var, t_env *env_list)
 {
-	char *equals;
-	char *key;
-	char *value;
-	int key_len;
-	t_env *new_node;
+	char	*equals;
+	char	*key;
+	char	*value;
+	int		key_len;
+	t_env	*new_node;
 
 	equals = ft_strchr(env_var, '=');
 	if (!equals)
 		return (env_list);
-	
 	key_len = equals - env_var;
 	key = (char *)malloc(key_len + 1);
 	if (!key)
@@ -67,10 +66,10 @@ static t_env *process_env_var(char *env_var, t_env *env_list)
 	return (env_list);
 }
 
-t_env *init_env(char **envp)
+t_env	*init_env(char **envp)
 {
-	t_env *env_list;
-	int i;
+	t_env	*env_list;
+	int		i;
 
 	env_list = NULL;
 	i = 0;

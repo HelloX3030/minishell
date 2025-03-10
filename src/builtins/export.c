@@ -6,15 +6,15 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 10:26:15 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:05:32 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static void print_export_vars(t_env *env)
+static void	print_export_vars(t_env *env)
 {
-	t_env *cur;
+	t_env	*cur;
 
 	cur = env;
 	while (cur)
@@ -24,12 +24,12 @@ static void print_export_vars(t_env *env)
 	}
 }
 
-static int export_with_equals(char *arg, t_env **env)
+static int	export_with_equals(char *arg, t_env **env)
 {
-	char *equals;
-	char *key;
-	char *value;
-	int key_len;
+	char	*equals;
+	char	*key;
+	char	*value;
+	int		key_len;
 
 	equals = ft_strchr(arg, '=');
 	key_len = equals - arg;
@@ -44,9 +44,9 @@ static int export_with_equals(char *arg, t_env **env)
 	return (EXIT_SUCCESS);
 }
 
-static int export_without_equals(char *arg, t_env **env)
+static int	export_without_equals(char *arg, t_env **env)
 {
-	char *value;
+	char	*value;
 
 	value = get_env_value(*env, arg);
 	if (!value)
@@ -54,10 +54,10 @@ static int export_without_equals(char *arg, t_env **env)
 	return (EXIT_SUCCESS);
 }
 
-int mini_export(char **args, t_env **env)
+int	mini_export(char **args, t_env **env)
 {
-	int i;
-	int result;
+	int	i;
+	int	result;
 
 	if (!args[1])
 	{
