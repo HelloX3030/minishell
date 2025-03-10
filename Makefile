@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall -Wextra -Werror # -Ofast
+CFLAGS := -Wall -Wextra -Werror -g # -Ofast
 DEBUG_FLAGS := -g -O0
 NAME := minishell
 

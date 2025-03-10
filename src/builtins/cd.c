@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 15:25:44 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:53:26 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	to_path(int fl, t_env **env)
 {
 	char		current_path[PATH_MAX];
 	static char	old_path[PATH_MAX] = {0};
-	char		*o_path;
 	char		*cur_path;
 	int			result;
 	char		temp_path[PATH_MAX];
@@ -90,9 +89,8 @@ int	to_path(int fl, t_env **env)
 	}
 	else
 	{
-		o_path = ft_strdup(old_path);
 		cur_path = ft_strdup(current_path);
-		result = handle_old_path(env, cur_path, o_path);
+		result = handle_old_path(env, cur_path, old_path);
 	}
 	if (result == 0)
 		ft_strlcpy(old_path, temp_path, PATH_MAX);
