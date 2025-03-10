@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 10:26:42 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:34:39 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,16 @@ int to_path(int fl, t_env **env)
 
 int mini_cd(char **args, t_env **env)
 {
+	char current_path[PATH_MAX];			// kann nicht gefreed werden, muss ich irgendwie fixen
+	int cd;
+
 	if (!args || !args[1])
 		return (to_path(0, env));
 	if (ft_strcmp(args[1], "-") == 0)
 		return (to_path(1, env));
-	char current_path[PATH_MAX];
 	if (getcwd(current_path, PATH_MAX))
 		set_env_val(env, "OLDPWD", current_path);
-	int cd = chdir(args[1]);
+	cd = chdir(args[1]);
 	if (cd != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", 2);
