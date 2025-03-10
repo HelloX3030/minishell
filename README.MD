@@ -38,7 +38,7 @@
 # Test Cases
 - export test=abc
 - export test
-=> test darf nicht geleert werden
+=> test darf nicht geleert werden	- bei mir funktioniert dieser test case wie angegeben, gab es bei dir fehler? (leo: 10.03)
 
 - pipe ins nichts
 
