@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 18:43:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 19:10:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_redir
 {
 	t_redir_type		type;
 	char				*file;
-	int					fd;
 }						t_redir;
 void					print_redir_type(t_redir_type type);
 void					print_redir(t_redir *redir, int insertion);
@@ -198,16 +197,15 @@ int						execute_ext(char **args, t_env *env);
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
-int						close_fds(int *fds, int count);
 
 // shell
 void					handle_lvl(t_env **env);
 int						exec_shell(char **args, t_env *env);
 
 // redirections
+int						make_redir(int target_fd, char *file, int flags);
+int						save_fd(int *saved_fd, int fd);
 int						redirect(t_expression *expr);
 int						reset_redirect(t_expression *expr);
-int						redirect_fd(t_list *files, int *fds, int flags,
-							int target_fd);
 
 #endif

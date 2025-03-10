@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_redir.c                                     :+:      :+:    :+:   */
+/*   make_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 17:24:50 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 19:03:28 by lseeger          ###   ########.fr       */
+/*   Created: 2025/03/10 19:09:30 by lseeger           #+#    #+#             */
+/*   Updated: 2025/03/10 19:09:40 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_redir	*create_redir(t_redir_type type, char *file)
+int	make_redir(int target_fd, char *file, int flags)
 {
-	t_redir	*redir;
+	int	new_fd;
 
-	redir = malloc(sizeof(t_redir));
-	if (!redir)
-		return (NULL);
-	redir->type = type;
-	redir->file = ft_strdup(file);
-	if (!redir->file)
-	{
-		free(redir);
-		return (NULL);
-	}
-	return (redir);
+	new_fd = open(file, flags, DEFAULT_FILE_PERMISSIONS);
+	if (new_fd == -1)
+		return (EXIT_FAILURE);
+	if (dup2(new_fd, target_fd) == -1)
+		return (EXIT_FAILURE);
+	if (close(new_fd) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
