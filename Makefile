@@ -1,7 +1,8 @@
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g # -Ofast
+CFLAGS := -Wall -Wextra -Werror
 DEBUG_FLAGS := -g -O0
 NAME := minishell
+DEBUG_NAME := minishell_debug
 
 # .h files
 H_FILES := include/include.h
@@ -29,9 +30,13 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	externals.c \
 	close_fds.c fd.c \
 
-# .o files
+# Normal .o files
 OBJ_DIR := obj
 OBJ_FILES := $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+
+# Debug .o files
+OBJ_DEBUG_DIR := obj_debug
+OBJ_DEBUG_FILES := $(addprefix $(OBJ_DEBUG_DIR)/, $(SRC_FILES:.c=.o))
 
 # libft
 LIBFT_DIR := libft
@@ -46,39 +51,41 @@ LDLIBS := -lft
 # all
 all: $(NAME)
 
-# bonus
-bonus: $(NAME)
-
-# Link
+# Link normal executable
 $(NAME): $(LIBS) $(OBJ_FILES)
 	$(CC) $(OBJ_FILES) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
-# Compile obj
+# Compile normal obj files
 $(OBJ_DIR)/%.o: %.c $(H_FILES) $(LIBFT) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+# Compile debug obj files
+$(OBJ_DEBUG_DIR)/%.o: %.c $(H_FILES) $(LIBFT) | $(OBJ_DEBUG_DIR)
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $(INCLUDES) -c $< -o $@
 
+$(OBJ_DIR) $(OBJ_DEBUG_DIR):
+	mkdir -p $@
+
+# Debug executable
+debug: $(LIBFT) $(OBJ_DEBUG_FILES)
+	$(CC) $(OBJ_DEBUG_FILES) $(LDFLAGS) $(LDLIBS) -o $(DEBUG_NAME)
+
+# libft
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 # clean
 clean:
-	$(RM) -r $(OBJ_DIR)
+	$(RM) -r $(OBJ_DIR) $(OBJ_DEBUG_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 
 # fclean
 fclean:
-	$(RM) -rf $(OBJ_DIR)
-	$(RM) -f $(NAME)
+	$(RM) -rf $(OBJ_DIR) $(OBJ_DEBUG_DIR)
+	$(RM) -f $(NAME) $(DEBUG_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 # re
 re: fclean all
 
-# debug
-debug: CFLAGS += $(DEBUG_FLAGS)
-debug: re bonus
-
-.PHONY: all clean fclean re debug bonus
+.PHONY: all clean fclean re debug
