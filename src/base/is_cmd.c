@@ -6,13 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 10:12:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 11:08:38 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-
 
 static int is_directory(const char *path)
 {

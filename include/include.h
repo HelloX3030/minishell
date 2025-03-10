@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 10:30:29 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 11:48:54 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ int						mini_cd(char **args, t_env **env);
 int						count_args(char **args);
 int						mini_echo(char **args);
 void					mini_env(t_env *env);
+int						mini_exit(char **args, t_minishell *ms);
+int						*status(void);
 int						mini_export(char **args, t_env **env);
 // int						is_valid_identifier(const char *str);
 void					mini_pwd(void);
