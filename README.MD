@@ -2,9 +2,9 @@
 - Redirections (Lukas, es muss abgesprochen werden wie ich das mit den Expressions machen soll + exit codes usw.)
 - Handle Expressions (Lukas)
 - expand variables $VAR_NAME -- ich wuerde das in den Parser machen, weil wie wir gerade "" und '' handeln passt noch nicht und wenn wir das richtig machen, kann ich im exec nicht mehr bestimmen ob etwas expanded werden muss oder nicht(Leo)
-- Signals handling
+- Signals handling => leo
 - Wildcards
-- Hanlde $? => Exit Codes -- exit codes erledigt, mini_exit handelt das jetzt, expansion teil fehlt noch (leo: 10.03)
+- Hanlde $? => Exit Codes -- exit codes erledigt, mini_exit handelt das jetzt, expansion teil fehlt noch (leo: 10.03) => leo 
 - Succes/Failure for execute Function => to handle the expressions
 
 # Problems
