@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/20 16:05:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:34:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*find_cmd_path(const char *cmd, t_env *env)
 	char	*full_path;
 	char	*tmp;
 	int		i;
-	
+
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	path_env = get_env_value(env, "PATH");
@@ -33,16 +33,16 @@ char	*find_cmd_path(const char *cmd, t_env *env)
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		full_path = ft_strjoin(tmp, cmd);
-		free (tmp);
+		free(tmp);
 		if (access(full_path, X_OK) == 0)
 		{
 			while (paths[i])
 				free(paths[i++]);
-			free (paths);
+			free(paths);
 			return (full_path);
 		}
 		free(full_path);
-		i ++;
+		i++;
 	}
 	i = 0;
 	while (paths[i])
@@ -66,7 +66,7 @@ void	free_array(char **array)
 int	execute_ext(char **args, t_env *env)
 {
 	char	*cmd_path;
-	char	 **envp;
+	char	**envp;
 	pid_t	pid;
 	int		status;
 

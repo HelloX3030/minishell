@@ -1,14 +1,17 @@
 # ToDo
-- Signals handling
-- expand variables $VAR_NAME (Leo)
+- Redirections (Lukas, es muss abgesprochen werden wie ich das mit den Expressions machen soll + exit codes usw.)
 - Handle Expressions (Lukas)
-- Fix main.c (Lukas)
-	- exit (Lukas)
+- expand variables $VAR_NAME -- ich wuerde das in den Parser machen, weil wie wir gerade "" und '' handeln passt noch nicht und wenn wir das richtig machen, kann ich im exec nicht mehr bestimmen ob etwas expanded werden muss oder nicht(Leo)
+- Signals handling => leo
 - Wildcards
-- Shell Level (Leo)
+- Hanlde $? => Exit Codes -- exit codes erledigt, mini_exit handelt das jetzt, expansion teil fehlt noch (leo: 10.03) => leo 
+- Succes/Failure for execute Function => to handle the expressions
 
 # Problems
+- ./"FILE" ist bei uns noch Syntax Error -- muss entweder "no such file in directory" / ""FILE" is a directory" / execute (<- funktioniert) sein. (leo: 10.03). 
+- bash erkennt "cmd" als valid => "pwd" gibt pwd aus etc. bei uns ist das ein Syntax Error	(Leo: 10.03)
 - Refactor External Codes => Norm, Malloc Protection
+- No more Mixed Exit Codes => the default Macros, not some selfe defined...
 - Leak in find_cmd_path: Valgrind Log:
 ==1129== 133 bytes in 4 blocks are definitely lost in loss record 23 of 67
 ==1129==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
@@ -24,12 +27,24 @@
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
-- echo -nnnnnnn 
-	=> Still Flag, needs to work
-	Example (works as no new line):
-		- echo -nnnnnnnnnn -nn -n -nnnn -nnn -nnnnnnnn -n hi
-	Example when flags turn to normal output
-		- echo -nnnnnn -n -nnnnn -nnnnn-n -n hi => -nnnnn-n -n hi
+- replace all exit calls with exit_minishell calls
+- remove free_array function and replace it with free_strs
+	=> or move it to libft
+- Parsing: "Hello("World")" => all will be conected to one str
+- Environment variables:
+	- bash prevents modification: ppid, uid, euid, lineno, bashpid
+	bash resets/overrides them: shlvl, seconds, random, pwd, oldpwd
+	- system may reset on login: path, term, logname
+- echo -nnnnnnn => Still Flag, needs to work Example (works as no new line): - echo -nnnnnnnnnn -nn -n -nnnn -nnn -nnnnnnnn -n hi Example when flags turn to normal output - echo -nnnnnn -n -nnnnn -nnnnn-n -n hi => -nnnnn-n -n hi
+- parsing of "" and ''
+	=> should also be possible in commands like e. g. "$LS"
+
+# Test Cases
+- export test=abc
+- export test
+=> test darf nicht geleert werden	- bei mir funktioniert dieser test case wie angegeben, gab es bei dir fehler? (leo: 10.03)
+
+- pipe ins nichts
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
