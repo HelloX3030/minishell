@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 10:23:43 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 10:26:15 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ static int export_with_equals(char *arg, t_env **env)
 	key = (char*)malloc(key_len + 1);
 	if (!key)
 		return (EXIT_FAILURE);
-	
 	ft_strlcpy(key, arg, key_len + 1);
 	value = ft_strdup(equals + 1);
 	set_env_val(env, key, value);
 	free(key);
 	free(value);
-	
 	return (EXIT_SUCCESS);
 }
 
@@ -53,7 +51,6 @@ static int export_without_equals(char *arg, t_env **env)
 	value = get_env_value(*env, arg);
 	if (!value)
 		set_env_val(env, arg, "");
-	
 	return (EXIT_SUCCESS);
 }
 
@@ -67,7 +64,6 @@ int mini_export(char **args, t_env **env)
 		print_export_vars(*env);
 		return (EXIT_SUCCESS);
 	}
-	
 	i = 1;
 	result = EXIT_SUCCESS;
 	while (args[i] && result == EXIT_SUCCESS)
@@ -78,6 +74,5 @@ int mini_export(char **args, t_env **env)
 			result = export_without_equals(args[i], env);
 		i++;
 	}
-	
 	return (result);
 }
