@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:24:50 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 17:26:07 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 18:43:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ t_redir	*create_redir(t_redir_type type, char *file)
 		free(redir);
 		return (NULL);
 	}
+	redir->fd = -1;
 	return (redir);
 }

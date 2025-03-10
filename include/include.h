@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 17:50:43 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 18:43:15 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ typedef enum e_redir_type
 	REDIR_APPEND,
 }						t_redir_type;
 
-typedef struct s_redi
+typedef struct s_redir
 {
 	t_redir_type		type;
 	char				*file;
+	int					fd;
 }						t_redir;
 void					print_redir_type(t_redir_type type);
 void					print_redir(t_redir *redir, int insertion);
