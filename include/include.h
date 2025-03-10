@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/07 16:28:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:50:43 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ typedef struct s_token
 	struct s_token		*next;
 }						t_token;
 
+typedef enum e_redir_type
+{
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+}						t_redir_type;
+
+typedef struct s_redi
+{
+	t_redir_type		type;
+	char				*file;
+}						t_redir;
+void					print_redir_type(t_redir_type type);
+void					print_redir(t_redir *redir, int insertion);
+t_redir					*create_redir(t_redir_type type, char *file);
+void					free_redir(void *redir);
+
 typedef enum e_expression_type
 {
 	EXPR_CMD,
@@ -88,26 +105,15 @@ typedef struct s_expression
 
 	// cmd values
 	t_list				*args;
-	t_list				*infiles;
-	t_list				*outfiles;
-	t_list				*append;
 
 	// controll structures
 	struct s_expression	*child;
 	struct s_expression	*next;
 
 	// redirections
-	// out
 	int					saved_stdout;
-	int					out_redir_count;
-	int					*out_redir_fds;
-
-	// in
 	int					saved_stdin;
-	int					in_redir_count;
-	int					*in_redir_fds;
-
-	// append
+	t_list				*redirs;
 }						t_expression;
 
 typedef struct s_env
