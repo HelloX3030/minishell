@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/05 13:44:34 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:26:23 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,28 @@ void	handle_lvl(t_env **env)
 	}
 }
 
+static void	child_process(char **args, char **envp)
+{
+	execve("./minishell", args, envp);
+	perror("minishell");
+	free_array(envp);
+	exit(1);
+}
+
+static int	handle_parent(pid_t pid, char **envp)
+{
+	int	status;
+
+	waitpid(pid, &status, 0);
+	free_array(envp);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (SUCCESS);
+}
+
 int	exec_shell(char **args, t_env *env)
 {
 	pid_t	pid;
-	int		status;
 	char	**envp;
 
 	envp = env_to_array(env);
@@ -59,18 +77,6 @@ int	exec_shell(char **args, t_env *env)
 		return (FAILURE);
 	}
 	if (pid == 0)
-	{
-		execve("./minishell", args, envp);
-		perror("minishell");
-		free_array(envp);
-		exit(1);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		free_array(envp);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		return (SUCCESS);
-	}
+		child_process(args, envp);
+	return (handle_parent(pid, envp));
 }

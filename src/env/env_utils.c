@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/27 15:16:52 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:07:11 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	set_env_val(t_env **env, char *key, char *value)
 		{
 			free(cur->value);
 			cur->value = ft_strdup(value);
+			free(value);
 			return ;
 		}
 		cur = cur->next;
@@ -90,41 +91,69 @@ void	unset_env_val(t_env **env, const char *key)
 	}
 }
 
+static int	count_env_vars(t_env *env)
+{
+	int		count;
+	t_env	*tmp;
+
+	count = 0;
+	tmp = env;
+	while (tmp)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
+static void	free_env_array(char **envp, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+		free(envp[i++]);
+	free(envp);
+}
+
+static char	*create_env_string(char *key, char *value)
+{
+	int		size;
+	char	*env_str;
+
+	size = ft_strlen(key) + ft_strlen(value) + 2;
+	env_str = malloc(size);
+	if (!env_str)
+		return (NULL);
+	ft_strlcpy(env_str, key, size);
+	ft_strlcat(env_str, "=", size);
+	ft_strlcat(env_str, value, size);
+	return (env_str);
+}
+
 char	**env_to_array(t_env *env)
 {
 	int		size;
-	t_env	*tmp;
 	char	**envp;
 	int		i;
+	char	*env_str;
 
-	tmp = env;
-	size = 0;
-	while (tmp)
-	{
-		size++;
-		tmp = tmp->next;
-	}
+	size = count_env_vars(env);
 	envp = malloc((size + 1) * sizeof(char *));
 	if (!envp)
 		return (NULL);
 	i = 0;
 	while (env)
 	{
-		size = ft_strlen(env->key) + ft_strlen(env->value) + 2;
-		envp[i] = malloc(size);
-		if (!envp[i])
+		env_str = create_env_string(env->key, env->value);
+		if (!env_str)
 		{
-			while (i > 0)
-				free(envp[--i]);
-			free(envp);
+			free_env_array(envp, i);
 			return (NULL);
 		}
-		ft_strlcpy(envp[i], env->key, size);
-		ft_strlcat(envp[i], "=", size);
-		ft_strlcat(envp[i], env->value, size);
+		envp[i++] = env_str;
 		env = env->next;
-		i++;
-	}
+	}	
 	envp[i] = NULL;
 	return (envp);
 }
