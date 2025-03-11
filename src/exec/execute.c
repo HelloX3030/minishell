@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:52:26 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:31:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:57:20 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	execute(char **args, t_minishell *ms)
 	if (args && is_builtin(args[0]))
 		dispatch_builtin(args, ms);
 	else if (args && args[0])
-		execute_ext(args, ms);
+		ms->status = execute_ext(args, ms);
 }
