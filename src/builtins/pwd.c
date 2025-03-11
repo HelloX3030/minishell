@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:32:18 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:46:00 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 11:13:39 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ int	mini_pwd(void)
 		return (EXIT_SUCCESS);
 	}
 	else
+	{
+		perror("pwd");
 		return (EXIT_FAILURE);
+	}
 }
