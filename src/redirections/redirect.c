@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 19:27:22 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:12:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,31 @@
 
 static int	redir_in(t_expression *expr, t_redir *redir_data)
 {
-	save_fd(&expr->saved_stdin, STDIN_FILENO);
-	make_redir(STDIN_FILENO, redir_data->file, O_RDONLY);
+	if (save_fd(&expr->saved_stdin, STDIN_FILENO) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdin, STDIN_FILENO), EXIT_FAILURE);
+	if (make_redir(STDIN_FILENO, redir_data->file, O_RDONLY) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdin, STDIN_FILENO), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	redir_out(t_expression *expr, t_redir *redir_data)
 {
-	save_fd(&expr->saved_stdout, STDOUT_FILENO);
-	make_redir(STDOUT_FILENO, redir_data->file, O_WRONLY | O_CREAT | O_TRUNC);
+	if (save_fd(&expr->saved_stdout, STDOUT_FILENO) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdout, STDOUT_FILENO), EXIT_FAILURE);
+	if (make_redir(STDOUT_FILENO, redir_data->file,
+			O_WRONLY | O_CREAT | O_TRUNC) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdout, STDOUT_FILENO), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	redir_append(t_expression *expr, t_redir *redir_data)
 {
-	save_fd(&expr->saved_stdout, STDOUT_FILENO);
-	make_redir(STDOUT_FILENO, redir_data->file, O_WRONLY | O_CREAT | O_APPEND);
+	if (save_fd(&expr->saved_stdout, STDOUT_FILENO) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdout, STDOUT_FILENO), EXIT_FAILURE);
+	if (make_redir(STDOUT_FILENO, redir_data->file,
+			O_WRONLY | O_CREAT | O_APPEND) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdout, STDOUT_FILENO), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	redirect(t_expression *expr)

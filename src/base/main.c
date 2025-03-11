@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 17:13:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:16:37 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	handle_input(t_minishell *ms)
 	if (!ms->token)
 		return (free_minishell(ms), exit(EXIT_FAILURE));
 	// debug print
-	print_token(ms->token);
+	// print_token(ms->token);
 	if (token_has_syntax_error(ms->token))
 	{
 		handle_token_syntax_error(ms);
@@ -48,7 +48,7 @@ static void	handle_input(t_minishell *ms)
 	if (!ms->expr)
 		return (free_minishell(ms), exit(EXIT_FAILURE));
 	// debug print
-	print_expression(ms->expr, 0);
+	// print_expression(ms->expr, 0);
 	if (expression_has_syntax_error(ms->expr))
 	{
 		handle_expression_syntax_error(ms);
