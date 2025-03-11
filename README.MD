@@ -38,6 +38,7 @@
 - echo -nnnnnnn => Still Flag, needs to work Example (works as no new line): - echo -nnnnnnnnnn -nn -n -nnnn -nnn -nnnnnnnn -n hi Example when flags turn to normal output - echo -nnnnnn -n -nnnnn -nnnnn-n -n hi => -nnnnn-n -n hi
 - parsing of "" and ''
 	=> should also be possible in commands like e. g. "$LS"
+- Makefile => alle rules so norm-correct, oder muss es abgeändert werden?
 
 # Test Cases
 - export test=abc

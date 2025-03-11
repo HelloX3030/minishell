@@ -6,6 +6,8 @@ minishell_tester
 obj/
 minishell
 !minishell/
+minishell_debug
+obj_debug/
 *.ini
 .vscode/
 # *.md

@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_expression.c                                :+:      :+:    :+:   */
+/*   make_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 17:59:20 by lseeger          ###   ########.fr       */
+/*   Created: 2025/03/10 19:09:30 by lseeger           #+#    #+#             */
+/*   Updated: 2025/03/10 19:09:40 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_expression	*create_expression(t_expression_type type)
+int	make_redir(int target_fd, char *file, int flags)
 {
-	t_expression	*expr;
+	int	new_fd;
 
-	expr = malloc(sizeof(t_expression));
-	if (!expr)
-		return (NULL);
-	expr->type = type;
-	expr->args = NULL;
-	expr->child = NULL;
-	expr->next = NULL;
-	expr->saved_stdout = -1;
-	expr->saved_stdin = -1;
-	expr->redirs = NULL;
-	return (expr);
+	new_fd = open(file, flags, DEFAULT_FILE_PERMISSIONS);
+	if (new_fd == -1)
+		return (EXIT_FAILURE);
+	if (dup2(new_fd, target_fd) == -1)
+		return (EXIT_FAILURE);
+	if (close(new_fd) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

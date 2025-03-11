@@ -6,22 +6,24 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/19 14:31:06 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:59:38 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static void	print_lst(char *name, t_list *lst, char *insertion_str,
-		char *more_insertion_str)
+static void	print_redirs(t_expression *expr, char *insertion_str, int insertion)
 {
-	if (lst)
+	t_list	*tmp;
+
+	if (expr->redirs)
 	{
-		printf("%s%s:\n", insertion_str, name);
-		while (lst)
+		printf("%sRedirs:\n", insertion_str);
+		tmp = expr->redirs;
+		while (tmp)
 		{
-			printf("%s%s\n", more_insertion_str, (char *)lst->content);
-			lst = lst->next;
+			print_redir((t_redir *)tmp->content, insertion);
+			tmp = tmp->next;
 		}
 	}
 }
@@ -30,13 +32,21 @@ static void	print_cmd_values(t_expression *expr, int insertion)
 {
 	char	*insertion_str;
 	char	*more_insertion_str;
+	t_list	*tmp;
 
 	insertion_str = ft_get_insertion(insertion);
 	more_insertion_str = ft_get_insertion(insertion + 1);
-	print_lst("args", expr->args, insertion_str, more_insertion_str);
-	print_lst("infiles", expr->infiles, insertion_str, more_insertion_str);
-	print_lst("outfiles", expr->outfiles, insertion_str, more_insertion_str);
-	print_lst("append", expr->append, insertion_str, more_insertion_str);
+	if (expr->args)
+	{
+		printf("%sArgs:\n", insertion_str);
+		tmp = expr->args;
+		while (tmp)
+		{
+			printf("%s%s\n", more_insertion_str, (char *)tmp->content);
+			tmp = tmp->next;
+		}
+	}
+	print_redirs(expr, insertion_str, insertion + 1);
 	free(insertion_str);
 	free(more_insertion_str);
 }

@@ -23,12 +23,12 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	create_expression.c expression_has_syntax_error.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
 	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c token_has_syntax_error.c \
 	execute_minishell.c exit_minishell.c free_minishell.c init_minishell.c \
-	redirect.c redirect_fd.c reset_redirect.c \
-	cd.c echo.c env.c exit.c export.c pwd.c unset.c \
+	create_redir.c free_redir.c make_redir.c print_redir.c redirect.c reset_redirect.c restore_fd.c save_fd.c \
+	cd.c echo.c env.c export.c pwd.c unset.c \
 	env_init.c env_utils.c \
 	builtin.c execute.c \
 	externals.c \
-	close_fds.c fd.c \
+	fd.c
 
 # Normal .o files
 OBJ_DIR := obj
@@ -50,6 +50,9 @@ LDLIBS := -lft
 
 # all
 all: $(NAME)
+
+#bonus
+bonus: all
 
 # Link normal executable
 $(NAME): $(LIBS) $(OBJ_FILES)
@@ -81,11 +84,32 @@ clean:
 
 # fclean
 fclean:
-	$(RM) -rf $(OBJ_DIR) $(OBJ_DEBUG_DIR)
-	$(RM) -f $(NAME) $(DEBUG_NAME)
+	$(RM) -rf $(OBJ_DIR)
+	$(RM) -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 # re
 re: fclean all
 
-.PHONY: all clean fclean re debug
+# debug_clean
+debug_clean:
+	$(RM) -r $(OBJ_DEBUG_DIR)
+
+# debug_fclean
+debug_fclean:
+	$(RM) -rf $(OBJ_DEBUG_DIR)
+	$(RM) -f $(DEBUG_NAME)
+
+# debug_re
+debug_re: debug_fclean debug
+
+# clean_all
+clean_all: clean debug_clean
+
+# fclean_all
+fclean_all: fclean debug_fclean
+
+# re_all
+re_all: fclean_all all debug
+
+.PHONY: all bonus clean fclean re debug debug_clean debug_fclean debug_re clean_all fclean_all re_all

@@ -6,11 +6,17 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 17:02:44 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:45:44 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+static bool	is_token_limiter(char c)
+{
+	return (c == ' ' || c == '\t' || c == '(' || c == ')' || c == '<'
+		|| c == '>');
+}
 
 static char	*get_token_end(char *end)
 {
@@ -18,7 +24,7 @@ static char	*get_token_end(char *end)
 
 	while (*end)
 	{
-		if (*end == ' ' || *end == '\t' || *end == '(' || *end == ')')
+		if (is_token_limiter(*end))
 			break ;
 		if (*end == '"')
 		{
