@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 13:07:05 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 15:47:49 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 	readable by the group and others (rw-r--r--).
  */
 # define DEFAULT_FILE_PERMISSIONS 0644
+
+# define PIPE_READ_END 0
+# define PIPE_WRITE_END 1
 
 typedef enum s_token_type
 {
@@ -208,5 +211,9 @@ int						save_fd(int *saved_fd, int fd);
 int						restore_fd(int *saved_fd, int fd);
 int						redirect(t_expression *expr);
 int						reset_redirect(t_expression *expr);
+
+// expansions
+int						expand_env(char **str, t_env *env);
+int						remove_quotes(char **str);
 
 #endif

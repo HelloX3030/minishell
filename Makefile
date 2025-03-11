@@ -25,10 +25,10 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	execute_minishell.c exit_minishell.c free_minishell.c init_minishell.c \
 	create_redir.c free_redir.c make_redir.c print_redir.c redirect.c reset_redirect.c restore_fd.c save_fd.c \
 	cd.c echo.c env.c export.c pwd.c unset.c \
-	env_init.c env_utils.c \
+	env_init.c env_utils.c expand_env.c \
 	builtin.c execute.c \
 	externals.c \
-	fd.c
+	fd.c remove_qutes.c
 
 # Normal .o files
 OBJ_DIR := obj
@@ -84,8 +84,8 @@ clean:
 
 # fclean
 fclean:
-	$(RM) -rf $(OBJ_DIR)
-	$(RM) -f $(NAME)
+	$(RM) -rf $(OBJ_DIR) $(OBJ_DEBUG_DIR)
+	$(RM) -f $(NAME) $(DEBUG_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 # re
@@ -103,13 +103,4 @@ debug_fclean:
 # debug_re
 debug_re: debug_fclean debug
 
-# clean_all
-clean_all: clean debug_clean
-
-# fclean_all
-fclean_all: fclean debug_fclean
-
-# re_all
-re_all: fclean_all all debug
-
-.PHONY: all bonus clean fclean re debug debug_clean debug_fclean debug_re clean_all fclean_all re_all
+.PHONY: all bonus clean fclean re debug debug_clean debug_fclean debug_re

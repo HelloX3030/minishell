@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:30:43 by hello_x           #+#    #+#             */
-/*   Updated: 2025/02/05 14:06:33 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:30:41 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strdup(const char *s)
 	return (new_str);
 }
 
-char	*ft_strdupn(char *src, char *next)
+char	*ft_strndup(char *src, char *next)
 {
 	const int	dest_len = next - src;
 	char		*dest;

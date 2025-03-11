@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:29:39 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 15:28:00 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,7 @@ t_expression	*parse_expression(t_token *token, t_token *end, t_env *env)
 	if (end && token == end)
 		return (create_expression(EXPR_END));
 	else if (token->type == TOKEN_WORD)
-	{
-		if (!is_cmd(token->str, env))
-			return (create_expression(EXPR_SYNTAX_ERROR));
-		else
-			return (parse_cmd(token, end, env));
-	}
+		return (parse_cmd(token, end, env));
 	else if (token->type == TOKEN_GROUP)
 		return (parse_group(token, end, env));
 	else if (token->type == TOKEN_END)
