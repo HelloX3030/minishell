@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:18:43 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/24 10:02:39 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:00:27 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_id(const char *str)
 {
 	int	i;
-	
+
 	if (!str || !*str)
 		return (FAILURE);
 	if (!ft_isalpha(str[0]) && str[0] != '_')
@@ -33,13 +33,13 @@ int	is_valid_id(const char *str)
 int	mini_unset(char **args, t_env **env)
 {
 	int	i;
-	
+
 	if (!args[1])
 		return (EXIT_FAILURE);
 	i = 1;
 	while (args[i])
 	{
-		if(is_valid_id(args[i]))
+		if (is_valid_id(args[i]))
 			unset_env_val(env, args[i]);
 		else
 		{

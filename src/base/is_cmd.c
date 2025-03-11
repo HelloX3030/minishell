@@ -6,115 +6,103 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:55:09 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:08:19 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-
-static void free_paths(char **paths)
+static int is_directory(const char *path)
 {
-	int	i;
+	DIR *dir_check;
+	int result;
 
-	if (!paths)
-		return;
+	dir_check = opendir(path);
+	result = dir_check != NULL;
+	if (dir_check)
+		closedir(dir_check);
+	return (result);
+}
+
+static char *check_direct_path(const char *cmd)
+{
+	if (!cmd || !cmd[0] || !ft_strchr(cmd, '/'))
+		return (NULL);
+	if (access(cmd, F_OK) != 0)
+		return (NULL);
+	if (is_directory(cmd))
+		return (NULL);
+	if (access(cmd, X_OK) != 0)
+		return (NULL);
+	return (ft_strdup(cmd));
+}
+
+static char	*try_path(const char *dir, const char *cmd)
+{
+	char	*tmp;
+	char	*full_path;
+
+	tmp = ft_strjoin(dir, "/");
+	if (!tmp)
+	{
+		free(tmp);
+		return (NULL);
+	}
+	full_path = ft_strjoin(tmp, cmd);
+	free(tmp);
+	if (!full_path)
+	{
+		free(full_path);
+		return (NULL);
+	}
+	if (access(full_path, F_OK) != 0 || is_directory(full_path)
+		|| access(full_path, X_OK) != 0)
+	{
+		free(full_path);
+		return (NULL);
+	}
+	return (full_path);
+}
+
+static char	*search_in_path(const char *cmd, char **paths)
+{
+	int		i;
+	char	*result;
+
 	i = 0;
 	while (paths[i])
-		free(paths[i++]);
-	free(paths);
+	{
+		result = try_path(paths[i], cmd);
+		if (result)
+		{
+			free_paths(paths);
+			return (result);
+		}
+		i++;
+	}
+	free_paths(paths);
+	return (NULL);
 }
-static char *is_external(const char *cmd, t_env *env)
+
+static char	*is_external(const char *cmd, t_env *env)
 {
 	char	*path_env;
 	char	**paths;
-	char	*full_path;
-	char	*tmp;
-	int		i;
-	DIR		*dir_check;
+	char	*result;
 
-	if (!cmd || !cmd[0])
-		return (NULL);
-
-	// Handle commands with path
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(cmd, F_OK) == 0)
-		{
-			dir_check = opendir(cmd);
-			if (dir_check)
-			{
-				closedir(dir_check);
-				return (NULL);
-			}
-			if (access(cmd, X_OK) == 0)
-				return (ft_strdup(cmd));
-		}
-		return (NULL);
-	}
-
-	// Look for command in PATH
+	result = check_direct_path(cmd);
+	if (result || !cmd || !cmd[0])
+		return (result);
 	path_env = get_env_value(env, "PATH");
 	if (!path_env)
 		return (NULL);
-
 	paths = ft_split(path_env, ':');
 	if (!paths)
-		return (NULL);
-
-	i = 0;
-	while (paths[i])
 	{
-		// Create full path
-		tmp = ft_strjoin(paths[i], "/");
-		if (!tmp)
-		{
-			free_paths(paths);
-			return (NULL);
-		}
-
-		full_path = ft_strjoin(tmp, cmd);
-		free(tmp);  // Free tmp immediately after use
-		if (!full_path)
-		{
-			// Free paths array if full_path allocation fails
-			while (paths[i])
-				free(paths[i++]);
-			free(paths);
-			return (NULL);
-		}
-
-		// Check if file exists and is executable
-		if (access(full_path, F_OK) == 0)
-		{
-			dir_check = opendir(full_path);
-			if (dir_check)
-			{
-				closedir(dir_check);
-				free(full_path);
-			}
-			else if (access(full_path, X_OK) == 0)
-			{
-				// Success: clean up paths and return full_path
-				while (paths[i])
-					free(paths[i++]);
-				free(paths);
-				return (full_path);
-			}
-			else
-				free(full_path);
-		}
-		else
-			free(full_path);
-		i++;
+		free(paths);
+		return (NULL);
 	}
-
-	// Clean up if no executable found
-	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
-	return (NULL);
+	return (search_in_path(cmd, paths));
 }
 
 bool	is_cmd(char *args, t_env *env)

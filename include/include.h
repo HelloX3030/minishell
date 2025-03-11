@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/07 16:28:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:25:38 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ int						mini_cd(char **args, t_env **env);
 int						count_args(char **args);
 int						mini_echo(char **args);
 void					mini_env(t_env *env);
+int						mini_exit(char **args, t_minishell *ms);
+int						*status(void);
 int						mini_export(char **args, t_env **env);
 // int						is_valid_identifier(const char *str);
 void					mini_pwd(void);
@@ -185,13 +187,13 @@ bool					is_cmd(char *args, t_env *env);
 
 // externals
 char					*find_cmd_path(const char *cmd, t_env *env);
-void					free_array(char **array);
 int						execute_ext(char **args, t_env *env);
 
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
-int						close_fds(int *fds, int count);
+void 					free_paths(char **paths);
+void					free_array(char **array);
 
 // shell
 void					handle_lvl(t_env **env);
