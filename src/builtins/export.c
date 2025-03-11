@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 15:05:32 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:45:49 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ static int	export_without_equals(char *arg, t_env **env)
 	return (EXIT_SUCCESS);
 }
 
-int	mini_export(char **args, t_env **env)
+int	mini_export(char **args, t_minishell *ms)
 {
 	int	i;
 	int	result;
 
 	if (!args[1])
 	{
-		print_export_vars(*env);
+		print_export_vars(ms->env);
 		return (EXIT_SUCCESS);
 	}
 	i = 1;
@@ -69,9 +69,9 @@ int	mini_export(char **args, t_env **env)
 	while (args[i] && result == EXIT_SUCCESS)
 	{
 		if (ft_strchr(args[i], '='))
-			result = export_with_equals(args[i], env);
+			result = export_with_equals(args[i], &ms->env);
 		else
-			result = export_without_equals(args[i], env);
+			result = export_without_equals(args[i], &ms->env);
 		i++;
 	}
 	return (result);

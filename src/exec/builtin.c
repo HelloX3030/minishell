@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 11:56:14 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:46:59 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,21 @@ int	is_builtin(char *cmd)
 	return (FAILURE);
 }
 
-int	dispatch_builtin(char **args, t_env **env)
+int	dispatch_builtin(char **args, t_minishell *ms)
 {
-	int	result;
-
-	result = 0;
-	(void)result;
 	if (ft_strcmp(args[0], "echo") == 0)
-		result = mini_echo(args);
+		ms->status = mini_echo(args);
 	if (ft_strcmp(args[0], "cd") == 0)
-		result = mini_cd(args, env);
+		ms->status = mini_cd(args, ms);
 	if (ft_strcmp(args[0], "pwd") == 0)
-		mini_pwd();
+		ms->status = mini_pwd();
 	if (ft_strcmp(args[0], "env") == 0)
-		mini_env(*env);
+		ms->status = mini_env(ms);
 	if (ft_strcmp(args[0], "export") == 0)
-		mini_export(args, env);
+		ms->status = mini_export(args, ms);
 	if (ft_strcmp(args[0], "unset") == 0)
-		mini_unset(args, env);
+		ms->status = mini_unset(args, ms);
 	if (ft_strcmp(args[0], "minishell") == 0)
-		exec_shell(args, *env);
+		ms->status = exec_shell(args, ms);
 	return (1);
 }

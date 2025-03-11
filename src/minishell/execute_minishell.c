@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 12:01:58 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:50:20 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	execute_expression(t_minishell *ms, t_expression *expr)
 			//ms->stop_execution = true;
 			//return ;
 		}
-	execute(args, ms->env);
+	execute(args, ms);
 	ft_free_strs(args);
 }
 

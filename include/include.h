@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 11:48:54 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:53:51 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_minishell
 	char				*input;
 	t_token				*token;
 	t_expression		*expr;
+	int					status;
 	bool				stop_execution;
 }						t_minishell;
 
@@ -135,17 +136,16 @@ void					execute_minishell(t_minishell *ms);
 
 // builtins
 int						to_path(int fl, t_env **env);
-int						mini_cd(char **args, t_env **env);
+int						mini_cd(char **args, t_minishell *ms);
 int						count_args(char **args);
 int						mini_echo(char **args);
-void					mini_env(t_env *env);
+int						mini_env(t_minishell *ms);
 int						mini_exit(char **args, t_minishell *ms);
-int						*status(void);
-int						mini_export(char **args, t_env **env);
+int						mini_export(char **args, t_minishell *ms);
 // int						is_valid_identifier(const char *str);
-void					mini_pwd(void);
+int						mini_pwd(void);
 int						is_valid_id(const char *str);
-int						mini_unset(char **args, t_env **env);
+int						mini_unset(char **args, t_minishell *ms);
 
 // envs
 void					free_env(t_env *env);
@@ -159,13 +159,13 @@ char					**env_to_array(t_env *env);
 
 // exec
 int						is_builtin(char *cmd);
-int						dispatch_builtin(char **args, t_env **env);
-void					execute(char **args, t_env *env);
+int						dispatch_builtin(char **args, t_minishell *ms);
+void					execute(char **args, t_minishell *ms);
 bool					is_cmd(char *args, t_env *env);
 
 // externals
 char					*find_cmd_path(const char *cmd, t_env *env);
-int						execute_ext(char **args, t_env *env);
+int						 execute_ext(char **args, t_minishell *ms);
 
 // utils
 char					*path_join(const char *s1, const char *s2);
@@ -175,6 +175,6 @@ void					free_array(char **array);
 
 //shell
 void	handle_lvl(t_env **env);
-int	exec_shell(char **args, t_env *env);
+int		exec_shell(char **args, t_minishell *ms);
 
 #endif
