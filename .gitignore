@@ -11,6 +11,7 @@ minishell
 # *.md
 .devcontainer
 supp.supp
+minishell_debug
 
 # Prerequisites
 *.d
