@@ -1,5 +1,6 @@
 # ToDo
-- Redirections (Lukas)
+- Parsing Update (Lukas)
+	- Parse Qutoes Correct
 - Handle Expressions (Lukas)
 - expand variables $VAR_NAME -- ich wuerde das in den Parser machen, weil wie wir gerade "" und '' handeln passt noch nicht und wenn wir das richtig machen, kann ich im exec nicht mehr bestimmen ob etwas expanded werden muss oder nicht(Leo)
 - Signals handling => leo

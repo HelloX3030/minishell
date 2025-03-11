@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   is_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/02/28 12:55:09 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:32:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-
-static void free_paths(char **paths)
+static void	free_paths(char **paths)
 {
 	int	i;
 
 	if (!paths)
-		return;
+		return ;
 	i = 0;
 	while (paths[i])
 		free(paths[i++]);
 	free(paths);
 }
-static char *is_external(const char *cmd, t_env *env)
+static char	*is_external(const char *cmd, t_env *env)
 {
 	char	*path_env;
 	char	**paths;
@@ -35,7 +34,6 @@ static char *is_external(const char *cmd, t_env *env)
 
 	if (!cmd || !cmd[0])
 		return (NULL);
-
 	// Handle commands with path
 	if (ft_strchr(cmd, '/'))
 	{
@@ -52,16 +50,13 @@ static char *is_external(const char *cmd, t_env *env)
 		}
 		return (NULL);
 	}
-
 	// Look for command in PATH
 	path_env = get_env_value(env, "PATH");
 	if (!path_env)
 		return (NULL);
-
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return (NULL);
-
 	i = 0;
 	while (paths[i])
 	{
@@ -72,9 +67,8 @@ static char *is_external(const char *cmd, t_env *env)
 			free_paths(paths);
 			return (NULL);
 		}
-
 		full_path = ft_strjoin(tmp, cmd);
-		free(tmp);  // Free tmp immediately after use
+		free(tmp); // Free tmp immediately after use
 		if (!full_path)
 		{
 			// Free paths array if full_path allocation fails
@@ -83,7 +77,6 @@ static char *is_external(const char *cmd, t_env *env)
 			free(paths);
 			return (NULL);
 		}
-
 		// Check if file exists and is executable
 		if (access(full_path, F_OK) == 0)
 		{
@@ -108,7 +101,6 @@ static char *is_external(const char *cmd, t_env *env)
 			free(full_path);
 		i++;
 	}
-
 	// Clean up if no executable found
 	i = 0;
 	while (paths[i])
