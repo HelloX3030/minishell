@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/12 12:10:13 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:28:19 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,10 @@ void					free_array(char **array);
 //shell
 void	handle_lvl(t_env **env);
 int		exec_shell(char **args, t_minishell *ms);
+
+//signals
+void	setup_execution(void);
+void	reset_singals(void);
+
 
 #endif
