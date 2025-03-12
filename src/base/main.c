@@ -6,11 +6,13 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 12:27:19 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:15:39 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+volatile sig_atomic_t g_in_exec = 0;
 
 inline static void	handle_token_syntax_error(t_minishell *ms)
 {
