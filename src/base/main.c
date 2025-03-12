@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/12 12:38:04 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:53:21 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	// atexit(check_leaks);
+	setup_interactive();
 	init_minishell(&ms, envp);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:16:28 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/12 12:39:05 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:58:22 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void	sigint_handler(int sig)
 {
 	(void) sig;
 
-	if(!g_in_exec)
+	if (g_in_exec)
+		write(STDOUT_FILENO, "\n", 1);	// aesthetic, might remove
+	if (!g_in_exec)
 	{
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
