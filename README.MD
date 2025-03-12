@@ -1,5 +1,6 @@
 # ToDo
-- Redirections (Lukas, es muss abgesprochen werden wie ich das mit den Expressions machen soll + exit codes usw.)
+- Parsing Update (Lukas)
+	- Parse Qutoes Correct
 - Handle Expressions (Lukas)
 - expand variables $VAR_NAME -- ich wuerde das in den Parser machen, weil wie wir gerade "" und '' handeln passt noch nicht und wenn wir das richtig machen, kann ich im exec nicht mehr bestimmen ob etwas expanded werden muss oder nicht(Leo)
 - Signals handling => leo
@@ -13,17 +14,17 @@
 - Refactor External Codes => Norm, Malloc Protection
 - No more Mixed Exit Codes => the default Macros, not some selfe defined...
 - Leak in find_cmd_path: Valgrind Log:
-==4005== 133 bytes in 4 blocks are definitely lost in loss record 24 of 68
-==4005==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4005==    by 0x10C9BF: custom_copy (in /workspaces/minishell/minishell)
-==4005==    by 0x10CB24: ft_split (in /workspaces/minishell/minishell)
-==4005==    by 0x10BFA0: find_cmd_path (in /workspaces/minishell/minishell)
-==4005==    by 0x10C1B6: execute_ext (in /workspaces/minishell/minishell)
-==4005==    by 0x10BF26: execute (in /workspaces/minishell/minishell)
-==4005==    by 0x10AB08: execute_expression (in /workspaces/minishell/minishell)
-==4005==    by 0x10AB40: execute_minishell (in /workspaces/minishell/minishell)
-==4005==    by 0x109575: handle_input (in /workspaces/minishell/minishell)
-==4005==    by 0x109639: main (in /workspaces/minishell/minishell)
+==1129== 133 bytes in 4 blocks are definitely lost in loss record 23 of 67
+==1129==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1129==    by 0x10CC8F: custom_copy (in /workspaces/minishell/minishell)
+==1129==    by 0x10CDF4: ft_split (in /workspaces/minishell/minishell)
+==1129==    by 0x10C270: find_cmd_path (externals.c:28)
+==1129==    by 0x10C486: execute_ext (externals.c:73)
+==1129==    by 0x10C1F6: execute (execute.c:20)
+==1129==    by 0x10ADAF: execute_expression (execute_minishell.c:31)
+==1129==    by 0x10ADE7: execute_minishell (execute_minishell.c:38)
+==1129==    by 0x109845: handle_input (main.c:53)
+==1129==    by 0x1098E0: main (main.c:82)
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
@@ -38,6 +39,7 @@
 - echo -nnnnnnn => Still Flag, needs to work Example (works as no new line): - echo -nnnnnnnnnn -nn -n -nnnn -nnn -nnnnnnnn -n hi Example when flags turn to normal output - echo -nnnnnn -n -nnnnn -nnnnn-n -n hi => -nnnnn-n -n hi
 - parsing of "" and ''
 	=> should also be possible in commands like e. g. "$LS"
+- Makefile => alle rules so norm-correct, oder muss es abgeändert werden?
 
 # Test Cases
 - export test=abc

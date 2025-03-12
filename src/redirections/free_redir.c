@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_expression.c                                :+:      :+:    :+:   */
+/*   free_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 17:59:20 by lseeger          ###   ########.fr       */
+/*   Created: 2025/03/10 17:26:59 by lseeger           #+#    #+#             */
+/*   Updated: 2025/03/10 17:27:20 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_expression	*create_expression(t_expression_type type)
+void	free_redir(void *redir)
 {
-	t_expression	*expr;
+	t_redir	*tmp;
 
-	expr = malloc(sizeof(t_expression));
-	if (!expr)
-		return (NULL);
-	expr->type = type;
-	expr->args = NULL;
-	expr->child = NULL;
-	expr->next = NULL;
-	expr->saved_stdout = -1;
-	expr->saved_stdin = -1;
-	expr->redirs = NULL;
-	return (expr);
+	tmp = (t_redir *)redir;
+	free(tmp->file);
+	free(tmp);
 }

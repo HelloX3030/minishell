@@ -6,33 +6,37 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 17:02:44 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:42:55 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
+static bool	is_token_limiter(char c)
+{
+	return (c == ' ' || c == '\t' || c == '(' || c == ')' || c == '<'
+		|| c == '>');
+}
+
 static char	*get_token_end(char *end)
 {
-	char	*end_quote;
-
 	while (*end)
 	{
-		if (*end == ' ' || *end == '\t' || *end == '(' || *end == ')')
+		if (is_token_limiter(*end))
 			break ;
 		if (*end == '"')
 		{
-			end_quote = ft_strchr(end + 1, '"');
-			if (end_quote)
-				return (end_quote + 1);
-			return (NULL);
+			end = ft_strchr(end + 1, '"');
+			if (!end)
+				return (NULL);
+			end++;
 		}
 		if (*end == '\'')
 		{
-			end_quote = ft_strchr(end + 1, '\'');
-			if (end_quote)
-				return (end_quote + 1);
-			return (NULL);
+			end = ft_strchr(end + 1, '\'');
+			if (!end)
+				return (NULL);
+			end++;
 		}
 		if (is_operator(end))
 			return (end);

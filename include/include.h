@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 10:25:38 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:28:36 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ typedef struct s_token
 	struct s_token		*next;
 }						t_token;
 
+typedef enum e_redir_type
+{
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+}						t_redir_type;
+
+typedef struct s_redir
+{
+	t_redir_type		type;
+	char				*file;
+}						t_redir;
+void					print_redir_type(t_redir_type type);
+void					print_redir(t_redir *redir, int insertion);
+t_redir					*create_redir(t_redir_type type, char *file);
+void					free_redir(void *redir);
+
 typedef enum e_expression_type
 {
 	EXPR_CMD,
@@ -88,26 +105,15 @@ typedef struct s_expression
 
 	// cmd values
 	t_list				*args;
-	t_list				*infiles;
-	t_list				*outfiles;
-	t_list				*append;
 
 	// controll structures
 	struct s_expression	*child;
 	struct s_expression	*next;
 
 	// redirections
-	// out
 	int					saved_stdout;
-	int					out_redir_count;
-	int					*out_redir_fds;
-
-	// in
 	int					saved_stdin;
-	int					in_redir_count;
-	int					*in_redir_fds;
-
-	// append
+	t_list				*redirs;
 }						t_expression;
 
 typedef struct s_env
@@ -192,17 +198,16 @@ int						execute_ext(char **args, t_env *env);
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
-void 					free_paths(char **paths);
-void					free_array(char **array);
 
 // shell
 void					handle_lvl(t_env **env);
 int						exec_shell(char **args, t_env *env);
 
 // redirections
+int						make_redir(int target_fd, char *file, int flags);
+int						save_fd(int *saved_fd, int fd);
+int						restore_fd(int *saved_fd, int fd);
 int						redirect(t_expression *expr);
 int						reset_redirect(t_expression *expr);
-int						redirect_fd(t_list *files, int *fds, int flags,
-							int target_fd);
 
 #endif

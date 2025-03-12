@@ -6,17 +6,17 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:51:33 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/26 14:29:05 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:48:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static t_token	*add_lst(t_expression *expr, t_list **lst, t_token *token,
-		t_token *end)
+static t_token	*add_redir(t_expression *expr, t_redir_type type,
+		t_token *token, t_token *end)
 {
-	char	*str;
 	t_list	*new_element;
+	t_redir	*redir;
 
 	if (!token || token->type != TOKEN_WORD || (end && token == end)
 		|| is_redirection_operator(token->str))
@@ -24,16 +24,16 @@ static t_token	*add_lst(t_expression *expr, t_list **lst, t_token *token,
 		expr->type = EXPR_SYNTAX_ERROR;
 		return (token);
 	}
-	str = ft_strdup(token->str);
-	if (!str)
+	redir = create_redir(type, token->str);
+	if (!redir)
 		return (NULL);
-	new_element = ft_lstnew(str);
+	new_element = ft_lstnew(redir);
 	if (!new_element)
 	{
-		free(str);
+		free_redir(redir);
 		return (NULL);
 	}
-	ft_lstadd_back(lst, new_element);
+	ft_lstadd_back(&expr->redirs, new_element);
 	return (token);
 }
 
@@ -70,11 +70,11 @@ t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end)
 	{
 		token = token->next;
 		if (ft_strcmp(token->str, "<") == 0)
-			token = add_lst(expr, &expr->infiles, token->next, end);
+			token = add_redir(expr, REDIR_IN, token->next, end);
 		else if (ft_strcmp(token->str, ">") == 0)
-			token = add_lst(expr, &expr->outfiles, token->next, end);
+			token = add_redir(expr, REDIR_OUT, token->next, end);
 		else if (ft_strcmp(token->str, ">>") == 0)
-			token = add_lst(expr, &expr->append, token->next, end);
+			token = add_redir(expr, REDIR_APPEND, token->next, end);
 		else
 			token = add_args(expr, token);
 		if (!token)

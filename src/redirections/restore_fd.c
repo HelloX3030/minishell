@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_expression.c                                :+:      :+:    :+:   */
+/*   restore_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 12:45:26 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 17:59:20 by lseeger          ###   ########.fr       */
+/*   Created: 2025/03/11 13:07:17 by lseeger           #+#    #+#             */
+/*   Updated: 2025/03/11 13:09:38 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_expression	*create_expression(t_expression_type type)
+int	restore_fd(int *saved_fd, int fd)
 {
-	t_expression	*expr;
+	int	return_value;
 
-	expr = malloc(sizeof(t_expression));
-	if (!expr)
-		return (NULL);
-	expr->type = type;
-	expr->args = NULL;
-	expr->child = NULL;
-	expr->next = NULL;
-	expr->saved_stdout = -1;
-	expr->saved_stdin = -1;
-	expr->redirs = NULL;
-	return (expr);
+	return_value = EXIT_SUCCESS;
+	if (*saved_fd != -1)
+	{
+		if (dup2(*saved_fd, fd) == -1)
+			return_value = EXIT_FAILURE;
+		if (close(*saved_fd) == -1)
+			return_value = EXIT_FAILURE;
+		*saved_fd = -1;
+	}
+	return (return_value);
 }

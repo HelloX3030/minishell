@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_fds.c                                        :+:      :+:    :+:   */
+/*   create_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 16:12:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/07 16:13:03 by lseeger          ###   ########.fr       */
+/*   Created: 2025/03/10 17:24:50 by lseeger           #+#    #+#             */
+/*   Updated: 2025/03/10 19:03:28 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int	close_fds(int *fds, int count)
+t_redir	*create_redir(t_redir_type type, char *file)
 {
-	int	i;
-	int	return_value;
+	t_redir	*redir;
 
-	return_value = EXIT_SUCCESS;
-	i = 0;
-	while (i < count)
+	redir = malloc(sizeof(t_redir));
+	if (!redir)
+		return (NULL);
+	redir->type = type;
+	redir->file = ft_strdup(file);
+	if (!redir->file)
 	{
-		if (close(fds[i]) == -1)
-			return_value = EXIT_FAILURE;
-		i++;
+		free(redir);
+		return (NULL);
 	}
-	return (return_value);
+	return (redir);
 }
