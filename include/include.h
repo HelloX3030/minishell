@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 15:47:49 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:21:41 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
 bool					expression_has_syntax_error(t_expression *expr);
+int						expand_expr_vars(t_expression *expr, t_env *env);
 
 // minishell
 void					init_minishell(t_minishell *ms, char **envp);
@@ -185,6 +186,7 @@ char					*get_env_value(t_env *env, const char *key);
 void					set_env_val(t_env **env, char *key, char *value);
 void					unset_env_val(t_env **env, const char *key);
 char					**env_to_array(t_env *env);
+int						expand_env(char **str, t_env *env);
 
 // exec
 int						is_builtin(char *cmd);
@@ -200,6 +202,7 @@ int						execute_ext(char **args, t_env *env);
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
+int						remove_quotes(char **str);
 
 // shell
 void					handle_lvl(t_env **env);
@@ -211,9 +214,5 @@ int						save_fd(int *saved_fd, int fd);
 int						restore_fd(int *saved_fd, int fd);
 int						redirect(t_expression *expr);
 int						reset_redirect(t_expression *expr);
-
-// expansions
-int						expand_env(char **str, t_env *env);
-int						remove_quotes(char **str);
 
 #endif

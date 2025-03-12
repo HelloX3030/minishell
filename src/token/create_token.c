@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:20:54 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/24 15:30:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/12 14:45:31 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*create_token(t_token_type type, char **str, char *str_end)
 
 	if (!*str || !str_end)
 		return (NULL);
-	new_str = ft_strdupn(*str, str_end);
+	new_str = ft_strndup(*str, str_end);
 	if (!new_str)
 		return (NULL);
 	*str = str_end;
