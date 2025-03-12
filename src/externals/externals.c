@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:33:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:46:30 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,27 +123,30 @@ static int parent_process(pid_t pid, char *cmd_path, char **envp)
 
 int execute_ext(char **args, t_minishell *ms)
 {
-	char *cmd_path;
-	char **envp;
-	pid_t pid;
+	char	*cmd_path;
+	char	**envp;
+	pid_t	pid;
+	int		result;
 
 	cmd_path = find_cmd_path(args[0], ms->env);
 	if (!cmd_path)
 		return (handle_cmd_not_found(args[0]));
-	
 	envp = env_to_array(ms->env);
 	if (!envp)
 	{
 		free(cmd_path);
 		return (1);
 	}
-	
+	g_in_exec = 1;
 	pid = fork();
 	if (pid == -1)
 		return (handle_fork_error(cmd_path, envp));
-	
 	if (pid == 0)
+	{
+		setup_execution();
 		child_process(cmd_path, args, envp);
-	
-	return (parent_process(pid, cmd_path, envp));
+	}
+	result = parent_process(pid, cmd_path, envp);
+	g_in_exec = 0;
+	return (result);
 }
