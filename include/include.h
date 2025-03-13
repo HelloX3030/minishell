@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 13:56:14 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/13 14:01:06 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 extern volatile sig_atomic_t	g_in_exec;
 # define PIPE_READ_END 0
 # define PIPE_WRITE_END 1
+
+# define DEFAULT_FILE_PERMISSIONS 0644
 
 typedef enum s_token_type
 {
@@ -190,7 +192,7 @@ int								expand_env(char **str, t_env *env);
 // exec
 int								is_builtin(char *cmd);
 int								dispatch_builtin(char **args, t_minishell *ms);
-int								execute(char **args, t_minishell *ms);
+void							execute(char **args, t_minishell *ms);
 bool							is_cmd(char *args, t_env *env);
 
 // externals

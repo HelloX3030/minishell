@@ -29,7 +29,8 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	env_init.c env_utils.c expand_env.c \
 	builtin.c execute.c \
 	externals.c \
-	fd.c remove_qutes.c
+	fd.c remove_qutes.c \
+	signals.c
 
 # Normal .o files
 OBJ_DIR := obj
