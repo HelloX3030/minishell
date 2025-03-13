@@ -25,8 +25,23 @@
 - export test=abc
 - export test
 => test darf nicht geleert werden	- bei mir funktioniert dieser test case wie angegeben, gab es bei dir fehler? (leo: 10.03)
-
+- cat
+^\^\^\^\^\
+Quit: 3
+- Environments nach alphabet sortieren
+- export VAR="            111         222        333         "
+echo $VAR "$VAR" '$VAR'
+111 222 333             111         222        333          $VAR
+- ">a"
 - pipe ins nichts
+- cat << EOF
+> sdfsdf
+> sdfsd
+> fsd
+> EOF
+sdfsdf
+sdfsd
+fsd
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?

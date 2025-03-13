@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/12 16:21:41 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:45:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,17 @@ typedef enum e_expression_type
 	EXPR_END,
 	EXPR_SYNTAX_ERROR,
 }						t_expression_type;
+
+/*
+	- needed for variable expansion
+*/
+typedef enum e_quote_type
+{
+	QUOTE_NONE,
+	QUOTE_SINGLE,
+	QUOTE_DOUBLE,
+}						t_quote_type;
+void					print_quote_type(t_quote_type type);
 
 /*
 	child: will only be set when type == EXPR_GROUP
