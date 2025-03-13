@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 15:45:10 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:05:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ int						count_args(char **args);
 int						mini_echo(char **args);
 void					mini_env(t_env *env);
 int						mini_export(char **args, t_env **env);
-// int						is_valid_identifier(const char *str);
 void					mini_pwd(void);
 int						is_valid_id(const char *str);
 int						mini_unset(char **args, t_env **env);
@@ -214,6 +213,10 @@ int						execute_ext(char **args, t_env *env);
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
 int						remove_quotes(char **str);
+
+// expansion utils
+char					*get_var_end(char *str);
+char					*create_terminated_str(int len);
 
 // shell
 void					handle_lvl(t_env **env);
