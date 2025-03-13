@@ -1,6 +1,4 @@
 # ToDo
-- Parsing Update (Lukas)
-	- Parse Qutoes Correct
 - Handle Expressions (Lukas)
 - expand variables $VAR_NAME -- ich wuerde das in den Parser machen, weil wie wir gerade "" und '' handeln passt noch nicht und wenn wir das richtig machen, kann ich im exec nicht mehr bestimmen ob etwas expanded werden muss oder nicht(Leo)
 - Signals handling => leo
@@ -9,37 +7,19 @@
 - Succes/Failure for execute Function => to handle the expressions
 
 # Problems
-- ./"FILE" ist bei uns noch Syntax Error -- muss entweder "no such file in directory" / ""FILE" is a directory" / execute (<- funktioniert) sein. (leo: 10.03). 
-- bash erkennt "cmd" als valid => "pwd" gibt pwd aus etc. bei uns ist das ein Syntax Error	(Leo: 10.03)
 - Refactor External Codes => Norm, Malloc Protection
-- No more Mixed Exit Codes => the default Macros, not some selfe defined...
-- Leak in find_cmd_path: Valgrind Log:
-==1129== 133 bytes in 4 blocks are definitely lost in loss record 23 of 67
-==1129==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1129==    by 0x10CC8F: custom_copy (in /workspaces/minishell/minishell)
-==1129==    by 0x10CDF4: ft_split (in /workspaces/minishell/minishell)
-==1129==    by 0x10C270: find_cmd_path (externals.c:28)
-==1129==    by 0x10C486: execute_ext (externals.c:73)
-==1129==    by 0x10C1F6: execute (execute.c:20)
-==1129==    by 0x10ADAF: execute_expression (execute_minishell.c:31)
-==1129==    by 0x10ADE7: execute_minishell (execute_minishell.c:38)
-==1129==    by 0x109845: handle_input (main.c:53)
-==1129==    by 0x1098E0: main (main.c:82)
+- No more Mixed Exit Codes => the default Macros, not some self defined...
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
-- replace all exit calls with exit_minishell calls
 - remove free_array function and replace it with free_strs
 	=> or move it to libft
-- Parsing: "Hello("World")" => all will be conected to one str
 - Environment variables:
 	- bash prevents modification: ppid, uid, euid, lineno, bashpid
-	bash resets/overrides them: shlvl, seconds, random, pwd, oldpwd
+	- bash resets/overrides them: shlvl, seconds, random, pwd, oldpwd
 	- system may reset on login: path, term, logname
 - echo -nnnnnnn => Still Flag, needs to work Example (works as no new line): - echo -nnnnnnnnnn -nn -n -nnnn -nnn -nnnnnnnn -n hi Example when flags turn to normal output - echo -nnnnnn -n -nnnnn -nnnnn-n -n hi => -nnnnn-n -n hi
-- parsing of "" and ''
-	=> should also be possible in commands like e. g. "$LS"
-- Makefile => alle rules so norm-correct, oder muss es abgeändert werden?
+- remove mixed exit calls => exit_minishell vs real exit
 
 # Test Cases
 - export test=abc
@@ -62,6 +42,44 @@
 	- di: init docker container
 	- Reopen in Container 
 	- valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=supp.supp  ./minishell
+- how to use lldb:
+1. Starting and Running a Program
+Command	Description
+lldb ./my_program	Start debugging my_program.
+run (or r)	Start running the program.
+run arg1 arg2	Run with command-line arguments.
+process attach -p <pid>	Attach to a running process.
+2. Breakpoints
+Command	Description
+b main	Set a breakpoint at main.
+b my_function	Break at my_function().
+b my_program.c:10	Break at line 10 in my_program.c.
+br list	List all breakpoints.
+br delete	Delete all breakpoints.
+br delete <id>	Delete a specific breakpoint by ID.
+br disable <id>	Disable a breakpoint without removing it.
+3. Stepping Through Code
+Command	Alias	Description
+next	n	Step over (execute line, but don't enter functions).
+step	s	Step into (go inside function calls).
+finish		Step out (run until function returns).
+continue	c	Resume execution until the next breakpoint.
+4. Inspecting the Program
+Command	Alias	Description
+frame variable	fr v	Show local variables in the current stack frame.
+print var_name	p var_name	Print a variable’s value.
+memory read var_name		Read memory at var_name (useful for pointers).
+bt		Show the backtrace (call stack).
+thread list		List all threads.
+thread backtrace		Show call stacks of all threads.
+5. Modifying Variables
+Command	Description
+expr var_name = 42	Change the value of var_name to 42.
+expr (int) var_name = 10	Explicitly cast var_name to int and set it to 10.
+6. Exiting lldb
+Command	Description
+quit	Exit lldb.
+exit	Alternative way to exit.
 
 # Ressources
 - https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf

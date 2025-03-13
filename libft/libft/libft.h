@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:25:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/02/20 17:32:06 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:30:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void				ft_write_byte(char c);
 void				ft_write_bytes(char *bytes, int size);
 int					ft_putchar(int c);
 char				*ft_get_insertion(int insertion);
-char				*ft_strdupn(char *src, char *next);
+char				*ft_strndup(char *src, char *next);
 
 #endif
