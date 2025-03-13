@@ -18,6 +18,7 @@ vpath %.c src/externals
 vpath %.c src/utils
 vpath %.c src/minishell
 vpath %.c src/redirections
+vpath %.c src/signals
 
 SRC_FILES := is_cmd.c main.c shell.c \
 	create_expression.c expression_has_syntax_error.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
@@ -29,6 +30,7 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	builtin.c execute.c \
 	externals.c \
 	fd.c
+	signals.c \
 
 # Normal .o files
 OBJ_DIR := obj

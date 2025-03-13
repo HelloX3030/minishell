@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 13:46:41 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:09:37 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,17 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	// atexit(check_leaks);
+	setup_interactive();
 	init_minishell(&ms, envp);
 	while (1)
 	{
 		ms.input = readline(PROMPT);
 		if (!ms.input)
-			continue ;
+		{
+			write(STDOUT_FILENO, "exit\n", 5);
+			break ;
+		}
 		handle_input(&ms);
 		add_history(ms.input);
 		free(ms.input);

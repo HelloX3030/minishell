@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:18:43 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 15:00:27 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 10:46:15 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_valid_id(const char *str)
 	return (SUCCESS);
 }
 
-int	mini_unset(char **args, t_env **env)
+int	mini_unset(char **args, t_minishell *ms)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ int	mini_unset(char **args, t_env **env)
 	while (args[i])
 	{
 		if (is_valid_id(args[i]))
-			unset_env_val(env, args[i]);
+			unset_env_val(&ms->env, args[i]);
 		else
 		{
 			ft_putstr_fd("minishell: unset: `", 2);

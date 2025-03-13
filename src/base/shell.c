@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:26:23 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:10:36 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ static int	handle_parent(pid_t pid, char **envp)
 	return (SUCCESS);
 }
 
-int	exec_shell(char **args, t_env *env)
+int	exec_shell(char **args, t_minishell *ms)
 {
 	pid_t	pid;
 	char	**envp;
 
-	envp = env_to_array(env);
+	envp = env_to_array(ms->env);
 	if (!envp)
 	{
 		free_array(envp);

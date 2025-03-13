@@ -6,23 +6,18 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:52:26 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:26:33 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:10:30 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int	execute(char **args, t_env *env)
+void	execute(char **args, t_minishell *ms)
 {
 	//if (ft_strcmp(args[0], "minishell") == 0)
 	//	exec_shell(args, env);
 	if (args && is_builtin(args[0]))
-		dispatch_builtin(args, &env);
+		dispatch_builtin(args, ms);
 	else if (args && args[0])
-		execute_ext(args, env);
-	// for testing exectue expressions
-	if (ft_strcmp(args[0], "ls"))
-		return (EXIT_SUCCESS);
-	else
-		return (EXIT_FAILURE);
+		ms->status = execute_ext(args, ms);
 }

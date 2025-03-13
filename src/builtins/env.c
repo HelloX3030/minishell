@@ -6,20 +6,25 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:54:20 by leokubler         #+#    #+#             */
-/*   Updated: 2025/03/10 15:03:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/11 11:09:36 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	mini_env(t_env *env)
+int	mini_env(t_minishell *ms)
 {
 	t_env	*current;
 
-	current = env;
+	current = ms->env;
 	while (current)
 	{
-		ft_printf("%s=%s\n", current->key, current->value);
+		if (ft_printf("%s=%s\n", current->key, current->value) < 0)
+		{
+			perror("env");
+			return(EXIT_FAILURE);
+		}
 		current = current->next;
 	}
+	return(EXIT_SUCCESS);
 }

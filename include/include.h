@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 13:28:36 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:09:22 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,13 @@
 # include <sys/wait.h>
 # include <termcap.h>
 # include <unistd.h>
+#include <signal.h>
 
 # define PROMPT "myshell> "
 # define SUCCESS 1
 # define FAILURE 0
 
-/*
-	DEFAULT_FILE_PERMISSIONS defines the default permissions for files
-	that are created using the O_CREAT flag in the open() system call.
-	It sets the file to be readable and writable by the owner, and
-	readable by the group and others (rw-r--r--).
- */
-# define DEFAULT_FILE_PERMISSIONS 0644
-
+extern volatile sig_atomic_t g_in_exec;
 typedef enum s_token_type
 {
 	TOKEN_WORD,
@@ -129,6 +123,7 @@ typedef struct s_minishell
 	char				*input;
 	t_token				*token;
 	t_expression		*expr;
+	int					status;
 }						t_minishell;
 
 // tokens
@@ -163,17 +158,16 @@ void					exit_minishell(t_minishell *ms, int status);
 
 // builtins
 int						to_path(int fl, t_env **env);
-int						mini_cd(char **args, t_env **env);
+int						mini_cd(char **args, t_minishell *ms);
 int						count_args(char **args);
 int						mini_echo(char **args);
-void					mini_env(t_env *env);
+int						mini_env(t_minishell *ms);
 int						mini_exit(char **args, t_minishell *ms);
-int						*status(void);
-int						mini_export(char **args, t_env **env);
+int						mini_export(char **args, t_minishell *ms);
 // int						is_valid_identifier(const char *str);
-void					mini_pwd(void);
+int						mini_pwd(void);
 int						is_valid_id(const char *str);
-int						mini_unset(char **args, t_env **env);
+int						mini_unset(char **args, t_minishell *ms);
 
 // envs
 void					free_env(t_env *env);
@@ -187,21 +181,29 @@ char					**env_to_array(t_env *env);
 
 // exec
 int						is_builtin(char *cmd);
-int						dispatch_builtin(char **args, t_env **env);
-int						execute(char **args, t_env *env);
+int						dispatch_builtin(char **args, t_minishell *ms);
+int						execute(char **args, t_minishell *ms);
 bool					is_cmd(char *args, t_env *env);
 
 // externals
 char					*find_cmd_path(const char *cmd, t_env *env);
-int						execute_ext(char **args, t_env *env);
+int						 execute_ext(char **args, t_minishell *ms);
 
 // utils
 char					*path_join(const char *s1, const char *s2);
 char					**list_to_arr(t_list *args);
+void 					free_paths(char **paths);
+void					free_array(char **array);
 
 // shell
 void					handle_lvl(t_env **env);
-int						exec_shell(char **args, t_env *env);
+int							exec_shell(char **args, t_minishell *ms);
+
+//signals
+void	setup_interactive(void);
+void	setup_execution(void);
+void	reset_singals(void);
+
 
 // redirections
 int						make_redir(int target_fd, char *file, int flags);
