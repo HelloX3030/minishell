@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:01:11 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/12 18:31:45 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:00:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ int	remove_quotes(char **str)
 	if (!str || !*str)
 		return (EXIT_SUCCESS);
 	new = malloc(len_without_quotes(*str) + 1);
+	if (!new)
+		return (EXIT_FAILURE);
+	// debug print
+	printf("len without quotes: %d\n", len_without_quotes(*str));
 	new_pos = new;
 	str_pos = *str;
 	while (*str_pos)
