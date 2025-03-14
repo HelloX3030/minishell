@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:26:29 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/14 13:31:12 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:39:39 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*get_var_value(char **str_pos, t_minishell *ms,
 	(void)quote_type;
 	// expand depending on quote type
 	if (**str_pos == '?')
-		return ((*str_pos)++, ft_itoa(ms->exit_status));
+		return ((*str_pos)++, ft_itoa(ms->status));
 	var_end = get_var_end(*str_pos);
 	if (var_end == *str_pos)
 		return (ft_strdup("$"));

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:17 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/14 13:38:43 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:41:32 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	expand_args(t_list *args, t_minishell *ms)
 		// printf("arg after expansion: %s\n", (char *)args->content);
 		if (remove_quotes((char **)&args->content) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		printf("arg after removing quotes: %s\n", (char *)args->content);
+		// printf("arg after removing quotes: %s\n", (char *)args->content);
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);
