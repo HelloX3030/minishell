@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 14:01:06 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:38:31 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,17 @@ typedef enum e_expression_type
 }								t_expression_type;
 
 /*
+	- needed for variable expansion
+*/
+typedef enum e_quote_type
+{
+	QUOTE_NONE,
+	QUOTE_SINGLE,
+	QUOTE_DOUBLE,
+}								t_quote_type;
+void							print_quote_type(t_quote_type type);
+
+/*
 	child: will only be set when type == EXPR_GROUP
 		contains the subexpressions of the group via a linked list
 
@@ -156,7 +167,7 @@ void							print_expression_type(t_expression_type type);
 void							free_expression(t_expression *expr);
 bool							expression_has_syntax_error(t_expression *expr);
 int								expand_expr_vars(t_expression *expr,
-									t_env *env);
+									t_minishell *ms);
 
 // minishell
 void							init_minishell(t_minishell *ms, char **envp);
@@ -187,7 +198,7 @@ void							set_env_val(t_env **env, char *key,
 									char *value);
 void							unset_env_val(t_env **env, const char *key);
 char							**env_to_array(t_env *env);
-int								expand_env(char **str, t_env *env);
+int								expand_env(char **str, t_minishell *ms);
 
 // exec
 int								is_builtin(char *cmd);
@@ -205,6 +216,16 @@ char							**list_to_arr(t_list *args);
 int								remove_quotes(char **str);
 void							free_paths(char **paths);
 void							free_array(char **array);
+
+// expansion utils
+char							*get_var_end(char *str);
+char							*handle_wildcard(char *str_pos, int len,
+									t_minishell *ms, t_quote_type quote_type);
+
+// expansion utils
+char							*get_var_end(char *str);
+char							*handle_wildcard(char *str_pos, int len,
+									t_minishell *ms, t_quote_type quote_type);
 
 // shell
 void							handle_lvl(t_env **env);

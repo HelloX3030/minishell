@@ -29,7 +29,7 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	env_init.c env_utils.c expand_env.c \
 	builtin.c execute.c \
 	externals.c \
-	fd.c remove_qutes.c \
+	expansion_utils.c fd.c handle_wildcard.c print_quote_type.c remove_qutes.c \ \
 	signals.c
 
 # Normal .o files

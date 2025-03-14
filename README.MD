@@ -1,12 +1,12 @@
 # ToDo
 - Handle Expressions (Lukas)
-- expand variables $VAR_NAME -- ich wuerde das in den Parser machen, weil wie wir gerade "" und '' handeln passt noch nicht und wenn wir das richtig machen, kann ich im exec nicht mehr bestimmen ob etwas expanded werden muss oder nicht(Leo)
-- Signals handling => leo
+- expand variables $VAR_NAME (Debug!!!)
 - Wildcards
 - Hanlde $? => Exit Codes -- exit codes erledigt, mini_exit handelt das jetzt, expansion teil fehlt noch (leo: 10.03) => leo 
 - Succes/Failure for execute Function => to handle the expressions
 
 # Problems
+- Remove empty inputs => e. g. ls "$NON_EXISTING_VAR"
 - Refactor External Codes => Norm, Malloc Protection
 - No more Mixed Exit Codes => the default Macros, not some self defined...
 - Start Application without environment variables
@@ -20,16 +20,45 @@
 	- system may reset on login: path, term, logname
 - echo -nnnnnnn => Still Flag, needs to work Example (works as no new line): - echo -nnnnnnnnnn -nn -n -nnnn -nnn -nnnnnnnn -n hi Example when flags turn to normal output - echo -nnnnnn -n -nnnnn -nnnnn-n -n hi => -nnnnn-n -n hi
 - remove mixed exit calls => exit_minishell vs real exit
+- Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
 
 # Test Cases
 - export test=abc
 - export test
 => test darf nicht geleert werden	- bei mir funktioniert dieser test case wie angegeben, gab es bei dir fehler? (leo: 10.03)
-
+- cat
+^\^\^\^\^\
+Quit: 3
+- Environments nach alphabet sortieren
+- export VAR="            111         222        333         "
+echo $VAR "$VAR" '$VAR'
+111 222 333             111         222        333          $VAR
+- ">a"
 - pipe ins nichts
+- cat << EOF
+> sdfsdf
+> sdfsd
+> fsd
+> EOF
+sdfsdf
+sdfsd
+fsd
+=> Der Fall kann relativ einfach in der Main gehandelt werden, noch lange bevor der Tokenizer das Zeug eigentlich bekommt. Genau so auch "   unclosed bracktes ... "
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
+- Wenn Shell gestarted, e. g. "pls report all bugs to... githublink für das Minishell Project
+- Unicode Characters falls command failed/funktioniert.
+	- z. b. Failure
+		❌ ✗ (Unicode: U+2717)
+		⚠️ ⚠ (Unicode: U+26A0)
+		💀 💀 (Unicode: U+1F480)
+		🚫 🚫 (Unicode: U+1F6AB)
+	- Succes
+		✅ ✔ (Unicode: U+2714)
+		🎉 🎉 (Unicode: U+1F389)
+		👍 👍 (Unicode: U+1F44D)
+		🟢 🟢 (Unicode: U+1F7E2)
 
 # Notizen
 
