@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:30:43 by hello_x           #+#    #+#             */
-/*   Updated: 2025/03/11 17:30:41 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/14 12:26:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ char	*ft_strndup(char *src, char *next)
 	}
 	dest[dest_len] = '\0';
 	return (dest);
+}
+
+char	*ft_create_terminated_str(int len)
+{
+	char	*result;
+
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	result[len] = '\0';
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 17:05:27 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/14 12:25:22 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,8 @@ int						remove_quotes(char **str);
 
 // expansion utils
 char					*get_var_end(char *str);
-char					*create_terminated_str(int len);
+char					*handle_wildcard(char *str_pos, int len, t_env *env,
+							t_quote_type quote_type);
 
 // shell
 void					handle_lvl(t_env **env);
