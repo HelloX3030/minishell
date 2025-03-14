@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/14 12:25:22 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:27:16 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void					print_expression(t_expression *expr, int insertion);
 void					print_expression_type(t_expression_type type);
 void					free_expression(t_expression *expr);
 bool					expression_has_syntax_error(t_expression *expr);
-int						expand_expr_vars(t_expression *expr, t_env *env);
+int						expand_expr_vars(t_expression *expr, t_minishell *ms);
 
 // minishell
 void					init_minishell(t_minishell *ms, char **envp);
@@ -196,7 +196,7 @@ char					*get_env_value(t_env *env, const char *key);
 void					set_env_val(t_env **env, char *key, char *value);
 void					unset_env_val(t_env **env, const char *key);
 char					**env_to_array(t_env *env);
-int						expand_env(char **str, t_env *env);
+int						expand_env(char **str, t_minishell *ms);
 
 // exec
 int						is_builtin(char *cmd);
@@ -216,8 +216,8 @@ int						remove_quotes(char **str);
 
 // expansion utils
 char					*get_var_end(char *str);
-char					*handle_wildcard(char *str_pos, int len, t_env *env,
-							t_quote_type quote_type);
+char					*handle_wildcard(char *str_pos, int len,
+							t_minishell *ms, t_quote_type quote_type);
 
 // shell
 void					handle_lvl(t_env **env);
