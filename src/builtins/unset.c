@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:18:43 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:46:15 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:22:04 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	mini_unset(char **args, t_minishell *ms)
 	int	i;
 
 	if (!args[1])
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	i = 1;
 	while (args[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/13 11:10:40 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:53:12 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,7 @@ int execute_ext(char **args, t_minishell *ms)
 		return (handle_cmd_not_found(args[0]));
 	envp = env_to_array(ms->env);
 	if (!envp)
-	{
-		free(cmd_path);
-		return (1);
-	}
+		return (free(cmd_path), 1);
 	g_in_exec = 1;
 	pid = fork();
 	if (pid == -1)
