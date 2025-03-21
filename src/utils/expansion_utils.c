@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:48:49 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 17:05:04 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/21 10:59:10 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,28 @@ char	*create_terminated_str(int len)
 		return (NULL);
 	result[len] = '\0';
 	return (result);
+}
+
+int match_pattern(char *pattern, char *filename)
+{
+	if (*pattern == '\0' && *filename == '\0')
+		return (1);
+
+	if (*pattern == '*')
+	{
+		while (*(pattern + 1) == '*')
+			pattern++;	
+		if (*(pattern + 1) == '\0')
+			return (1);
+		while (*filename != '\0')
+		{
+			if (match_pattern(pattern + 1, filename))
+				return (1);
+			filename++;
+		}
+		return (match_pattern(pattern + 1, filename));
+	}
+	if (*pattern == *filename || (*pattern == '?' && *filename != '\0'))
+		return (match_pattern(pattern + 1, filename + 1));
+	return (0);
 }
