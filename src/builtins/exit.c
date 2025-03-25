@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/25 13:29:05 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:36:30 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	mini_exit(char **args, t_minishell *ms)
 			else
 				calculate_exit(&exit_code, args);
 		}
+		ms->status = exit_code;
 	}
-	ms->status = exit_code;
-	free_minishell(ms);
-	//ms->stop_execution = true;
-	exit(ms->status);
+		free_minishell(ms);
+		//ms->stop_execution = true;
+		exit(ms->status);
 }
