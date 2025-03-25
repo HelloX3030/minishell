@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 13:29:43 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:02:37 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,8 +225,6 @@ char							*handle_wildcard(char *str_pos, int len,
 char							*get_var_end(char *str);
 char							*handle_wildcard(char *str_pos, int len,
 									t_minishell *ms, t_quote_type quote_type);
-int								match_pattern(char *pattern, char *filename);
-int								count_matching_files(char *pattern);
 char							**get_matching_filenames(char *pattern);
 
 

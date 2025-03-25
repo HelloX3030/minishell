@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:48:49 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 14:59:08 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:02:53 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*create_terminated_str(int len)
 	return (result);
 }
 
-int	match_pattern(char *pattern, char *filename)
+static int	match_pattern(char *pattern, char *filename)
 {
 	if (*pattern == '\0' && *filename == '\0')
 		return (1);
@@ -58,7 +58,7 @@ int	match_pattern(char *pattern, char *filename)
 	return (0);
 }
 
-int	count_matching_files(char *pattern)
+static int	count_matching_files(char *pattern)
 {
 	DIR				*dir;
 	struct dirent	*entry;
