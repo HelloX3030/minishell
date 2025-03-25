@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/19 13:07:16 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:06:25 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void	execute_expression(t_minishell *ms, t_expression *expr)
 	if (expand_expr_vars(expr, ms) == EXIT_FAILURE)
 		exit_minishell(ms, EXIT_FAILURE);
 	args = list_to_arr(ms->expr->args);
+	if (!args)
+		mini_exit(args, ms);
+	if (redirect(expr) == EXIT_FAILURE)
+		mini_exit(args, ms);
 	if (expr->type == EXPR_CMD && ft_strcmp((char *)expr->args->content,
 		"exit") == 0)
 		{
@@ -31,6 +35,8 @@ static void	execute_expression(t_minishell *ms, t_expression *expr)
 			//return ;
 		}
 	execute(args, ms);
+	if (reset_redirect(expr) == EXIT_FAILURE)
+		mini_exit(args, ms);
 	ft_free_strs(args);
 }
 
