@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 13:06:25 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:31:06 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	execute_expression(t_minishell *ms, t_expression *expr)
 {
 	char	**args;
 
-	if (expand_expr_vars(expr, ms) == EXIT_FAILURE)
-		exit_minishell(ms, EXIT_FAILURE);
 	args = list_to_arr(ms->expr->args);
-	if (!args)
+	//if (!args)
+	//	mini_exit(args, ms);
+	if (expand_expr_vars(expr, ms) == EXIT_FAILURE)
 		mini_exit(args, ms);
 	if (redirect(expr) == EXIT_FAILURE)
 		mini_exit(args, ms);

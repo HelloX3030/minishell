@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/19 13:44:30 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:29:05 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,25 @@ int	mini_exit(char **args, t_minishell *ms)
 	int	exit_code;
 
 	exit_code = 0;
-	if (args[1] != NULL)
+	if (args)
 	{
-		if (!ft_atoi(args[1]) || ft_strlen(args[1]) == 0)
+		if (args[1] != NULL)
 		{
-			ft_putendl_fd("exit: numeric argument required", 2);
-			ms->status = 255;
-			exit(ms->status);
+			if (!ft_atoi(args[1]) || ft_strlen(args[1]) == 0)
+			{
+				ft_putendl_fd("exit: numeric argument required", 2);
+				ms->status = 255;
+				exit(ms->status);
+			}
+			if (args[2])
+			{
+				ft_putendl_fd("exit: too many arguments", 2);
+				ms->status = 1;
+				return (1);
+			}
+			else
+				calculate_exit(&exit_code, args);
 		}
-		if (args[2])
-		{
-			ft_putendl_fd("exit: too many arguments", 2);
-			ms->status = 1;
-			return (1);
-		}
-		else
-			calculate_exit(&exit_code, args);
 	}
 	ms->status = exit_code;
 	free_minishell(ms);
