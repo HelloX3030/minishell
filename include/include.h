@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 12:56:07 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:29:43 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ int								expand_expr_vars(t_expression *expr,
 void							init_minishell(t_minishell *ms, char **envp);
 void							free_minishell(t_minishell *ms);
 void							execute_minishell(t_minishell *ms);
-void							exit_minishell(t_minishell *ms, int status);
 
 // builtins
 int								to_path(int fl, t_env **env);
