@@ -6,7 +6,6 @@
 - Succes/Failure for execute Function => to handle the expressions
 
 # Problems
-- == "ENTER" beendet auf master die shell ==
 - Remove empty inputs => e. g. ls "$NON_EXISTING_VAR"
 - Refactor External Codes => Norm, Malloc Protection
 - No more Mixed Exit Codes => the default Macros, not some self defined...
