@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:25:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 17:06:28 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:50:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# define INSERTION_SIZE 4
 
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
@@ -99,7 +97,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 void				ft_write_byte(char c);
 void				ft_write_bytes(char *bytes, int size);
 int					ft_putchar(int c);
-char				*ft_get_insertion(int insertion);
+void				ft_printf_insertion(int insertion);
 char				*ft_strndup(char *src, char *next);
 char				*ft_create_terminated_str(int len);
 
