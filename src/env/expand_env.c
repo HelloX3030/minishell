@@ -6,13 +6,15 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:26:29 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/14 13:39:39 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:06:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
 static char	*handle_dollar(char *str_pos, int len, t_minishell *ms,
+				t_quote_type quote_type);
+static char	*handle_wildcard(char *str_pos, int len, t_minishell *ms,
 				t_quote_type quote_type);
 
 static void	handle_quote(char c, t_quote_type *quote_type)
@@ -60,35 +62,6 @@ static char	*handle_normal(char *str_pos, int len, t_minishell *ms,
 	return (result);
 }
 
-static char	*get_var_value(char **str_pos, t_minishell *ms,
-		t_quote_type quote_type)
-{
-	char	*var_end;
-	char	*var_name;
-	char	*var_value;
-
-	(void)quote_type;
-	// expand depending on quote type
-	if (**str_pos == '?')
-		return ((*str_pos)++, ft_itoa(ms->status));
-	var_end = get_var_end(*str_pos);
-	if (var_end == *str_pos)
-		return (ft_strdup("$"));
-	var_name = ft_strndup(*str_pos, var_end);
-	if (!var_name)
-		return (NULL);
-	var_value = get_env_value(ms->env, var_name);
-	if (!var_value)
-	{
-		var_value = ft_strdup("");
-		if (!var_value)
-			return (free(var_name), NULL);
-	}
-	free(var_name);
-	*str_pos = var_end;
-	return (ft_strdup(var_value));
-}
-
 static char	*handle_dollar(char *str_pos, int len, t_minishell *ms,
 		t_quote_type quote_type)
 {
@@ -113,6 +86,22 @@ static char	*handle_dollar(char *str_pos, int len, t_minishell *ms,
 		return (NULL);
 	ft_memcpy(result + len, var_value, var_len);
 	free(var_value);
+	return (result);
+}
+
+char	*handle_wildcard(char *str_pos, int len, t_minishell *ms,
+		t_quote_type quote_type)
+{
+	char	*result;
+
+	(void)ms;
+	(void)quote_type;
+	// placeholder for wildcard handling
+	str_pos++;
+	result = ft_create_terminated_str(len + 1);
+	if (!result)
+		return (NULL);
+	result[len] = '@';
 	return (result);
 }
 
