@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/19 13:48:20 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:22:10 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	mini_export(char **args, t_minishell *ms)
 		if (ft_strchr(args[i], '='))
 		{
 			if (args[i][0] == '=')
-			return (ft_putendl_fd("not a valid identifier", 2), EXIT_FAILURE);
+				return (ft_putendl_fd("not a valid identifier", 2), EXIT_FAILURE);
 			result = export_with_equals(args[i], &ms->env);
 		}
 		else
