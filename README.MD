@@ -1,9 +1,7 @@
 # ToDo
-- Handle Expressions (Lukas)
-- expand variables $VAR_NAME (Debug!!!)
-- Wildcards
-- Hanlde $? => Exit Codes -- exit codes erledigt, mini_exit handelt das jetzt, expansion teil fehlt noch (leo: 10.03) => leo 
-- Succes/Failure for execute Function => to handle the expressions
+- Handle Expressions (Leo)
+- expand variables $VAR_NAME (Lukas)
+- Wildcards (Leo)
 
 # Problems
 - Remove empty inputs => e. g. ls "$NON_EXISTING_VAR"
@@ -107,7 +105,3 @@ exit	Alternative way to exit.
 
 # Ressources
 - https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
-
-Here’s a structured summary of everything we’ve discussed so far:
-
----
