@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:48:49 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 12:56:12 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:59:08 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,13 @@ char	**get_matching_filenames(char *pattern)
 
 	file_count = count_matching_files(pattern);
 	if (file_count <= 0)
-		return (NULL);
+	{
+		filenames = malloc(sizeof(char *));
+		if (!filenames)
+			return (NULL);
+		filenames[0] = NULL;
+		return (filenames);
+	}
 	filenames = malloc((file_count + 1) * sizeof(char *));
 	if (!filenames)
 		return (NULL);
