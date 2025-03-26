@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/26 12:01:53 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:14:50 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,41 @@ static int	execute_expression(t_minishell *ms, t_expression *expr)
 		mini_exit(args, ms);
 	ft_free_strs(args);
 	return(status);
+}
+
+static int	handle_and(t_minishell *ms, t_expression *expr)
+{
+	int	status;
+
+	status = rec_handle_type(ms, expr);
+	if (status == EXIT_SUCCESS)
+		return (rec_handle_type(ms, expr->next));
+	return (status);
+}
+
+static int	handle_or(t_minishell *ms, t_expression *expr)
+{
+	int	status;
+
+	status = rec_handle_type(ms, expr);
+	if (status != EXIT_SUCCESS)
+		return (rec_handle_type(ms, expr->next));
+	return (status);
+}
+
+static int	rec_handle_type(t_minishell *ms, t_expression *expr)
+{
+	if (!expr)
+		return (EXIT_SUCCESS);
+	if(expr->type == EXPR_CMD)
+		return (execute_expression(ms, expr));
+	else if (expr->type == EXPR_PIPE)
+		return (execute_pipe(ms, expr));
+	else if (expr->type == EXPR_AND)
+		return (handle_and(ms, expr));
+	else if (expr->type == EXPR_OR)
+		return (handle_or(expr, ms));
+	return (EXIT_FAILURE);
 }
 
 void	execute_minishell(t_minishell *ms)
