@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execute_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 14:11:29 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:01:53 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static void	execute_expression(t_minishell *ms, t_expression *expr)
+static int	execute_expression(t_minishell *ms, t_expression *expr)
 {
 	char	**args;
+	int		status;
 
 	if (expand_expr_vars(expr, ms) == EXIT_FAILURE)
 		mini_exit(list_to_arr(expr->args), ms);
@@ -27,13 +28,15 @@ static void	execute_expression(t_minishell *ms, t_expression *expr)
 			"exit") == 0)
 		mini_exit(args, ms);
 	execute(args, ms);
+	status = ms->status;
 	if (reset_redirect(expr) == EXIT_FAILURE)
 		mini_exit(args, ms);
 	ft_free_strs(args);
+	return(status);
 }
 
 void	execute_minishell(t_minishell *ms)
 {
 	// placeholder
-	execute_expression(ms, ms->expr);
+	ms->status = execute_expression(ms, ms->expr);
 }
