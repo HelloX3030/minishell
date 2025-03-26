@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/25 13:36:30 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/26 13:22:27 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	calculate_exit(int *exit_code, char *args[])
 int	mini_exit(char **args, t_minishell *ms)
 {
 	int	exit_code;
-
+	
 	exit_code = 0;
 	if (args)
 	{
@@ -46,6 +46,5 @@ int	mini_exit(char **args, t_minishell *ms)
 		ms->status = exit_code;
 	}
 		free_minishell(ms);
-		//ms->stop_execution = true;
 		exit(ms->status);
 }
