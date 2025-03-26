@@ -26,7 +26,7 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	execute_minishell.c free_minishell.c init_minishell.c \
 	create_redir.c free_redir.c make_redir.c print_redir.c redirect.c reset_redirect.c restore_fd.c save_fd.c \
 	cd.c echo.c env.c export.c pwd.c unset.c exit.c \
-	env_init.c env_utils.c expand_env.c \
+	env_init.c env_utils.c expand_env.c pipes.c \
 	builtin.c execute.c \
 	externals.c \
 	expansion_utils.c fd.c handle_wildcard.c print_quote_type.c remove_qutes.c \
