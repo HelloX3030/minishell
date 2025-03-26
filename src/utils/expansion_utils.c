@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:48:49 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 15:02:53 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:46:03 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,43 @@ char	*get_var_end(char *str)
 	return (str);
 }
 
-char	*create_terminated_str(int len)
+static char	*get_var_value(char **str_pos, t_minishell *ms,
+		t_quote_type quote_type)
 {
-	char	*result;
+	char	*var_end;
+	char	*var_name;
+	char	*var_value;
 
-	result = malloc(len + 1);
-	if (!result)
+	(void)quote_type;
+	// expand depending on quote type
+	if (**str_pos == '?')
+		return ((*str_pos)++, ft_itoa(ms->status));
+	var_end = get_var_end(*str_pos);
+	if (var_end == *str_pos)
+		return (ft_strdup("$"));
+	var_name = ft_strndup(*str_pos, var_end);
+	if (!var_name)
 		return (NULL);
-	result[len] = '\0';
-	return (result);
+	var_value = get_env_value(ms->env, var_name);
+	if (!var_value)
+	{
+		var_value = ft_strdup("");
+		if (!var_value)
+			return (free(var_name), NULL);
+	}
+	free(var_name);
+	*str_pos = var_end;
+	return (ft_strdup(var_value));
 }
 
 static int	match_pattern(char *pattern, char *filename)
 {
 	if (*pattern == '\0' && *filename == '\0')
 		return (1);
-
 	if (*pattern == '*')
 	{
 		while (*(pattern + 1) == '*')
-			pattern++;	
+			pattern++;
 		if (*(pattern + 1) == '\0')
 			return (1);
 		while (*filename != '\0')
