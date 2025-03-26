@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char *ft_strjoin(char const *s1, char const *s2)
 {
-	const int	len1 = ft_strlen(s1);
-	const int	len2 = ft_strlen(s2);
-	char		*new_str;
-	int			i;
-	int			j;
+	const int len1 = ft_strlen(s1);
+	const int len2 = ft_strlen(s2);
+	char *new_str;
+	int i;
+	int j;
 
 	if (!s1 && s2)
 		return (ft_strdup(s2));
@@ -37,13 +37,50 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new_str);
 }
 
-// int	main(void)
-// {
-// 	const char	*s1 = "ABC";
-// 	const char	*s2 = "ZZZZ";
-// 	char		*new_str;
+int ft_strjoin_inplace(char **s1, char *s2)
+{
+	char *new_str;
 
-// 	new_str = ft_strjoin(s1, s2);
-// 	printf("%s\n", new_str);
-// 	free(new_str);
-// }
+	new_str = ft_strjoin(*s1, s2);
+	if (!new_str)
+		return (EXIT_FAILURE);
+	free(*s1);
+	*s1 = new_str;
+	return (EXIT_SUCCESS);
+}
+
+void ft_replace_char(char *str, char old, char new)
+{
+	while (*str)
+	{
+		if (*str == old)
+			*str = new;
+		str++;
+	}
+}
+
+char *ft_collapse_whitespace(const char *str)
+{
+	char **split;
+	char *result;
+	int i;
+
+	split = ft_split_charset(str, " \t");
+	if (!split)
+		return (NULL);
+	if (!split[0])
+		return (ft_free_strs(split), ft_strdup(""));
+	result = ft_strdup(split[0]);
+	if (!result)
+		return (ft_free_strs(split), NULL);
+	i = 1;
+	while (split[i])
+	{
+		if (ft_strjoin_inplace(&result, " ") == EXIT_FAILURE)
+			return (ft_free_strs(split), free(result), NULL);
+		if (ft_strjoin_inplace(&result, split[i]) == EXIT_FAILURE)
+			return (ft_free_strs(split), free(result), NULL);
+		i++;
+	}
+	return (ft_free_strs(split), result);
+}

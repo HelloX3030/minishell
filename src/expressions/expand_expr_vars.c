@@ -12,7 +12,7 @@
 
 #include "include.h"
 
-static int	expand_args(t_list *args, t_minishell *ms)
+static int expand_args(t_list *args, t_minishell *ms)
 {
 	while (args)
 	{
@@ -20,7 +20,10 @@ static int	expand_args(t_list *args, t_minishell *ms)
 		printf("arg before expansion: %s\n", (char *)args->content);
 		if (expand_env((char **)&args->content, ms) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		printf("arg after expansion: %s\n", (char *)args->content);
+		printf("arg after expand_env(): %s\n", (char *)args->content);
+		if (expand_wildcards((char **)&args->content) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		printf("arg after expand_wildcards(): %s\n", (char *)args->content);
 		if (remove_quotes((char **)&args->content) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		printf("arg after removing quotes: %s\n", (char *)args->content);
@@ -29,7 +32,7 @@ static int	expand_args(t_list *args, t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-static int	expand_redirs(t_list *redirs, t_minishell *ms)
+static int expand_redirs(t_list *redirs, t_minishell *ms)
 {
 	while (redirs)
 	{
@@ -42,7 +45,7 @@ static int	expand_redirs(t_list *redirs, t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-int	expand_expr_vars(t_expression *expr, t_minishell *ms)
+int expand_expr_vars(t_expression *expr, t_minishell *ms)
 {
 	if (expand_args(expr->args, ms) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

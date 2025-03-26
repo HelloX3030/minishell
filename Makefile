@@ -19,6 +19,7 @@ vpath %.c src/utils
 vpath %.c src/minishell
 vpath %.c src/redirections
 vpath %.c src/signals
+vpath %.c src/expansions
 
 SRC_FILES := is_cmd.c main.c shell.c \
 	create_expression.c expand_expr_vars.c expression_has_syntax_error.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
@@ -26,11 +27,12 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	execute_minishell.c free_minishell.c init_minishell.c \
 	create_redir.c free_redir.c make_redir.c print_redir.c redirect.c reset_redirect.c restore_fd.c save_fd.c \
 	cd.c echo.c env.c export.c pwd.c unset.c exit.c \
-	env_init.c env_utils.c expand_env.c \
+	env_init.c env_utils.c \
 	builtin.c execute.c \
 	externals.c \
-	expansion_utils.c fd.c print_quote_type.c remove_qutes.c \
-	signals.c
+	fd.c print_quote_type.c remove_qutes.c \
+	signals.c \
+	expand_env.c expand_wildcards.c expansion_utils.c
 
 # Normal .o files
 OBJ_DIR := obj

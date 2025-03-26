@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static int	get_c_dif(const char *s, char c)
+static int get_c_dif(const char *s, char c)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s[i] && s[i] != c)
@@ -22,10 +22,10 @@ static int	get_c_dif(const char *s, char c)
 	return (i);
 }
 
-static int	get_str_count(const char *s, char c)
+static int get_str_count(const char *s, char c)
 {
-	int	count;
-	int	dif;
+	int count;
+	int dif;
 
 	count = 0;
 	while (*s != 0)
@@ -42,9 +42,9 @@ static int	get_str_count(const char *s, char c)
 	return (count);
 }
 
-static bool	custom_copy(const char *s, int len, char **strs, int strs_i)
+static bool custom_copy(const char *s, int len, char **strs, int strs_i)
 {
-	int	i;
+	int i;
 
 	strs[strs_i] = malloc(sizeof(char) * (len + 1));
 	if (strs[strs_i] == NULL)
@@ -61,11 +61,11 @@ static bool	custom_copy(const char *s, int len, char **strs, int strs_i)
 	return (true);
 }
 
-char	**ft_split(char const *s, char c)
+char **ft_split(char const *s, char c)
 {
-	char	**strs;
-	int		strs_i;
-	int		dif;
+	char **strs;
+	int strs_i;
+	int dif;
 
 	strs = malloc(sizeof(char *) * (get_str_count(s, c) + 1));
 	if (strs == NULL)
@@ -85,6 +85,27 @@ char	**ft_split(char const *s, char c)
 	}
 	strs[strs_i] = NULL;
 	return (strs);
+}
+
+char **ft_split_charset(const char *str, char *charset)
+{
+	char *tmp;
+	char c;
+	char **split;
+
+	tmp = ft_strdup(str);
+	if (!tmp)
+		return (NULL);
+	c = charset[0];
+	charset++;
+	while (*charset)
+	{
+		ft_replace_char(tmp, *charset, c);
+		charset++;
+	}
+	split = ft_split(tmp, c);
+	free(tmp);
+	return (split);
 }
 
 // int	main(void)
