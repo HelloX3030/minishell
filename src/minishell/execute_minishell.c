@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/26 12:41:18 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:43:47 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ int	rec_handle_type(t_minishell *ms, t_expression *expr)
 void	execute_minishell(t_minishell *ms)
 {
 	// placeholder
-	ms->status = execute_expression(ms, ms->expr);
+	ms->status = rec_handle_type(ms, ms->expr);
 }
