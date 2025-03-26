@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:24:46 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/26 12:47:19 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:54:33 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	setup_child1(int *pipefd, t_minishell * ms, t_expression *expr)
 	close(pipefd[PIPE_READ_END]);
 	dup2(pipefd[PIPE_WRITE_END], STDOUT_FILENO);
 	close(pipefd[PIPE_WRITE_END]);
-	status = rec_handle_type(ms, expr);
+	status = execute_expression(ms, expr);
 	exit(status);
 }
 
@@ -30,7 +30,7 @@ static void	setup_child2(int *pipefd, t_minishell *ms, t_expression *expr)
 	close(pipefd[PIPE_WRITE_END]);
 	dup2(pipefd[PIPE_READ_END], STDIN_FILENO);
 	close(pipefd[PIPE_READ_END]);
-	status = rec_handle_type(ms, expr->next);
+	status = execute_expression(ms, expr->next);
 	exit(status);
 }
 
