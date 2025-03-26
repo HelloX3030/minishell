@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/26 12:43:47 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:50:37 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	handle_and(t_minishell *ms, t_expression *expr)
 {
 	int	status;
 
-	status = rec_handle_type(ms, expr);
+	status = execute_expression(ms, expr);
 	if (status == EXIT_SUCCESS)
 		return (rec_handle_type(ms, expr->next));
 	return (status);
@@ -49,7 +49,7 @@ static int	handle_or(t_minishell *ms, t_expression *expr)
 {
 	int	status;
 
-	status = rec_handle_type(ms, expr);
+	status = execute_expression(ms, expr);
 	if (status != EXIT_SUCCESS)
 		return (rec_handle_type(ms, expr->next));
 	return (status);
