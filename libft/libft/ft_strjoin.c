@@ -6,19 +6,19 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:47:45 by hello_x           #+#    #+#             */
-/*   Updated: 2024/10/28 10:40:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:57:24 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	const int len1 = ft_strlen(s1);
-	const int len2 = ft_strlen(s2);
-	char *new_str;
-	int i;
-	int j;
+	const int	len1 = ft_strlen(s1);
+	const int	len2 = ft_strlen(s2);
+	char		*new_str;
+	int			i;
+	int			j;
 
 	if (!s1 && s2)
 		return (ft_strdup(s2));
@@ -37,9 +37,9 @@ char *ft_strjoin(char const *s1, char const *s2)
 	return (new_str);
 }
 
-int ft_strjoin_inplace(char **s1, char *s2)
+int	ft_strjoin_inplace(char **s1, char *s2)
 {
-	char *new_str;
+	char	*new_str;
 
 	new_str = ft_strjoin(*s1, s2);
 	if (!new_str)
@@ -49,7 +49,7 @@ int ft_strjoin_inplace(char **s1, char *s2)
 	return (EXIT_SUCCESS);
 }
 
-void ft_replace_char(char *str, char old, char new)
+void	ft_replace_char(char *str, char old, char new)
 {
 	while (*str)
 	{
@@ -59,11 +59,11 @@ void ft_replace_char(char *str, char old, char new)
 	}
 }
 
-char *ft_collapse_whitespace(const char *str)
+char	*ft_collapse_whitespace(const char *str)
 {
-	char **split;
-	char *result;
-	int i;
+	char	**split;
+	char	*result;
+	int		i;
 
 	split = ft_split_charset(str, " \t");
 	if (!split)
