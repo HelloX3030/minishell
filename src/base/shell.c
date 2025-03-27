@@ -12,11 +12,11 @@
 
 #include "include.h"
 
-void	handle_lvl(t_env **env)
+void handle_lvl(t_env **env)
 {
-	char	*lvl_str;
-	char	*new_lvl;
-	int		lvl;
+	char *lvl_str;
+	char *new_lvl;
+	int lvl;
 
 	lvl_str = get_env_value(*env, "SHLVL");
 	if (!lvl_str || !*lvl_str)
@@ -40,40 +40,40 @@ void	handle_lvl(t_env **env)
 	}
 }
 
-static void	child_process(char **args, char **envp)
+static void child_process(char **args, char **envp)
 {
 	execve("./minishell", args, envp);
 	perror("minishell");
-	free_array(envp);
+	ft_free_strs(envp);
 	exit(1);
 }
 
-static int	handle_parent(pid_t pid, char **envp)
+static int handle_parent(pid_t pid, char **envp)
 {
-	int	status;
+	int status;
 
 	waitpid(pid, &status, 0);
-	free_array(envp);
+	ft_free_strs(envp);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (SUCCESS);
 }
 
-int	exec_shell(char **args, t_minishell *ms)
+int exec_shell(char **args, t_minishell *ms)
 {
-	pid_t	pid;
-	char	**envp;
+	pid_t pid;
+	char **envp;
 
 	envp = env_to_array(ms->env);
 	if (!envp)
 	{
-		free_array(envp);
+		ft_free_strs(envp);
 		return (FAILURE);
 	}
 	pid = fork();
 	if (pid == -1)
 	{
-		free_array(envp);
+		ft_free_strs(envp);
 		return (FAILURE);
 	}
 	if (pid == 0)

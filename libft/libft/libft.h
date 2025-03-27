@@ -87,6 +87,7 @@ uint32_t ft_atocolor(const char *str);
 unsigned int ft_htoi(char *str);
 bool ft_in_charset(char c, char *set);
 void ft_free_strs(char **strs);
+void ft_free_strs_partial(char **strs, int i);
 void ft_print_strs(char **str, int insertion);
 void ft_free_ints(int **ints, int width);
 int ft_abs(int n);

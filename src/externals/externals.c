@@ -20,19 +20,19 @@ static char *try_path(const char *dir, const char *cmd)
 	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
 		return (NULL);
-	
+
 	full_path = ft_strjoin(tmp, cmd);
 	free(tmp);
-	
+
 	if (!full_path)
 		return (NULL);
-	
+
 	if (access(full_path, X_OK) != 0)
 	{
 		free(full_path);
 		return (NULL);
 	}
-	
+
 	return (full_path);
 }
 
@@ -47,13 +47,12 @@ static char *search_in_paths(char **paths, const char *cmd)
 		result = try_path(paths[i], cmd);
 		if (result)
 		{
-			free_paths(paths);
+			ft_free_strs(paths);
 			return (result);
 		}
 		i++;
 	}
-	
-	free_paths(paths);
+	ft_free_strs(paths);
 	return (NULL);
 }
 
@@ -64,15 +63,15 @@ char *find_cmd_path(const char *cmd, t_env *env)
 
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	
+
 	path_env = get_env_value(env, "PATH");
 	if (!path_env)
 		return (NULL);
-	
+
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return (NULL);
-	
+
 	return (search_in_paths(paths, cmd));
 }
 
@@ -88,45 +87,45 @@ static int handle_fork_error(char *cmd_path, char **envp)
 {
 	perror("fork");
 	free(cmd_path);
-	free_array(envp);
+	ft_free_strs(envp);
 	return (1);
 }
 
 static void child_process(char *cmd_path, char **args, char **envp)
 {
 	execve(cmd_path, args, envp);
-	
+
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(args[0], 2);
 	perror(": ");
-	
+
 	free(cmd_path);
-	free_array(envp);
+	ft_free_strs(envp);
 	exit(126);
 }
 
 static int parent_process(pid_t pid, char *cmd_path, char **envp)
 {
 	int status;
-	
+
 	waitpid(pid, &status, 0);
 	free(cmd_path);
-	free_array(envp);
-	
+	ft_free_strs(envp);
+
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
 		return (128 + WTERMSIG(status));
-	
+
 	return (1);
 }
 
 int execute_ext(char **args, t_minishell *ms)
 {
-	char	*cmd_path;
-	char	**envp;
-	pid_t	pid;
-	int		result;
+	char *cmd_path;
+	char **envp;
+	pid_t pid;
+	int result;
 
 	cmd_path = find_cmd_path(args[0], ms->env);
 	if (!cmd_path)

@@ -12,82 +12,42 @@
 
 #include "include.h"
 
-void	fd_close(int fd)
+static int get_size(t_list *args)
 {
-	if (fd > 0)
-		close (fd);
+	int size;
+
+	size = 0;
+	while (args)
+	{
+		if (args->content && ft_strcmp(args->content, ""))
+			size++;
+		args = args->next;
+	}
+	return (size);
 }
 
-//void	close_fds(t_command *cmd)
-//{
-//	fd_close(cmd->infile);
-//	fd_close(cmd->outfile);
-//	fd_close(cmd->inpipe);
-//	fd_close(cmd->outpipe);
-//}
-
-char	*path_join(const char *s1, const char *s2)
+char **list_to_arr(t_list *args)
 {
-	char	*tmp;
-	char	*path;
+	char **arr;
+	int size;
+	int i;
 
-	tmp = ft_strjoin(s1, "/");
-	path = ft_strjoin(tmp, s2);
-	return (path);
-}
-
-char	**list_to_arr(t_list *args)
-{
-	char	**arr;
-	t_list	*current;
-	int		size;
-	int		i;
-
-	size = ft_lstsize(args);
-	if (size == 0)
-		return (NULL);
+	size = get_size(args);
 	arr = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);
-	current = args;
 	i = 0;
-	while (current)
+	while (args)
 	{
-		arr[i] = ft_strdup((char *)current->content);
-		if (!arr[i])
+		if (args->content && ft_strcmp(args->content, ""))
 		{
-			while (i > 0)
-				free(arr[--i]);
-			free(arr);
-			return (NULL);
+			arr[i] = ft_strdup(args->content);
+			if (!arr[i])
+				return (ft_free_strs_partial(arr, i), NULL);
 		}
-		current = current->next;
+		args = args->next;
 		i++;
 	}
 	arr[size] = NULL;
 	return (arr);
-}
-
-void	free_paths(char **paths)		// needed in is_cmd
-{
-	int	i;
-
-	if (!paths)
-		return ;
-	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
-}
-
-void	free_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
 }

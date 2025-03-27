@@ -30,7 +30,7 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	env_init.c env_utils.c \
 	builtin.c execute.c \
 	externals.c \
-	fd.c print_quote_type.c remove_qutes.c \
+	list_to_arr.c print_quote_type.c remove_qutes.c \
 	signals.c \
 	expand_env.c expand_wildcards.c expansion_utils.c
 

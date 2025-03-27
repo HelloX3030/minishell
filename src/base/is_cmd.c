@@ -12,10 +12,10 @@
 
 #include "include.h"
 
-static int	is_directory(const char *path)
+static int is_directory(const char *path)
 {
-	DIR	*dir_check;
-	int	result;
+	DIR *dir_check;
+	int result;
 
 	dir_check = opendir(path);
 	result = dir_check != NULL;
@@ -24,7 +24,7 @@ static int	is_directory(const char *path)
 	return (result);
 }
 
-static char	*check_direct_path(const char *cmd)
+static char *check_direct_path(const char *cmd)
 {
 	if (!cmd || !cmd[0] || !ft_strchr(cmd, '/'))
 		return (NULL);
@@ -37,10 +37,10 @@ static char	*check_direct_path(const char *cmd)
 	return (ft_strdup(cmd));
 }
 
-static char	*try_path(const char *dir, const char *cmd)
+static char *try_path(const char *dir, const char *cmd)
 {
-	char	*tmp;
-	char	*full_path;
+	char *tmp;
+	char *full_path;
 
 	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
@@ -55,8 +55,7 @@ static char	*try_path(const char *dir, const char *cmd)
 		free(full_path);
 		return (NULL);
 	}
-	if (access(full_path, F_OK) != 0 || is_directory(full_path)
-		|| access(full_path, X_OK) != 0)
+	if (access(full_path, F_OK) != 0 || is_directory(full_path) || access(full_path, X_OK) != 0)
 	{
 		free(full_path);
 		return (NULL);
@@ -64,10 +63,10 @@ static char	*try_path(const char *dir, const char *cmd)
 	return (full_path);
 }
 
-static char	*search_in_path(const char *cmd, char **paths)
+static char *search_in_path(const char *cmd, char **paths)
 {
-	int		i;
-	char	*result;
+	int i;
+	char *result;
 
 	i = 0;
 	while (paths[i])
@@ -75,20 +74,20 @@ static char	*search_in_path(const char *cmd, char **paths)
 		result = try_path(paths[i], cmd);
 		if (result)
 		{
-			free_paths(paths);
+			ft_free_strs(paths);
 			return (result);
 		}
 		i++;
 	}
-	free_paths(paths);
+	ft_free_strs(paths);
 	return (NULL);
 }
 
-static char	*is_external(const char *cmd, t_env *env)
+static char *is_external(const char *cmd, t_env *env)
 {
-	char	*path_env;
-	char	**paths;
-	char	*result;
+	char *path_env;
+	char **paths;
+	char *result;
 
 	result = check_direct_path(cmd);
 	if (result || !cmd || !cmd[0])
@@ -105,10 +104,10 @@ static char	*is_external(const char *cmd, t_env *env)
 	return (search_in_path(cmd, paths));
 }
 
-bool	is_cmd(char *args, t_env *env)
+bool is_cmd(char *args, t_env *env)
 {
-	char	*cmd_path;
-	int		is_built;
+	char *cmd_path;
+	int is_built;
 
 	if (!args || !args[0])
 		return (FAILURE);

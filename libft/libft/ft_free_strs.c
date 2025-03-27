@@ -12,14 +12,21 @@
 
 #include "libft.h"
 
-void	ft_free_strs(char **strs)
+void ft_free_strs(char **strs)
 {
-	int	i;
+	int i;
 
 	if (!strs)
-		return ;
+		return;
 	i = -1;
 	while (strs[++i])
 		free(strs[i]);
+	free(strs);
+}
+
+void ft_free_strs_partial(char **strs, int i)
+{
+	while (i > 0)
+		free(strs[--i]);
 	free(strs);
 }
