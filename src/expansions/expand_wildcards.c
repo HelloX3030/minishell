@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_wildcards.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 15:45:46 by lseeger           #+#    #+#             */
+/*   Updated: 2025/03/27 15:45:47 by lseeger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
-static int match_pattern(char *pattern, char *filename)
+static int	match_pattern(char *pattern, char *filename)
 {
 	if (*pattern == '\0' && *filename == '\0')
 		return (1);
@@ -23,11 +35,11 @@ static int match_pattern(char *pattern, char *filename)
 	return (0);
 }
 
-static int count_matching_files(char *pattern)
+static int	count_matching_files(char *pattern)
 {
-	DIR *dir;
-	struct dirent *entry;
-	int count;
+	DIR				*dir;
+	struct dirent	*entry;
+	int				count;
 
 	count = 0;
 	dir = opendir(".");
@@ -42,13 +54,13 @@ static int count_matching_files(char *pattern)
 	return (count);
 }
 
-char **get_matching_filenames(char *pattern)
+char	**get_matching_filenames(char *pattern)
 {
-	DIR *dir;
-	struct dirent *entry;
-	char **filenames;
-	int i;
-	int file_count;
+	DIR				*dir;
+	struct dirent	*entry;
+	char			**filenames;
+	int				i;
+	int				file_count;
 
 	file_count = count_matching_files(pattern);
 	if (file_count <= 0)
@@ -90,7 +102,7 @@ char **get_matching_filenames(char *pattern)
 	return (filenames);
 }
 
-int expand_wildcards(char **str)
+int	expand_wildcards(char **str)
 {
 	(void)str;
 	return (EXIT_SUCCESS);

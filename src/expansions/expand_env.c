@@ -6,16 +6,16 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:26:29 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 15:06:17 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:50:49 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static char *handle_dollar(char *str_pos, int len, t_minishell *ms,
-						   t_quote_type quote_type);
+static char	*handle_dollar(char *str_pos, int len, t_minishell *ms,
+				t_quote_type quote_type);
 
-static void handle_quote(char c, t_quote_type *quote_type)
+static void	handle_quote(char c, t_quote_type *quote_type)
 {
 	if (c == '\"')
 	{
@@ -33,18 +33,18 @@ static void handle_quote(char c, t_quote_type *quote_type)
 	}
 }
 
-static char *handle_normal(char *str_pos, int len, t_minishell *ms,
-						   t_quote_type quote_type)
+static char	*handle_normal(char *str_pos, int len, t_minishell *ms,
+		t_quote_type quote_type)
 {
-	char *result;
-	int i;
+	char	*result;
+	int		i;
 
 	i = 0;
 	while (str_pos[i])
 	{
 		handle_quote(str_pos[i], &quote_type);
 		if ((str_pos[i] == '$' && quote_type != QUOTE_SINGLE))
-			break;
+			break ;
 		i++;
 	}
 	if (!str_pos[i])
@@ -57,12 +57,12 @@ static char *handle_normal(char *str_pos, int len, t_minishell *ms,
 	return (result);
 }
 
-static char *handle_dollar(char *str_pos, int len, t_minishell *ms,
-						   t_quote_type quote_type)
+static char	*handle_dollar(char *str_pos, int len, t_minishell *ms,
+		t_quote_type quote_type)
 {
-	char *result;
-	char *var_value;
-	int var_len;
+	char	*result;
+	char	*var_value;
+	int		var_len;
 
 	str_pos++;
 	var_value = get_var_value(&str_pos, ms, quote_type);
@@ -82,9 +82,9 @@ static char *handle_dollar(char *str_pos, int len, t_minishell *ms,
 	return (result);
 }
 
-int expand_env(char **str, t_minishell *ms)
+int	expand_env(char **str, t_minishell *ms)
 {
-	char *result;
+	char	*result;
 
 	if (!str || !*str)
 		return (EXIT_SUCCESS);

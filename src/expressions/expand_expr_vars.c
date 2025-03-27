@@ -6,13 +6,13 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:17 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/25 14:37:48 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:44:31 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int expand_args(t_list *args, t_minishell *ms)
+static int	expand_args(t_list *args, t_minishell *ms)
 {
 	while (args)
 	{
@@ -32,7 +32,7 @@ static int expand_args(t_list *args, t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-static int expand_redirs(t_list *redirs, t_minishell *ms)
+static int	expand_redirs(t_list *redirs, t_minishell *ms)
 {
 	while (redirs)
 	{
@@ -45,7 +45,7 @@ static int expand_redirs(t_list *redirs, t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-int expand_expr_vars(t_expression *expr, t_minishell *ms)
+int	expand_expr_vars(t_expression *expr, t_minishell *ms)
 {
 	if (expand_args(expr->args, ms) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
