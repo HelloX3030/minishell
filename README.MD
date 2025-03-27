@@ -8,8 +8,6 @@
 	=> env -i ./minishell
 	=> some environments need default values?
 - Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
-- free_array
-- free_paths
 
 # Maybe
 - Environment variables:
@@ -39,8 +37,7 @@ fsd
 echo $VAR "$VAR" '$VAR'
 111 222 333             111         222        333          $VAR
 - Remove empty inputs => e. g. ls "$NON_EXISTING_VAR"
-- Environments nach alphabet sortieren
-
+(- Environments nach alphabet sortieren) => kp warum es hier steht, aber bash macht es auch nicht... demnach nö
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
