@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:17 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/27 15:44:31 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/28 13:31:16 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static int	expand_args(t_list *args, t_minishell *ms)
 	while (args)
 	{
 		// debug print
-		printf("arg before expansion: %s\n", (char *)args->content);
+		// printf("arg before expansion: %s\n", (char *)args->content);
 		if (expand_env((char **)&args->content, ms) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		printf("arg after expand_env(): %s\n", (char *)args->content);
+		// printf("arg after expand_env(): %s\n", (char *)args->content);
 		if (expand_wildcards((char **)&args->content) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		printf("arg after expand_wildcards(): %s\n", (char *)args->content);
+		// printf("arg after expand_wildcards(): %s\n", (char *)args->content);
 		if (remove_quotes((char **)&args->content) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		printf("arg after removing quotes: %s\n", (char *)args->content);
+		// printf("arg after removing quotes: %s\n", (char *)args->content);
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);
