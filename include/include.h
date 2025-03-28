@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 14:22:14 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/28 15:08:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ char							*get_var_end(char *str);
 char							*get_var_value(char **str_pos, t_minishell *ms,
 									t_quote_type quote_type);
 int								expand_env(char **str, t_minishell *ms);
+t_list							*get_matching_filenames(const char *pattern);
 int								expand_wildcards(char **str);
 
 // shell

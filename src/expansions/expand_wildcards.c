@@ -6,96 +6,71 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:45:46 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 14:26:25 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/28 16:30:07 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int	match_pattern(const char *pattern, const char *filename)
+static t_list	*insert_wildcard_expansion(t_list *args, t_list *filenames)
 {
-	if (*pattern == '\0' && *filename == '\0')
-		return (1);
-	if (*pattern == '*')
-	{
-		while (*(pattern + 1) == '*')
-			pattern++;
-		if (*(pattern + 1) == '\0')
-			return (1);
-		while (*filename != '\0')
-		{
-			if (match_pattern(pattern + 1, filename))
-				return (1);
-			filename++;
-		}
-		return (match_pattern(pattern + 1, filename));
-	}
-	if (*pattern == *filename || (*pattern == '?' && *filename != '\0'))
-		return (match_pattern(pattern + 1, filename + 1));
-	return (0);
-}
-
-static int	add_filename(t_list *filenames, const char *pattern,
-		const char *filename)
-{
-	char	*tmp;
-	t_list	*new;
+	t_list	*next;
 	t_list	*last;
 
-	if (!match_pattern(pattern, filename))
-		return (EXIT_SUCCESS);
+	if (!args || !filenames)
+		return (args);
+	next = args->next;
+	args->next = filenames;
+	ft_lstdellast(&filenames, free);
 	last = ft_lstlast(filenames);
-	if (!last)
-		return (EXIT_FAILURE);
-	tmp = ft_strdup(filename);
-	if (!tmp)
-		return (EXIT_FAILURE);
-	last->content = tmp;
-	new = ft_lstnew(NULL);
-	if (!new)
-		return (free(tmp), EXIT_FAILURE);
-	ft_lstadd_back(&filenames, new);
-	return (EXIT_SUCCESS);
+	if (last)
+		last->next = next;
+	return (next);
 }
 
-static t_list	*get_matching_filenames(const char *pattern)
-{
-	DIR				*dir;
-	struct dirent	*entry;
-	t_list			*filenames;
-
-	filenames = ft_lstnew(NULL);
-	if (!filenames)
-		return (NULL);
-	dir = opendir(".");
-	if (!dir)
-		return (ft_lstclear(&filenames, free), NULL);
-	entry = readdir(dir);
-	while (entry)
-	{
-		if (add_filename(filenames, pattern, entry->d_name) == EXIT_FAILURE)
-			return (ft_lstclear(&filenames, free), closedir(dir), NULL);
-		entry = readdir(dir);
-	}
-	closedir(dir);
-	return (filenames);
-}
-
-int	expand_wildcards(char **str)
+int	expand_wildcards(t_list *args)
 {
 	t_list	*filenames;
 	t_list	*tmp;
 
-	(void)str;
-	filenames = get_matching_filenames("test*");
-	printf("filenames: %p\n", filenames);
-	if (!filenames)
-		return (EXIT_FAILURE);
-	tmp = filenames;
-	while (tmp && tmp->content)
+	while (args)
 	{
-		printf("filename: %s\n", (char *)tmp->content);
-		tmp = tmp->next;
+		filenames = get_matching_filenames(args->content);
+		if (!filenames)
+			return (EXIT_FAILURE);
+		if (!filenames->content)
+		{
+			ft_lstclear(&filenames, free);
+			args = args->next;
+			continue ;
+		}
+		free(args->content);
+		args->content = filenames->content;
+		tmp = filenames->next;
+		free(filenames);
+		filenames = tmp;
+		args = insert_wildcard_expansion(args, filenames);
 	}
 	return (EXIT_SUCCESS);
 }
+
+// Test Code
+// int	expand_wildcards(char **str)
+// {
+// 	t_list	*filenames;
+// 	t_list	*tmp;
+
+// 	(void)str;
+// 	filenames = get_matching_filenames("\"te\"st*");
+// 	printf("filenames: %p\n", filenames);
+// 	if (!filenames)
+// 		return (EXIT_FAILURE);
+// 	tmp = filenames;
+// 	while (tmp && tmp->content)
+// 	{
+// 		printf("filename: %s\n", (char *)tmp->content);
+// 		tmp = tmp->next;
+// 	}
+// 	ft_lstclear(&filenames, free);
+// 	return (EXIT_SUCCESS);
+// }
