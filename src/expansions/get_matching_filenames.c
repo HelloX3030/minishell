@@ -6,33 +6,52 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:06:52 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 16:31:05 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/28 17:28:18 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int	match_pattern(const char *str, const char *filename, char quotes)
+static int	match_pattern(const char *pattern, const char *filename,
+				char quotes);
+
+static int	handle_star(const char *pattern, const char *filename, char quotes)
 {
-	if (*str == '\0' && *filename == '\0')
+	while (*pattern == '*')
+		pattern++;
+	if (*pattern == '\0')
 		return (1);
-	if (*pattern == '*')
+	while (*filename != '\0')
 	{
-		while (*(pattern + 1) == '*')
-			pattern++;
-		if (*(pattern + 1) == '\0')
+		if (match_pattern(pattern + 1, filename, quotes))
 			return (1);
-		while (*filename != '\0')
-		{
-			if (match_pattern(pattern + 1, filename))
-				return (1);
-			filename++;
-		}
-		return (match_pattern(pattern + 1, filename));
+		filename++;
 	}
-	if (*pattern == *filename || (*pattern == '?' && *filename != '\0'))
-		return (match_pattern(pattern + 1, filename + 1));
-	return (0);
+	return (match_pattern(str + 1, filename, quotes));
+}
+
+static int	match_pattern(const char *pattern, const char *filename,
+		char quotes)
+{
+	while (*pattern && *filename)
+	{
+		if (*pattern == '*' && quotes == 0)
+			return (handle_star(pattern, filename, quotes));
+		else if (*pattern == '\"' && quotes == 0)
+			quotes = '\"';
+		else if (*pattern == '\"' && quotes == '\"')
+			quotes = 0;
+		else if (*pattern == '\'' && quotes == 0)
+			quotes = '\'';
+		else if (*pattern == '\'' && quotes == '\'')
+			quotes = 0;
+		else if (*pattern != *filename)
+			return (0);
+		else
+			filename++;
+		pattern++;
+	}
+	return (*pattern == *filename);
 }
 
 static int	add_filename(t_list *filenames, const char *pattern,
