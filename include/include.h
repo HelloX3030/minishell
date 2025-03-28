@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 13:15:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/28 14:22:14 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ int								mini_echo(char **args);
 int								mini_env(t_minishell *ms);
 int								mini_exit(char **args, t_minishell *ms);
 int								mini_export(char **args, t_minishell *ms);
-// int						is_valid_identifier(const char *str);
 int								mini_pwd(void);
 int								is_valid_id(const char *str);
 int								mini_unset(char **args, t_minishell *ms);
