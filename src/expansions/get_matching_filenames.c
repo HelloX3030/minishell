@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:06:52 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 17:28:18 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/28 17:29:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	handle_star(const char *pattern, const char *filename, char quotes)
 			return (1);
 		filename++;
 	}
-	return (match_pattern(str + 1, filename, quotes));
+	return (0);
 }
 
 static int	match_pattern(const char *pattern, const char *filename,
