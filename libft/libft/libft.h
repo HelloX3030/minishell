@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:25:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 16:17:50 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/31 16:39:15 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
-void				ft_lstdellast(t_list **lst, void (*del)(void *));
 t_list				*ft_lstlast(t_list *lst);
+t_list				*ft_lstprevious(t_list *lst, t_list *target);
 t_list				*ft_lstnew(void *content);
 
 // ft_printf

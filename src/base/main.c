@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 13:56:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/03/31 14:11:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ int	main(int argc, char **argv, char **envp)
 		free(ms.input);
 		ms.input = NULL;
 	}
-	return (free_minishell(&ms), EXIT_SUCCESS);
+	return (free_minishell(&ms), EXIT_FAILURE);
 }

@@ -10,6 +10,8 @@
 - Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
 - double free falls zwei mal selbe Variable exportiert
 	=> liegt vermutlich an set_env_val() => freed einen übergebenen ptr. das ist ein Seiteneffekt der einfach nur bugs rein bringt... außerdem gibt es noch im selben Code in der function export_without_equals() einen call mit set_env_val(env, arg, ""); => ein str literal, das nicht gemalloct wurde...
+- remove quotes leaves space after some things... e. g. "abc" => cat -e
+- Klammern testing
 
 # Maybe
 - Environment variables:
