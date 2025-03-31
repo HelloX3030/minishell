@@ -7,6 +7,9 @@
 - Remove empty inputs => e. g. ls "$NON_EXISTING_VAR"
 - issues with set_env_val free location ?
 - No more Mixed Exit Codes => the default Macros, not some self defined...
+- echo "Hello, World!" | cat
+	Hello, World! $
+	woher kommt das space?
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
