@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/25 11:22:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/31 13:31:06 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int	export_with_equals(char *arg, t_env **env)
 		return(EXIT_FAILURE);
 	set_env_val(env, key, value);
 	free(key);
-	free(value);
 	return (EXIT_SUCCESS);
 }
 
@@ -67,7 +66,7 @@ static int	export_without_equals(char *arg, t_env **env)
 		i ++;
 	}
 	if (!value)
-		set_env_val(env, arg, "");
+		set_env_val(env, arg, ft_strdup(""));
 	return (EXIT_SUCCESS);
 }
 
