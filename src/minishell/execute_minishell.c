@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/26 12:53:44 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/31 11:58:18 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	rec_handle_type(t_minishell *ms, t_expression *expr)
 		return (handle_and(ms, expr));
 	else if (expr->type == EXPR_OR)
 		return (handle_or(ms, expr));
-	return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 void	execute_minishell(t_minishell *ms)

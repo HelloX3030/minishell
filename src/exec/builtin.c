@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:46:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/03/31 11:48:22 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	is_builtin(char *cmd)
 {
 	if (ft_strcmp(cmd, "exit") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "echo") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "cd") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "pwd") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "env") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "export") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "unset") == 0)
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "minishell") == 0)
-		return (SUCCESS);
-	return (FAILURE);
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	dispatch_builtin(char **args, t_minishell *ms)
