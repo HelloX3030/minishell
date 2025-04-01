@@ -6,12 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/26 13:22:27 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:20:42 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
 
 static void	calculate_exit(int *exit_code, char *args[])
 {
@@ -22,7 +21,7 @@ static void	calculate_exit(int *exit_code, char *args[])
 int	mini_exit(char **args, t_minishell *ms)
 {
 	int	exit_code;
-	
+
 	exit_code = 0;
 	if (args)
 	{
@@ -37,14 +36,13 @@ int	mini_exit(char **args, t_minishell *ms)
 			if (args[2])
 			{
 				ft_putendl_fd("exit: too many arguments", 2);
-				ms->status = 1;
-				return (1);
+				return (ms->status = 1, 1);
 			}
 			else
 				calculate_exit(&exit_code, args);
 		}
 		ms->status = exit_code;
 	}
-		free_minishell(ms);
-		exit(ms->status);
+	free_minishell(ms);
+	exit(ms->status);
 }
