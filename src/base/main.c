@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 15:19:07 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:21:34 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ int	main(int argc, char **argv, char **envp)
 		free(ms.input);
 		ms.input = NULL;
 	}
-	return (free_minishell(&ms), EXIT_SUCCESS);
+	return (free_minishell(&ms), EXIT_FAILURE);
 }

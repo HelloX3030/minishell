@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 15:28:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:21:24 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ int								mini_echo(char **args);
 int								mini_env(t_minishell *ms);
 int								mini_exit(char **args, t_minishell *ms);
 int								mini_export(char **args, t_minishell *ms);
-// int						is_valid_identifier(const char *str);
 int								mini_pwd(void);
 int								is_valid_id(const char *str);
 int								mini_unset(char **args, t_minishell *ms);
@@ -225,7 +224,8 @@ char							*get_var_end(char *str);
 char							*get_var_value(char **str_pos, t_minishell *ms,
 									t_quote_type quote_type);
 int								expand_env(char **str, t_minishell *ms);
-int								expand_wildcards(char **str);
+t_list							*get_matching_filenames(const char *pattern);
+int								expand_wildcards(t_list *lst);
 
 // shell
 void							handle_lvl(t_env **env);

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:16:28 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:34:43 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:23:03 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-volatile	sig_atomic_t g_in_exec = 0;
+volatile	sig_atomic_t	g_in_exec = 0;
 
 static void	sigint_handler(int sig)
 {
-	(void) sig;
+	(void)sig;
 	if (g_in_exec)
-		write(STDOUT_FILENO, "\n", 1);	// aesthetic, might remove
+		write(STDOUT_FILENO, "\n", 1); // aesthetic, might remove
 	if (!g_in_exec)
 	{
 		write(STDOUT_FILENO, "\n", 1);

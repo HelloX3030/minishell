@@ -3,107 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcards.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 16:48:49 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 15:29:05 by lkubler          ###   ########.fr       */
+/*   Created: 2025/03/27 15:45:46 by lseeger           #+#    #+#             */
+/*   Updated: 2025/04/01 16:21:43 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int	match_pattern(char *pattern, char *filename)
+static t_list	*add_files(t_list *lst, t_list *filenames)
 {
-	if (*pattern == '\0' && *filename == '\0')
-		return (1);
-	if (*pattern == '*')
+	t_list	*next;
+	t_list	*last;
+
+	next = lst->next;
+	free(lst->content);
+	lst->content = filenames->content;
+	lst->next = filenames->next;
+	free(filenames);
+	last = ft_lstlast(lst);
+	if (!last->content)
 	{
-		while (*(pattern + 1) == '*')
-			pattern++;
-		if (*(pattern + 1) == '\0')
-			return (1);
-		while (*filename != '\0')
+		if (next)
 		{
-			if (match_pattern(pattern + 1, filename))
-				return (1);
-			filename++;
+			last->content = next->content;
+			last->next = next->next;
+			return (free(next), last);
 		}
-		return (match_pattern(pattern + 1, filename));
+		else
+		{
+			next = ft_lstprevious(lst, last);
+			return (free(last), next->next = NULL, NULL);
+		}
 	}
-	if (*pattern == *filename || (*pattern == '?' && *filename != '\0'))
-		return (match_pattern(pattern + 1, filename + 1));
-	return (0);
+	else
+		return (last->next = next, next);
 }
 
-static int	count_matching_files(char *pattern)
+int	expand_wildcards(t_list *lst)
 {
-	DIR				*dir;
-	struct dirent	*entry;
-	int				count;
+	t_list	*filenames;
+	t_list	*lst_start;
 
-	count = 0;
-	dir = opendir(".");
-	if (!dir)
-		return (-1);
-	while ((entry = readdir(dir)))
+	lst_start = lst;
+	while (lst)
 	{
-		if (match_pattern(pattern, entry->d_name))
-			count++;
-	}
-	closedir(dir);
-	return (count);
-}
-
-char	**get_matching_filenames(char *pattern)
-{
-	DIR				*dir;
-	struct dirent	*entry;
-	char			**filenames;
-	int				i;
-	int				file_count;
-
-	file_count = count_matching_files(pattern);
-	if (file_count <= 0)
-	{
-		filenames = malloc(sizeof(char *));
+		filenames = get_matching_filenames(lst->content);
 		if (!filenames)
-			return (NULL);
-		filenames[0] = NULL;
-		return (filenames);
-	}
-	filenames = malloc((file_count + 1) * sizeof(char *));
-	if (!filenames)
-		return (NULL);
-	dir = opendir(".");
-	if (!dir)
-	{
-		free(filenames);
-		return (NULL);
-	}
-	i = 0;
-	while ((entry = readdir(dir)))
-	{
-		if (match_pattern(pattern, entry->d_name))
+			return (EXIT_FAILURE);
+		if (ft_lstsize(filenames) <= 1)
 		{
-			filenames[i] = ft_strdup(entry->d_name);
-			if (!filenames[i])
-			{
-				while (--i >= 0)
-					free(filenames[i]);
-				free(filenames);
-				closedir(dir);
-				return (NULL);
-			}
-			i++;
+			ft_lstclear(&filenames, free);
+			lst = lst->next;
 		}
+		else
+			lst = add_files(lst, filenames);
 	}
-	filenames[i] = NULL;
-	closedir(dir);
-	return (filenames);
-}
-
-int	expand_wildcards(char **str)
-{
-	(void)str;
 	return (EXIT_SUCCESS);
 }

@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:35:11 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:23:18 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	fd_close(int fd)
+static int	get_size(t_list *args)
 {
-	if (fd > 0)
-		close (fd);
-}
+	int	size;
 
-char	*path_join(const char *s1, const char *s2)
-{
-	char	*tmp;
-	char	*path;
-
-	tmp = ft_strjoin(s1, "/");
-	path = ft_strjoin(tmp, s2);
-	return (path);
+	size = 0;
+	while (args)
+	{
+		if (args->content && ft_strcmp(args->content, ""))
+			size++;
+		args = args->next;
+	}
+	return (size);
 }
 
 char	**list_to_arr(t_list *args)
 {
 	char	**arr;
-	t_list	*current;
 	int		size;
 	int		i;
 
@@ -45,16 +42,14 @@ char	**list_to_arr(t_list *args)
 	i = 0;
 	while (current)
 	{
-		arr[i] = ft_strdup((char *)current->content);
-		if (!arr[i])
+		if (args->content && ft_strcmp(args->content, ""))
 		{
-			while (i > 0)
-				free(arr[--i]);
-			free(arr);
-			return (NULL);
+			arr[i] = ft_strdup(args->content);
+			if (!arr[i])
+				return (ft_free_strs_partial(arr, i), NULL);
+			i++;
 		}
-		current = current->next;
-		i++;
+		args = args->next;
 	}
 	arr[size] = NULL;
 	return (arr);
