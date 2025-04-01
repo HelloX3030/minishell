@@ -28,7 +28,7 @@ SRC_FILES := is_cmd.c main.c shell.c \
 	cd.c echo.c env.c export.c pwd.c unset.c exit.c \
 	env_init.c env_utils.c env_utils2.c expand_env.c pipes.c builtin_utils.c \
 	builtin.c execute.c \
-	externals.c \
+	externals.c externals2.c \
 	expansion_utils.c fd.c handle_wildcard.c print_quote_type.c remove_qutes.c \
 	signals.c
 
