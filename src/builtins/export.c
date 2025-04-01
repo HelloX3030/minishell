@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/28 13:16:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:28:45 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	export_with_equals(char *arg, t_env **env)
 	while (arg[i] && arg[i] != '=')
 	{
 		if (!ft_isalnum(arg[i++]))
-			return (ft_putendl_fd("not a valid identifier", 2), EXIT_FAILURE);
+			return (ft_putendl_fd("not a valid identifier", 2),
+				EXIT_FAILURE);
 	}
 	equals = ft_strchr(arg, '=');
 	key_len = equals - arg;
@@ -49,7 +50,6 @@ static int	export_with_equals(char *arg, t_env **env)
 		return (EXIT_FAILURE);
 	set_env_val(env, key, value);
 	free(key);
-	free(value);
 	return (EXIT_SUCCESS);
 }
 
@@ -63,11 +63,12 @@ static int	export_without_equals(char *arg, t_env **env)
 	while (arg[i])
 	{
 		if (!ft_isalpha(arg[i]))
-			return (ft_putendl_fd("not a valid identifier", 2), EXIT_FAILURE);
-		i++;
+			return (ft_putendl_fd("not a valid identifier", 2),
+				EXIT_FAILURE);
+		i ++;
 	}
 	if (!value)
-		set_env_val(env, arg, "");
+		set_env_val(env, arg, ft_strdup(""));
 	return (EXIT_SUCCESS);
 }
 

@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:32 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/28 13:19:55 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:28:55 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-void	free_env(t_env *env)
-{
-	t_env	*current;
-	t_env	*next;
-
-	current = env;
-	while (current)
-	{
-		next = current->next;
-		if (current->key)
-			free(current->key);
-		if (current->value)
-			free(current->value);
-		free(current);
-		current = next;
-	}
-}
 
 char	*get_env_value(t_env *env, const char *key)
 {
@@ -39,56 +21,6 @@ char	*get_env_value(t_env *env, const char *key)
 		env = env->next;
 	}
 	return (NULL);
-}
-
-void	set_env_val(t_env **env, char *key, char *value)
-{
-	t_env	*cur;
-	t_env	*new_node;
-
-	if (!env || !key)
-		return ;
-	cur = *env;
-	while (cur)
-	{
-		if (ft_strcmp(cur->key, key) == 0)
-		{
-			free(cur->value);
-			cur->value = ft_strdup(value);
-			free(value);
-			return ;
-		}
-		cur = cur->next;
-	}
-	new_node = create_env_node(key, value);
-	if (!new_node)
-		return ;
-	add_env_node(env, new_node);
-}
-
-void	unset_env_val(t_env **env, const char *key)
-{
-	t_env	*cur;
-	t_env	*prev;
-
-	cur = *env;
-	prev = NULL;
-	while (cur)
-	{
-		if (ft_strcmp(cur->key, key) == 0)
-		{
-			if (prev)
-				prev->next = cur->next;
-			else
-				*env = cur->next;
-			free(cur->key);
-			free(cur->value);
-			free(cur);
-			return ;
-		}
-		prev = cur;
-		cur = cur->next;
-	}
 }
 
 static int	count_env_vars(t_env *env)

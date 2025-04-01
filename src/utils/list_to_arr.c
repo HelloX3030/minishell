@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd.c                                               :+:      :+:    :+:   */
+/*   list_to_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 15:08:45 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:30:57 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int get_size(t_list *args)
+void	fd_close(int fd)
 {
-	int size;
+	if (fd > 0)
+		close (fd);
+}
 
-	size = 0;
-	while (args)
-	{
-		if (args->content && ft_strcmp(args->content, ""))
-			size++;
-		args = args->next;
-	}
-	return (size);
+char	*path_join(const char *s1, const char *s2)
+{
+	char	*tmp;
+	char	*path;
+
+	tmp = ft_strjoin(s1, "/");
+	path = ft_strjoin(tmp, s2);
+	return (path);
 }
 
 char **list_to_arr(t_list *args)
@@ -50,4 +52,28 @@ char **list_to_arr(t_list *args)
 	}
 	arr[size] = NULL;
 	return (arr);
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
+
+int	is_directory(const char *path)
+{
+	DIR	*dir_check;
+	int	result;
+
+	dir_check = opendir(path);
+	result = dir_check != NULL;
+	if (dir_check)
+		closedir(dir_check);
+	return (result);
 }

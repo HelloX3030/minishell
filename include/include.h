@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 13:15:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:28:06 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,9 @@ int								expand_expr_vars(t_expression *expr,
 void							init_minishell(t_minishell *ms, char **envp);
 void							free_minishell(t_minishell *ms);
 void							execute_minishell(t_minishell *ms);
+int								execute_expression(t_minishell *ms, t_expression *expr);
+int								rec_handle_type(t_minishell *ms, t_expression *expr);
+
 
 // builtins
 int								to_path(int fl, t_env **env);
@@ -208,9 +211,14 @@ bool							is_cmd(char *args, t_env *env);
 char							*find_cmd_path(const char *cmd, t_env *env);
 int								execute_ext(char **args, t_minishell *ms);
 
+//builtin_utils
+void							cd_error(char *args);
+
 // utils
 char							**list_to_arr(t_list *args);
 int								remove_quotes(char **str);
+void							free_array(char **array);
+int								is_directory(const char *path);
 
 // expansion
 char							*get_var_end(char *str);
@@ -222,6 +230,7 @@ int								expand_wildcards(char **str);
 // shell
 void							handle_lvl(t_env **env);
 int								exec_shell(char **args, t_minishell *ms);
+char							*balance_input(void);
 
 // signals
 void							setup_interactive(void);
@@ -235,5 +244,8 @@ int								save_fd(int *saved_fd, int fd);
 int								restore_fd(int *saved_fd, int fd);
 int								redirect(t_expression *expr);
 int								reset_redirect(t_expression *expr);
+
+//pipes
+int	execute_pipe(t_minishell *ms, t_expression *expr);
 
 #endif
