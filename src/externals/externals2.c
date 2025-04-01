@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externals2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:30:51 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:32:19 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:34:45 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static char	*search_in_paths(char **paths, const char *cmd)
 		result = try_path(paths[i], cmd);
 		if (result)
 		{
-			free_array(paths);
+			ft_free_strs(paths);
 			return (result);
 		}
 		i++;
 	}
-	free_array(paths);
+	ft_free_strs(paths);
 	return (NULL);
 }
 

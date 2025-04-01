@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:28:26 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:33:34 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static char *search_in_path(const char *cmd, char **paths)
 		result = try_path(paths[i], cmd);
 		if (result)
 		{
-			free_array(paths);
+			ft_free_strs(paths);
 			return (result);
 		}
 		i++;
 	}
-	free_array(paths);
+	ft_free_strs(paths);
 	return (NULL);
 }
 

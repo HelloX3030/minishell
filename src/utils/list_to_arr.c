@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 16:23:18 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:38:57 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,12 @@ char	**list_to_arr(t_list *args)
 	int		size;
 	int		i;
 
-	size = ft_lstsize(args);
-	if (size == 0)
-		return (NULL);
+	size = get_size(args);
 	arr = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);
-	current = args;
 	i = 0;
-	while (current)
+	while (args)
 	{
 		if (args->content && ft_strcmp(args->content, ""))
 		{
@@ -53,18 +50,6 @@ char	**list_to_arr(t_list *args)
 	}
 	arr[size] = NULL;
 	return (arr);
-}
-
-void	free_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
 }
 
 int	is_directory(const char *path)

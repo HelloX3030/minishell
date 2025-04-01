@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:30:22 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:34:02 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	parent_process(pid_t pid, char *cmd_path, char **envp)
 
 	waitpid(pid, &status, 0);
 	free(cmd_path);
-	free_array(envp);
+	ft_free_strs(envp);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
