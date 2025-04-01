@@ -6,14 +6,14 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:06:52 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 14:03:26 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:15:30 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int	match_pattern(const char *pattern, const char *filename,
-				char quotes);
+static int			match_pattern(const char *pattern, const char *filename,
+						char quotes);
 
 static int	handle_star(const char *pattern, const char *filename, char quotes)
 {
@@ -27,7 +27,31 @@ static int	handle_star(const char *pattern, const char *filename, char quotes)
 			return (1);
 		filename++;
 	}
-	return (match_pattern(pattern, filename, quotes));
+	return (0);
+}
+
+static const char	*skip_end(const char *pattern, char quotes)
+{
+	while (*pattern)
+	{
+		if (*pattern == '\"' && quotes == 0)
+			quotes = '\"';
+		else if (*pattern == '\"' && quotes == '\"')
+			quotes = 0;
+		else if (*pattern == '\'' && quotes == 0)
+			quotes = '\'';
+		else if (*pattern == '\'' && quotes == '\'')
+			quotes = 0;
+		else if (*pattern == '*' && quotes == 0)
+		{
+			pattern++;
+			continue ;
+		}
+		else
+			break ;
+		pattern++;
+	}
+	return (pattern);
 }
 
 static int	match_pattern(const char *pattern, const char *filename,
@@ -51,6 +75,7 @@ static int	match_pattern(const char *pattern, const char *filename,
 			filename++;
 		pattern++;
 	}
+	pattern = skip_end(pattern, quotes);
 	if (*pattern == '\0' && *filename == '\0')
 		return (1);
 	else

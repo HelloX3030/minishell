@@ -6,20 +6,11 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:17 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/31 15:42:48 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:17:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-static void	print_list(t_list *lst)
-{
-	while (lst)
-	{
-		printf("     arg: %s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-}
 
 static int	expand_args(t_list *args, t_minishell *ms)
 {
@@ -34,9 +25,6 @@ static int	expand_args(t_list *args, t_minishell *ms)
 	}
 	if (expand_wildcards(args_start) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	// debug print
-	printf("after expand_wildcards\n");
-	print_list(args_start);
 	args = args_start;
 	while (args)
 	{
