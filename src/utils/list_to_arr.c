@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:30:57 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:31:48 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char	*path_join(const char *s1, const char *s2)
 
 char **list_to_arr(t_list *args)
 {
-	char **arr;
-	int size;
-	int i;
+	char	**arr;
+	int		size;
+	int		i;
 
 	size = get_size(args);
 	arr = (char **)malloc(sizeof(char *) * (size + 1));
