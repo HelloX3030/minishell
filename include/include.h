@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 14:06:35 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:17:33 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,9 @@ bool							is_cmd(char *args, t_env *env);
 // externals
 char							*find_cmd_path(const char *cmd, t_env *env);
 int								execute_ext(char **args, t_minishell *ms);
+
+//builtin_utils
+void							cd_error(char *args);
 
 // utils
 char							*path_join(const char *s1, const char *s2);

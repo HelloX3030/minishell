@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:08:23 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:15:52 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,7 @@ int	mini_cd(char **args, t_minishell *ms)
 	}
 	cd = chdir(args[1]);
 	if (cd != 0)
-	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": ", 2);
-		perror("");
-		return (EXIT_FAILURE);
-	}
+		return (cd_error(args[1]), EXIT_FAILURE);
 	if (getcwd(new_path, PATH_MAX))
 	{
 		n_path = ft_strdup(new_path);
