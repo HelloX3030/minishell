@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 13:46:25 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:05:54 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-static int	is_directory(const char *path)
-{
-	DIR	*dir_check;
-	int	result;
-
-	dir_check = opendir(path);
-	result = dir_check != NULL;
-	if (dir_check)
-		closedir(dir_check);
-	return (result);
-}
 
 static char	*check_direct_path(const char *cmd)
 {
@@ -75,12 +63,12 @@ static char	*search_in_path(const char *cmd, char **paths)
 		result = try_path(paths[i], cmd);
 		if (result)
 		{
-			free_paths(paths);
+			free_array(paths);
 			return (result);
 		}
 		i++;
 	}
-	free_paths(paths);
+	free_array(paths);
 	return (NULL);
 }
 

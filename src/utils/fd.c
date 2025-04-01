@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/10 15:08:45 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:06:07 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@ void	fd_close(int fd)
 	if (fd > 0)
 		close (fd);
 }
-
-//void	close_fds(t_command *cmd)
-//{
-//	fd_close(cmd->infile);
-//	fd_close(cmd->outfile);
-//	fd_close(cmd->inpipe);
-//	fd_close(cmd->outpipe);
-//}
 
 char	*path_join(const char *s1, const char *s2)
 {
@@ -68,18 +60,6 @@ char	**list_to_arr(t_list *args)
 	return (arr);
 }
 
-void	free_paths(char **paths)		// needed in is_cmd
-{
-	int	i;
-
-	if (!paths)
-		return ;
-	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
-}
-
 void	free_array(char **array)
 {
 	int	i;
@@ -90,4 +70,16 @@ void	free_array(char **array)
 	while (array[i])
 		free(array[i++]);
 	free(array);
+}
+
+int	is_directory(const char *path)
+{
+	DIR	*dir_check;
+	int	result;
+
+	dir_check = opendir(path);
+	result = dir_check != NULL;
+	if (dir_check)
+		closedir(dir_check);
+	return (result);
 }

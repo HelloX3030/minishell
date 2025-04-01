@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/11 10:44:23 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:08:23 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	change_directory(char *path, char *current_path, t_env **env)
 	int		ret;
 	char	new_path[PATH_MAX];
 	char	*n_path;
-	
+
 	ret = chdir(path);
 	if (ret != 0)
 	{
@@ -38,8 +38,8 @@ static int	change_directory(char *path, char *current_path, t_env **env)
 
 static int	handle_home_path(t_env **env, char *current_path)
 {
-	char *path;
-	
+	char	*path;
+
 	path = get_env_value(*env, "HOME");
 	if (!path)
 	{
@@ -51,7 +51,7 @@ static int	handle_home_path(t_env **env, char *current_path)
 
 static int	handle_old_path(t_env **env, char *current_path, char *old_path)
 {
-	char *path;
+	char	*path;
 
 	if (!old_path[0])
 	{

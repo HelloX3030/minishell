@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/31 11:53:02 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:06:35 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,8 @@ int								execute_ext(char **args, t_minishell *ms);
 char							*path_join(const char *s1, const char *s2);
 char							**list_to_arr(t_list *args);
 int								remove_quotes(char **str);
-void							free_paths(char **paths);
 void							free_array(char **array);
+int								is_directory(const char *path);
 
 // expansion utils
 char							*get_var_end(char *str);
