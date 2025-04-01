@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:06:52 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/28 17:29:52 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:03:26 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static int	handle_star(const char *pattern, const char *filename, char quotes)
 		return (1);
 	while (*filename != '\0')
 	{
-		if (match_pattern(pattern + 1, filename, quotes))
+		if (match_pattern(pattern, filename, quotes))
 			return (1);
 		filename++;
 	}
-	return (0);
+	return (match_pattern(pattern, filename, quotes));
 }
 
 static int	match_pattern(const char *pattern, const char *filename,
@@ -45,13 +45,16 @@ static int	match_pattern(const char *pattern, const char *filename,
 			quotes = '\'';
 		else if (*pattern == '\'' && quotes == '\'')
 			quotes = 0;
-		else if (*pattern != *filename)
+		else if (*pattern != *filename && (quotes || *pattern != '?'))
 			return (0);
 		else
 			filename++;
 		pattern++;
 	}
-	return (*pattern == *filename);
+	if (*pattern == '\0' && *filename == '\0')
+		return (1);
+	else
+		return (0);
 }
 
 static int	add_filename(t_list *filenames, const char *pattern,
