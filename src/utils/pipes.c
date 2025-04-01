@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:24:46 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/26 12:54:33 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:38:56 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ static int	wait_for_child(pid_t pid1, pid_t pid2)
 	return (EXIT_FAILURE);
 }
 
+static int	cleanup_pipe(int *pipefd, pid_t pid1, pid_t pid2)
+{
+	close(pipefd[PIPE_READ_END]);
+	close(pipefd[PIPE_WRITE_END]);
+	if (pid1 > 0)
+		waitpid(pid1, NULL, 0);
+	if (pid2 > 0)
+		waitpid(pid2, NULL, 0);
+	return (EXIT_FAILURE);
+}
+
 int	execute_pipe(t_minishell *ms, t_expression *expr)
 {
 	int		pipefd[2];
@@ -55,20 +66,14 @@ int	execute_pipe(t_minishell *ms, t_expression *expr)
 		return (EXIT_FAILURE);
 	pid1 = fork();
 	if (pid1 < 0)
-	{
-		close(pipefd[PIPE_READ_END]);
-		close(pipefd[PIPE_WRITE_END]);
-		return (EXIT_FAILURE);
-	}
+		return (cleanup_pipe(pipefd, 0, 0));
 	if (pid1 == 0)
 		setup_child1(pipefd, ms, expr);
 	pid2 = fork();
 	if (pid2 < 0)
 	{
-		close(pipefd[PIPE_READ_END]);
-		close(pipefd[PIPE_WRITE_END]);
 		waitpid(pid1, NULL, 0);
-		return (EXIT_FAILURE);
+		return (cleanup_pipe(pipefd, 0, 0));
 	}
 	if (pid2 == 0)
 		setup_child2(pipefd, ms, expr);
