@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:31:48 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:35:11 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,32 @@ char	*path_join(const char *s1, const char *s2)
 	return (path);
 }
 
-char **list_to_arr(t_list *args)
+char	**list_to_arr(t_list *args)
 {
 	char	**arr;
+	t_list	*current;
 	int		size;
 	int		i;
 
-	size = get_size(args);
+	size = ft_lstsize(args);
+	if (size == 0)
+		return (NULL);
 	arr = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);
+	current = args;
 	i = 0;
-	while (args)
+	while (current)
 	{
-		if (args->content && ft_strcmp(args->content, ""))
+		arr[i] = ft_strdup((char *)current->content);
+		if (!arr[i])
 		{
-			arr[i] = ft_strdup(args->content);
-			if (!arr[i])
-				return (ft_free_strs_partial(arr, i), NULL);
+			while (i > 0)
+				free(arr[--i]);
+			free(arr);
+			return (NULL);
 		}
-		args = args->next;
+		current = current->next;
 		i++;
 	}
 	arr[size] = NULL;

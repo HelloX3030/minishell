@@ -32,7 +32,7 @@ SRC_FILES := is_cmd.c main.c shell.c complete_input.c \
 	externals.c externals2.c \
 	list_to_arr.c print_quote_type.c remove_qutes.c \
 	signals.c \
-	expand_env.c expand_wildcards.c expansion_utils.c
+	expand_env.c expand_wildcards.c expansion_utils.c \
 
 # Normal .o files
 OBJ_DIR := obj
