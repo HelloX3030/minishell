@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 14:17:33 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:18:32 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,7 @@ char							**get_matching_filenames(char *pattern);
 // shell
 void							handle_lvl(t_env **env);
 int								exec_shell(char **args, t_minishell *ms);
+char							*balance_input(void);
 
 // signals
 void							setup_interactive(void);

@@ -20,7 +20,7 @@ vpath %.c src/minishell
 vpath %.c src/redirections
 vpath %.c src/signals
 
-SRC_FILES := is_cmd.c main.c shell.c \
+SRC_FILES := is_cmd.c main.c shell.c complete_input.c \
 	create_expression.c expand_expr_vars.c expression_has_syntax_error.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
 	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c token_has_syntax_error.c \
 	execute_minishell.c free_minishell.c init_minishell.c \

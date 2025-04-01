@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/13 13:56:56 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:19:07 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	init_minishell(&ms, envp);
 	while (1)
 	{
-		ms.input = readline(PROMPT);
+		ms.input = balance_input();
 		if (!ms.input)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
