@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 16:34:02 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:43:26 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ static int	parent_process(pid_t pid, char *cmd_path, char **envp)
 
 int	execute_ext(char **args, t_minishell *ms)
 {
-	char *cmd_path;
-	char **envp;
-	pid_t pid;
-	int result;
+	char	*cmd_path;
+	char	**envp;
+	pid_t	pid;
+	int		result;
 
 	cmd_path = find_cmd_path(args[0], ms->env);
 	if (!cmd_path)
