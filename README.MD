@@ -1,27 +1,26 @@
 # ToDo
 - wir haben mal darueber gesprochen, dass immer die aktuellste instany von ms mitgegeben werden muss. Ich glaube ich mache das grade noch falsch, weswegen einer der pipe tests failen wird (env werden in pipe bearbeitet aber dann im falschen state weitergegeben).
 - Handle Expressions (Leo)
-- Wildcards (Lukas)
+	- Groups: () usw. => Diese werden als EXP_CMD enum angegeben, mit einem args[0] von ft_strcmp("(") == 0...
+	- müssen einen Subprozess erstellen
+
+# in Progress:
+	- remove quotes leaves space after some things... e. g. "abc" => cat -e
 
 # Problems
 - cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
 	UPDATE: konnte den exit fixen in execute_minishell.c ABER falls irgendwas in redirections wirklich failt und ein richtiges Problem verursacht kann es sein, dass das jetzt nichtmehr richtig gehandelt wird. 
 	AUSSERDEM: error-message (in diesem Fall "zsh: no such file or directory: /nonexistent_file") vielleicht gibt es noch andere
 - issues with set_env_val free location ?
-- No more Mixed Exit Codes => the default Macros, not some self defined...
-- echo "Hello, World!" | cat
-	Hello, World! $
-	woher kommt das space?
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
 - Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
 - double free falls zwei mal selbe Variable exportiert
 	=> liegt vermutlich an set_env_val() => freed einen übergebenen ptr. das ist ein Seiteneffekt der einfach nur bugs rein bringt... außerdem gibt es noch im selben Code in der function export_without_equals() einen call mit set_env_val(env, arg, ""); => ein str literal, das nicht gemalloct wurde...
-- remove quotes leaves space after some things... e. g. "abc" => cat -e
-- Klammern testing
 
 # Maybe
+- No more Mixed Exit Codes => the default Macros, not some self defined...
 - Environment variables:
 	- bash prevents modification: ppid, uid, euid, lineno, bashpid
 	- bash resets/overrides them: shlvl, seconds, random, pwd, oldpwd
@@ -44,16 +43,10 @@ fsd
 => Der Fall kann relativ einfach in der Main gehandelt werden, noch lange bevor der Tokenizer das Zeug eigentlich bekommt. Genau so auch "   unclosed bracktes ... "
 - | `cmd < /dev/null` | Runs `cmd` without input. | -- should work properly
 
-# Done 
-- export VAR="            111         222        333         "
-echo $VAR "$VAR" '$VAR'
-111 222 333             111         222        333          $VAR
-- Remove empty inputs => e. g. ls "$NON_EXISTING_VAR"
-(- Environments nach alphabet sortieren) => kp warum es hier steht, aber bash macht es auch nicht... demnach nö
-
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
 - Wenn Shell gestarted, e. g. "pls report all bugs to... githublink für das Minishell Project
+- Links auf unsere githubs + ascii art start graphic? :D
 - Unicode Characters falls command failed/funktioniert.
 	- z. b. Failure
 		❌ ✗ (Unicode: U+2717)
