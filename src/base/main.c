@@ -6,27 +6,11 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 13:45:17 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:03:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-inline static void	handle_token_syntax_error(t_minishell *ms)
-{
-	printf("Token Syntax error\n");
-	free_token(ms->token);
-	ms->token = NULL;
-}
-
-inline static void	handle_expression_syntax_error(t_minishell *ms)
-{
-	printf("Expression Syntax error\n");
-	free_token(ms->token);
-	ms->token = NULL;
-	free_expression(ms->expr);
-	ms->expr = NULL;
-}
 
 /*
 	- manages ms.token and ms.expr
@@ -34,23 +18,8 @@ inline static void	handle_expression_syntax_error(t_minishell *ms)
 */
 static void	handle_input(t_minishell *ms)
 {
-	ms->token = parse_token(ms->input);
-	if (!ms->token)
-		return (free_minishell(ms), exit(EXIT_FAILURE));
-	if (token_has_syntax_error(ms->token))
-	{
-		handle_token_syntax_error(ms);
-		return ;
-	}
-	ms->expr = parse_expression(ms->token, NULL, ms->env);
-	if (!ms->expr)
-		return (free_minishell(ms), exit(EXIT_FAILURE));
-	if (expression_has_syntax_error(ms->expr))
-	{
-		handle_expression_syntax_error(ms);
-		return ;
-	}
-	execute_minishell(ms);
+	if (!get_expression_error(ms->expr))
+		execute_minishell(ms);
 	free_token(ms->token);
 	ms->token = NULL;
 	free_expression(ms->expr);
@@ -71,8 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	init_minishell(&ms, envp);
 	while (1)
 	{
-		ms.input = balance_input();
-		if (!ms.input)
+		if (get_input(&ms) == EXIT_FAILURE)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
 			break ;
