@@ -4,6 +4,8 @@
 
 # Problems
 - cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
+	UPDATE: konnte den exit fixen in execute_minishell.c ABER falls irgendwas in redirections wirklich failt und ein richtiges Problem verursacht kann es sein, dass das jetzt nichtmehr richtig gehandelt wird. 
+	AUSSERDEM: error-message (in diesem Fall "zsh: no such file or directory: /nonexistent_file") vielleicht gibt es noch andere
 - issues with set_env_val free location ?
 - No more Mixed Exit Codes => the default Macros, not some self defined...
 - echo "Hello, World!" | cat
