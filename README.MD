@@ -1,4 +1,5 @@
 # ToDo
+- wir haben mal darueber gesprochen, dass immer die aktuellste instany von ms mitgegeben werden muss. Ich glaube ich mache das grade noch falsch, weswegen einer der pipe tests failen wird (env werden in pipe bearbeitet aber dann im falschen state weitergegeben).
 - Handle Expressions (Leo)
 - Wildcards (Lukas)
 
@@ -41,7 +42,7 @@ sdfsdf
 sdfsd
 fsd
 => Der Fall kann relativ einfach in der Main gehandelt werden, noch lange bevor der Tokenizer das Zeug eigentlich bekommt. Genau so auch "   unclosed bracktes ... "
-- | `cmd < /dev/null` | Runs `cmd` without input. |
+- | `cmd < /dev/null` | Runs `cmd` without input. | -- should work properly
 
 # Done 
 - export VAR="            111         222        333         "
