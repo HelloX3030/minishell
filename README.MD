@@ -11,15 +11,13 @@
 - cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
 	UPDATE: konnte den exit fixen in execute_minishell.c ABER falls irgendwas in redirections wirklich failt und ein richtiges Problem verursacht kann es sein, dass das jetzt nichtmehr richtig gehandelt wird. 
 	AUSSERDEM: error-message (in diesem Fall "zsh: no such file or directory: /nonexistent_file") vielleicht gibt es noch andere
-- issues with set_env_val free location ?
+- Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
-- Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
-- double free falls zwei mal selbe Variable exportiert
-	=> liegt vermutlich an set_env_val() => freed einen übergebenen ptr. das ist ein Seiteneffekt der einfach nur bugs rein bringt... außerdem gibt es noch im selben Code in der function export_without_equals() einen call mit set_env_val(env, arg, ""); => ein str literal, das nicht gemalloct wurde...
 
 # Maybe
+- issues with set_env_val free location ?
 - No more Mixed Exit Codes => the default Macros, not some self defined...
 - Environment variables:
 	- bash prevents modification: ppid, uid, euid, lineno, bashpid

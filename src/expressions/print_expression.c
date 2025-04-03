@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 13:55:53 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:33:07 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	print_cmd_values(t_expression *expr, int insertion)
 		while (tmp)
 		{
 			ft_printf_insertion(insertion + 1);
-			printf("%s\n", (char *)tmp->content);
+			printf("<%s>\n", (char *)tmp->content);
 			tmp = tmp->next;
 		}
 	}
