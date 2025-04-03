@@ -4,9 +4,6 @@
 	- Groups: () usw. => Diese werden als EXP_CMD enum angegeben, mit einem args[0] von ft_strcmp("(") == 0...
 	- müssen einen Subprozess erstellen
 
-# in Progress:
-	- remove quotes leaves space after some things... e. g. "abc" => cat -e
-
 # Problems
 - cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
 	UPDATE: konnte den exit fixen in execute_minishell.c ABER falls irgendwas in redirections wirklich failt und ein richtiges Problem verursacht kann es sein, dass das jetzt nichtmehr richtig gehandelt wird. 
