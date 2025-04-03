@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 16:21:24 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:47:41 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,9 +173,10 @@ int								expand_expr_vars(t_expression *expr,
 void							init_minishell(t_minishell *ms, char **envp);
 void							free_minishell(t_minishell *ms);
 void							execute_minishell(t_minishell *ms);
-int								execute_expression(t_minishell *ms, t_expression *expr);
-int								rec_handle_type(t_minishell *ms, t_expression *expr);
-
+int								execute_expression(t_minishell *ms,
+									t_expression *expr);
+int								rec_handle_type(t_minishell *ms,
+									t_expression *expr);
 
 // builtins
 int								to_path(int fl, t_env **env);
@@ -210,7 +211,7 @@ bool							is_cmd(char *args, t_env *env);
 char							*find_cmd_path(const char *cmd, t_env *env);
 int								execute_ext(char **args, t_minishell *ms);
 
-//builtin_utils
+// builtin_utils
 void							cd_error(char *args);
 
 // utils
@@ -245,7 +246,8 @@ int								restore_fd(int *saved_fd, int fd);
 int								redirect(t_expression *expr);
 int								reset_redirect(t_expression *expr);
 
-//pipes
-int	execute_pipe(t_minishell *ms, t_expression *expr);
+// pipes
+int								execute_pipe(t_minishell *ms,
+									t_expression *expr);
 
 #endif

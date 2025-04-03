@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 11:57:48 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:39:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int	rec_handle_type(t_minishell *ms, t_expression *expr)
 
 void	execute_minishell(t_minishell *ms)
 {
-	// placeholder
 	ms->status = rec_handle_type(ms, ms->expr);
 }
