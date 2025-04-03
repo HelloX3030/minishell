@@ -3,6 +3,7 @@
 - Wildcards (Lukas)
 
 # Problems
+- cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
 - issues with set_env_val free location ?
 - No more Mixed Exit Codes => the default Macros, not some self defined...
 - echo "Hello, World!" | cat

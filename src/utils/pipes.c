@@ -6,13 +6,13 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:24:46 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:38:56 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:48:43 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static void	setup_child1(int *pipefd, t_minishell * ms, t_expression *expr)
+static void	setup_child1(int *pipefd, t_minishell *ms, t_expression *expr)
 {
 	int	status;
 
