@@ -12,6 +12,7 @@
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
+- Keine mixed ft_printf oder printf => Alles auf printf!!!!
 
 # Maybe
 - issues with set_env_val free location ?
