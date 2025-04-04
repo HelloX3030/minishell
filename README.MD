@@ -1,14 +1,10 @@
 # ToDo
-- wir haben mal darueber gesprochen, dass immer die aktuellste instany von ms mitgegeben werden muss. Ich glaube ich mache das grade noch falsch, weswegen einer der pipe tests failen wird (env werden in pipe bearbeitet aber dann im falschen state weitergegeben).
 - Handle Expressions (Leo)
 	- Groups: () usw. => Diese werden als EXP_CMD enum angegeben, mit einem args[0] von ft_strcmp("(") == 0...
 	- müssen einen Subprozess erstellen
+- Groups Syntax error
 
 # Problems
-- cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
-	UPDATE: konnte den exit fixen in execute_minishell.c ABER falls irgendwas in redirections wirklich failt und ein richtiges Problem verursacht kann es sein, dass das jetzt nichtmehr richtig gehandelt wird. 
-	AUSSERDEM: error-message (in diesem Fall "zsh: no such file or directory: /nonexistent_file") vielleicht gibt es noch andere
-- Was passiert wenn wir failen ein infile zu öffnen => weitere commands werden dennoch ausgeführt, aber mit einer empty pipe
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?
@@ -27,7 +23,6 @@
 ^\^\^\^\^\
 Quit: 3
 - ">a"
-- pipe ins nichts
 - cat << EOF
 > sdfsdf
 > sdfsd
@@ -37,7 +32,8 @@ sdfsdf
 sdfsd
 fsd
 => Der Fall kann relativ einfach in der Main gehandelt werden, noch lange bevor der Tokenizer das Zeug eigentlich bekommt. Genau so auch "   unclosed bracktes ... "
-- | `cmd < /dev/null` | Runs `cmd` without input. | -- should work properly
+
+- 
 
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:46:32 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 17:03:48 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/04 14:21:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_expression	*parse_group(t_token *token, t_token *end, t_env *env)
 
 	end = get_closing_group(token);
 	if (!end)
-		return (create_expression(EXPR_SYNTAX_ERROR));
+		return (create_expression(EXPR_UNCLOSED_GROUP));
 	expr = create_expression(EXPR_CMD);
 	if (!expr)
 		return (NULL);

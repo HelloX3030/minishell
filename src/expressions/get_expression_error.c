@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:32:07 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 17:07:29 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:30:22 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ t_expression_type	get_expression_error(t_expression *expr)
 
 	if (!expr)
 		return (EXPR_CMD);
-	if (return_type(expr->type))
+	if (expr->type == EXPR_SYNTAX_ERROR || expr->type == EXPR_UNCLOSED_GROUP)
 		return (expr->type);
+	if (expr->type == EXPR_PIPE && expr->next->type == EXPR_END)
+		return (EXPR_UNCLOSED_PIPE);
+	else if (expr->type == EXPR_AND && expr->next->type == EXPR_END)
+		return (EXPR_UNCLOSED_AND);
+	else if (expr->type == EXPR_OR && expr->next->type == EXPR_END)
+		return (EXPR_UNCLOSED_OR);
 	type = get_expression_error(expr->child);
 	if (return_type(type))
 		return (type);
