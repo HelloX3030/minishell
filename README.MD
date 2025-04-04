@@ -2,7 +2,8 @@
 - Handle Expressions (Leo)
 	- Groups: () usw. => Diese werden als EXP_CMD enum angegeben, mit einem args[0] von ft_strcmp("(") == 0...
 	- müssen einen Subprozess erstellen
-- Groups Syntax error
+- Fix bonus (Lukas)
+- Signals für Unclosed ...
 
 # Problems
 - Start Application without environment variables
@@ -31,7 +32,6 @@ Quit: 3
 sdfsdf
 sdfsd
 fsd
-=> Der Fall kann relativ einfach in der Main gehandelt werden, noch lange bevor der Tokenizer das Zeug eigentlich bekommt. Genau so auch "   unclosed bracktes ... "
 
 - 
 

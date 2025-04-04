@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:05:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/04 14:55:41 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:45:49 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ static int	handle_input(t_minishell *ms, char **prompt)
 	if (!ms->expr)
 		return (EXIT_FAILURE);
 	type = get_expression_error(ms->expr);
-	if (type == EXPR_UNCLOSED_GROUP)
+	if (type == EXPR_SYNTAX_ERROR)
+		return (EXIT_SUCCESS);
+	else if (type == EXPR_UNCLOSED_GROUP)
 		return (*prompt = PROMPT_GROUP, EXIT_CONTINUE);
-	if (type == EXPR_UNCLOSED_AND)
+	else if (type == EXPR_UNCLOSED_AND)
 		return (*prompt = PROMPT_AND, EXIT_CONTINUE);
-	if (type == EXPR_UNCLOSED_OR)
+	else if (type == EXPR_UNCLOSED_OR)
 		return (*prompt = PROMPT_OR, EXIT_CONTINUE);
-	if (type == EXPR_UNCLOSED_PIPE)
+	else if (type == EXPR_UNCLOSED_PIPE)
 		return (*prompt = PROMPT_PIPE, EXIT_CONTINUE);
 	return (EXIT_SUCCESS);
 }

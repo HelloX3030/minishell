@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 16:57:27 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/04 16:05:18 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,24 @@
 # include <termcap.h>
 # include <unistd.h>
 
+// Prompts
 # define PROMPT "myshell> "
 # define PROMPT_GROUP "group> "
 # define PROMPT_QUOTE "quote> "
 # define PROMPT_AND "and> "
 # define PROMPT_OR "or> "
 # define PROMPT_PIPE "pipe> "
+
+// Error Messages
+# define SYNTAX_ERROR "syntax error"
+
+// Exit Codes
 # define SUCCESS 1
 # define FAILURE 0
 # define EXIT_CONTINUE 2
+
+// Error Codes
+# define ERROR_CODE_SYNTAX 2
 
 extern volatile sig_atomic_t	g_in_exec;
 # define PIPE_READ_END 0
@@ -171,8 +180,7 @@ t_expression					*parse_expression(t_token *token, t_token *end,
 									t_env *env);
 t_token							*parse_cmd_values(t_expression *expr,
 									t_token *token, t_token *end);
-void							print_expression(t_expression *expr,
-									int insertion);
+void							print_expression(t_expression *expr);
 void							print_expression_type(t_expression_type type);
 void							free_expression(t_expression *expr);
 t_expression_type				get_expression_error(t_expression *expr);
