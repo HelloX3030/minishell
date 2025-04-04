@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   externals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/03 11:43:26 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:40:36 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
 
 static int	handle_cmd_not_found(char *cmd)
 {

@@ -6,13 +6,13 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:58:40 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 16:33:34 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:45:46 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static char *check_direct_path(const char *cmd)
+static char	*check_direct_path(const char *cmd)
 {
 	if (!cmd || !cmd[0] || !ft_strchr(cmd, '/'))
 		return (NULL);
@@ -25,10 +25,10 @@ static char *check_direct_path(const char *cmd)
 	return (ft_strdup(cmd));
 }
 
-static char *try_path(const char *dir, const char *cmd)
+static char	*try_path(const char *dir, const char *cmd)
 {
-	char *tmp;
-	char *full_path;
+	char	*tmp;
+	char	*full_path;
 
 	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
@@ -43,7 +43,8 @@ static char *try_path(const char *dir, const char *cmd)
 		free(full_path);
 		return (NULL);
 	}
-	if (access(full_path, F_OK) != 0 || is_directory(full_path) || access(full_path, X_OK) != 0)
+	if (access(full_path, F_OK) != 0 || is_directory(full_path)
+		|| access(full_path, X_OK) != 0)
 	{
 		free(full_path);
 		return (NULL);
@@ -51,10 +52,10 @@ static char *try_path(const char *dir, const char *cmd)
 	return (full_path);
 }
 
-static char *search_in_path(const char *cmd, char **paths)
+static char	*search_in_path(const char *cmd, char **paths)
 {
-	int i;
-	char *result;
+	int		i;
+	char	*result;
 
 	i = 0;
 	while (paths[i])
@@ -71,11 +72,11 @@ static char *search_in_path(const char *cmd, char **paths)
 	return (NULL);
 }
 
-static char *is_external(const char *cmd, t_env *env)
+static char	*is_external(const char *cmd, t_env *env)
 {
-	char *path_env;
-	char **paths;
-	char *result;
+	char	*path_env;
+	char	**paths;
+	char	*result;
 
 	result = check_direct_path(cmd);
 	if (result || !cmd || !cmd[0])
@@ -92,10 +93,10 @@ static char *is_external(const char *cmd, t_env *env)
 	return (search_in_path(cmd, paths));
 }
 
-bool is_cmd(char *args, t_env *env)
+bool	is_cmd(char *args, t_env *env)
 {
-	char *cmd_path;
-	int is_built;
+	char	*cmd_path;
+	int		is_built;
 
 	if (!args || !args[0])
 		return (FAILURE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complete_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:05:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:16:55 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:47:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	balance_quotes(char *input)
 	single_q = 0;
 	double_q = 0;
 	i = 0;
-	while	(input[i])
+	while (input[i])
 	{
 		if (input[i] == '\'' && !double_q)
 			single_q = !single_q;

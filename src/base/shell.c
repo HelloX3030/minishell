@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/12 13:10:36 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:43:18 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void handle_lvl(t_env **env)
+void	handle_lvl(t_env **env)
 {
-	char *lvl_str;
-	char *new_lvl;
-	int lvl;
+	char	*lvl_str;
+	char	*new_lvl;
+	int		lvl;
 
 	lvl_str = get_env_value(*env, "SHLVL");
 	if (!lvl_str || !*lvl_str)
@@ -40,7 +40,7 @@ void handle_lvl(t_env **env)
 	}
 }
 
-static void child_process(char **args, char **envp)
+static void	child_process(char **args, char **envp)
 {
 	execve("./minishell", args, envp);
 	perror("minishell");
@@ -48,9 +48,9 @@ static void child_process(char **args, char **envp)
 	exit(1);
 }
 
-static int handle_parent(pid_t pid, char **envp)
+static int	handle_parent(pid_t pid, char **envp)
 {
-	int status;
+	int	status;
 
 	waitpid(pid, &status, 0);
 	ft_free_strs(envp);
@@ -59,10 +59,10 @@ static int handle_parent(pid_t pid, char **envp)
 	return (SUCCESS);
 }
 
-int exec_shell(char **args, t_minishell *ms)
+int	exec_shell(char **args, t_minishell *ms)
 {
-	pid_t pid;
-	char **envp;
+	pid_t	pid;
+	char	**envp;
 
 	envp = env_to_array(ms->env);
 	if (!envp)

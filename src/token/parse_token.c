@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 16:37:20 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:46:02 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,15 @@ static char	*get_token_end(char *end)
 			break ;
 		if (*end == '"')
 		{
-			end = ft_strchr(end + 1, '"');
+			end = ft_strchr(end + 1, '\"');
 			if (!end)
 				return (NULL);
-			end++;
 		}
 		if (*end == '\'')
 		{
 			end = ft_strchr(end + 1, '\'');
 			if (!end)
 				return (NULL);
-			end++;
 		}
 		if (is_operator(end))
 			return (end);

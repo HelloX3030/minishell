@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 16:21:34 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:45:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static void	handle_input(t_minishell *ms)
 	ms->token = parse_token(ms->input);
 	if (!ms->token)
 		return (free_minishell(ms), exit(EXIT_FAILURE));
-	// debug print
-	// print_token(ms->token);
 	if (token_has_syntax_error(ms->token))
 	{
 		handle_token_syntax_error(ms);
@@ -47,8 +45,6 @@ static void	handle_input(t_minishell *ms)
 	ms->expr = parse_expression(ms->token, NULL, ms->env);
 	if (!ms->expr)
 		return (free_minishell(ms), exit(EXIT_FAILURE));
-	// debug print
-	// print_expression(ms->expr, 0);
 	if (expression_has_syntax_error(ms->expr))
 	{
 		handle_expression_syntax_error(ms);
@@ -71,7 +67,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	// atexit(check_leaks);
 	setup_interactive();
 	init_minishell(&ms, envp);
 	while (1)
