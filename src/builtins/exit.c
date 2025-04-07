@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:20:42 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/07 11:12:01 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	mini_exit(char **args, t_minishell *ms)
 		{
 			if (!ft_atoi(args[1]) || ft_strlen(args[1]) == 0)
 			{
-				ft_putendl_fd("exit: numeric argument required", 2);
+				ft_putstr_fd("exit: numeric argument required\n", 2);
 				ms->status = 255;
 				exit(ms->status);
 			}
 			if (args[2])
 			{
-				ft_putendl_fd("exit: too many arguments", 2);
+				ft_putstr_fd("exit: too many arguments\n", 2);
 				return (ms->status = 1, 1);
 			}
 			else
