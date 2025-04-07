@@ -28,6 +28,7 @@
 #include <sys/wait.h>
 #include <termcap.h>
 #include <unistd.h>
+#include <errno.h>
 
 // Prompts
 #define PROMPT "myshell> "

@@ -75,7 +75,7 @@ int rec_handle_type(t_minishell *ms, t_expression *expr)
 
 void execute_minishell(t_minishell *ms)
 {
-	print_expression(ms->expr, 0);
+	print_expression(ms->expr);
 	if (get_expression_error(ms->expr) != EXPR_CMD)
 	{
 		ms->status = ERROR_CODE_SYNTAX;
