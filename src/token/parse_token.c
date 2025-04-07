@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:57 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/03 14:46:02 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:31:58 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	is_token_limiter(char c)
 {
 	return (c == ' ' || c == '\t' || c == '(' || c == ')' || c == '<'
-		|| c == '>');
+		|| c == '>' || c == '\n');
 }
 
 static char	*get_token_end(char *end)
@@ -58,7 +58,7 @@ static t_token	*get_token(char **str)
 		return (create_token(TOKEN_GROUP, str, *str + 1));
 	str_end = get_token_end(*str);
 	if (!str_end)
-		return (create_token(TOKEN_SYNTAX_ERROR, str, ft_strchr(*str, 0)));
+		return (create_token(TOKEN_UNMATCHED_QUOTES, str, ft_strchr(*str, 0)));
 	if (*str != str_end)
 		return (create_token(TOKEN_WORD, str, str_end));
 	return (create_token(TOKEN_END, str, *str));
@@ -69,14 +69,14 @@ t_token	*parse_token(char *str)
 	t_token	*token_start;
 	t_token	*token;
 
-	str = ft_skip_charset(str, " \t");
+	str = ft_skip_charset(str, " \t\n");
 	token_start = get_token(&str);
 	if (!token_start)
 		return (NULL);
 	token = token_start;
-	while (token->type != TOKEN_END && token->type != TOKEN_SYNTAX_ERROR)
+	while (token->type != TOKEN_END && token->type != TOKEN_UNMATCHED_QUOTES)
 	{
-		str = ft_skip_charset(str, " \t");
+		str = ft_skip_charset(str, " \t\n");
 		token->next = get_token(&str);
 		if (!token->next)
 			return (free_token(token_start), NULL);

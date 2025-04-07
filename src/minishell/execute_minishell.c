@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/04 12:46:58 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/04 16:05:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,12 @@ int rec_handle_type(t_minishell *ms, t_expression *expr)
 void execute_minishell(t_minishell *ms)
 {
 	print_expression(ms->expr, 0);
+	if (get_expression_error(ms->expr) != EXPR_CMD)
+	{
+		ms->status = ERROR_CODE_SYNTAX;
+		write(STDERR_FILENO, SYNTAX_ERROR, ft_strlen(SYNTAX_ERROR));
+		write(STDERR_FILENO, "\n", 1);
+		return;
+	}
 	ms->status = rec_handle_type(ms, ms->expr);
 }
