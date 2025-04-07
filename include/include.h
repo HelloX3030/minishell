@@ -229,6 +229,7 @@ char *get_var_value(char **str_pos, t_minishell *ms,
 int expand_env(char **str, t_minishell *ms);
 t_list *get_matching_filenames(const char *pattern);
 int expand_wildcards(t_list *lst);
+int expand_redirect_wildcard(t_list *lst);
 
 // shell
 void handle_lvl(t_env **env);

@@ -12,20 +12,20 @@
 
 #include "include.h"
 
-static int	expand_args(t_list *args, t_minishell *ms)
+static int expand_args(t_list *args, t_minishell *ms)
 {
-	t_list	*args_start;
+	t_list *lst_start;
 
-	args_start = args;
+	lst_start = args;
 	while (args)
 	{
 		if (expand_env((char **)&args->content, ms) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		args = args->next;
 	}
-	if (expand_wildcards(args_start) == EXIT_FAILURE)
+	if (expand_wildcards(lst_start) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	args = args_start;
+	args = lst_start;
 	while (args)
 	{
 		if (remove_quotes((char **)&args->content) == EXIT_FAILURE)
@@ -35,20 +35,33 @@ static int	expand_args(t_list *args, t_minishell *ms)
 	return (EXIT_SUCCESS);
 }
 
-static int	expand_redirs(t_list *redirs, t_minishell *ms)
+static int expand_redirs(t_list *redirs, t_minishell *ms)
 {
+	t_list *lst_start;
+	t_redir *redir;
+
+	lst_start = redirs;
 	while (redirs)
 	{
-		if (expand_env(&((t_redir *)redirs->content)->file, ms) == EXIT_FAILURE)
+		redir = (t_redir *)redirs->content;
+		if (expand_env(&redir->file, ms) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (remove_quotes(&((t_redir *)redirs->content)->file) == EXIT_FAILURE)
+		redirs = redirs->next;
+	}
+	// if (expand_wildcards(lst_start) == EXIT_FAILURE)
+	// 	return (EXIT_FAILURE);
+	redirs = lst_start;
+	while (redirs)
+	{
+		redir = (t_redir *)redirs->content;
+		if (remove_quotes(&redir->file) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		redirs = redirs->next;
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	expand_expr_vars(t_expression *expr, t_minishell *ms)
+int expand_expr_vars(t_expression *expr, t_minishell *ms)
 {
 	if (expand_args(expr->args, ms) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

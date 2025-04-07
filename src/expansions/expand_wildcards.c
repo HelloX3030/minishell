@@ -60,3 +60,35 @@ int expand_wildcards(t_list *lst)
 	}
 	return (EXIT_SUCCESS);
 }
+
+static t_list *add_file(t_list *lst, t_list *filenames)
+{
+	(void)lst;
+	(void)filenames;
+	return (lst->next);
+}
+
+int expand_redirect_wildcard(t_list *lst)
+{
+	t_list *filenames;
+
+	while (lst)
+	{
+		filenames = get_matching_filenames(lst->content);
+		if (!filenames)
+			return (EXIT_FAILURE);
+		if (ft_lstsize(filenames) <= 1)
+		{
+			ft_lstclear(&filenames, free);
+			lst = lst->next;
+		}
+		else if (ft_lstsize(filenames) == 2)
+			lst = add_file(lst, filenames);
+		else
+		{
+			ft_lstclear(&filenames, free);
+			lst = lst->next;
+		}
+	}
+	return (EXIT_SUCCESS);
+}

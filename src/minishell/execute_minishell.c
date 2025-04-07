@@ -12,10 +12,10 @@
 
 #include "include.h"
 
-int	execute_expression(t_minishell *ms, t_expression *expr)
+int execute_expression(t_minishell *ms, t_expression *expr)
 {
-	char	**args;
-	int		status;
+	char **args;
+	int status;
 
 	if (expand_expr_vars(expr, ms) == EXIT_FAILURE)
 		mini_exit(list_to_arr(expr->args), ms);
@@ -28,7 +28,7 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 		return (EXIT_FAILURE);
 	}
 	if (expr->type == EXPR_CMD && ft_strcmp((char *)expr->args->content,
-			"exit") == 0)
+											"exit") == 0)
 		mini_exit(args, ms);
 	execute(args, ms);
 	status = ms->status;
@@ -38,9 +38,9 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	return (status);
 }
 
-static int	handle_and(t_minishell *ms, t_expression *expr)
+static int handle_and(t_minishell *ms, t_expression *expr)
 {
-	int	status;
+	int status;
 
 	status = execute_expression(ms, expr);
 	if (status == EXIT_SUCCESS)
@@ -48,9 +48,9 @@ static int	handle_and(t_minishell *ms, t_expression *expr)
 	return (status);
 }
 
-static int	handle_or(t_minishell *ms, t_expression *expr)
+static int handle_or(t_minishell *ms, t_expression *expr)
 {
-	int	status;
+	int status;
 
 	status = execute_expression(ms, expr);
 	if (status != EXIT_SUCCESS)
@@ -58,7 +58,7 @@ static int	handle_or(t_minishell *ms, t_expression *expr)
 	return (status);
 }
 
-int	rec_handle_type(t_minishell *ms, t_expression *expr)
+int rec_handle_type(t_minishell *ms, t_expression *expr)
 {
 	if (!expr)
 		return (EXIT_SUCCESS);
@@ -73,7 +73,8 @@ int	rec_handle_type(t_minishell *ms, t_expression *expr)
 	return (EXIT_SUCCESS);
 }
 
-void	execute_minishell(t_minishell *ms)
+void execute_minishell(t_minishell *ms)
 {
+	print_expression(ms->expr, 0);
 	ms->status = rec_handle_type(ms, ms->expr);
 }
