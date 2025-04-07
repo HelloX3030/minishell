@@ -12,10 +12,10 @@
 
 #include "include.h"
 
-static t_list	*add_files(t_list *lst, t_list *filenames)
+static t_list *add_files(t_list *lst, t_list *filenames)
 {
-	t_list	*next;
-	t_list	*last;
+	t_list *next;
+	t_list *last;
 
 	next = lst->next;
 	free(lst->content);
@@ -41,12 +41,10 @@ static t_list	*add_files(t_list *lst, t_list *filenames)
 		return (last->next = next, next);
 }
 
-int	expand_wildcards(t_list *lst)
+int expand_wildcards(t_list *lst)
 {
-	t_list	*filenames;
-	t_list	*lst_start;
+	t_list *filenames;
 
-	lst_start = lst;
 	while (lst)
 	{
 		filenames = get_matching_filenames(lst->content);
