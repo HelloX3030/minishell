@@ -6,27 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 14:33:03 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:34:33 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-inline static void	handle_token_syntax_error(t_minishell *ms)
-{
-	printf("Token Syntax error\n");
-	free_token(ms->token);
-	ms->token = NULL;
-}
-
-inline static void	handle_expression_syntax_error(t_minishell *ms)
-{
-	printf("Expression Syntax error\n");
-	free_token(ms->token);
-	ms->token = NULL;
-	free_expression(ms->expr);
-	ms->expr = NULL;
-}
 
 static char	*get_path(char *relative_path)
 {
