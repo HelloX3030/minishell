@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 14:31:30 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:50:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	char	**args;
 	int		status;
 
-	if (expand_expr_vars(expr, ms) == EXIT_FAILURE)
+	status = expand_expr_vars(expr, ms);
+	if (status == EXIT_FAILURE)
 		mini_exit(list_to_arr(expr->args), ms);
+	else if (status == EXIT_CONTINUE)
+		return (ms->status = 1, write(STDERR_FILENO, "ambiguous redirect\n",
+				19), EXIT_FAILURE);
 	args = list_to_arr(expr->args);
 	if (!args && expr->args)
 		mini_exit(args, ms);
 	if (redirect(expr) == EXIT_FAILURE)
-	{
-		ms->status = 1;
-		return (EXIT_FAILURE);
-	}
+		return (ms->status = 1, EXIT_FAILURE);
 	if (expr->type == EXPR_CMD && ft_strcmp((char *)expr->args->content,
 			"exit") == 0)
 		mini_exit(args, ms);
@@ -34,8 +35,7 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	status = ms->status;
 	if (reset_redirect(expr) == EXIT_FAILURE)
 		mini_exit(args, ms);
-	ft_free_strs(args);
-	return (status);
+	return (ft_free_strs(args), status);
 }
 
 static int	handle_and(t_minishell *ms, t_expression *expr)
@@ -86,7 +86,6 @@ int	rec_handle_type(t_minishell *ms, t_expression *expr)
 
 void	execute_minishell(t_minishell *ms)
 {
-	print_expression(ms->expr);
 	if (get_expression_error(ms->expr) != EXPR_CMD)
 	{
 		ms->status = ERROR_CODE_SYNTAX;

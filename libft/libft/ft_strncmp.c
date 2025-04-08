@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:12:15 by lseeger           #+#    #+#             */
-/*   Updated: 2024/10/14 17:46:29 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:14:51 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-
-// #include <string.h>
-
-// int	main(void)
-// {
-// 	char	*big;
-// 	char	*little;
-
-// 	big = "abcdef";
-// 	little = "abcdefghijklmnop";
-// 	ft_putnbr_fd(ft_strncmp(big, little, 6), 1);
-// 	printf("\n");
-// 	ft_putnbr_fd(strncmp(big, little, 6), 1);
-// 	printf("\n");
-// 	return (0);
-// }

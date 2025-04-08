@@ -1,9 +1,6 @@
 # ToDo
-- Handle Expressions (Leo)
-	- Groups: () usw. => Diese werden als EXP_CMD enum angegeben, mit einem args[0] von ft_strcmp("(") == 0...
-	- müssen einen Subprozess erstellen
-- Fix bonus (Lukas)
-- Signals für Unclosed ...
+- heredoc (Leo)
+- create files via redirects (Lukas)
 
 # Problems
 - ich weis nicht seit wann aber wenn wir mit ctrl D verlassen, geben wir code 1 zurueck. muss aber 0 sein.
@@ -34,8 +31,6 @@ sdfsdf
 sdfsd
 fsd
 
-- 
-
 # Ideen
 - Für Readability: vlt e. g. eingegebene Prompts unterstreichen oder so?
 - Wenn Shell gestarted, e. g. "pls report all bugs to... githublink für das Minishell Project
@@ -52,55 +47,3 @@ fsd
 		👍 👍 (Unicode: U+1F44D)
 		🟢 🟢 (Unicode: U+1F7E2)
 
-# Notizen
-
-# Nachrichten xD
-- Add Remote Repository:
-	- From the Repositry with the Code
-  	- git remote add intra(name) "url"
-  	- git push intra
-- Check for Leaks
-	- di: init docker container
-	- Reopen in Container 
-	- valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=supp.supp  ./minishell
-- how to use lldb:
-1. Starting and Running a Program
-Command	Description
-lldb ./my_program	Start debugging my_program.
-run (or r)	Start running the program.
-run arg1 arg2	Run with command-line arguments.
-process attach -p <pid>	Attach to a running process.
-2. Breakpoints
-Command	Description
-b main	Set a breakpoint at main.
-b my_function	Break at my_function().
-b my_program.c:10	Break at line 10 in my_program.c.
-br list	List all breakpoints.
-br delete	Delete all breakpoints.
-br delete <id>	Delete a specific breakpoint by ID.
-br disable <id>	Disable a breakpoint without removing it.
-3. Stepping Through Code
-Command	Alias	Description
-next	n	Step over (execute line, but don't enter functions).
-step	s	Step into (go inside function calls).
-finish		Step out (run until function returns).
-continue	c	Resume execution until the next breakpoint.
-4. Inspecting the Program
-Command	Alias	Description
-frame variable	fr v	Show local variables in the current stack frame.
-print var_name	p var_name	Print a variable’s value.
-memory read var_name		Read memory at var_name (useful for pointers).
-bt		Show the backtrace (call stack).
-thread list		List all threads.
-thread backtrace		Show call stacks of all threads.
-5. Modifying Variables
-Command	Description
-expr var_name = 42	Change the value of var_name to 42.
-expr (int) var_name = 10	Explicitly cast var_name to int and set it to 10.
-6. Exiting lldb
-Command	Description
-quit	Exit lldb.
-exit	Alternative way to exit.
-
-# Ressources
-- https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf

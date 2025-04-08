@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:17 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 13:58:17 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:49:53 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	expand_redirs(t_list *redirs, t_minishell *ms)
 {
 	t_list	*lst_start;
 	t_redir	*redir;
+	int		status;
 
 	lst_start = redirs;
 	while (redirs)
@@ -48,8 +49,9 @@ static int	expand_redirs(t_list *redirs, t_minishell *ms)
 			return (EXIT_FAILURE);
 		redirs = redirs->next;
 	}
-	// if (expand_wildcards(lst_start) == EXIT_FAILURE)
-	// 	return (EXIT_FAILURE);
+	status = expand_redirect_wildcard(lst_start);
+	if (status != EXIT_SUCCESS)
+		return (status);
 	redirs = lst_start;
 	while (redirs)
 	{
@@ -65,7 +67,5 @@ int	expand_expr_vars(t_expression *expr, t_minishell *ms)
 {
 	if (expand_args(expr->args, ms) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (expand_redirs(expr->redirs, ms) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (expand_redirs(expr->redirs, ms));
 }

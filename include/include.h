@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 14:31:54 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:49:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,14 +189,16 @@ int								expand_expr_vars(t_expression *expr,
 									t_minishell *ms);
 
 // minishell
-void							init_minishell(t_minishell *ms, char **envp, char *path);
+void							init_minishell(t_minishell *ms, char **envp,
+									char *path);
 void							free_minishell(t_minishell *ms);
 void							execute_minishell(t_minishell *ms);
 int								execute_expression(t_minishell *ms,
 									t_expression *expr);
 int								rec_handle_type(t_minishell *ms,
 									t_expression *expr);
-int								handle_group(t_minishell *ms, t_expression *expr);
+int								handle_group(t_minishell *ms,
+									t_expression *expr);
 
 // builtins
 int								to_path(int fl, t_env **env);

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:05:48 by hello_x           #+#    #+#             */
-/*   Updated: 2025/03/25 14:47:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:16:31 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_putchar(int c)
 	return (c);
 }
 
-void	ft_printf_insertion(int insertion)
+void	ft_write_insertion(int insertion)
 {
 	while (insertion--)
-		printf("\t");
+		write(STDOUT_FILENO, "\t", 1);
 }

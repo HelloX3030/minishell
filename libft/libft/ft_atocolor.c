@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:25:46 by lseeger           #+#    #+#             */
-/*   Updated: 2024/11/28 13:21:23 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:15:26 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,3 @@ uint32_t	ft_atocolor(const char *str)
 		num |= 0xFF;
 	return (num);
 }
-
-// void	test_ft_atocolor(const char *input, uint32_t expected)
-// {
-// 	uint32_t	result;
-
-// 	result = ft_atocolor(input);
-// 	printf("Input: '%s' | Result: %#010x | Expected: %#010x | %s\n", input,
-// 		result, expected, (result == expected) ? "PASS" : "FAIL");
-// }
-
-// int	main(void)
-// {
-// 	test_ft_atocolor("0x00FF00FF", 0x00FF00FF);
-// 	test_ft_atocolor("0xff", 0xFF0000FF);
-// 	test_ft_atocolor("0X12345678", 0x12345678);
-// 	test_ft_atocolor("12345678", 0x12345678);
-// 	test_ft_atocolor("  0xABCDEF  ", 0xABCDEFFF);
-// 	test_ft_atocolor("  0x", 0x000000FF);
-// 	test_ft_atocolor("0xGHIJKL", 0x000000FF);
-// 	test_ft_atocolor("0x123ZZZ", 0x123000FF);
-// 	test_ft_atocolor("", 0x000000FF);
-// 	test_ft_atocolor("FFFFFFFF", 0xFFFFFFFF);
-// 	test_ft_atocolor("00000000", 0x00000000);
-// 	return (0);
-// }

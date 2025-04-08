@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:32:21 by hello_x           #+#    #+#             */
-/*   Updated: 2024/10/14 17:46:35 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:30:40 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-
-// int	main(void)
-// {
-// 	const char	*haystack = "Morgen Moin Moin";
-// 	const char	*needle = "Moin";
-// 	const char	*found = ft_strnstr(haystack, needle, 100);
-
-// 	printf("%s, %s: %s\n", haystack, needle, found);
-// 	return (0);
-// }
