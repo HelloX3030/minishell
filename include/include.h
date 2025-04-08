@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/07 12:16:18 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 11:46:53 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int								expand_expr_vars(t_expression *expr,
 									t_minishell *ms);
 
 // minishell
-void							init_minishell(t_minishell *ms, char **envp);
+void							init_minishell(t_minishell *ms, char **envp, char *path);
 void							free_minishell(t_minishell *ms);
 void							execute_minishell(t_minishell *ms);
 int								execute_expression(t_minishell *ms,
@@ -200,6 +200,7 @@ void							set_env_val(t_env **env, char *key,
 									char *value);
 void							unset_env_val(t_env **env, const char *key);
 char							**env_to_array(t_env *env);
+t_env							*init_essentials(char *path);
 
 // exec
 int								is_builtin(char *cmd);
