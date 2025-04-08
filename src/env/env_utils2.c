@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:26:27 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:27:56 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 11:45:37 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,26 @@ void	free_env(t_env *env)
 		free(current);
 		current = next;
 	}
+}
+
+t_env	*init_essentials(char *path)
+{
+	t_env	*env_list;
+	t_env	*new_node;
+	char	cwd[PATH_MAX];
+
+	env_list = NULL;
+	if (getcwd(cwd, PATH_MAX))
+	{
+		new_node = create_env_node("PWD", cwd);
+		if (new_node)
+			add_env_node(&env_list, new_node);
+	}
+	new_node = create_env_node("SHLVL", "1");
+	if (new_node)
+		add_env_node(&env_list, new_node);
+	new_node = create_env_node("_", path);
+	if (new_node)
+		add_env_node(&env_list, new_node);
+	return (env_list);
 }

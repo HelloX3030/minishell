@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 14:15:52 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/07 12:13:12 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	handle_old_path(t_env **env, char *current_path, char *old_path)
 	}
 	else
 		path = old_path;
-	ft_putendl_fd(path, 1);
+	printf("%s", path);
 	return (change_directory(path, current_path, env));
 }
 

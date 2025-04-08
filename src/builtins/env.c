@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:54:20 by leokubler         #+#    #+#             */
-/*   Updated: 2025/04/01 14:19:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/07 11:11:09 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	mini_env(t_minishell *ms)
 	current = ms->env;
 	while (current)
 	{
-		if (ft_printf("%s=%s\n", current->key, current->value) < 0)
+		if (printf("%s=%s\n", current->key, current->value) < 0)
 		{
 			perror("env");
 			return (EXIT_FAILURE);

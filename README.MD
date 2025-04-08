@@ -6,6 +6,7 @@
 - Signals für Unclosed ...
 
 # Problems
+- ich weis nicht seit wann aber wenn wir mit ctrl D verlassen, geben wir code 1 zurueck. muss aber 0 sein.
 - Start Application without environment variables
 	=> env -i ./minishell
 	=> some environments need default values?

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/01 15:28:45 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/07 11:13:59 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_export_vars(t_env *env)
 	cur = env;
 	while (cur)
 	{
-		ft_printf("declare -x %s=\"%s\"\n", cur->key, cur->value);
+		printf("declare -x %s=\"%s\"\n", cur->key, cur->value);
 		cur = cur->next;
 	}
 }
@@ -36,7 +36,7 @@ static int	export_with_equals(char *arg, t_env **env)
 	while (arg[i] && arg[i] != '=')
 	{
 		if (!ft_isalnum(arg[i++]))
-			return (ft_putendl_fd("not a valid identifier", 2),
+			return (ft_putstr_fd("not a valid identifier\n", 2),
 				EXIT_FAILURE);
 	}
 	equals = ft_strchr(arg, '=');
@@ -63,7 +63,7 @@ static int	export_without_equals(char *arg, t_env **env)
 	while (arg[i])
 	{
 		if (!ft_isalpha(arg[i]))
-			return (ft_putendl_fd("not a valid identifier", 2),
+			return (ft_putstr_fd("not a valid identifier\n", 2),
 				EXIT_FAILURE);
 		i ++;
 	}
@@ -88,7 +88,7 @@ int	mini_export(char **args, t_minishell *ms)
 		if (ft_strchr(args[i], '='))
 		{
 			if (args[i][0] == '=')
-				return (ft_putendl_fd("not a valid identifier", 2),
+				return (ft_putstr_fd("not a valid identifier\n", 2),
 					EXIT_FAILURE);
 			result = export_with_equals(args[i], &ms->env);
 		}
