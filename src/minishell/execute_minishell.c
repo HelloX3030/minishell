@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 15:11:32 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:41:59 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	int		status;
 
 	status = expand_expr_vars(expr, ms);
-	// debug print
-	print_expression(expr);
 	if (status == EXIT_FAILURE)
 		mini_exit(list_to_arr(expr->args), ms);
 	else if (status == EXIT_CONTINUE)
@@ -37,8 +35,7 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	status = ms->status;
 	if (reset_redirect(expr) == EXIT_FAILURE)
 		mini_exit(args, ms);
-	ft_free_strs(args);
-	return (status);
+	return (ft_free_strs(args), status);
 }
 
 static int	handle_and(t_minishell *ms, t_expression *expr)

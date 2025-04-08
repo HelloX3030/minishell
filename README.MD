@@ -1,15 +1,8 @@
 # ToDo
-- Handle Expressions (Leo)
-	- Groups: () usw. => Diese werden als EXP_CMD enum angegeben, mit einem args[0] von ft_strcmp("(") == 0...
-	- müssen einen Subprozess erstellen
-- Fix bonus (Lukas)
-- Signals für Unclosed ...
+- heredoc (Leo)
+- create files via redirects (Lukas)
 
 # Problems
-- Start Application without environment variables
-	=> env -i ./minishell
-	=> some environments need default values?
-- syntax error: echo test (ls && ls)
 
 # Maybe
 - issues with set_env_val free location ?
