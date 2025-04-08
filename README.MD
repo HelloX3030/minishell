@@ -5,6 +5,7 @@
 	- müssen einen Subprozess erstellen
 
 # Problems
+- ich weis nicht seit wann aber wenn wir mit ctrl D verlassen, geben wir code 1 zurueck. muss aber 0 sein.
 - cat < /nonexistent_file sollte nur fehler reporten, beendet aber die Shell (zwar mit exit 0 aber trotzdem). 
 	UPDATE: konnte den exit fixen in execute_minishell.c ABER falls irgendwas in redirections wirklich failt und ein richtiges Problem verursacht kann es sein, dass das jetzt nichtmehr richtig gehandelt wird. 
 	AUSSERDEM: error-message (in diesem Fall "zsh: no such file or directory: /nonexistent_file") vielleicht gibt es noch andere
