@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:25 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/04 16:04:57 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:29:13 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	print_redirs(t_expression *expr, int insertion)
 
 	if (expr->redirs)
 	{
-		ft_printf_insertion(insertion);
-		printf("Redirs:\n");
+		ft_write_insertion(insertion);
+		ft_putstr("Redirs:\n");
 		tmp = expr->redirs;
 		while (tmp)
 		{
@@ -35,13 +35,15 @@ static void	print_cmd_values(t_expression *expr, int insertion)
 
 	if (expr->args)
 	{
-		ft_printf_insertion(insertion);
-		printf("Args:\n");
+		ft_write_insertion(insertion);
+		ft_putstr("Args:\n");
 		tmp = expr->args;
 		while (tmp)
 		{
-			ft_printf_insertion(insertion + 1);
-			printf("<%s>\n", (char *)tmp->content);
+			ft_write_insertion(insertion + 1);
+			ft_putstr("<");
+			ft_putstr(tmp->content);
+			ft_putstr(">\n");
 			tmp = tmp->next;
 		}
 	}
@@ -52,12 +54,12 @@ static void	print_helper(t_expression *expr, int insertion)
 {
 	if (expr)
 	{
-		ft_printf_insertion(insertion);
-		printf("Expression:\n");
-		ft_printf_insertion(insertion + 1);
-		printf("type: ");
+		ft_write_insertion(insertion);
+		ft_putstr("Expression:\n");
+		ft_write_insertion(insertion + 1);
+		ft_putstr("type: ");
 		print_expression_type(expr->type);
-		printf("\n");
+		ft_putstr("\n");
 		print_cmd_values(expr, insertion + 1);
 		if (expr->child)
 			print_helper(expr->child, insertion + 2);
@@ -68,6 +70,6 @@ static void	print_helper(t_expression *expr, int insertion)
 
 void	print_expression(t_expression *expr)
 {
-	printf("Expressions:\n");
+	ft_putstr("Expressions:\n");
 	print_helper(expr, 1);
 }

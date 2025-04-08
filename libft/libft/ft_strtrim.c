@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:23:00 by hello_x           #+#    #+#             */
-/*   Updated: 2024/10/14 17:46:47 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:30:31 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	new_str[i] = 0;
 	return (new_str);
 }
-
-// int	main(void)
-// {
-// 	const char	*s1 = "ABABAABBXXAAAABAAA";
-// 	const char	*set = "AB";
-// 	char		*new_str;
-
-// 	new_str = ft_strtrim(s1, set);
-// 	printf("%s, %s: %s\n", s1, set, new_str);
-// 	free(new_str);
-// }

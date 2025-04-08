@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:45:08 by hello_x           #+#    #+#             */
-/*   Updated: 2024/10/14 17:41:40 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:31:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,3 @@ char	*ft_itoa(int n)
 	str[int_len] = 0;
 	return (str);
 }
-
-// int main(void)
-// {
-// 	const int	n = -3561;
-// 	char		*numb;
-
-// 	numb = ft_itoa(n);
-// 	if (numb == NULL)
-// 		return (1);
-// 	printf("%s\n", numb);
-// 	free(numb);
-// 	return (0);
-// }

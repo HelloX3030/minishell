@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:58:35 by hello_x           #+#    #+#             */
-/*   Updated: 2025/04/03 13:48:31 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:31:55 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,25 +107,3 @@ char	**ft_split_charset(const char *str, char *charset)
 	free(tmp);
 	return (split);
 }
-
-// int	main(void)
-// {
-// 	const char	*s = "AA";
-// 	char		c;
-// 	char		**strs;
-// 	int			i;
-
-// 	c = 'z';
-// 	strs = ft_split(s, c);
-// 	if (strs == NULL)
-// 		return (1);
-// 	i = 0;
-// 	while (strs[i] != NULL)
-// 	{
-// 		printf("%s\n", strs[i]);
-// 		free(strs[i]);
-// 		i++;
-// 	}
-// 	free(strs);
-// 	return (0);
-// }

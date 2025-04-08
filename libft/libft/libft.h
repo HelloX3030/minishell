@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:25:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/31 16:39:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:24:15 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char				*ft_itoa(int n);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strchr(const char *s, int c);
 void				ft_putstr_fd(char *s, int fd);
+void				ft_putstr(char *s);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_isalnum(int c);
@@ -99,7 +100,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 void				ft_write_byte(char c);
 void				ft_write_bytes(char *bytes, int size);
 int					ft_putchar(int c);
-void				ft_printf_insertion(int insertion);
+void				ft_write_insertion(int insertion);
 char				*ft_strndup(char *src, char *next);
 char				*ft_create_terminated_str(int len);
 int					ft_strjoin_inplace(char **s1, char *s2);
