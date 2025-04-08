@@ -6,15 +6,15 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:09:30 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/10 19:09:40 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:57:42 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int make_redir(int target_fd, char *file, int flags)
+int	make_redir(int target_fd, char *file, int flags)
 {
-	int new_fd;
+	int	new_fd;
 
 	new_fd = open(file, flags, DEFAULT_FILE_PERMISSIONS);
 	if (new_fd == -1)

@@ -6,16 +6,16 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:45:46 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/01 16:21:43 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:57:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static t_list *add_files(t_list *lst, t_list *filenames)
+static t_list	*add_files(t_list *lst, t_list *filenames)
 {
-	t_list *next;
-	t_list *last;
+	t_list	*next;
+	t_list	*last;
 
 	next = lst->next;
 	free(lst->content);
@@ -41,9 +41,9 @@ static t_list *add_files(t_list *lst, t_list *filenames)
 		return (last->next = next, next);
 }
 
-int expand_wildcards(t_list *lst)
+int	expand_wildcards(t_list *lst)
 {
-	t_list *filenames;
+	t_list	*filenames;
 
 	while (lst)
 	{
@@ -61,16 +61,16 @@ int expand_wildcards(t_list *lst)
 	return (EXIT_SUCCESS);
 }
 
-static t_list *add_file(t_list *lst, t_list *filenames)
+static t_list	*add_file(t_list *lst, t_list *filenames)
 {
 	(void)lst;
 	(void)filenames;
 	return (lst->next);
 }
 
-int expand_redirect_wildcard(t_list *lst)
+int	expand_redirect_wildcard(t_list *lst)
 {
-	t_list *filenames;
+	t_list	*filenames;
 
 	while (lst)
 	{
