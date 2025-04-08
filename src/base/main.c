@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 11:53:47 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:00:52 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,5 @@ int	main(int argc, char **argv, char **envp)
 		free(ms.input);
 		ms.input = NULL;
 	}
-	return (free_minishell(&ms), EXIT_FAILURE);
+	return (free_minishell(&ms), EXIT_SUCCESS);
 }

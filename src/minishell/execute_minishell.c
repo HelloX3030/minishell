@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 11:56:33 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:03:48 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,19 @@ static int	handle_or(t_minishell *ms, t_expression *expr)
 
 int	rec_handle_type(t_minishell *ms, t_expression *expr)
 {
-	//char	**args;
+	char	**args;
 
 	if (!expr)
 		return (EXIT_SUCCESS);
 	else if (expr->type == EXPR_CMD)
 	{
-		//args = list_to_arr(expr->args);
-		//if (expr->type == EXPR_CMD && ft_strcmp(&args[0][0], "(") == 0)
-		//{
-		//	ft_free_strs(args);
-		//	return (handle_group(ms, expr, args));
-		//}
-		//ft_free_strs(args);
+		args = list_to_arr(expr->args);
+		if (ft_strcmp(args[0], "(") == 0)
+		{
+			ft_free_strs(args);
+			return (handle_group(ms, expr));
+		}
+		ft_free_strs(args);
 		return (execute_expression(ms, expr));
 	}
 	else if (expr->type == EXPR_PIPE)

@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 11:46:53 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:09:09 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ int								execute_expression(t_minishell *ms,
 									t_expression *expr);
 int								rec_handle_type(t_minishell *ms,
 									t_expression *expr);
+int								handle_group(t_minishell *ms, t_expression *expr);
 
 // builtins
 int								to_path(int fl, t_env **env);
@@ -218,7 +219,6 @@ void							cd_error(char *args);
 // utils
 char							**list_to_arr(t_list *args);
 int								remove_quotes(char **str);
-void							free_array(char **array);
 int								is_directory(const char *path);
 
 // expansion
