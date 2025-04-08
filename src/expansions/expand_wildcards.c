@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:45:46 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 13:57:27 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:04:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,25 @@ int	expand_wildcards(t_list *lst)
 
 static t_list	*add_file(t_list *lst, t_list *filenames)
 {
-	(void)lst;
-	(void)filenames;
+	t_redir	*redir;
+
+	redir = (t_redir *)lst->content;
+	free(redir->file);
+	redir->file = filenames->content;
+	filenames->content = NULL;
+	ft_lstclear(&filenames, free);
 	return (lst->next);
 }
 
 int	expand_redirect_wildcard(t_list *lst)
 {
 	t_list	*filenames;
+	t_redir	*redir;
 
 	while (lst)
 	{
-		filenames = get_matching_filenames(lst->content);
+		redir = (t_redir *)lst->content;
+		filenames = get_matching_filenames(redir->file);
 		if (!filenames)
 			return (EXIT_FAILURE);
 		if (ft_lstsize(filenames) <= 1)
@@ -88,6 +95,7 @@ int	expand_redirect_wildcard(t_list *lst)
 		{
 			ft_lstclear(&filenames, free);
 			lst = lst->next;
+			return (EXIT_CONTINUE);
 		}
 	}
 	return (EXIT_SUCCESS);

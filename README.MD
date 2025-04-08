@@ -10,6 +10,8 @@
 	=> env -i ./minishell
 	=> some environments need default values?
 - Keine mixed ft_printf oder printf => Alles auf printf!!!!
+=> Nur über all write usw, kein printf mehr... 
+- syntax error: echo test (ls && ls)
 
 # Maybe
 - issues with set_env_val free location ?

@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 13:57:04 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:24:24 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,6 @@ void							cd_error(char *args);
 // utils
 char							**list_to_arr(t_list *args);
 int								remove_quotes(char **str);
-void							free_array(char **array);
 int								is_directory(const char *path);
 
 // expansion
