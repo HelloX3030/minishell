@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/03/11 13:12:32 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/09 14:20:08 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-static int	redir_in(t_expression *expr, t_redir *redir_data)
-{
-	if (save_fd(&expr->saved_stdin, STDIN_FILENO) == EXIT_FAILURE)
-		return (restore_fd(&expr->saved_stdin, STDIN_FILENO), EXIT_FAILURE);
-	if (make_redir(STDIN_FILENO, redir_data->file, O_RDONLY) == EXIT_FAILURE)
-		return (restore_fd(&expr->saved_stdin, STDIN_FILENO), EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
 
 static int	redir_out(t_expression *expr, t_redir *redir_data)
 {
