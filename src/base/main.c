@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:52 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:34:38 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,6 @@ static void	handle_input(t_minishell *ms)
 	ms->expr = NULL;
 }
 
-/*
-	- manages ms.input and ms.env
-		=> needs to also free it
-*/
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   welcome.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 17:05:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 17:05:21 by lseeger          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "include.h"
-
 static void	display_welcome(int argc, char **argv)
 {
 	(void)argc;
@@ -57,6 +39,10 @@ static void	display_welcome(int argc, char **argv)
 	ft_putstr_fd("\033[0m\n", STDOUT_FILENO);
 }
 
+/*
+	- manages ms.input and ms.env
+		=> needs to also free it
+*/
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	ms;
