@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:20:48 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 12:52:54 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 13:08:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	print_redir_type(t_redir_type type)
 		ft_putstr("REDIR_OUTPUT");
 	else if (type == REDIR_APPEND)
 		ft_putstr("REDIR_APPEND");
+	else if (type == REDIR_HEREDOC)
+		ft_putstr("REDIR_HEREDOC");
 	else
 		ft_putstr("UNKNOWN");
 }

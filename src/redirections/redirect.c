@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/09 14:20:08 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 13:18:42 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,38 @@ static int	redir_append(t_expression *expr, t_redir *redir_data)
 	return (EXIT_SUCCESS);
 }
 
+static int	handle_redir_data(t_expression *expr, t_redir *redir_data)
+{
+	if (redir_data->type == REDIR_IN)
+	{
+		if (redir_in(expr, redir_data) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+	}
+	else if (redir_data->type == REDIR_OUT)
+	{
+		if (redir_out(expr, redir_data) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+	}
+	else if (redir_data->type == REDIR_APPEND)
+	{
+		if (redir_append(expr, redir_data) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+	}
+	else if (redir_data->type == REDIR_HEREDOC)
+	{
+		// heredoc
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	redirect(t_expression *expr)
 {
 	t_list	*redir;
-	t_redir	*redir_data;
 
 	redir = expr->redirs;
 	while (redir)
 	{
-		redir_data = redir->content;
-		if (redir_data->type == REDIR_IN)
-		{
-			if (redir_in(expr, redir_data) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
-		}
-		else if (redir_data->type == REDIR_OUT)
-		{
-			if (redir_out(expr, redir_data) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
-		}
-		else if (redir_append(expr, redir_data) == EXIT_FAILURE)
+		if (handle_redir_data(expr, redir->content) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		redir = redir->next;
 	}

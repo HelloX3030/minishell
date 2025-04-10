@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:51:33 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 16:35:52 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 13:09:26 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end)
 	while (token->next && (!end || token->next != end)
 		&& (token->next->type == TOKEN_WORD))
 	{
-		if (ft_strcmp(token->str, "<") && ft_strcmp(token->str, ">")
-			&& ft_strcmp(token->str, ">>"))
+		if (!is_redirection_operator(token->str))
 			token = token->next;
 		if (ft_strcmp(token->str, "<") == 0)
 			token = add_redir(expr, REDIR_IN, token->next, end);
@@ -77,6 +76,8 @@ t_token	*parse_cmd_values(t_expression *expr, t_token *token, t_token *end)
 			token = add_redir(expr, REDIR_OUT, token->next, end);
 		else if (ft_strcmp(token->str, ">>") == 0)
 			token = add_redir(expr, REDIR_APPEND, token->next, end);
+		else if (ft_strcmp(token->str, "<<") == 0)
+			token = add_redir(expr, REDIR_HEREDOC, token->next, end);
 		else
 			token = add_args(expr, token);
 		if (!token)
