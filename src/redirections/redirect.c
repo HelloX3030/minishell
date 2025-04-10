@@ -6,11 +6,20 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 13:18:42 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 13:47:56 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+static int	redir_in(t_expression *expr, t_redir *redir_data)
+{
+	if (save_fd(&expr->saved_stdin, STDIN_FILENO) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdin, STDIN_FILENO), EXIT_FAILURE);
+	if (make_redir(STDIN_FILENO, redir_data->file, O_RDONLY) == EXIT_FAILURE)
+		return (restore_fd(&expr->saved_stdin, STDIN_FILENO), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
 static int	redir_out(t_expression *expr, t_redir *redir_data)
 {
@@ -51,7 +60,8 @@ static int	handle_redir_data(t_expression *expr, t_redir *redir_data)
 	}
 	else if (redir_data->type == REDIR_HEREDOC)
 	{
-		// heredoc
+		if (redir_herdoc(expr, redir_data) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

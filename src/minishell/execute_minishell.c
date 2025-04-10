@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 12:46:47 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:12:38 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	rec_handle_type(t_minishell *ms, t_expression *expr)
 
 void	execute_minishell(t_minishell *ms)
 {
-	print_expression(ms->expr);
 	if (get_expression_error(ms->expr) != EXPR_CMD)
 	{
 		ms->status = ERROR_CODE_SYNTAX;

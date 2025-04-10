@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:05:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/10 12:55:54 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:13:04 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	handle_input(t_minishell *ms, char **prompt)
 	ms->token = parse_token(ms->input);
 	if (!ms->token)
 		return (EXIT_FAILURE);
-	print_token(ms->token);
 	if (get_token_unmatched_quotes(ms->token))
 		return (*prompt = PROMPT_QUOTE, EXIT_CONTINUE);
 	free_expression(ms->expr);

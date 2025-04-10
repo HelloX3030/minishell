@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 13:07:46 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 13:48:34 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,9 +268,8 @@ int								save_fd(int *saved_fd, int fd);
 int								restore_fd(int *saved_fd, int fd);
 int								redirect(t_expression *expr);
 int								reset_redirect(t_expression *expr);
-int								redir_in(t_expression *expr,
+int								redir_herdoc(t_expression *expr,
 									t_redir *redir_data);
-t_redir							*create_heredoc(char *delimiter);
 
 // pipes
 int								execute_pipe(t_minishell *ms,

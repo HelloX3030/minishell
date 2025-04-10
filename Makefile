@@ -21,7 +21,7 @@ vpath %.c src/redirections
 vpath %.c src/signals
 vpath %.c src/expansions
 
-SRC_FILES := is_cmd.c main.c shell.c get_input.c \
+SRC_FILES := main.c shell.c get_input.c \
 	get_expression_error.c create_expression.c expand_expr_vars.c get_token_unmatched_quotes.c free_expression.c parse_cmd_values.c parse_expression.c print_expression.c print_expression_type.c \
 	create_token.c free_token.c get_closing_group.c is_operator.c parse_token.c print_token.c print_token_type.c \
 	execute_minishell.c free_minishell.c init_minishell.c \
