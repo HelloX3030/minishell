@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:35:08 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 14:26:34 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:13:15 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	handle_group(t_minishell *ms, t_expression *expr)
 
 	if (!expr || !expr->child)
 		return (EXIT_FAILURE);
-	if (redirect(expr) == EXIT_FAILURE)
+	if (redirect(ms, expr) == EXIT_FAILURE)
 	{
 		ms->status = 1;
 		return (EXIT_FAILURE);
