@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 15:51:30 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:52 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ static void	handle_input(t_minishell *ms)
 
 static void	display_welcome(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
+	(void)argc;
+	(void)argv;
 	ft_putstr_fd("\033[1;36m", STDOUT_FILENO);
-	ft_putstr_fd(" __  __ _____ _   _ _____  _____ _    _ ______ _      _      \n", STDOUT_FILENO);
-	ft_putstr_fd("|  \\/  |_   _| \\ | |_   _|/ ____| |  | |  ____| |    | |     \n", STDOUT_FILENO);
-	ft_putstr_fd("| \\  / | | | |  \\| | | | | (___ | |__| | |__  | |    | |     \n", STDOUT_FILENO);
-	ft_putstr_fd("| |\\/| | | | | . ` | | |  \\___ \\|  __  |  __| | |    | |     \n", STDOUT_FILENO);
-	ft_putstr_fd("| |  | |_| |_| |\\  |_| |_ ____) | |  | | |____| |____| |____ \n", STDOUT_FILENO);
-	ft_putstr_fd("|_|  |_|_____|_| \\_|_____|_____/|_|  |_|______|______|______|\n", STDOUT_FILENO);
+	ft_putstr_fd(L1, STDOUT_FILENO);
+	ft_putstr_fd(L2, STDOUT_FILENO);
+	ft_putstr_fd(L3, STDOUT_FILENO);
+	ft_putstr_fd(L4, STDOUT_FILENO);
+	ft_putstr_fd(L5, STDOUT_FILENO);
+	ft_putstr_fd(L6, STDOUT_FILENO);
 	ft_putstr_fd("\033[0m\n", STDOUT_FILENO);
 }
 

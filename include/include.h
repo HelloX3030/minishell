@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:24:11 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:49 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@
 # define PROMPT_OR "or> "
 # define PROMPT_PIPE "pipe> "
 # define PROMPT_HEREDOC "> "
+
+// start ascii art
+# define L1 " __  __ _____ _   _ _____  _____ _    _ ______ _      _        \n"
+# define L2 "|  \\/  |_   _| \\ | |_   _|/ ____| |  | |  ____| |    | |     \n"
+# define L3 "| \\  / | | | |  \\| | | | | (___ | |__| | |__  | |    | |     \n"
+# define L4 "| \\  / | | | |  \\| | | | | (___ | |__| | |__  | |    | |     \n"
+# define L5 "| |  | |_| |_| |\\  |_| |_ ____) | |  | | |____| |____| |____  \n"
+# define L6 "|_|  |_|_____|_| \\_|_____|_____/|_|  |_|______|______|______|\n"
 
 // Error Messages
 # define SYNTAX_ERROR "syntax error"
