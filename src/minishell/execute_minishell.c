@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 14:12:38 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:13:06 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	args = list_to_arr(expr->args);
 	if (!args && expr->args)
 		mini_exit(args, ms);
-	if (redirect(expr) == EXIT_FAILURE)
+	if (redirect(ms, expr) == EXIT_FAILURE)
 		return (ms->status = 1, EXIT_FAILURE);
 	if (expr->type == EXPR_CMD && ft_strcmp((char *)expr->args->content,
 			"exit") == 0)
@@ -93,5 +93,6 @@ void	execute_minishell(t_minishell *ms)
 		write(STDERR_FILENO, "\n", 1);
 		return ;
 	}
+	ms->heredoc_count = 0;
 	ms->status = rec_handle_type(ms, ms->expr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 15:37:08 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:24:11 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # include <termcap.h>
 # include <unistd.h>
 
+// tmp files paths
+# define TMP_FILE_PATH_HEREDOC "/tmp/minishell_heredoc_lseeger_lkubler"
+
 // Prompts
 # define PROMPT "✅myshell> "
 # define PROMPT_FAILURE "❌myshell>"
@@ -38,6 +41,7 @@
 # define PROMPT_AND "and> "
 # define PROMPT_OR "or> "
 # define PROMPT_PIPE "pipe> "
+# define PROMPT_HEREDOC "> "
 
 // Error Messages
 # define SYNTAX_ERROR "syntax error"
@@ -162,6 +166,7 @@ typedef struct s_minishell
 	t_token						*token;
 	t_expression				*expr;
 	int							status;
+	int							heredoc_count;
 }								t_minishell;
 
 // tokens
@@ -266,10 +271,10 @@ int								make_redir(int target_fd, char *file,
 									int flags);
 int								save_fd(int *saved_fd, int fd);
 int								restore_fd(int *saved_fd, int fd);
-int								redirect(t_expression *expr);
+int								redirect(t_minishell *ms, t_expression *expr);
 int								reset_redirect(t_expression *expr);
-int								redir_herdoc(t_expression *expr,
-									t_redir *redir_data);
+int								redir_heredoc(t_minishell *ms,
+									t_expression *expr, t_redir *redir_data);
 
 // pipes
 int								execute_pipe(t_minishell *ms,

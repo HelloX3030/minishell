@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:11:47 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 15:01:10 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:24:20 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	init_minishell(t_minishell *ms, char **envp)
 	ms->input = NULL;
 	ms->token = NULL;
 	ms->expr = NULL;
+	ms->heredoc_count = 0;
 }
