@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/09 14:21:07 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 12:51:03 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,6 @@ t_env							*init_essentials(char *path);
 int								is_builtin(char *cmd);
 int								dispatch_builtin(char **args, t_minishell *ms);
 void							execute(char **args, t_minishell *ms);
-bool							is_cmd(char *args, t_env *env);
 
 // externals
 char							*find_cmd_path(const char *cmd, t_env *env);
@@ -268,7 +267,8 @@ int								save_fd(int *saved_fd, int fd);
 int								restore_fd(int *saved_fd, int fd);
 int								redirect(t_expression *expr);
 int								reset_redirect(t_expression *expr);
-int								redir_in(t_expression *expr, t_redir *redir_data);
+int								redir_in(t_expression *expr,
+									t_redir *redir_data);
 t_redir							*create_heredoc(char *delimiter);
 
 // pipes

@@ -3,38 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   print_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:20:48 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/09 14:23:39 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 12:52:54 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-//void	print_redir_type(t_redir_type type)
-//{
-//	if (type == REDIR_IN)
-//		ft_putstr("REDIR_IN");
-//	else if (type == REDIR_OUT)
-//		ft_putstr("REDIR_OUTPUT");
-//	else if (type == REDIR_APPEND)
-//		ft_putstr("REDIR_APPEND");
-//	else
-//		ft_putstr("UNKNOWN");
-//}
+void	print_redir_type(t_redir_type type)
+{
+	if (type == REDIR_IN)
+		ft_putstr("REDIR_IN");
+	else if (type == REDIR_OUT)
+		ft_putstr("REDIR_OUTPUT");
+	else if (type == REDIR_APPEND)
+		ft_putstr("REDIR_APPEND");
+	else
+		ft_putstr("UNKNOWN");
+}
 
-//void	print_redir(t_redir *redir, int insertion)
-//{
-//	if (!redir)
-//	{
-//		ft_write_insertion(insertion);
-//		ft_putstr("NULL\n");
-//		return ;
-//	}
-//	ft_write_insertion(insertion);
-//	print_redir_type(redir->type);
-//	ft_putstr(": ");
-//	ft_putstr(redir->file);
-//	ft_putstr("\n");
-//}
+void	print_redir(t_redir *redir, int insertion)
+{
+	if (!redir)
+	{
+		ft_write_insertion(insertion);
+		ft_putstr("NULL\n");
+		return ;
+	}
+	ft_write_insertion(insertion);
+	print_redir_type(redir->type);
+	ft_putstr(": ");
+	ft_putstr(redir->file);
+	ft_putstr("\n");
+}
