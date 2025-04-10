@@ -6,64 +6,11 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/08 14:34:33 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:01:59 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-static char	*get_path(char *relative_path)
-{
-	char	*absolute_path = NULL;
-	char	*resolved_path = NULL;
-	char	cwd[PATH_MAX];
-
-	if (relative_path[0] == '/')
-		return (ft_strdup(relative_path));
-	if (ft_strchr(relative_path, '/'))
-	{
-		resolved_path = malloc(PATH_MAX);
-		if (!resolved_path)
-			return (NULL);
-		if (realpath(relative_path, resolved_path))
-			return (resolved_path);
-		free(resolved_path);
-		return (NULL);
-	}
-	char *path_env = getenv("PATH");
-	if (path_env)
-	{
-		char *path_copy = ft_strdup(path_env);
-		char *path_token = strtok(path_copy, ":");
-		
-		while (path_token)
-		{
-			char test_path[PATH_MAX];
-			ft_strlcpy(test_path, path_token, PATH_MAX);
-			ft_strlcat(test_path, "/", PATH_MAX);
-			ft_strlcat(test_path, relative_path, PATH_MAX);
-			if (access(test_path, X_OK) == 0)
-			{
-				absolute_path = ft_strdup(test_path);
-				free(path_copy);
-				return (absolute_path);
-			}
-			path_token = strtok(NULL, ":");
-		}
-		free(path_copy);
-	}
-	if (getcwd(cwd, PATH_MAX))
-	{
-		absolute_path = malloc(PATH_MAX);
-		if (!absolute_path)
-			return (NULL);
-		ft_strlcpy(absolute_path, cwd, PATH_MAX);
-		ft_strlcat(absolute_path, "/", PATH_MAX);
-		ft_strlcat(absolute_path, relative_path, PATH_MAX);
-		return (absolute_path);
-	}
-	return (ft_strdup(relative_path));
-}
 
 /*
 	- manages ms.token and ms.expr
@@ -85,17 +32,11 @@ static void	handle_input(t_minishell *ms)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	ms;
-	char		*path;
 
 	(void)argc;
 	(void)argv;
-	path = get_path(argv[0]);
-	if (!path)
-		path = argv[0];
 	setup_interactive();
-	init_minishell(&ms, envp, path);
-	if (path != argv[0])
-		free(path);
+	init_minishell(&ms, envp);
 	while (1)
 	{
 		if (get_input(&ms) == EXIT_FAILURE)
