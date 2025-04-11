@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/11 13:10:21 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 14:14:08 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@
 # define L4 "| \\  / | | | |  \\| | | | | (___ | |__| | |__  | |    | |     \n"
 # define L5 "| |  | |_| |_| |\\  |_| |_ ____) | |  | | |____| |____| |____  \n"
 # define L6 "|_|  |_|_____|_| \\_|_____|_____/|_|  |_|______|______|______|\n"
+
+# define LSEEGER_GITHUB "github.com/HelloX3030\n"
+# define LKUBLER_GITHUB "github.com/lkubler\n"
 
 // Error Messages
 # define SYNTAX_ERROR "syntax error"

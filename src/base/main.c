@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:38 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 14:21:46 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ static void	display_welcome(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	ft_putstr_fd("\033[1;36m", STDOUT_FILENO);
-	ft_putstr_fd(L1, STDOUT_FILENO);
-	ft_putstr_fd(L2, STDOUT_FILENO);
-	ft_putstr_fd(L3, STDOUT_FILENO);
-	ft_putstr_fd(L4, STDOUT_FILENO);
-	ft_putstr_fd(L5, STDOUT_FILENO);
-	ft_putstr_fd(L6, STDOUT_FILENO);
-	ft_putstr_fd("\033[0m\n", STDOUT_FILENO);
+	ft_putstr("\033[1;36m");
+	ft_putstr(L1);
+	ft_putstr(L2);
+	ft_putstr(L3);
+	ft_putstr(L4);
+	ft_putstr(L5);
+	ft_putstr(L6);
+	ft_putstr("\033[38;2;64;224;208m");
+	ft_putstr("Contributors:\n");
+	ft_putstr(LSEEGER_GITHUB);
+	ft_putstr(LKUBLER_GITHUB);
+	ft_putstr("\033[0m\n");
 }
 
 /*
