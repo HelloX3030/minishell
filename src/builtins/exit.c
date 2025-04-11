@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/07 11:12:01 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 12:49:53 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ static void	calculate_exit(int *exit_code, char *args[])
 {
 	*exit_code = ft_atoi(args[1]);
 	*exit_code = *exit_code % 256;
+}
+
+static void handle_no_numeric_argument(t_minishell *ms, char **args)
+{
+	ft_putstr_fd("exit: numeric argument required\n", 2);
+	ms->status = 255;
+	ft_free_strs(args);
+	exit(ms->status);
 }
 
 int	mini_exit(char **args, t_minishell *ms)
@@ -28,21 +36,18 @@ int	mini_exit(char **args, t_minishell *ms)
 		if (args[1] != NULL)
 		{
 			if (!ft_atoi(args[1]) || ft_strlen(args[1]) == 0)
-			{
-				ft_putstr_fd("exit: numeric argument required\n", 2);
-				ms->status = 255;
-				exit(ms->status);
-			}
+				handle_no_numeric_argument(ms, args);
 			if (args[2])
 			{
 				ft_putstr_fd("exit: too many arguments\n", 2);
-				return (ms->status = 1, 1);
+				return (ft_free_strs(args), ms->status = 1, 1);
 			}
 			else
 				calculate_exit(&exit_code, args);
 		}
 		ms->status = exit_code;
 	}
+	ft_free_strs(args);
 	free_minishell(ms);
 	exit(ms->status);
 }

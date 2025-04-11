@@ -1,5 +1,13 @@
 # Welcome
 
+# Problems
+- echo -nnnn
+- sort when export
+- cd -
+    => new line?
+    => old pwd
+    => what when old_pwd and home are not set?
+
 # Leaks Check
 {
     ignore_libreadline_leaks
@@ -8,6 +16,4 @@
     obj:*/libreadline.so.*
 }
 
-Valgrind Flag: --suppressions=supp.supp
-
-valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=all --suppressions=supp.supp ./minishell
+valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=all --suppressions=supp.supp ./minishell_debug

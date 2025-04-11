@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:13:06 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 12:44:09 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 	if (!args && expr->args)
 		mini_exit(args, ms);
 	if (redirect(ms, expr) == EXIT_FAILURE)
-		return (ms->status = 1, EXIT_FAILURE);
+		return (ft_free_strs(args), ms->status = 1, EXIT_FAILURE);
 	if (expr->type == EXPR_CMD && ft_strcmp((char *)expr->args->content,
 			"exit") == 0)
 		mini_exit(args, ms);
