@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 17:14:13 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 17:26:48 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static void	calculate_exit(int *exit_code, char *args[])
 
 static void	handle_no_numeric_argument(t_minishell *ms, char **args)
 {
-	ft_putstr_fd("exit: numeric argument required\n", 2);
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(args[1], 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 	ms->status = 255;
+	free_minishell(ms);
 	ft_free_strs(args);
 	exit(ms->status);
 }
