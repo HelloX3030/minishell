@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:35:08 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:13:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:42:56 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	execute_group_child(t_minishell *ms, t_expression *expr)
 	int	exit_status;
 
 	exit_status = rec_handle_type(ms, expr->child);
+	free_minishell(ms);
 	exit(exit_status);
 	return (EXIT_FAILURE);
 }
