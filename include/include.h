@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:49 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 13:10:21 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define TMP_FILE_PATH_HEREDOC "/tmp/minishell_heredoc_lseeger_lkubler"
 
 // Prompts
-# define PROMPT "✅myshell> "
-# define PROMPT_FAILURE "❌myshell>"
+# define PROMPT "✅ myshell> "
+# define PROMPT_FAILURE "❌ myshell>"
 # define PROMPT_GROUP "group> "
 # define PROMPT_QUOTE "quote> "
 # define PROMPT_AND "and> "
