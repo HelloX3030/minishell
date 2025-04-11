@@ -3,24 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/07 11:13:59 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:33:14 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
+static t_env	*get_min(t_env *env)
+{
+	t_env	*min;
+
+	min = env;
+	while (env)
+	{
+		if (ft_strcmp(env->key, min->key) < 0)
+			min = env;
+		env = env->next;
+	}
+	return (min);
+}
+
+static t_env	*get_next(t_env *env, t_env *cur)
+{
+	t_env	*min;
+
+	min = NULL;
+	while (env)
+	{
+		if (ft_strcmp(env->key, cur->key) > 0)
+		{
+			if (!min || ft_strcmp(env->key, min->key) < 0)
+				min = env;
+		}
+		env = env->next;
+	}
+	return (min);
+}
+
 static void	print_export_vars(t_env *env)
 {
 	t_env	*cur;
 
-	cur = env;
+	cur = get_min(env);
 	while (cur)
 	{
 		printf("declare -x %s=\"%s\"\n", cur->key, cur->value);
-		cur = cur->next;
+		cur = get_next(env, cur);
 	}
 }
 
@@ -36,8 +67,7 @@ static int	export_with_equals(char *arg, t_env **env)
 	while (arg[i] && arg[i] != '=')
 	{
 		if (!ft_isalnum(arg[i++]))
-			return (ft_putstr_fd("not a valid identifier\n", 2),
-				EXIT_FAILURE);
+			return (ft_putstr_fd("not a valid identifier\n", 2), EXIT_FAILURE);
 	}
 	equals = ft_strchr(arg, '=');
 	key_len = equals - arg;
@@ -63,9 +93,8 @@ static int	export_without_equals(char *arg, t_env **env)
 	while (arg[i])
 	{
 		if (!ft_isalpha(arg[i]))
-			return (ft_putstr_fd("not a valid identifier\n", 2),
-				EXIT_FAILURE);
-		i ++;
+			return (ft_putstr_fd("not a valid identifier\n", 2), EXIT_FAILURE);
+		i++;
 	}
 	if (!value)
 		set_env_val(env, arg, ft_strdup(""));
