@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 16:16:06 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:25:16 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,16 @@ static int	handle_home_path(t_env **env, char *current_path)
 	return (change_directory(path, current_path, env));
 }
 
-static int	handle_old_path(t_env **env, char *current_path, char *old_path)
+static int	handle_old_path(t_env **env, char *current_path)
 {
 	char	*path;
 
-	if (!old_path[0])
+	path = get_env_value(*env, "OLDPWD");
+	if (!path)
 	{
-		path = get_env_value(*env, "OLDPWD");
-		if (!path)
-		{
-			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
-			return (EXIT_FAILURE);
-		}
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+		return (EXIT_FAILURE);
 	}
-	else
-		path = old_path;
 	printf("%s\n", path);
 	return (change_directory(path, current_path, env));
 }
@@ -71,29 +66,21 @@ static int	handle_old_path(t_env **env, char *current_path, char *old_path)
 int	to_path(int fl, t_env **env)
 {
 	char		current_path[PATH_MAX];
-	static char	old_path[PATH_MAX] = {0};
 	char		*cur_path;
 	int			result;
-	char		temp_path[PATH_MAX];
 
 	if (!getcwd(current_path, PATH_MAX))
 	{
 		ft_putstr_fd("minishell: cd: error retrieving current directory\n", 2);
 		return (EXIT_FAILURE);
 	}
-	ft_strlcpy(temp_path, current_path, PATH_MAX);
+	
+	cur_path = ft_strdup(current_path);
 	if (fl == 0)
-	{
-		cur_path = ft_strdup(current_path);
 		result = handle_home_path(env, cur_path);
-	}
 	else
-	{
-		cur_path = ft_strdup(current_path);
-		result = handle_old_path(env, cur_path, old_path);
-	}
-	if (result == 0)
-		ft_strlcpy(old_path, temp_path, PATH_MAX);
+		result = handle_old_path(env, cur_path);
+	
 	return (result);
 }
 
