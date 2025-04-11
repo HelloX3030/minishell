@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 16:37:21 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 17:14:13 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	mini_exit(char **args, t_minishell *ms)
 			if (args[2])
 			{
 				ft_putstr_fd("exit: too many arguments\n", 2);
-				return (ft_free_strs(args), ms->status = 1, 1);
+				return (ms->status = 1, 1);
 			}
 			else
 				calculate_exit(&exit_code, args);

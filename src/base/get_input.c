@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:05:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/10 15:37:40 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 17:03:42 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	get_input(t_minishell *ms)
 	char	*prompt;
 
 	prompt = PROMPT;
-	if (ms->status != 0)
-		prompt = PROMPT_FAILURE;
+	//if (ms->status != 0)
+	//	prompt = PROMPT_FAILURE;
 	exit_code = EXIT_CONTINUE;
 	while (exit_code == EXIT_CONTINUE)
 	{
