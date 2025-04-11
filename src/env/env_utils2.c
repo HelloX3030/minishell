@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:26:27 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/10 15:01:27 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:36:15 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,47 @@ void	set_env_val(t_env **env, char *key, char *value)
 {
 	t_env	*cur;
 	t_env	*new_node;
+	char    *key_copy;
 
-	if (!env || !key)
+	if (!env || !key || !value)
+	{
+		if (value)
+			free(value);
 		return ;
+	}
+	
 	cur = *env;
 	while (cur)
 	{
 		if (ft_strcmp(cur->key, key) == 0)
 		{
 			free(cur->value);
-			cur->value = ft_strdup(value);
-			free(value);
+			cur->value = value;  // Take ownership of value
 			return ;
 		}
 		cur = cur->next;
 	}
-	new_node = create_env_node(key, value);
-	if (!new_node)
+	
+	// Need to make a copy of key since we don't own it
+	key_copy = ft_strdup(key);
+	if (!key_copy)
+	{
+		free(value);
 		return ;
+	}
+	
+	new_node = create_env_node(key_copy, value);
+	if (!new_node)
+	{
+		free(key_copy);
+		free(value);
+		return ;
+	}
+	
+	// create_env_node makes its own copies, so free our copies
+	free(key_copy);
+	free(value);
+	
 	add_env_node(env, new_node);
 }
 
