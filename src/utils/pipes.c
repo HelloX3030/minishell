@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:24:46 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/04 12:44:52 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:06:34 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	setup_child1(int *pipefd, t_minishell *ms, t_expression *expr)
 	dup2(pipefd[PIPE_WRITE_END], STDOUT_FILENO);
 	close(pipefd[PIPE_WRITE_END]);
 	status = execute_expression(ms, expr);
+	free_minishell(ms);
 	exit(status);
 }
 
@@ -31,6 +32,7 @@ static void	setup_child2(int *pipefd, t_minishell *ms, t_expression *expr)
 	dup2(pipefd[PIPE_READ_END], STDIN_FILENO);
 	close(pipefd[PIPE_READ_END]);
 	status = rec_handle_type(ms, expr->next);
+	free_minishell(ms);
 	exit(status);
 }
 
@@ -67,7 +69,7 @@ int	execute_pipe(t_minishell *ms, t_expression *expr)
 	pid1 = fork();
 	if (pid1 < 0)
 		return (cleanup_pipe(pipefd, 0, 0));
-	if (pid1 == 0)
+	else if (pid1 == 0)
 		setup_child1(pipefd, ms, expr);
 	pid2 = fork();
 	if (pid2 < 0)
