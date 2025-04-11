@@ -2,7 +2,6 @@
 
 # Problems
 - echo -nnnn
-- sort when export
 - cd -
     => new line?
     => old pwd

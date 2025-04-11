@@ -6,25 +6,11 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 16:33:14 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:39:15 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-static t_env	*get_min(t_env *env)
-{
-	t_env	*min;
-
-	min = env;
-	while (env)
-	{
-		if (ft_strcmp(env->key, min->key) < 0)
-			min = env;
-		env = env->next;
-	}
-	return (min);
-}
 
 static t_env	*get_next(t_env *env, t_env *cur)
 {
@@ -47,7 +33,13 @@ static void	print_export_vars(t_env *env)
 {
 	t_env	*cur;
 
-	cur = get_min(env);
+	cur = env;
+	while (env)
+	{
+		if (ft_strcmp(env->key, cur->key) < 0)
+			cur = env;
+		env = env->next;
+	}
 	while (cur)
 	{
 		printf("declare -x %s=\"%s\"\n", cur->key, cur->value);

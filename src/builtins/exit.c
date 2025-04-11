@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:20:38 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 12:49:53 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:37:21 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	calculate_exit(int *exit_code, char *args[])
 	*exit_code = *exit_code % 256;
 }
 
-static void handle_no_numeric_argument(t_minishell *ms, char **args)
+static void	handle_no_numeric_argument(t_minishell *ms, char **args)
 {
 	ft_putstr_fd("exit: numeric argument required\n", 2);
 	ms->status = 255;
