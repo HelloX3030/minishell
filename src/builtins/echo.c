@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:49:21 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 16:59:38 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/11 17:12:21 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	mini_echo(char **args)
 
 	i = 1;
 	n_flag = false;
-	while (has_n_flag(args[i]))
+	while (i < count_args(args) && has_n_flag(args[i]))
 	{
 		n_flag = true;
 		i++;
