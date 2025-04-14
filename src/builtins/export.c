@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:57:50 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 16:39:15 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:46:28 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ static t_env	*get_next(t_env *env, t_env *cur)
 
 static void	print_export_vars(t_env *env)
 {
+	t_env	*tmp;
 	t_env	*cur;
 
 	cur = env;
-	while (env)
+	tmp = env;
+	while (tmp)
 	{
-		if (ft_strcmp(env->key, cur->key) < 0)
-			cur = env;
-		env = env->next;
+		if (ft_strcmp(tmp->key, cur->key) < 0)
+			cur = tmp;
+		tmp = tmp->next;
 	}
 	while (cur)
 	{
