@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/11 17:16:49 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:34:22 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ static void	display_welcome(int argc, char **argv)
 	ft_putstr(L4);
 	ft_putstr(L5);
 	ft_putstr(L6);
-	ft_putstr("\033[38;2;64;224;208m");
+	ft_putstr("\033[38;2;64;224;208m\n");
 	ft_putstr("Contributors:\n");
-	ft_putstr(LSEEGER_GITHUB);
-	ft_putstr(LKUBLER_GITHUB);
+	ft_putstr(LSEEGER);
+	ft_putstr(LSEEGER_NAME);
+	ft_putstr(LKUBLER);
+	ft_putstr(LKUBLER_NAME);
 	ft_putstr("\033[0m\n");
 }
 

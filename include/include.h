@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/14 15:37:29 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:33:18 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@
 # define L4 "| \\  / | | | |  \\| | | | | (___ | |__| | |__  | |    | |     \n"
 # define L5 "| |  | |_| |_| |\\  |_| |_ ____) | |  | | |____| |____| |____  \n"
 # define L6 "|_|  |_|_____|_| \\_|_____|_____/|_|  |_|______|______|______|\n"
-
-# define LSEEGER_GITHUB "github.com/HelloX3030\n"
-# define LKUBLER_GITHUB "github.com/lkubler\n"
+# define LSEEGER "\e]8;;https://github.com/HelloX3030\e\\"
+# define LSEEGER_NAME "github.com/HelloX3030\e]8;;\e\\\n"
+# define LKUBLER "\e]8;;https://github.com/lkubler\e\\"
+# define LKUBLER_NAME "github.com/lkubler\e]8;;\e\\\n"
 
 // Error Messages
 # define SYNTAX_ERROR "syntax error"
