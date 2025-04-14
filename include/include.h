@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:55:06 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/11 14:14:08 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/14 15:37:29 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 // Prompts
 # define PROMPT "✅ myshell> "
-# define PROMPT_FAILURE "❌ myshell>"
+# define PROMPT_FAILURE "❌ myshell> "
 # define PROMPT_GROUP "group> "
 # define PROMPT_QUOTE "quote> "
 # define PROMPT_AND "and> "

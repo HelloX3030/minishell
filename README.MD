@@ -1,11 +1,7 @@
 # Welcome
 
 # Problems
-- echo -nnnn
-- cd -
-    => new line?
-    => old pwd
-    => what when old_pwd and home are not set?
+- Hyperlink behind git hub stuff
 
 # Leaks Check
 {
