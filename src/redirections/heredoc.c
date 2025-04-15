@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:15:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/10 16:21:11 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:05:44 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	setup_vars(char **result, char **prompt, const char *eof_str)
 	*prompt = ft_strjoin(eof_str, PROMPT_HEREDOC);
 	if (!*prompt)
 		return (free(*result), EXIT_FAILURE);
+	sigmode_heredoc();
 	return (EXIT_SUCCESS);
 }
 
@@ -44,6 +45,8 @@ static char	*get_str(const char *eof_str)
 		new_line = readline(prompt);
 		if (!new_line)
 			return (free(result), free(prompt), NULL);
+		if (g_in_exec == 4)
+			return (free(result), free(prompt), free(new_line), NULL);
 	}
 	return (free(new_line), free(prompt), result);
 }
@@ -75,6 +78,8 @@ int	redir_heredoc(t_minishell *ms, t_expression *expr, t_redir *redir_data)
 	if (!numb_str)
 		return (EXIT_FAILURE);
 	str = get_str(redir_data->file);
+	g_in_exec = 0;
+	setup_interactive();
 	if (!str)
 		return (free(numb_str), EXIT_FAILURE);
 	free(redir_data->file);

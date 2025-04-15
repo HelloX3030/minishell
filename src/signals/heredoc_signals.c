@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_child.c                                         :+:      :+:    :+:   */
+/*   heredoc_signals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:37:16 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/15 15:08:02 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:01:53 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 void	heredoc_handler(int signum)
 {
+	g_in_exec = 4;
 	(void)signum;
-	rl_done = 1;
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
 	rl_replace_line("", 0);
-	close(STDIN_FILENO);
+	rl_redisplay();
+	rl_done = 1;
 }
 
-void	ft_sigmode_heredoc(void)
+void	sigmode_heredoc(void)
 {
-	set_sighandler(SIGINT, heredoc_handler);
-	set_sighandler(SIGQUIT, SIG_IGN);
+	signal(SIGINT, heredoc_handler);
+	signal(SIGQUIT, SIG_DFL);
 }
