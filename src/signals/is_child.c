@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:37:16 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/15 15:05:45 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:08:02 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	heredoc_handler(int signum)
 {
 	(void)signum;
 	rl_done = 1;
-	g_in_exec = 1;
 	rl_replace_line("", 0);
 	close(STDIN_FILENO);
 }
