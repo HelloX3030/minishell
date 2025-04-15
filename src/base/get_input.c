@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:05:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/11 17:17:14 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:59:17 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ int	get_input(t_minishell *ms)
 	prompt = PROMPT;
 	if (ms->status != 0)
 		prompt = PROMPT_FAILURE;
+	sigmode_heredoc();
 	exit_code = EXIT_CONTINUE;
 	while (exit_code == EXIT_CONTINUE)
 	{
 		exit_code = get_new_input(ms, prompt);
+		if (g_in_exec == 4)
+			return (EXIT_SUCCESS);
 		if (exit_code == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		exit_code = handle_input(ms, &prompt);

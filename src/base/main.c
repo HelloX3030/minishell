@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/14 16:34:22 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/15 17:11:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ int	main(int argc, char **argv, char **envp)
 			write(STDOUT_FILENO, "exit\n", 5);
 			break ;
 		}
-		handle_input(&ms);
+		if (g_in_exec == 4)
+		{
+			g_in_exec = 0;
+			ms.status = 1;
+		}
+		else
+			handle_input(&ms);
 		add_history(ms.input);
 		free(ms.input);
 		ms.input = NULL;
