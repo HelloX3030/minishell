@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   is_child.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:37:16 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/15 14:13:01 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:05:45 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static int	*get_child(void)
+void	heredoc_handler(int signum)
 {
-	static int	child = -1;
-
-	return (&child);
+	(void)signum;
+	rl_done = 1;
+	g_in_exec = 1;
+	rl_replace_line("", 0);
+	close(STDIN_FILENO);
 }
 
-void	increase_child(void)
+void	ft_sigmode_heredoc(void)
 {
-	(*get_child())++;
-}
-
-bool	is_child(void)
-{
-	return (*get_child());
+	set_sighandler(SIGINT, heredoc_handler);
+	set_sighandler(SIGQUIT, SIG_IGN);
 }
