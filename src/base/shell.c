@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:08:04 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/03 13:43:18 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:50:00 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ static int	handle_parent(pid_t pid, char **envp)
 {
 	int	status;
 
+	reset_singals();
 	waitpid(pid, &status, 0);
+	setup_interactive();
 	ft_free_strs(envp);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

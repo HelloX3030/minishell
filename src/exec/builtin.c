@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:03:58 by lkubler           #+#    #+#             */
-/*   Updated: 2025/03/31 11:48:22 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:52:02 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_builtin(char *cmd)
 		return (EXIT_SUCCESS);
 	if (ft_strcmp(cmd, "unset") == 0)
 		return (EXIT_SUCCESS);
-	if (ft_strcmp(cmd, "minishell") == 0)
+	if (ft_strcmp(cmd, "minishell") == 0 || ft_strcmp(cmd, "./minishell") == 0)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }
@@ -47,7 +47,8 @@ int	dispatch_builtin(char **args, t_minishell *ms)
 		ms->status = mini_export(args, ms);
 	if (ft_strcmp(args[0], "unset") == 0)
 		ms->status = mini_unset(args, ms);
-	if (ft_strcmp(args[0], "minishell") == 0)
+	if (ft_strcmp(args[0], "minishell") == 0 || ft_strcmp(args[0],
+			"./minishell") == 0)
 		ms->status = exec_shell(args, ms);
 	return (1);
 }
