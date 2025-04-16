@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:26:27 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/16 13:55:24 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:59:11 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,8 @@ void	set_env_val(t_env **env, char *key, char *value)
 		free(value);
 		return ;
 	}
-	cur = *env;
-	while (cur)
-	{
-		if (ft_strcmp(cur->key, key) == 0)
-		{
-			free(cur->value);
-			cur->value = value;
-			return ;
-		}
-		cur = cur->next;
-	}
+	if (replace_value(*env, key, value))
+		return ;
 	key_copy = ft_strdup(key);
 	if (!key_copy)
 	{
@@ -80,14 +71,10 @@ void	set_env_val(t_env **env, char *key, char *value)
 		return ;
 	}
 	new_node = create_env_node(key_copy, value);
-	if (!new_node)
-	{
-		free(key_copy);
-		free(value);
-		return ;
-	}
 	free(key_copy);
 	free(value);
+	if (!new_node)
+		return ;
 	add_env_node(env, new_node);
 }
 
