@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/03 13:40:36 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/16 14:24:19 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	handle_fork_error(char *cmd_path, char **envp)
 	return (1);
 }
 
-static void	child_process(char *cmd_path, char **args, char **envp)
+static void	child_process(t_minishell *ms, char *cmd_path, char **args, char **envp)
 {
 	execve(cmd_path, args, envp);
 	ft_putstr_fd("minishell: ", 2);
@@ -36,7 +36,8 @@ static void	child_process(char *cmd_path, char **args, char **envp)
 	perror(": ");
 	free(cmd_path);
 	ft_free_strs(envp);
-	exit(126);
+	ms->status = 126;
+	mini_exit(args, ms);
 }
 
 static int	parent_process(pid_t pid, char *cmd_path, char **envp)
@@ -73,7 +74,7 @@ int	execute_ext(char **args, t_minishell *ms)
 	if (pid == 0)
 	{
 		setup_execution();
-		child_process(cmd_path, args, envp);
+		child_process(ms, cmd_path, args, envp);
 	}
 	result = parent_process(pid, cmd_path, envp);
 	g_in_exec = 0;
