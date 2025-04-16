@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:35:10 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/16 13:44:50 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:53:03 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	to_path(int fl, t_env **env)
 int	mini_cd(char **args, t_minishell *ms)
 {
 	char	current_path[PATH_MAX];
-	int		cd;
 	char	new_path[PATH_MAX];
 	char	*cur_path;
 	char	*n_path;
@@ -109,8 +108,7 @@ int	mini_cd(char **args, t_minishell *ms)
 		if (cur_path)
 			set_env_val(&ms->env, "OLDPWD", cur_path);
 	}
-	cd = chdir(args[1]);
-	if (cd != 0)
+	if (chdir(args[1]) != 0)
 		return (cd_error(args[1]), EXIT_FAILURE);
 	if (getcwd(new_path, PATH_MAX))
 	{
