@@ -6,7 +6,7 @@
 /*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/16 14:25:07 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/16 14:41:52 by lkubler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ static void	child_process(t_minishell *ms, char *cmd_path,
 				char **args, char **envp)
 {
 	execve(cmd_path, args, envp);
+	ft_free_strs(args);
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(args[0], 2);
 	perror(": ");
 	free(cmd_path);
 	ft_free_strs(envp);
 	ms->status = 126;
-	mini_exit(args, ms);
+	mini_exit(NULL, ms);
 }
 
 static int	parent_process(pid_t pid, char *cmd_path, char **envp)
