@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/08 16:40:41 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:53:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	get_size(t_list *args)
 	size = 0;
 	while (args)
 	{
-		if (args->content && ft_strcmp(args->content, ""))
+		if (args->content)
 			size++;
 		args = args->next;
 	}
@@ -37,7 +37,7 @@ static char	**to_arr(t_list *args, int size)
 	i = 0;
 	while (args)
 	{
-		if (args->content && ft_strcmp(args->content, ""))
+		if (args->content)
 		{
 			arr[i] = ft_strdup(args->content);
 			if (!arr[i])

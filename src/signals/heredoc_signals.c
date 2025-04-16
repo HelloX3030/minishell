@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:37:16 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/15 16:01:53 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:54:05 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ void	heredoc_handler(int signum)
 void	sigmode_heredoc(void)
 {
 	signal(SIGINT, heredoc_handler);
-	signal(SIGQUIT, SIG_DFL);
 }
