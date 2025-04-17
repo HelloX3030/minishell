@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:32:21 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/10 16:13:33 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/17 16:01:11 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ static int	redir_append(t_expression *expr, t_redir *redir_data)
 	return (EXIT_SUCCESS);
 }
 
-static int	handle_redir_data(t_minishell *ms, t_expression *expr,
-		t_redir *redir_data)
+static int	handle_redir_data(t_expression *expr, t_redir *redir_data)
 {
 	if (redir_data->type == REDIR_IN)
 	{
@@ -61,20 +60,20 @@ static int	handle_redir_data(t_minishell *ms, t_expression *expr,
 	}
 	else if (redir_data->type == REDIR_HEREDOC)
 	{
-		if (redir_heredoc(ms, expr, redir_data) == EXIT_FAILURE)
+		if (redir_heredoc(expr, redir_data) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	redirect(t_minishell *ms, t_expression *expr)
+int	redirect(t_expression *expr)
 {
 	t_list	*redir;
 
 	redir = expr->redirs;
 	while (redir)
 	{
-		if (handle_redir_data(ms, expr, redir->content) == EXIT_FAILURE)
+		if (handle_redir_data(expr, redir->content) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		redir = redir->next;
 	}
