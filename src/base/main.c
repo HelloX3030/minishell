@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:54:04 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/15 17:11:10 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/17 15:01:34 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	ms;
 
 	display_welcome(argc, argv);
-	setup_interactive();
+	sigmode_interactive();
 	init_minishell(&ms, envp);
 	while (1)
 	{
@@ -63,9 +63,9 @@ int	main(int argc, char **argv, char **envp)
 			write(STDOUT_FILENO, "exit\n", 5);
 			break ;
 		}
-		if (g_in_exec == 4)
+		if (get_sigint())
 		{
-			g_in_exec = 0;
+			reset_sigint();
 			ms.status = 1;
 		}
 		else

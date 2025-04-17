@@ -31,7 +31,7 @@ SRC_FILES := main.c shell.c get_input.c \
 	builtin.c execute.c \
 	externals.c externals2.c \
 	list_to_arr.c print_quote_type.c remove_quotes.c \
-	signals.c heredoc_signals.c \
+	signals.c sigint.c \
 	expand_env.c expand_wildcards.c expansion_utils.c get_matching_filenames.c \
 
 # Normal .o files

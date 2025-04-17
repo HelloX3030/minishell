@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseeger <lseeger@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:31:14 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/11 12:44:09 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/17 14:30:19 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	execute_expression(t_minishell *ms, t_expression *expr)
 				19), EXIT_FAILURE);
 	args = list_to_arr(expr->args);
 	if (!args && expr->args)
-		mini_exit(args, ms);
+		mini_exit(NULL, ms);
 	if (redirect(ms, expr) == EXIT_FAILURE)
 		return (ft_free_strs(args), ms->status = 1, EXIT_FAILURE);
 	if (expr->type == EXPR_CMD && ft_strcmp((char *)expr->args->content,
@@ -42,6 +42,8 @@ static int	handle_and(t_minishell *ms, t_expression *expr)
 {
 	int	status;
 
+	if (ft_strcmp(expr->args->content, "(") == 0)
+		return (handle_group(ms, expr));
 	status = execute_expression(ms, expr);
 	if (status == EXIT_SUCCESS)
 		return (rec_handle_type(ms, expr->next));
@@ -52,6 +54,8 @@ static int	handle_or(t_minishell *ms, t_expression *expr)
 {
 	int	status;
 
+	if (ft_strcmp(expr->args->content, "(") == 0)
+		return (handle_group(ms, expr));
 	status = execute_expression(ms, expr);
 	if (status != EXIT_SUCCESS)
 		return (rec_handle_type(ms, expr->next));

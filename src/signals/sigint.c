@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_signals.c                                  :+:      :+:    :+:   */
+/*   sigint.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 13:37:16 by lseeger           #+#    #+#             */
-/*   Updated: 2025/04/16 18:54:05 by lseeger          ###   ########.fr       */
+/*   Created: 2025/04/17 14:51:21 by lseeger           #+#    #+#             */
+/*   Updated: 2025/04/17 14:54:40 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-void	heredoc_handler(int signum)
+static volatile sig_atomic_t	*get_value(void)
 {
-	g_in_exec = 4;
-	(void)signum;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	rl_done = 1;
+	static volatile sig_atomic_t	sigint = 0;
+
+	return (&sigint);
 }
 
-void	sigmode_heredoc(void)
+void	set_sigint(void)
 {
-	signal(SIGINT, heredoc_handler);
+	*get_value() = 1;
+}
+
+void	reset_sigint(void)
+{
+	*get_value() = 0;
+}
+
+bool	get_sigint(void)
+{
+	return (*get_value());
 }

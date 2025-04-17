@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:15:05 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/15 16:05:44 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/17 15:07:58 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	setup_vars(char **result, char **prompt, const char *eof_str)
 	*prompt = ft_strjoin(eof_str, PROMPT_HEREDOC);
 	if (!*prompt)
 		return (free(*result), EXIT_FAILURE);
-	sigmode_heredoc();
+	sigmode_interactive();
+	reset_sigint();
 	return (EXIT_SUCCESS);
 }
 
@@ -33,7 +34,7 @@ static char	*get_str(const char *eof_str)
 	if (setup_vars(&result, &prompt, eof_str) == EXIT_FAILURE)
 		return (NULL);
 	new_line = readline(prompt);
-	if (!new_line)
+	if (!new_line || get_sigint())
 		return (free(result), free(prompt), NULL);
 	while (ft_strcmp(new_line, eof_str))
 	{
@@ -45,7 +46,7 @@ static char	*get_str(const char *eof_str)
 		new_line = readline(prompt);
 		if (!new_line)
 			return (free(result), free(prompt), NULL);
-		if (g_in_exec == 4)
+		if (get_sigint())
 			return (free(result), free(prompt), free(new_line), NULL);
 	}
 	return (free(new_line), free(prompt), result);
@@ -79,7 +80,7 @@ int	redir_heredoc(t_minishell *ms, t_expression *expr, t_redir *redir_data)
 		return (EXIT_FAILURE);
 	str = get_str(redir_data->file);
 	g_in_exec = 0;
-	setup_interactive();
+	sigmode_interactive();
 	if (!str)
 		return (free(numb_str), EXIT_FAILURE);
 	free(redir_data->file);

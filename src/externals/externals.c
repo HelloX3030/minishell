@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkubler <lkubler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:00 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/16 14:41:52 by lkubler          ###   ########.fr       */
+/*   Updated: 2025/04/17 15:00:16 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int	handle_fork_error(char *cmd_path, char **envp)
 	return (1);
 }
 
-static void	child_process(t_minishell *ms, char *cmd_path,
-				char **args, char **envp)
+static void	child_process(t_minishell *ms, char *cmd_path, char **args,
+		char **envp)
 {
 	execve(cmd_path, args, envp);
 	ft_free_strs(args);
@@ -75,7 +75,7 @@ int	execute_ext(char **args, t_minishell *ms)
 		return (handle_fork_error(cmd_path, envp));
 	if (pid == 0)
 	{
-		setup_execution();
+		sigmode_kill();
 		child_process(ms, cmd_path, args, envp);
 	}
 	result = parent_process(pid, cmd_path, envp);

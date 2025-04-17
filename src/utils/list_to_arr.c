@@ -6,11 +6,24 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:31:15 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/16 18:53:19 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:51:27 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+t_list	*skip_start(t_list *args)
+{
+	while (args)
+	{
+		if (args->content && ft_strcmp(args->content, "")
+			&& !is_operator(args->content)
+			&& !is_redirection_operator(args->content))
+			break ;
+		args = args->next;
+	}
+	return (args);
+}
 
 static int	get_size(t_list *args)
 {
@@ -55,6 +68,7 @@ char	**list_to_arr(t_list *args)
 	int		size;
 	char	**arr;
 
+	args = skip_start(args);
 	size = get_size(args);
 	if (size > 0)
 		return (to_arr(args, size));

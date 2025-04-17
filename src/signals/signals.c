@@ -6,7 +6,7 @@
 /*   By: lseeger <lseeger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:16:28 by lkubler           #+#    #+#             */
-/*   Updated: 2025/04/16 18:53:57 by lseeger          ###   ########.fr       */
+/*   Updated: 2025/04/17 15:09:10 by lseeger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ volatile sig_atomic_t	g_in_exec = 0;
 static void	sigint_handler(int sig)
 {
 	(void)sig;
+	set_sigint();
 	if (g_in_exec)
 		write(STDOUT_FILENO, "\n", 1);
 	if (!g_in_exec)
@@ -25,10 +26,11 @@ static void	sigint_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		rl_done = 1;
 	}
 }
 
-void	setup_interactive(void)
+void	sigmode_interactive(void)
 {
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
@@ -43,13 +45,13 @@ void	setup_interactive(void)
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
-void	setup_execution(void)
+void	sigmode_kill(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }
 
-void	reset_singals(void)
+void	sigmode_ignore_sigint(void)
 {
 	struct sigaction	sa;
 
